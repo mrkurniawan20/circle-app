@@ -15,7 +15,7 @@ function Login() {
   ];
   return (
     <div className="flex flex-col mx-auto w-fit mt-20">
-      <CircleText />
+      <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Login to Circle" />
       <Form title="login" inputs={formInputs} onSubmit={handleSubmit} buttonText="Login" forgotPassword="Forgot password?" />
       <p className="text-gray-300 pt-3">

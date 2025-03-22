@@ -3,6 +3,7 @@
   /* max-width: 1280px; */
   /* margin: 0 auto; */
   padding: 2rem;
+  height: 100vh;
   /* text-align: center; */
 }
 
@@ -17,6 +18,22 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+.sideBar {
+  padding: 10px;
+}
+.sideBar:hover {
+  border-radius: 100px;
+  background-color: #2d495e !important;
+  border-radius: 100px;
+  transition: all;
+}
+.invert {
+  filter: invert(100%) !important;
+}
+.app-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr 300px;
 }
 
 @keyframes logo-spin {

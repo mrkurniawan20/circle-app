@@ -32,13 +32,19 @@ function Form({ title, inputs, onSubmit, buttonText, forgotPassword }: FormProps
     <form action="" className="flex flex-col">
       {inputs.map((input) => (
         <div key={input.name} className="pb-2">
-          <input className="w-sm p-1.5 border-2 border-gray-600 rounded-sm  text-sm text-gray-300 focus:border-green-500 focus:outline-none transition-all" type={input.type} name={input.name} placeholder={input.placeholder} required />
+          <input
+            className="w-sm px-1.5 py-2.5 border-2 border-gray-600 rounded-sm  text-sm text-gray-300 focus:border-green-500 focus:outline-none transition-all"
+            type={input.type}
+            name={input.name}
+            placeholder={input.placeholder}
+            required
+          />
         </div>
       ))}
-      <NavLink to={'/forgot'} className="py-2 text-white ml-auto hover:text-green-500 transition-all">
+      <NavLink to={'/forgot'} className="py-2 text-white ml-auto hover:text-green-800 transition-all">
         {forgotPassword}
       </NavLink>
-      <Button variant="circle" className="rounded-full w-sm transition-all">
+      <Button variant="circle" className="w-sm transition-all">
         {buttonText}
       </Button>
     </form>

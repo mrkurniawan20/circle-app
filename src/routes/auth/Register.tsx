@@ -16,7 +16,7 @@ function Register() {
   ];
   return (
     <div className="flex flex-col mx-auto w-fit mt-20">
-      <CircleText />
+      <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Create account Circle" />
       <Form title="login" inputs={formInputs} onSubmit={handleSubmit} buttonText="Register" />
       <p className="text-gray-300 pt-3">
