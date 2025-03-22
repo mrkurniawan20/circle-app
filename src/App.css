@@ -2,7 +2,7 @@
 #root {
   /* max-width: 1280px; */
   /* margin: 0 auto; */
-  padding: 2rem;
+  /* padding: 2rem; */
   height: 100vh;
   /* text-align: center; */
 }
@@ -34,6 +34,13 @@
 .app-layout {
   display: grid;
   grid-template-columns: 300px 1fr 300px;
+}
+.app-layout > div:first-child {
+  position: fixed;
+}
+
+.main-content {
+  /* border: 2px solid black; */
 }
 
 @keyframes logo-spin {

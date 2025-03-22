@@ -11,7 +11,7 @@ function ForgotPassword() {
   };
   const formInputs = [{ label: 'email', type: 'email', name: 'email', placeholder: 'Email/Username' }];
   return (
-    <div className="flex flex-col mx-auto w-fit mt-20">
+    <div className="flex flex-col mx-auto w-fit pt-20">
       <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Forgot password" />
       <Form title="login" inputs={formInputs} onSubmit={handleSubmit} buttonText="Send Instruction" />

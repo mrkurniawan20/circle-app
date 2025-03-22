@@ -6,7 +6,9 @@ import CircleText from './CircleText';
 function SideBar() {
   return (
     <div className="flex flex-col gap-5 h-screen fixed w-xs">
-      <CircleText textSize="text-5xl" />
+      <a href="" className="hover:scale-105 transition-transform duration-200">
+        <CircleText textSize="text-5xl" />
+      </a>
       <NavLink to={'/Home'} className="flex flex-row items-center sideBar ">
         <img className="invert" src="./src/assets/img/home.png" alt="" width="10%" />
         &emsp;<p className="text-lg font-semibold invert">Home</p>

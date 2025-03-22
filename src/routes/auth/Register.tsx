@@ -15,7 +15,7 @@ function Register() {
     { label: 'password', type: 'password', name: 'password', placeholder: 'Password' },
   ];
   return (
-    <div className="flex flex-col mx-auto w-fit mt-20">
+    <div className="flex flex-col mx-auto w-fit pt-20">
       <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Create account Circle" />
       <Form title="login" inputs={formInputs} onSubmit={handleSubmit} buttonText="Register" />
