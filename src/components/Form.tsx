@@ -44,7 +44,7 @@ function Form({ title, inputs, onSubmit, buttonText, forgotPassword }: FormProps
       <NavLink to={'/forgot'} className="py-2 text-white ml-auto hover:text-green-800 transition-all">
         {forgotPassword}
       </NavLink>
-      <Button variant="circle" className="w-sm transition-all">
+      <Button variant="circle" className="w-sm transition-all p-5">
         {buttonText}
       </Button>
     </form>
