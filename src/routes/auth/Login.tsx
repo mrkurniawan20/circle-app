@@ -10,15 +10,14 @@ function Login() {
     console.log(`Form Data: ${data}`);
   };
   const formInputs = [
-    { label: 'fullName', type: 'text', name: 'fullName', placeholder: 'Full Name' },
-    { label: 'email', type: 'email', name: 'email', placeholder: 'Email' },
+    { label: 'email', type: 'email', name: 'email', placeholder: 'Email/Username' },
     { label: 'password', type: 'password', name: 'password', placeholder: 'Password' },
   ];
   return (
     <div className="flex flex-col mx-auto w-fit mt-20">
       <CircleText />
       <SubTitle subTitle="Login to Circle" />
-      <Form title="login" inputs={formInputs} onSubmit={handleSubmit} buttonText="Login" />
+      <Form title="login" inputs={formInputs} onSubmit={handleSubmit} buttonText="Login" forgotPassword="Forgot password?" />
       <p className="text-gray-300 pt-3">
         Don't have an account yet?{' '}
         <NavLink to={'/register'} className={({ isActive }) => `rounded ${isActive ? 'text-blue-500 font-bold' : 'text-green-500'} hover:text-green-800 transition-all`}>

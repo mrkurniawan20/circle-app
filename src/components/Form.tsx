@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { buttonVariants } from '@/components/ui/button';
+import { NavLink } from 'react-router-dom';
 
 interface InputConfig {
   type: string;
@@ -13,9 +14,10 @@ interface FormProps {
   inputs: InputConfig[];
   onSubmit: (data: Record<string, string>) => void;
   buttonText: string;
+  forgotPassword?: string;
 }
 
-function Form({ title, inputs, onSubmit, buttonText }: FormProps) {
+function Form({ title, inputs, onSubmit, buttonText, forgotPassword }: FormProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -27,15 +29,16 @@ function Form({ title, inputs, onSubmit, buttonText }: FormProps) {
   };
 
   return (
-    <form action="" className="">
+    <form action="" className="flex flex-col">
       {inputs.map((input) => (
         <div key={input.name} className="pb-2">
-          <input className="w-xs p-1.5 border-2 border-gray-600 rounded-sm  text-sm text-gray-300 focus:border-green-500 focus:outline-none transition-all" type={input.type} name={input.name} placeholder={input.placeholder} required />
+          <input className="w-sm p-1.5 border-2 border-gray-600 rounded-sm  text-sm text-gray-300 focus:border-green-500 focus:outline-none transition-all" type={input.type} name={input.name} placeholder={input.placeholder} required />
         </div>
       ))}
-      {/* <button>Submit</button> */}
-
-      <Button variant="circle" className="rounded-full w-xs transition-all">
+      <NavLink to={'/forgot'} className="py-2 text-white ml-auto hover:text-green-500 transition-all">
+        {forgotPassword}
+      </NavLink>
+      <Button variant="circle" className="rounded-full w-sm transition-all">
         {buttonText}
       </Button>
     </form>
