@@ -8,7 +8,6 @@ function Home() {
   return (
     <div className="grid grid-cols-[0.4fr_1fr_0.6fr] h-screen">
       <SideBar />
-      <div></div>
       <MainContent />
       <ProfileBar />
     </div>

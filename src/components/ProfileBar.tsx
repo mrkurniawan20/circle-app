@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { NavLink } from 'react-router-dom';
 
 function ProfileBar() {
   return (
@@ -11,7 +12,9 @@ function ProfileBar() {
           <img src="./src/assets/img/header.png" alt="" className="aspect-5/1 overflow-hidden object-cover rounded-xl" />
           <img src="./src/assets/img/star platinum.png" alt="" width="15%" className="aspect-square object-cover rounded-full border-3 -mt-10 ml-4 absolute" />
           <div className="flex pt-3">
-            <Button className="ms-auto rounded-full">Edit Profile</Button>
+            <Button variant={'garis'} className="ms-auto rounded-full">
+              Edit Profile
+            </Button>
           </div>
           <h2 className="text-gray-50 pb-1 text-2xl font-semibold">Dio Brando👊🏼</h2>
           <p className="text-slate-400 text-sm pb-1">@konodioda</p>
@@ -27,9 +30,9 @@ function ProfileBar() {
             </div>
           </div>
         </div>
-        <div className="second-profile-container bg-gray-800 mt-5 pl-5 pr-5 rounded-xl">
-          <h3 className="text-xl font-semibold text-gray-50 pt-5 pb-5">Suggested for you </h3>
-          <div className="profile flex pb-3">
+        <div className="second-profile-container bg-gray-800 mt-5 rounded-xl">
+          <h3 className="text-xl font-semibold text-gray-50 pt-5 pb-5  pl-5 pr-5 ">Suggested for you </h3>
+          <NavLink to={'/'} className="profile flex pb-3 pl-5 pr-5  hover:bg-slate-700">
             <Avatar className="my-auto">
               <AvatarImage src="./src/assets/img/sticky finger.png" alt="@shadcn" />
               <AvatarFallback>ZW</AvatarFallback>
@@ -38,11 +41,11 @@ function ProfileBar() {
               <h5 className="text-lg font-semibold text-gray-50">Bucciaratti</h5>
               <p className="text-slate-400 text-sm pb-1">@StickyFinger</p>
             </div>
-            <Button variant={'followed'} className="rounded-full ms-auto">
+            <Button variant={'followed'} className="rounded-full ms-auto my-auto">
               Following
             </Button>
-          </div>
-          <div className="profile flex pb-3">
+          </NavLink>
+          <NavLink to={'/'} className="profile flex pb-3 pl-5 pr-5  hover:bg-slate-700">
             <Avatar className="my-auto">
               <AvatarImage src="./src/assets/img/golden requim.png" alt="@shadcn" />
               <AvatarFallback>ZW</AvatarFallback>
@@ -51,11 +54,11 @@ function ProfileBar() {
               <h5 className="text-lg font-semibold text-gray-50">Giorno</h5>
               <p className="text-slate-400 text-sm pb-1">@GoldenRequim</p>
             </div>
-            <Button variant={'followed'} className="rounded-full ms-auto">
+            <Button variant={'followed'} className="rounded-full ms-auto my-auto">
               Following
             </Button>
-          </div>
-          <div className="profile flex pb-3">
+          </NavLink>
+          <NavLink to={'/'} className="profile flex pb-3 pl-5 pr-5  hover:bg-slate-700">
             <Avatar className="my-auto">
               <AvatarImage src="./src/assets/img/diver down.png" alt="@shadcn" />
               <AvatarFallback>ZW</AvatarFallback>
@@ -64,28 +67,28 @@ function ProfileBar() {
               <h5 className="text-lg font-semibold text-gray-50">Anasui</h5>
               <p className="text-slate-400 text-sm pb-1">@DiverDown</p>
             </div>
-            <Button variant={'follow'} className="rounded-full ms-auto">
+            <Button variant={'follow'} className="rounded-full ms-auto my-auto">
               Follow
             </Button>
-          </div>
-          <div className="profile flex pb-3">
-            <Avatar className="my-auto">
+          </NavLink>
+          <NavLink to={'/'} className="profile flex pb-3 pl-5 pr-5  hover:bg-slate-700">
+            <Avatar className="my-auto  ">
               <AvatarImage src="./src/assets/img/black sabbath.png" alt="@shadcn" />
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
-            <div className="pl-5">
+            <div className="pl-5 pr-10 ">
               <h5 className="text-lg font-semibold text-gray-50">Polpo</h5>
               <p className="text-slate-400 text-sm pb-1">@BlackSabbath</p>
             </div>
-            <Button variant={'follow'} className="rounded-full ms-auto">
+            <Button variant={'follow'} className="rounded-full ms-auto my-auto">
               Follow
             </Button>
-          </div>
+          </NavLink>
         </div>
         <div className="third-profile-container bg-gray-800 mt-5 pl-3 pr-3 rounded-xl">
           <div className="pt-5 pb-5">
             <div className="flex">
-              <h4 className="my-auto text-gray-50 font-semibold">Developed by Rafli&ensp;•&ensp;</h4>
+              <h4 className="my-auto text-gray-50 font-semibold">Developed by Rafli Kurniawan&ensp;•&ensp;</h4>
               <div className="flex gap-3">
                 <a className="p-0 m-0 size-7" href="">
                   <img className="grayscale hover:grayscale-0" src="./src/assets/img/github.png" alt="" />
