@@ -33,7 +33,7 @@ function Form({ title, inputs, onSubmit, buttonText, forgotPassword }: FormProps
       {inputs.map((input) => (
         <div key={input.name} className="pb-2">
           <input
-            className="w-sm px-1.5 py-2.5 border-2 border-gray-600 rounded-sm  text-sm text-gray-300 focus:border-green-500 focus:outline-none transition-all"
+            className="w-sm px-1.5 py-2.5 border-2 border-gray-600 rounded-sm  text-sm text-gray-100 focus:border-green-500 focus:outline-none transition-all"
             type={input.type}
             name={input.name}
             placeholder={input.placeholder}
@@ -41,7 +41,7 @@ function Form({ title, inputs, onSubmit, buttonText, forgotPassword }: FormProps
           />
         </div>
       ))}
-      <NavLink to={'/forgot'} className="py-2 text-white ml-auto hover:text-green-800 transition-all">
+      <NavLink to={'/forgot'} className="py-2 text-gray-100 ml-auto hover:text-green-800 transition-all">
         {forgotPassword}
       </NavLink>
       <Button variant="circle" className="w-sm transition-all p-5">

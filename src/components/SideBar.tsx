@@ -5,7 +5,7 @@ import CircleText from './CircleText';
 
 function SideBar() {
   return (
-    <div className="flex flex-col gap-5 h-screen fixed w-xs">
+    <div className="flex flex-col gap-5 h-screen fixed w-80 p-10">
       <a href="" className="hover:scale-105 transition-transform duration-200">
         <CircleText textSize="text-5xl" />
       </a>

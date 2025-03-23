@@ -6,6 +6,9 @@
   height: 100vh;
   /* text-align: center; */
 }
+body {
+  height: 10000px;
+}
 
 .logo {
   height: 6em;

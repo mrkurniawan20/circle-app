@@ -19,7 +19,7 @@ function Register() {
       <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Create account Circle" />
       <Form title="login" inputs={formInputs} onSubmit={handleSubmit} buttonText="Register" />
-      <p className="text-gray-300 pt-3">
+      <p className="text-gray-100 pt-3">
         Already have an account?{' '}
         <NavLink to={'/login'} className={({ isActive }) => `rounded ${isActive ? 'text-blue-500 font-bold' : 'text-green-500'} hover:text-green-800 transition-all`}>
           Login

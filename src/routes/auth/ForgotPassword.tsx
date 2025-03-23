@@ -15,7 +15,7 @@ function ForgotPassword() {
       <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Forgot password" />
       <Form title="login" inputs={formInputs} onSubmit={handleSubmit} buttonText="Send Instruction" />
-      <p className="text-gray-300 pt-2">
+      <p className="text-gray-100 pt-2">
         Already have an account?{' '}
         <NavLink to={'/register'} className={({ isActive }) => `rounded ${isActive ? 'text-blue-500 font-bold' : 'text-green-500'} hover:text-green-800 transition-all`}>
           Login
