@@ -41,7 +41,7 @@ function PageContent() {
         <p className="text-slate-400">11:32 PM • March 24, 2025</p>
       </div>
       <div className="flex items-center gap-2 pl-5 pb-5">
-        <img src="./src/assets/img/heart.png" alt="" width="2.5%" />
+        <img src="./src/assets/img/liked.png" alt="" width="2.5%" />
         <p className="text-slate-400">35</p>
         <img src="./src/assets/img/text-bubble.png" className="invert" alt="" width="2.5%" />
         <p className="text-slate-400">200 Replies</p>
@@ -53,7 +53,7 @@ function PageContent() {
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
         <Textarea className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-xl font-semibold" placeholder="Type your reply"></Textarea>
-        <img className="justify-self-end invert-50  size-10" src="./src/assets/img/add-image.png" alt="" />
+        <img className="justify-self-end size-10" src="./src/assets/img/add-image-green.png" alt="" />
         <Button variant="circle" className="justify-self-end ">
           Reply
         </Button>

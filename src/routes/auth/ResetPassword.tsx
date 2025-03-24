@@ -16,7 +16,7 @@ function ResetPassword() {
   return (
     <div className="flex flex-col mx-auto w-fit pt-20">
       <CircleText textSize="text-3xl" />
-      <SubTitle subTitle="Forgot password" />
+      <SubTitle subTitle="Reset your password" />
       <Form title="login" inputs={formInputs} onSubmit={handleSubmit} buttonText="Create New Password" />
     </div>
   );

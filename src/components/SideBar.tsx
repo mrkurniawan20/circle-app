@@ -36,9 +36,9 @@ function SideBar() {
   return (
     <div className="p-10">
       <div className="flex flex-col gap-5 h-screen fixed w-xs">
-        <a href="" className="hover:scale-105 transition-transform duration-200">
+        <NavLink to={'/'} className="hover:scale-105 transition-transform duration-200">
           <CircleText textSize="text-5xl" />
-        </a>
+        </NavLink>
         {pages.map((page, index) => (
           <SideBarPage key={index} page={page.page} image={page.image} namePage={page.namePage} />
         ))}
@@ -60,7 +60,7 @@ function SideBar() {
               </div>
             </div>
             <DialogFooter className="flex justify-between">
-              <img className="me-auto invert-50" src="./src/assets/img/add-image.png" alt="" width="8%" />
+              <img className="me-auto" src="./src/assets/img/add-image-green.png" alt="" width="8%" />
               <Button variant={'circle'} type="submit">
                 Post
               </Button>
