@@ -9,9 +9,11 @@ interface BarPage {
 
 function SideBarPage({ page, image, namePage }: BarPage) {
   return (
-    <NavLink to={`/${page}`} className="flex flex-row items-center p-2 hover:rounded-full hover:bg-slate-700 ">
-      <img className="invert" src={`./src/assets/img/${image}.png`} alt="" width="10%" />
-      &emsp;<p className="text-lg font-semibold invert">{namePage}</p>
+    <NavLink to={`/${page}`} className="inline-block max-w-max items-center p-2 hover:rounded-full hover:bg-slate-700 ">
+      <div className="flex items-center space-x-5 px-3">
+        <img className="invert size-8" src={`./src/assets/img/${image}.png`} alt="" width="10%" />
+        <p className="text-lg font-semibold invert">{namePage}</p>
+      </div>
     </NavLink>
   );
 }

@@ -41,7 +41,7 @@ const users = [
     page: 'Blackmore',
     image: 'rainbow',
     fallback: 'B',
-    name: 'Black More',
+    name: 'Blackmore',
     username: 'CatchTheRainbow',
     buttonType: 'follow' as 'follow' | 'followed',
   },

@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 
-function MainContent() {
+function HomeContent() {
   return (
     <div
       className="main-content border-l-1 border-r-1 border-gray-500 p-10"
@@ -27,4 +27,4 @@ function MainContent() {
   );
 }
 
-export default MainContent;
+export default HomeContent;
