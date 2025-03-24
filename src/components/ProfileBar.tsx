@@ -4,8 +4,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { NavLink } from 'react-router-dom';
 import SuggestedAccount from './SuggestedAccount';
 import EditProfile from './EditProfile';
-import ContainerMyProfile from './ContainerMyProfile';
+// import ContainerMyProfile from './ProfileBarContainerMyProfile';
 import ContainerCredentials from './ContainerCredentials';
+import ContainerMyProfile from './ContainerMyProfile';
 
 const users = [
   {

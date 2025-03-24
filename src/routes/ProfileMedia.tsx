@@ -42,7 +42,7 @@ const threads = [
   },
 ];
 
-function Profile() {
+function ProfileMedia() {
   return (
     <div className="grid grid-cols-[0.4fr_1fr_0.6fr] h-screen">
       <SideBar />
@@ -88,4 +88,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ProfileMedia;

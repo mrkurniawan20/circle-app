@@ -6,6 +6,7 @@ import Login from './auth/Login';
 import Home from './Home';
 import Page from './Page';
 import Profile from './Profile';
+import ProfileMedia from './ProfileMedia';
 
 let router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ let router = createBrowserRouter([
   {
     path: '/profile',
     Component: Profile,
+  },
+  {
+    path: '/profile/media',
+    Component: ProfileMedia,
   },
 ]);
 
