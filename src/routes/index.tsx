@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Register from './auth/Register';
-import Home from './Home';
-import Page from './Page';
-import Login from './auth/Login';
 import ForgotPassword from './auth/ForgotPassword';
 import ResetPassword from './auth/ResetPassword';
+import Login from './auth/Login';
+import Home from './Home';
+import Page from './Page';
+import Profile from './Profile';
 
 let router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ let router = createBrowserRouter([
   {
     path: '/page',
     Component: Page,
+  },
+  {
+    path: '/profile',
+    Component: Profile,
   },
 ]);
 

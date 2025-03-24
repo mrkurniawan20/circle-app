@@ -21,7 +21,7 @@ const threads = [
     name: 'Giorno',
     username: 'GoldenRequim',
     relativeTime: '1d',
-    threadImage: 'header-resized',
+    threadImage: 'header-resized.png',
     thread: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam hic expedita deleniti ipsam exercitationem iure enim molestiae repudiandae odio maxime?', //Thread
     liked: 'unlike' as 'unlike' | 'liked',
     likeCount: '30',
@@ -32,7 +32,7 @@ const threads = [
     name: 'Anasui',
     username: 'DiverDown',
     relativeTime: '12d',
-    threadImage: '',
+    threadImage: 'dio.jpg',
     thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
     liked: 'liked' as 'liked' | 'unlike',
     likeCount: '30',

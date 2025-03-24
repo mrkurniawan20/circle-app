@@ -31,10 +31,10 @@ function ThreadList({ avatarImage, name, username, relativeTime, threadImage, th
       </div>
       <div className=" pb-2 ml-15">
         <p className="text-gray-100 pb-2">{thread}</p>
-        <img src={`./src/assets/img/${threadImage}.png`} className="w-fit rounded-4xl pb-2" alt="" />
+        <img src={`./src/assets/img/${threadImage}`} className="w-fit rounded-4xl pb-2" alt="" />
       </div>
       <div className="flex items-center gap-2 ml-15 pb-5">
-        <img src={`./src/assets/img/${liked === 'liked' ? 'liked' : 'unlike'}.png`} alt="" width="2.5%" />
+        <img src={`./src/assets/img/${liked === 'liked' ? 'liked' : 'unlike'}.png`} className={liked === 'unlike' ? `invert` : `invert-0`} alt="" width="2.5%" />
         <p className="text-slate-400">{likeCount}</p>
         <img src="./src/assets/img/text-bubble.png" className="invert" alt="" width="2.5%" />
         <p className="text-slate-400">{replyCount} Replies</p>
