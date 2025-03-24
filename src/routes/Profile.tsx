@@ -62,7 +62,7 @@ function Profile() {
         </div>
         <div className="p-10 pt-2">
           <img src="./src/assets/img/header-resized.png" alt="" className="aspect-5/1  object-cover  rounded-2xl" />
-          <img src="./src/assets/img/star platinum.png" alt="" className="aspect-square object-cover size-25 rounded-full border-3 ml-10 -mt-12 absolute" />
+          <img src="./src/assets/img/star platinum.png" alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute" />
           <div className="flex pt-3 pb-5">
             <EditProfile />
           </div>

@@ -53,8 +53,8 @@ const users = [
 
 function ProfileBar({ showProfileContainer = true }: { showProfileContainer?: boolean }) {
   return (
-    <div className="pl-10 pt-10">
-      <div className="fixed pr-10">
+    <div className="">
+      <div className="fixed pl-10 pt-10 pr-10">
         {/* biar bisa dipanggil atau engga */}
         {showProfileContainer && <ContainerMyProfile />}
         <div className="second-profile-container bg-gray-800 mt-5 rounded-xl">
