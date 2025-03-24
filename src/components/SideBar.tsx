@@ -7,6 +7,30 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from './ui/textarea';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import SideBarPage from './SideBarPage';
+
+const pages = [
+  {
+    page: 'home',
+    image: 'home',
+    namePage: 'Home',
+  },
+  {
+    page: 'search',
+    image: 'search',
+    namePage: 'Search',
+  },
+  {
+    page: 'follow',
+    image: 'follow',
+    namePage: 'Follow',
+  },
+  {
+    page: 'profile',
+    image: 'profile',
+    namePage: 'Profile',
+  },
+];
 
 function SideBar() {
   return (
@@ -15,22 +39,9 @@ function SideBar() {
         <a href="" className="hover:scale-105 transition-transform duration-200">
           <CircleText textSize="text-5xl" />
         </a>
-        <NavLink to={'/Home'} className="flex flex-row items-center p-2 hover:rounded-full hover:bg-slate-700 ">
-          <img className="invert" src="./src/assets/img/home.png" alt="" width="10%" />
-          &emsp;<p className="text-lg font-semibold invert">Home</p>
-        </NavLink>
-        <NavLink to={'/Home'} className="flex flex-row items-center  p-2 hover:rounded-full hover:bg-slate-700 ">
-          <img className="invert" src="./src/assets/img/search.png" alt="" width="10%" />
-          &emsp;<p className="text-lg font-semibold invert">Search</p>
-        </NavLink>
-        <NavLink to={'/Home'} className="flex flex-row items-center  p-2 hover:rounded-full hover:bg-slate-700 ">
-          <img className="invert" src="./src/assets/img/follow.png" alt="" width="10%" />
-          &emsp;<p className="text-lg font-semibold invert">Follow</p>
-        </NavLink>
-        <NavLink to={'/Home'} className="flex flex-row items-center  p-2 hover:rounded-full hover:bg-slate-700 ">
-          <img className="invert" src="./src/assets/img/profile.png" alt="" width="10%" />
-          &emsp;<p className="text-lg font-semibold invert">Profile</p>
-        </NavLink>
+        {pages.map((page, index) => (
+          <SideBarPage key={index} page={page.page} image={page.image} namePage={page.namePage} />
+        ))}
         <Dialog>
           <DialogTrigger asChild>
             <Button variant={'circle'} className="p-5">
