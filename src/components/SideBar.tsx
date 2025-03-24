@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from './ui/textarea';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import SideBarPage from './SideBarPage';
+import EditProfile from './EditProfile';
 
 const pages = [
   {
@@ -68,7 +69,7 @@ function SideBar() {
           </DialogContent>
         </Dialog>
         <div className="flex-grow"></div>
-        <NavLink to={'/logout'} className="flex flex-row items-center sideBar mb-15">
+        <NavLink to={'/logout'} className="flex flex-row items-center mb-15">
           <img className="invert" src="./src/assets/img/logout.png" alt="" width="10%" />
           &emsp;<p className="text-lg font-semibold invert">logout</p>
         </NavLink>

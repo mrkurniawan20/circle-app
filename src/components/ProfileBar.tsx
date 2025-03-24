@@ -3,6 +3,7 @@ import { Button } from './ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { NavLink } from 'react-router-dom';
 import SuggestedAccount from './SuggestedAccount';
+import EditProfile from './EditProfile';
 
 const users = [
   {
@@ -56,9 +57,10 @@ function ProfileBar() {
           <img src="./src/assets/img/header-resized.png" alt="" className="aspect-5/1 overflow-hidden object-cover rounded-xl" />
           <img src="./src/assets/img/star platinum.png" alt="" width="15%" className="aspect-square object-cover rounded-full border-3 -mt-10 ml-4 absolute" />
           <div className="flex pt-3">
-            <Button variant={'garis'} className="ms-auto rounded-full">
+            {/* <Button variant={'garis'} className="ms-auto rounded-full">
               Edit Profile
-            </Button>
+            </Button> */}
+            <EditProfile />
           </div>
           <h2 className="text-gray-50 pb-1 text-2xl font-semibold">Dio Brando👊🏼</h2>
           <p className="text-slate-400 text-sm pb-1">@konodioda</p>

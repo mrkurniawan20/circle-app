@@ -30,7 +30,7 @@ const threads = [
   {
     avatarImage: 'diver down',
     name: 'Anasui',
-    username: 'DiverDOwn',
+    username: 'DiverDown',
     relativeTime: '12d',
     threadImage: '',
     thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
