@@ -17,7 +17,7 @@ function MainContent() {
           <AvatarImage src="./src/assets/img/star platinum.png" alt="@shadcn" />
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
-        <Textarea className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 " placeholder="What is happening?"></Textarea>
+        <Textarea className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-base" placeholder="What is happening?"></Textarea>
         <img className="justify-self-end invert-50  size-10" src="./src/assets/img/add-image.png" alt="" />
         <Button variant="circle" className="justify-self-end ">
           Post

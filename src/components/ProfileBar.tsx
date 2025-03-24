@@ -2,6 +2,50 @@ import React from 'react';
 import { Button } from './ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { NavLink } from 'react-router-dom';
+import SuggestedAccount from './SuggestedAccount';
+
+const users = [
+  {
+    page: 'bucciaratti',
+    image: 'sticky finger',
+    fallback: 'B',
+    name: 'Bucciaratti',
+    username: 'StickyFinger',
+    buttonType: 'followed' as 'followed' | 'follow',
+  },
+  {
+    page: 'giorno',
+    image: 'golden requim',
+    fallback: 'GG',
+    name: 'Giorno',
+    username: 'GoldenRequim',
+    buttonType: 'follow' as 'follow' | 'followed',
+  },
+  {
+    page: 'anasui',
+    image: 'diver down',
+    fallback: 'A',
+    name: 'Anasui',
+    username: 'Diver Down',
+    buttonType: 'follow' as 'follow' | 'followed',
+  },
+  {
+    page: 'polpo',
+    image: 'black sabbath',
+    fallback: 'P',
+    name: 'Polpo',
+    username: 'Black Sabbath',
+    buttonType: 'follow' as 'follow' | 'followed',
+  },
+  {
+    page: 'Blackmore',
+    image: 'rainbow',
+    fallback: 'B',
+    name: 'Black More',
+    username: 'CatchTheRainbow',
+    buttonType: 'follow' as 'follow' | 'followed',
+  },
+];
 
 function ProfileBar() {
   return (
@@ -32,58 +76,9 @@ function ProfileBar() {
         </div>
         <div className="second-profile-container bg-gray-800 mt-5 rounded-xl">
           <h3 className="text-xl font-semibold text-gray-50 pt-5 pb-5  pl-5 pr-5 ">Suggested for you </h3>
-          <NavLink to={'/'} className="profile flex pb-3 pl-5 pr-5  hover:bg-slate-700">
-            <Avatar className="my-auto">
-              <AvatarImage src="./src/assets/img/sticky finger.png" alt="@shadcn" />
-              <AvatarFallback>ZW</AvatarFallback>
-            </Avatar>
-            <div className="pl-5">
-              <h5 className="text-lg font-semibold text-gray-50">Bucciaratti</h5>
-              <p className="text-slate-400 text-sm pb-1">@StickyFinger</p>
-            </div>
-            <Button variant={'followed'} className="rounded-full ms-auto my-auto">
-              Following
-            </Button>
-          </NavLink>
-          <NavLink to={'/'} className="profile flex pb-3 pl-5 pr-5  hover:bg-slate-700">
-            <Avatar className="my-auto">
-              <AvatarImage src="./src/assets/img/golden requim.png" alt="@shadcn" />
-              <AvatarFallback>ZW</AvatarFallback>
-            </Avatar>
-            <div className="pl-5">
-              <h5 className="text-lg font-semibold text-gray-50">Giorno</h5>
-              <p className="text-slate-400 text-sm pb-1">@GoldenRequim</p>
-            </div>
-            <Button variant={'followed'} className="rounded-full ms-auto my-auto">
-              Following
-            </Button>
-          </NavLink>
-          <NavLink to={'/'} className="profile flex pb-3 pl-5 pr-5  hover:bg-slate-700">
-            <Avatar className="my-auto">
-              <AvatarImage src="./src/assets/img/diver down.png" alt="@shadcn" />
-              <AvatarFallback>ZW</AvatarFallback>
-            </Avatar>
-            <div className="pl-5">
-              <h5 className="text-lg font-semibold text-gray-50">Anasui</h5>
-              <p className="text-slate-400 text-sm pb-1">@DiverDown</p>
-            </div>
-            <Button variant={'follow'} className="rounded-full ms-auto my-auto">
-              Follow
-            </Button>
-          </NavLink>
-          <NavLink to={'/'} className="profile flex pb-3 pl-5 pr-5  hover:bg-slate-700">
-            <Avatar className="my-auto  ">
-              <AvatarImage src="./src/assets/img/black sabbath.png" alt="@shadcn" />
-              <AvatarFallback>ZW</AvatarFallback>
-            </Avatar>
-            <div className="pl-5 pr-10 ">
-              <h5 className="text-lg font-semibold text-gray-50">Polpo</h5>
-              <p className="text-slate-400 text-sm pb-1">@BlackSabbath</p>
-            </div>
-            <Button variant={'follow'} className="rounded-full ms-auto my-auto">
-              Follow
-            </Button>
-          </NavLink>
+          {users.map((user, index) => (
+            <SuggestedAccount key={index} page={user.page} image={user.image} fallback={user.fallback} name={user.name} username={user.username} buttonType={user.buttonType} />
+          ))}
         </div>
         <div className="third-profile-container bg-gray-800 mt-5 pl-3 pr-3 rounded-xl">
           <div className="pt-5 pb-5">
