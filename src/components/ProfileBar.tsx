@@ -7,49 +7,7 @@ import EditProfile from './EditProfile';
 // import ContainerMyProfile from './ProfileBarContainerMyProfile';
 import ContainerCredentials from './ContainerCredentials';
 import ContainerMyProfile from './ContainerMyProfile';
-
-const users = [
-  {
-    page: 'bucciaratti',
-    image: 'sticky finger',
-    fallback: 'B',
-    name: 'Bucciaratti',
-    username: 'StickyFinger',
-    buttonType: 'followed' as 'followed' | 'follow',
-  },
-  {
-    page: 'giorno',
-    image: 'golden requim',
-    fallback: 'GG',
-    name: 'Giorno',
-    username: 'GoldenRequim',
-    buttonType: 'follow' as 'follow' | 'followed',
-  },
-  {
-    page: 'anasui',
-    image: 'diver down',
-    fallback: 'A',
-    name: 'Anasui',
-    username: 'Diver Down',
-    buttonType: 'follow' as 'follow' | 'followed',
-  },
-  {
-    page: 'polpo',
-    image: 'black sabbath',
-    fallback: 'P',
-    name: 'Polpo',
-    username: 'Black Sabbath',
-    buttonType: 'follow' as 'follow' | 'followed',
-  },
-  {
-    page: 'Blackmore',
-    image: 'rainbow',
-    fallback: 'B',
-    name: 'Blackmore',
-    username: 'CatchTheRainbow',
-    buttonType: 'follow' as 'follow' | 'followed',
-  },
-];
+import { users } from '@/stores/users';
 
 function ProfileBar({ showProfileContainer = true }: { showProfileContainer?: boolean }) {
   return (
