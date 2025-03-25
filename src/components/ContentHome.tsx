@@ -40,7 +40,7 @@ const threads = [
   },
 ];
 
-function HomeContent() {
+function ContentHome() {
   return (
     <div
       className="main-content border-l-1 border-r-1 border-gray-500"
@@ -78,4 +78,4 @@ function HomeContent() {
   );
 }
 
-export default HomeContent;
+export default ContentHome;
