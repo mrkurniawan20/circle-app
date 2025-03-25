@@ -50,11 +50,14 @@ function ContentHome() {
     >
       <h2 className="text-2xl p-10 pb-0 text-gray-100 font-semibold">Home</h2>
       <form action="" className="flex gap-5 p-10">
-        <Avatar className="">
+        <Avatar className="size-12">
           <AvatarImage src="./src/assets/img/star platinum.png" alt="@shadcn" />
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
-        <Textarea className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-base" placeholder="What is happening?"></Textarea>
+        <Textarea
+          className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-base placeholder:text-lg placeholder:font-semibold"
+          placeholder="What is happening?"
+        ></Textarea>
         <img className="justify-self-end size-10" src="./src/assets/img/add-image-green.png" alt="" />
         <Button variant="circle" className="justify-self-end ">
           Post

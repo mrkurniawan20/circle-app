@@ -8,6 +8,8 @@ import Page from './Page';
 import Profile from './Profile';
 import ProfileMedia from './ProfileMedia';
 import Search from './Search';
+import Follow from './Follow';
+import Following from './Following';
 
 let router = createBrowserRouter([
   {
@@ -49,6 +51,14 @@ let router = createBrowserRouter([
   {
     path: '/search',
     Component: Search,
+  },
+  {
+    path: '/follow',
+    Component: Follow,
+  },
+  {
+    path: '/following',
+    Component: Following,
   },
 ]);
 

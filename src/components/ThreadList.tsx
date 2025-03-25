@@ -18,19 +18,19 @@ function ThreadList({ avatarImage, name, username, relativeTime, threadImage, th
   return (
     <div className="border-t-1 border-b-1 p-5 pl-10 pr-10 border-gray-500">
       <div className="flex pr-5 pt-5 ">
-        <Avatar className="my-auto">
+        <Avatar className="my-auto size-12">
           <AvatarImage src={`./src/assets/img/${avatarImage}.png`} alt="@shadcn" />
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
-        <div className="inline-flex pl-5 items-center">
+        <div className="inline-flex pl-3 ">
           <h2 className="text-gray-50 font-semibold">{name}</h2>
           <p className="text-slate-400 pl-3">
             @{username} • {relativeTime}
           </p>
         </div>
       </div>
-      <div className=" pb-2 ml-15">
-        <p className="text-gray-100 pb-2">{thread}</p>
+      <div className=" pb-2 ml-15 -mt-5">
+        <p className="text-gray-300 pb-2">{thread}</p>
         <img src={`./src/assets/img/${threadImage}`} className="w-fit rounded-4xl pb-2" alt="" />
       </div>
       <div className="flex items-center gap-2 ml-15 pb-5">
