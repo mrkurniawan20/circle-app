@@ -7,6 +7,7 @@ import Home from './Home';
 import Page from './Page';
 import Profile from './Profile';
 import ProfileMedia from './ProfileMedia';
+import Search from './Search';
 
 let router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ let router = createBrowserRouter([
   {
     path: '/profile/media',
     Component: ProfileMedia,
+  },
+  {
+    path: '/search',
+    Component: Search,
   },
 ]);
 
