@@ -10,12 +10,26 @@ import ProfileMedia from './ProfileMedia';
 import Search from './Search';
 import Follow from './Follow';
 import Following from './Following';
+import ProtectedRouteLayout from './ProtectedRoute';
 
 let router = createBrowserRouter([
   {
-    path: '/',
-    Component: Home,
+    Component: ProtectedRouteLayout,
+    children: [
+      {
+        path: '/',
+        Component: Home,
+      },
+      {
+        path: '/profile',
+        Component: Profile,
+      },
+    ],
   },
+  // {
+  //   path: '/',
+  //   Component: Home,
+  // },
   {
     path: '/register',
     Component: Register,
@@ -40,10 +54,10 @@ let router = createBrowserRouter([
     path: '/page',
     Component: Page,
   },
-  {
-    path: '/profile',
-    Component: Profile,
-  },
+  // {
+  //   path: '/profile',
+  //   Component: Profile,
+  // },
   {
     path: '/profile/media',
     Component: ProfileMedia,
