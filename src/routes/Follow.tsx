@@ -1,8 +1,8 @@
 import CircleText from '@/components/CircleText';
 import ContentFollow from '@/components/ContentFollow';
 import ContentHome from '@/components/ContentHome';
-import ProfileBar from '@/components/ProfileBar';
-import SideBar from '@/components/SideBar';
+import ProfileBar from '@/layouts/components/ProfileBar';
+import SideBar from '@/layouts/components/SideBar';
 import React from 'react';
 
 function Follow() {

@@ -1,10 +1,10 @@
 import { AuthContext } from '@/assets/contexts/auth';
 import React, { useContext, useState } from 'react';
+import CircleText from '../CircleText';
+import SubTitle from '../SubTitle';
 import { NavLink } from 'react-router-dom';
-import CircleText from '@/components/CircleText';
-import SubTitle from '@/components/SubTitle';
+import Form from '../Form';
 import { useUserStore } from '@/stores/auth';
-import Form from '@/components/Form';
 
 interface LoginFormState {
   email: string;

@@ -1,7 +1,7 @@
 import DataMyProfile from '@/components/DataMyProfile';
 import EditProfile from '@/components/EditProfile';
-import ProfileBar from '@/components/ProfileBar';
-import SideBar from '@/components/SideBar';
+import ProfileBar from '@/layouts/components/ProfileBar';
+import SideBar from '@/layouts/components/SideBar';
 import ThreadList from '@/components/ThreadList';
 import React from 'react';
 import { NavLink } from 'react-router-dom';

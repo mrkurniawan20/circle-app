@@ -1,51 +1,16 @@
 import DataMyProfile from '@/components/DataMyProfile';
 import EditProfile from '@/components/EditProfile';
-import ProfileBar from '@/components/ProfileBar';
-import SideBar from '@/components/SideBar';
+import ProfileBar from '@/layouts/components/ProfileBar';
+import SideBar from '@/layouts/components/SideBar';
 import ThreadList from '@/components/ThreadList';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
-const threads = [
-  {
-    avatarImage: 'star platinum',
-    name: 'Dio Brando 👊🏼',
-    username: 'konodioda',
-    relativeTime: '4h',
-    threadImage: '',
-    thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
-    liked: 'liked' as 'liked' | 'unlike',
-    likeCount: '30',
-    replyCount: '100',
-  },
-  {
-    avatarImage: 'star platinum',
-    name: 'Dio Brando 👊🏼',
-    username: 'konodioda',
-    relativeTime: '1d',
-    threadImage: 'header-resized.png',
-    thread: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam hic expedita deleniti ipsam exercitationem iure enim molestiae repudiandae odio maxime?', //Thread
-    liked: 'unlike' as 'unlike' | 'liked',
-    likeCount: '30',
-    replyCount: '100',
-  },
-  {
-    avatarImage: 'star platinum',
-    name: 'Dio Brando 👊🏼',
-    username: 'konodioda',
-    relativeTime: '12d',
-    threadImage: 'dio.jpg',
-    thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
-    liked: 'liked' as 'liked' | 'unlike',
-    likeCount: '30',
-    replyCount: '100',
-  },
-];
+import { threads } from '@/stores/threads';
+import Layout from '@/layouts/Layout';
 
 function Profile() {
   return (
-    <div className="grid grid-cols-[0.4fr_1fr_0.6fr] h-screen">
-      <SideBar />
+    <Layout showProfileContainer={false}>
       <div
         className="main-content border-l-1 border-r-1 border-gray-500 border-collapse"
         style={{
@@ -83,8 +48,7 @@ function Profile() {
           />
         ))}
       </div>
-      <ProfileBar showProfileContainer={false} />
-    </div>
+    </Layout>
   );
 }
 

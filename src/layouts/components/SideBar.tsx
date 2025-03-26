@@ -1,14 +1,15 @@
 import React from 'react';
-import { Button } from './ui/button';
+import { Button } from '../../components/ui/button';
 import { NavLink } from 'react-router-dom';
-import CircleText from './CircleText';
+import CircleText from '../../components/CircleText';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from './ui/textarea';
+import { Textarea } from '../../components/ui/textarea';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import SideBarPage from './SideBarPage';
-import EditProfile from './EditProfile';
+import SideBarPage from '../../components/SideBarPage';
+import EditProfile from '../../components/EditProfile';
+import { useUserStore } from '@/stores/auth';
 
 const pages = [
   {
@@ -34,6 +35,7 @@ const pages = [
 ];
 
 function SideBar() {
+  const { clearUser } = useUserStore();
   return (
     <div className="p-10">
       <div className="flex flex-col gap-5 h-screen fixed w-xs">
@@ -69,7 +71,8 @@ function SideBar() {
           </DialogContent>
         </Dialog>
         <div className="flex-grow"></div>
-        <NavLink to={'/logout'} className="flex flex-row items-center mb-15">
+        {/* <Button onClick={clearUser}>logout</Button> */}
+        <NavLink to={'/logout'} onClick={clearUser} className="flex flex-row items-center mb-15">
           <img className="invert" src="./src/assets/img/logout.png" alt="" width="10%" />
           &emsp;<p className="text-lg font-semibold invert">logout</p>
         </NavLink>

@@ -1,8 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Register from './auth/Register';
+import Login from './auth/Login';
 import ForgotPassword from './auth/ForgotPassword';
 import ResetPassword from './auth/ResetPassword';
-import Login from './auth/Login';
+// import Login from './auth/DeprecatedLogin';
 import Home from './Home';
 import Page from './Page';
 import Profile from './Profile';
@@ -11,6 +12,7 @@ import Search from './Search';
 import Follow from './Follow';
 import Following from './Following';
 import ProtectedRouteLayout from './ProtectedRoute';
+import LoginForm from '@/components/auth/MyForm';
 
 let router = createBrowserRouter([
   {
@@ -23,6 +25,18 @@ let router = createBrowserRouter([
       {
         path: '/profile',
         Component: Profile,
+      },
+      {
+        path: '/follow',
+        Component: Follow,
+      },
+      {
+        path: '/following',
+        Component: Following,
+      },
+      {
+        path: '/home',
+        Component: Home,
       },
     ],
   },
@@ -47,13 +61,13 @@ let router = createBrowserRouter([
     Component: ResetPassword,
   },
   {
-    path: '/home',
-    Component: Home,
-  },
-  {
     path: '/page',
     Component: Page,
   },
+  // {
+  //   path: '/home',
+  //   Component: Home,
+  // },
   // {
   //   path: '/profile',
   //   Component: Profile,
@@ -66,13 +80,17 @@ let router = createBrowserRouter([
     path: '/search',
     Component: Search,
   },
+  // {
+  //   path: '/follow',
+  //   Component: Follow,
+  // },
+  // {
+  //   path: '/following',
+  //   Component: Following,
+  // },
   {
-    path: '/follow',
-    Component: Follow,
-  },
-  {
-    path: '/following',
-    Component: Following,
+    path: '/myform',
+    Component: LoginForm,
   },
 ]);
 

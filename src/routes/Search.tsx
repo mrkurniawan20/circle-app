@@ -1,8 +1,8 @@
 import React from 'react';
 import CircleText from '@/components/CircleText';
 import ContentPage from '@/components/ContentPage';
-import ProfileBar from '@/components/ProfileBar';
-import SideBar from '@/components/SideBar';
+import ProfileBar from '@/layouts/components/ProfileBar';
+import SideBar from '@/layouts/components/SideBar';
 import ContentSearch from '@/components/ContentSearch';
 
 function Search() {

@@ -2,7 +2,7 @@ import React from 'react';
 
 function ContainerCredentials() {
   return (
-    <div className="third-profile-container bg-gray-800 mt-5 pl-3 pr-3 rounded-xl">
+    <div className="third-profile-container bg-gray-800 mt-5 pl-3 pr-3 rounded-xl w-full">
       <div className="pt-5 pb-5">
         <div className="flex">
           <h4 className="my-auto text-gray-50 font-semibold">Developed by Rafli Kurniawan&ensp;•&ensp;</h4>
