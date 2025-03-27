@@ -8,9 +8,9 @@ function PageContent() {
   return (
     <div
       className="main-content border-l-1 border-r-1 border-gray-500 border-collapse"
-      style={{
-        height: '10000px',
-      }}
+      // style={{
+      //   height: '10000px',
+      // }}
     >
       <div className="inline-flex">
         <NavLink to={'/home'} className="inline-flex items-center pt-10">

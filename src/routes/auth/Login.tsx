@@ -1,6 +1,6 @@
 import { AuthContext } from '@/assets/contexts/auth';
 import React, { useContext, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import CircleText from '@/components/CircleText';
 import SubTitle from '@/components/SubTitle';
 import { useUserStore } from '@/stores/auth';
@@ -14,6 +14,7 @@ interface LoginFormState {
 function LoginForm() {
   // const { user, setUser } = useContext(AuthContext);
   const { user, setUser } = useUserStore();
+  const navigate = useNavigate();
 
   const [formState, setFormState] = useState<LoginFormState>({
     email: '',
@@ -29,6 +30,7 @@ function LoginForm() {
     event.preventDefault();
     console.log(`Halo berikut data saya`, formState);
     setUser(formState);
+    navigate('/');
     // alert(`Hello, my name is ${formState.username}\nmy age is ${formState.age}`);
   };
   const formInputs = [

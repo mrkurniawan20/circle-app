@@ -8,13 +8,13 @@ import { threads } from '@/stores/threads';
 function ContentHome() {
   return (
     <div
-      className="main-content border-l-1 border-r-1 border-gray-500"
-      style={{
-        height: '10000px',
-      }}
+      className="main-content border-l-1 border-r-1 border-gray-500 border-collapse"
+      // style={{
+      //   height: '10000px',
+      // }}
     >
       <h2 className="text-2xl p-10 pb-0 text-gray-100 font-semibold">Home</h2>
-      <form action="" className="flex gap-5 p-10">
+      <form action="" className="flex gap-5 p-10 border-b-1 border-gray-500">
         <Avatar className="size-12">
           <AvatarImage src="./src/assets/img/star platinum.png" alt="@shadcn" />
           <AvatarFallback>ZW</AvatarFallback>

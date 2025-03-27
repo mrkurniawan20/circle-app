@@ -8,7 +8,7 @@ interface LayoutProps {
 
 function Layout({ children, showProfileContainer = true }: LayoutProps & { showProfileContainer?: boolean }) {
   return (
-    <div className="grid grid-cols-[0.4fr_1fr_0.6fr] h-screen">
+    <div className="grid grid-cols-[0.4fr_1fr_0.6fr]">
       <SideBar />
       <div>{children}</div>
       <ProfileBar showProfileContainer={showProfileContainer} />

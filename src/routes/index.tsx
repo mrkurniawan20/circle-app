@@ -13,6 +13,7 @@ import Follow from './Follow';
 import Following from './Following';
 import ProtectedRouteLayout from './ProtectedRoute';
 import LoginForm from '@/components/auth/MyForm';
+import PageMedia from './PageMedia';
 
 let router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ let router = createBrowserRouter([
   {
     path: '/page',
     Component: Page,
+  },
+  {
+    path: '/pagemedia',
+    Component: PageMedia,
   },
   // {
   //   path: '/home',

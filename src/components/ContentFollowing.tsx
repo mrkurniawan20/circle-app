@@ -8,9 +8,9 @@ function ContentFollowing() {
   return (
     <div
       className="main-content border-l-1 border-r-1 border-gray-500"
-      style={{
-        height: '10000px',
-      }}
+      // style={{
+      //   height: '10000px',
+      // }}
     >
       <h2 className="text-2xl p-10 pb-5 text-gray-100 font-semibold">Follows</h2>
       <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
