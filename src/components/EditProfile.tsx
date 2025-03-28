@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -6,8 +6,18 @@ import { Label } from '@/components/ui/label';
 import { Textarea, TweetArea } from './ui/textarea';
 
 function EditProfile() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'; // Disable scrolling
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isOpen]);
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="garis" className="ms-auto rounded-full">
           Edit Profile
@@ -16,10 +26,22 @@ function EditProfile() {
       <DialogContent className="sm:max-w-[425px] bg-gray-800 border-none">
         <DialogHeader>
           <DialogTitle className="text-gray-100 ">Edit profile</DialogTitle>
-          <img src="./src/assets/img/header-resized.png" className="aspect-6/2 object-cover rounded-xl" alt="" />
-          <img src="./src/assets/img/star platinum.png" className="aspect-square object-cover rounded-full size-20 ml-7 -mt-10 border-4 border-gray-800" alt="" />
+          <form action="">
+            <label htmlFor="header">
+              <img src="./src/assets/img/header-resized.png" className="aspect-6/2 object-cover rounded-xl hover:cursor-pointer hover:brightness-50 transition-all duration-200" alt="" />
+            </label>
+            <input type="file" name="header" id="header" className="hidden" />
+            <label htmlFor="avatar">
+              <img
+                src="./src/assets/img/star platinum.png"
+                className="absolute aspect-square object-cover rounded-full size-20 ml-7 -mt-10 border-4 border-gray-800 hover:cursor-pointer hover:brightness-50 transition-all duration-200"
+                alt=""
+              />
+            </label>
+            <input type="file" name="avatar" id="avatar" className="hidden" />
+          </form>
         </DialogHeader>
-        <form className="grid gap-4 py-4">
+        <form className="mt-5 grid gap-4 py-4">
           <div className="flex flex-col items-center gap-4 relative">
             <label
               htmlFor="name"

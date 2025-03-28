@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import SideBarPage from '../../components/SideBarPage';
 import EditProfile from '../../components/EditProfile';
 import { useUserStore } from '@/stores/auth';
+import { ImagePlus } from 'lucide-react';
 
 const pages = [
   {
@@ -52,22 +53,29 @@ function SideBar() {
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[525px] bg-gray-800 border-none">
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-[1fr_10fr] items-center">
-                {/* <Input id="name" value="Pedro Duarte" className="col-span-3" /> */}
-                <Avatar className="my-auto">
-                  <AvatarImage src="./src/assets/img/star platinum.png" alt="@shadcn" />
-                  <AvatarFallback>ZW</AvatarFallback>
-                </Avatar>
-                <Textarea className="ml-2 resize-none w-sm max-w-sm border-none shadow-none focus:ring-green-500 items-center text-gray-100" placeholder="What is happening?"></Textarea>
+            <form action="">
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-[1fr_10fr] items-center">
+                  {/* <Input id="name" value="Pedro Duarte" className="col-span-3" /> */}
+                  <Avatar className="my-auto">
+                    <AvatarImage src="./src/assets/img/star platinum.png" alt="@shadcn" />
+                    <AvatarFallback>ZW</AvatarFallback>
+                  </Avatar>
+                  <Textarea className="ml-2 resize-none w-sm max-w-sm border-none shadow-none focus:ring-green-500 items-center text-gray-100" placeholder="What is happening?"></Textarea>
+                </div>
               </div>
-            </div>
-            <DialogFooter className="flex justify-between">
-              <img className="me-auto" src="./src/assets/img/add-image-green.png" alt="" width="8%" />
-              <Button variant={'circle'} type="submit">
-                Post
-              </Button>
-            </DialogFooter>
+              <DialogFooter className="flex">
+                <div className="mr-auto">
+                  <label htmlFor="add-image">
+                    <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800 transform-all duration-200" />
+                  </label>
+                  <input type="file" name="add-image" id="add-image" className="hidden" />
+                </div>
+                <Button variant={'circle'} type="submit">
+                  Post
+                </Button>
+              </DialogFooter>
+            </form>
           </DialogContent>
         </Dialog>
         <div className="flex-grow"></div>

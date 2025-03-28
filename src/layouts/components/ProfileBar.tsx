@@ -11,7 +11,7 @@ import { users } from '@/stores/users';
 
 function ProfileBar({ showProfileContainer = true }: { showProfileContainer?: boolean }) {
   return (
-    <div className="w-full">
+    <div className="w-full relative">
       <div className="fixed flex flex-col pl-10 pt-10 pr-10 w-base">
         {/* biar bisa dipanggil atau engga */}
         {showProfileContainer && <ContainerMyProfile />}

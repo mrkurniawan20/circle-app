@@ -4,22 +4,24 @@ import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { NavLink } from 'react-router-dom';
 
-function PageContent() {
+function PageContent({ showNavLink = true }: { showNavLink?: boolean }) {
   return (
     <div
-      className="main-content border-l-1 border-r-1 border-gray-500 border-collapse"
+      className="border-l-1 border-r-1 border-gray-500 h-full"
       // style={{
       //   height: '10000px',
       // }}
     >
-      <div className="inline-flex">
-        <NavLink to={'/home'} className="inline-flex items-center pt-10">
-          <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700">
-            <img src="./src/assets/img/back.png" className="invert w-6 h-6" alt="" />
-            <h2 className="text-2xl text-gray-100 font-semibold">Home</h2>
-          </div>
-        </NavLink>
-      </div>
+      {showNavLink && (
+        <div className="inline-flex">
+          <NavLink to={'/home'} className="inline-flex items-center pt-10">
+            <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700">
+              <img src="./src/assets/img/back.png" className="invert w-6 h-6" alt="" />
+              <h2 className="text-2xl text-gray-100 font-semibold">Home</h2>
+            </div>
+          </NavLink>
+        </div>
+      )}
 
       <div className="flex p-5">
         <Avatar className="my-auto">

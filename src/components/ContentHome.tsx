@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import ThreadList from './ThreadList';
 import { threads } from '@/stores/threads';
+import { ImagePlus } from 'lucide-react';
 
 function ContentHome() {
   return (
@@ -23,7 +24,10 @@ function ContentHome() {
           className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-base placeholder:text-lg placeholder:font-semibold"
           placeholder="What is happening?"
         ></Textarea>
-        <img className="justify-self-end size-10" src="./src/assets/img/add-image-green.png" alt="" />
+        <label htmlFor="add-image">
+          <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800 transform-all duration-200" />
+        </label>
+        <input type="file" name="add-image" id="add-image" className="hidden" />
         <Button variant="circle" className="justify-self-end ">
           Post
         </Button>
@@ -37,7 +41,7 @@ function ContentHome() {
           relativeTime={thread.relativeTime}
           threadImage={thread.threadImage}
           thread={thread.thread}
-          liked={thread.liked}
+          likedCount={thread.likedCount}
           likeCount={thread.likeCount}
           replyCount={thread.replyCount}
         />

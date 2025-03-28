@@ -33,6 +33,15 @@ function Profile() {
           </div>
           <DataMyProfile />
         </div>
+        <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
+          <NavLink to={'/profile'} className="text-center text-xl text-gray-50 ">
+            <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg">All Post</p>
+            <div className="border-2 border-green-500 h-1 rounded-full"></div>
+          </NavLink>
+          <NavLink to={'/profilemedia'} className="text-center text-xl text-gray-50">
+            <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg">Media</p>
+          </NavLink>
+        </div>
         {threads.map((thread, index) => (
           <ThreadList
             key={index}
@@ -42,7 +51,7 @@ function Profile() {
             relativeTime={thread.relativeTime}
             threadImage={thread.threadImage}
             thread={thread.thread}
-            liked={thread.liked}
+            likedCount={thread.likedCount}
             likeCount={thread.likeCount}
             replyCount={thread.replyCount}
           />

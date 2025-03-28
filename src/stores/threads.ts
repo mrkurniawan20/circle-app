@@ -8,6 +8,7 @@ export const threads = [
     thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
     liked: 'liked' as 'liked' | 'unlike',
     likeCount: '30',
+    likedCount: '31',
     replyCount: '100',
   },
   {
@@ -18,7 +19,8 @@ export const threads = [
     threadImage: 'header-resized.png',
     thread: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam hic expedita deleniti ipsam exercitationem iure enim molestiae repudiandae odio maxime?', //Thread
     liked: 'unlike' as 'unlike' | 'liked',
-    likeCount: '30',
+    likeCount: '56',
+    likedCount: '57',
     replyCount: '100',
   },
   {
@@ -29,7 +31,8 @@ export const threads = [
     threadImage: 'dio.jpg',
     thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
     liked: 'liked' as 'liked' | 'unlike',
-    likeCount: '30',
+    likeCount: '122',
+    likedCount: '123',
     replyCount: '100',
   },
   {
@@ -40,7 +43,8 @@ export const threads = [
     threadImage: '',
     thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
     liked: 'liked' as 'liked' | 'unlike',
-    likeCount: '30',
+    likeCount: '332',
+    likedCount: '333',
     replyCount: '100',
   },
   {
@@ -51,7 +55,8 @@ export const threads = [
     threadImage: 'abbachio.jpeg',
     thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
     liked: 'liked' as 'liked' | 'unlike',
-    likeCount: '30',
+    likeCount: '909',
+    likedCount: '910',
     replyCount: '100',
   },
 ];

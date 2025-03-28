@@ -5,47 +5,14 @@ import SideBar from '@/layouts/components/SideBar';
 import ThreadList from '@/components/ThreadList';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
-const threads = [
-  {
-    avatarImage: 'star platinum',
-    name: 'Dio Brando 👊🏼',
-    username: 'konodioda',
-    relativeTime: '4h',
-    threadImage: '',
-    thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
-    liked: 'liked' as 'liked' | 'unlike',
-    likeCount: '30',
-    replyCount: '100',
-  },
-  {
-    avatarImage: 'star platinum',
-    name: 'Dio Brando 👊🏼',
-    username: 'konodioda',
-    relativeTime: '1d',
-    threadImage: 'header-resized.png',
-    thread: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam hic expedita deleniti ipsam exercitationem iure enim molestiae repudiandae odio maxime?', //Thread
-    liked: 'unlike' as 'unlike' | 'liked',
-    likeCount: '30',
-    replyCount: '100',
-  },
-  {
-    avatarImage: 'star platinum',
-    name: 'Dio Brando 👊🏼',
-    username: 'konodioda',
-    relativeTime: '12d',
-    threadImage: 'dio.jpg',
-    thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
-    liked: 'liked' as 'liked' | 'unlike',
-    likeCount: '30',
-    replyCount: '100',
-  },
-];
+import { threads } from '@/stores/threads';
+import Layout from '@/layouts/Layout';
+import { images } from '@/stores/images';
+import ThreadLikes from '@/components/ThreadLikes';
 
 function ProfileMedia() {
   return (
-    <div className="grid grid-cols-[0.4fr_1fr_0.6fr] h-screen">
-      <SideBar />
+    <Layout showProfileContainer={false}>
       <div
         className="main-content border-l-1 border-r-1 border-gray-500 border-collapse"
         // style={{
@@ -62,29 +29,29 @@ function ProfileMedia() {
         </div>
         <div className="p-10 pt-2">
           <img src="./src/assets/img/header-resized.png" alt="" className="aspect-5/1  object-cover  rounded-2xl" />
-          <img src="./src/assets/img/star platinum.png" alt="" className="aspect-square object-cover size-25 rounded-full border-3 ml-10 -mt-12 absolute" />
+          <img src="./src/assets/img/star platinum.png" alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute" />
           <div className="flex pt-3 pb-5">
             <EditProfile />
           </div>
           <DataMyProfile />
         </div>
-        {threads.map((thread, index) => (
-          <ThreadList
-            key={index}
-            avatarImage={thread.avatarImage}
-            name={thread.name}
-            username={thread.username}
-            relativeTime={thread.relativeTime}
-            threadImage={thread.threadImage}
-            thread={thread.thread}
-            liked={thread.liked}
-            likeCount={thread.likeCount}
-            replyCount={thread.replyCount}
-          />
-        ))}
+        <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
+          <NavLink to={'/profile'} className="text-center text-xl text-gray-50 ">
+            <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg">All Post</p>
+          </NavLink>
+          <NavLink to={'/profilemedia'} className="text-center text-xl text-gray-50">
+            <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg">Media</p>
+            <div className="border-2 border-green-500 h-1 rounded-full"></div>
+          </NavLink>
+        </div>
+        <ThreadLikes />
+        <div className="grid grid-cols-3 gap-2 p-2">
+          {images.map((img, index) => (
+            <img key={index} src={`./src/assets/img/${img.image}`} alt="" className="rounded-lg aspect-square object-cover" />
+          ))}
+        </div>
       </div>
-      <ProfileBar showProfileContainer={false} />
-    </div>
+    </Layout>
   );
 }
 

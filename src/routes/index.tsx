@@ -66,7 +66,7 @@ let router = createBrowserRouter([
     Component: Page,
   },
   {
-    path: '/pagemedia',
+    path: '/media',
     Component: PageMedia,
   },
   // {
@@ -78,7 +78,7 @@ let router = createBrowserRouter([
   //   Component: Profile,
   // },
   {
-    path: '/profile/media',
+    path: '/profilemedia',
     Component: ProfileMedia,
   },
   {
