@@ -14,6 +14,7 @@ import { ImagePlus, DoorOpen, CircleUserRound } from 'lucide-react';
 import { FaHome, FaSearch, FaRegHeart } from 'react-icons/fa';
 import { IoPersonCircleOutline, IoPersonCircleSharp } from 'react-icons/io5';
 import { GiExitDoor } from 'react-icons/gi';
+import { Separator } from '@/components/ui/separator';
 
 const pages = [
   {
@@ -53,7 +54,7 @@ function SideBar() {
               Create Post
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[525px] bg-gray-800 border-none">
+          <DialogContent className="sm:max-w-[525px] md:min-w-[700px] bg-gray-800 border-none top-[25%]">
             <form action="">
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-[1fr_10fr] items-center">
@@ -64,6 +65,7 @@ function SideBar() {
                   <Textarea className="ml-2 resize-none w-sm max-w-sm border-none shadow-none focus:ring-green-500 items-center text-gray-100 md:text-xl" placeholder="What is happening?"></Textarea>
                 </div>
               </div>
+              <Separator className="mb-5 " />
               <DialogFooter className="flex">
                 <div className="mr-auto">
                   <label htmlFor="add-image">

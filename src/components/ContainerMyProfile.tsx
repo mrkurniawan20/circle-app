@@ -12,7 +12,7 @@ function ContainerMyProfile() {
       <div className="flex pt-3">
         <EditProfile />
       </div>
-      <DataMyProfile name={loggedInUser.name} username={loggedInUser.username} bio={loggedInUser.bio} following={loggedInUser.following} followers={loggedInUser.followers} />
+      <DataMyProfile loggedIn={loggedInUser} />
     </div>
   );
 }

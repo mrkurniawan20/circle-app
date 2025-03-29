@@ -19,9 +19,9 @@ interface FollowersProps {
 
 function FollowersList({ followers = [] }: FollowersProps) {
   return (
-    <>
+    <div className="p-5">
       {followers.map((follower) => (
-        <NavLink to={`/${follower.page}`} className="flex w-full pb-1 pt-1 pl-5 pr-5 hover:bg-slate-700 rounded-2xl duration-200">
+        <NavLink to={`/${follower.page}`} className="flex w-full pb-1 pt-1 px-5 hover:bg-slate-700 rounded-2xl duration-200">
           <Avatar className="my-auto">
             <AvatarImage src={`./src/assets/img/${follower.image}.png`} alt="@shadcn" />
             <AvatarFallback>{follower.fallback}</AvatarFallback>
@@ -36,7 +36,7 @@ function FollowersList({ followers = [] }: FollowersProps) {
           </Button>
         </NavLink>
       ))}
-    </>
+    </div>
   );
 }
 

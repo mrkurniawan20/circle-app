@@ -10,12 +10,7 @@ import { users } from '@/stores/users';
 
 function ContentSearch() {
   return (
-    <div
-      className="main-content  border-collapse"
-      // style={{
-      //   height: '10000px',
-      // }}
-    >
+    <div>
       <Command className=" md:min-w-[450px] bg-[#213547] p-5 rounded-none h-full">
         <CommandInput defaultValue="" placeholder="Type a command or search..." className="bg-gray-600 text-gray-300 p-5 border-none rounded-full placeholder:text-gray-300 " />
         <CommandList className="max-h-full">

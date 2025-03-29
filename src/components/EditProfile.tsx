@@ -13,7 +13,7 @@ function EditProfile() {
           Edit Profile
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-gray-800 border-none">
+      <DialogContent className="sm:max-w-[425px] bg-gray-800 border-none top-[35%]">
         <DialogHeader>
           <DialogTitle className="text-gray-100 ">Edit profile</DialogTitle>
           <form action="">

@@ -32,9 +32,7 @@ function ContentHome() {
           Post
         </Button>
       </form>
-      {threads.map(() => (
-        <ThreadList threadList={threads} />
-      ))}
+      <ThreadList threadList={threads} />
     </div>
   );
 }

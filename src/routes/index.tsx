@@ -14,6 +14,7 @@ import Following from './Following';
 import ProtectedRouteLayout from './ProtectedRoute';
 import LoginForm from '@/components/auth/MyForm';
 import PageMedia from './PageMedia';
+import PageTitle from '@/layouts/components/PageTitle';
 
 let router = createBrowserRouter([
   {
@@ -21,57 +22,60 @@ let router = createBrowserRouter([
     children: [
       {
         path: '/',
-        Component: Home,
+        Component: PageTitle(Home, 'Home | Circle'),
       },
       {
         path: '/profile',
-        Component: Profile,
+        Component: PageTitle(Profile, 'Profile | Circle'),
       },
       {
         path: '/follow',
-        Component: Follow,
+        Component: PageTitle(Follow, 'Followers | Circle'),
       },
       {
         path: '/following',
-        Component: Following,
+        Component: PageTitle(Following, 'Following | Circle'),
       },
       {
         path: '/home',
-        Component: Home,
+        Component: PageTitle(Home, 'Home | Circle'),
       },
       {
         path: '/profilemedia',
-        Component: ProfileMedia,
+        Component: PageTitle(ProfileMedia, 'Profile | Circle'),
       },
       {
         path: '/search',
-        Component: Search,
+        Component: PageTitle(Search, 'Search | Circle'),
       },
     ],
   },
   {
     path: '/register',
-    Component: Register,
+    Component: PageTitle(Register, 'Register | Circle'),
   },
   {
     path: '/login',
-    Component: Login,
+    Component: PageTitle(Login, 'Login | Circle'),
   },
   {
     path: '/forgot',
-    Component: ForgotPassword,
+    Component: PageTitle(ForgotPassword, 'Forgot Password | Circle'),
   },
   {
     path: '/reset',
-    Component: ResetPassword,
+    Component: PageTitle(ResetPassword, 'Reset Password | Circle'),
   },
   {
     path: '/page',
-    Component: Page,
+    Component: PageTitle(Page, 'Page | Circle'),
   },
   {
     path: '/media',
-    element: <PageMedia image="splash.jpg" />,
+    element: (() => {
+      const MediaWithTitle = PageTitle(PageMedia, 'Media | Cirlce');
+      return <MediaWithTitle image="splash.jpg" />;
+    })(),
   },
   // {
   //   path: '/',
