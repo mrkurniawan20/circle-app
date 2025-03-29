@@ -9,7 +9,7 @@ import { ImagePlus } from 'lucide-react';
 function ContentHome() {
   return (
     <div
-      className="main-content border-l-1 border-r-1 border-gray-500 border-collapse"
+      className="main-content  border-collapse"
       // style={{
       //   height: '10000px',
       // }}
@@ -32,19 +32,8 @@ function ContentHome() {
           Post
         </Button>
       </form>
-      {threads.map((thread, index) => (
-        <ThreadList
-          key={index}
-          avatarImage={thread.avatarImage}
-          name={thread.name}
-          username={thread.username}
-          relativeTime={thread.relativeTime}
-          threadImage={thread.threadImage}
-          thread={thread.thread}
-          likedCount={thread.likedCount}
-          likeCount={thread.likeCount}
-          replyCount={thread.replyCount}
-        />
+      {threads.map(() => (
+        <ThreadList threadList={threads} />
       ))}
     </div>
   );

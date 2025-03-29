@@ -16,7 +16,7 @@ function ProfileMedia() {
   return (
     <Layout showProfileContainer={false}>
       <div
-        className="main-content border-l-1 border-r-1 border-gray-500 border-collapse"
+        className="main-content  border-collapse"
         // style={{
         //   height: '10000px',
         // }}
@@ -25,7 +25,7 @@ function ProfileMedia() {
           <NavLink to={'/home'} className="inline-flex items-center pt-10">
             <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700">
               <img src="./src/assets/img/back.png" className="invert w-6 h-6" alt="" />
-              <h2 className="text-2xl text-gray-100 font-semibold">Dio Brando 👊🏼</h2>
+              <h2 className="text-2xl text-gray-100 font-semibold">{loggedInUser.name}</h2>
             </div>
           </NavLink>
         </div>
@@ -39,10 +39,10 @@ function ProfileMedia() {
         </div>
         <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
           <NavLink to={'/profile'} className="text-center text-xl text-gray-50 ">
-            <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg">All Post</p>
+            <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg duration-150">All Post</p>
           </NavLink>
           <NavLink to={'/profilemedia'} className="text-center text-xl text-gray-50">
-            <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg">Media</p>
+            <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg duration-150">Media</p>
             <div className="border-2 border-green-500 h-1 rounded-full"></div>
           </NavLink>
         </div>

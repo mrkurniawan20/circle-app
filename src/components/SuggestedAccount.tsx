@@ -12,21 +12,29 @@ interface AvatarSuggest {
   buttonType: 'follow' | 'followed';
 }
 
-function SuggestedAccount({ page, image, fallback, name, username, buttonType }: AvatarSuggest) {
+interface SuggestedProps {
+  avatars: AvatarSuggest[];
+}
+
+function SuggestedAccount({ avatars = [] }: SuggestedProps) {
   return (
-    <NavLink to={`/${page}`} className="profile flex pb-3 pl-5 pr-5  hover:bg-slate-700 duration-175">
-      <Avatar className="my-auto">
-        <AvatarImage src={`./src/assets/img/${image}.png`} alt="@shadcn" />
-        <AvatarFallback>{fallback}</AvatarFallback>
-      </Avatar>
-      <div className="pl-5">
-        <h5 className="text-lg font-semibold text-gray-50">{name}</h5>
-        <p className="text-slate-400 text-sm pb-1">@{username}</p>
-      </div>
-      <Button variant={buttonType === 'follow' ? 'follow' : 'followed'} className="rounded-full ms-auto my-auto">
-        {buttonType === 'follow' ? 'Follow' : 'Following'}
-      </Button>
-    </NavLink>
+    <>
+      {avatars.map((avatar) => (
+        <NavLink to={`/${avatar.page}`} className="profile flex pb-3 pl-5 pr-5  hover:bg-slate-700 duration-100">
+          <Avatar className="my-auto">
+            <AvatarImage src={`./src/assets/img/${avatar.image}.png`} alt="@shadcn" />
+            <AvatarFallback>{avatar.fallback}</AvatarFallback>
+          </Avatar>
+          <div className="pl-5">
+            <h5 className="text-lg font-semibold text-gray-50">{avatar.name}</h5>
+            <p className="text-slate-400 text-sm pb-1">@{avatar.username}</p>
+          </div>
+          <Button variant={avatar.buttonType === 'follow' ? 'follow' : 'followed'} className="rounded-full ms-auto my-auto">
+            {avatar.buttonType === 'follow' ? 'Follow' : 'Following'}
+          </Button>
+        </NavLink>
+      ))}
+    </>
   );
 }
 

@@ -39,12 +39,16 @@ let router = createBrowserRouter([
         path: '/home',
         Component: Home,
       },
+      {
+        path: '/profilemedia',
+        Component: ProfileMedia,
+      },
+      {
+        path: '/search',
+        Component: Search,
+      },
     ],
   },
-  // {
-  //   path: '/',
-  //   Component: Home,
-  // },
   {
     path: '/register',
     Component: Register,
@@ -67,8 +71,12 @@ let router = createBrowserRouter([
   },
   {
     path: '/media',
-    Component: PageMedia,
+    element: <PageMedia image="splash.jpg" />,
   },
+  // {
+  //   path: '/',
+  //   Component: Home,
+  // },
   // {
   //   path: '/home',
   //   Component: Home,
@@ -77,14 +85,6 @@ let router = createBrowserRouter([
   //   path: '/profile',
   //   Component: Profile,
   // },
-  {
-    path: '/profilemedia',
-    Component: ProfileMedia,
-  },
-  {
-    path: '/search',
-    Component: Search,
-  },
   // {
   //   path: '/follow',
   //   Component: Follow,

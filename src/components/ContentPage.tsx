@@ -21,7 +21,7 @@ function ContentPage({ showNavLink = true }: { showNavLink?: boolean }) {
   };
   return (
     <div
-      className="border-l-1 border-r-1 border-gray-500 h-base"
+      className=" h-base"
       // style={{
       //   height: '10000px',
       // }}
@@ -90,18 +90,8 @@ function ContentPage({ showNavLink = true }: { showNavLink?: boolean }) {
           Reply
         </Button>
       </form>
-      {replies.map((reply) => (
-        <ThreadList
-          avatarImage={reply.avatarImage}
-          name={reply.name}
-          username={reply.username}
-          relativeTime={reply.relativeTime}
-          threadImage={reply.threadImage}
-          thread={reply.thread}
-          likedCount={reply.likedCount}
-          likeCount={reply.likeCount}
-          replyCount={reply.replyCount}
-        />
+      {replies.map(() => (
+        <ThreadList threadList={replies} />
       ))}
     </div>
   );

@@ -13,24 +13,30 @@ interface FollowersList {
   buttonType: 'follow' | 'followed';
 }
 
-function FollowersList({ page, image, fallback, name, username, bio, buttonType }: FollowersList) {
+interface FollowersProps {
+  followers: FollowersList[];
+}
+
+function FollowersList({ followers = [] }: FollowersProps) {
   return (
-    <div>
-      <NavLink to={`/${page}`} className="flex w-full pb-1 pt-1 pl-5 pr-5 hover:bg-slate-700 rounded-2xl duration-200">
-        <Avatar className="my-auto">
-          <AvatarImage src={`./src/assets/img/${image}.png`} alt="@shadcn" />
-          <AvatarFallback>{fallback}</AvatarFallback>
-        </Avatar>
-        <div className="pl-5">
-          <h5 className="text-base font-semibold text-gray-50">{name}</h5>
-          <p className="text-slate-400 text-xs pb-1">@{username}</p>
-          <p className="text-gray-200 text-xs pb-1">{bio}</p>
-        </div>
-        <Button variant={buttonType === 'follow' ? 'follow' : 'followed'} className="rounded-full ml-auto my-auto">
-          {buttonType === 'follow' ? 'Follow' : 'Following'}
-        </Button>
-      </NavLink>
-    </div>
+    <>
+      {followers.map((follower) => (
+        <NavLink to={`/${follower.page}`} className="flex w-full pb-1 pt-1 pl-5 pr-5 hover:bg-slate-700 rounded-2xl duration-200">
+          <Avatar className="my-auto">
+            <AvatarImage src={`./src/assets/img/${follower.image}.png`} alt="@shadcn" />
+            <AvatarFallback>{follower.fallback}</AvatarFallback>
+          </Avatar>
+          <div className="pl-5">
+            <h5 className="text-base font-semibold text-gray-50">{follower.name}</h5>
+            <p className="text-slate-400 text-xs pb-1">@{follower.username}</p>
+            <p className="text-gray-200 text-xs pb-1">{follower.bio}</p>
+          </div>
+          <Button variant={follower.buttonType === 'follow' ? 'follow' : 'followed'} className="rounded-full ml-auto my-auto">
+            {follower.buttonType === 'follow' ? 'Follow' : 'Following'}
+          </Button>
+        </NavLink>
+      ))}
+    </>
   );
 }
 

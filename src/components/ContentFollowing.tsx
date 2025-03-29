@@ -3,11 +3,12 @@ import { NavLink } from 'react-router-dom';
 // import { users } from '@/stores/users';
 import { usersFollowed } from '@/stores/users-followed';
 import FollowersList from './FollowersList';
+import { users } from '@/stores/users';
 
 function ContentFollowing() {
   return (
     <div
-      className="main-content border-l-1 border-r-1 border-gray-500"
+      className="main-content "
       // style={{
       //   height: '10000px',
       // }}
@@ -22,9 +23,7 @@ function ContentFollowing() {
           <div className="border-2 border-green-500 h-1 rounded-full"></div>
         </NavLink>
       </div>
-      {usersFollowed.map((user, index) => (
-        <FollowersList key={index} page={user.page} image={user.image} fallback={user.fallback} name={user.name} username={user.username} bio={user.bio} buttonType={user.buttonType} />
-      ))}
+      <FollowersList followers={usersFollowed} />
     </div>
   );
 }

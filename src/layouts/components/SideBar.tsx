@@ -46,9 +46,7 @@ function SideBar() {
         <NavLink to={'/'} className="hover:scale-105 transition-transform duration-200">
           <CircleText textSize="text-5xl" />
         </NavLink>
-        {pages.map((page, index) => (
-          <SideBarPage key={index} page={page.page} image={page.image} namePage={page.namePage} />
-        ))}
+        <SideBarPage profiles={pages} />
         <Dialog>
           <DialogTrigger asChild>
             <Button variant={'circle'} className="p-5">
@@ -59,12 +57,11 @@ function SideBar() {
             <form action="">
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-[1fr_10fr] items-center">
-                  {/* <Input id="name" value="Pedro Duarte" className="col-span-3" /> */}
                   <Avatar className="my-auto">
                     <AvatarImage src="./src/assets/img/star platinum.png" alt="@shadcn" />
                     <AvatarFallback>ZW</AvatarFallback>
                   </Avatar>
-                  <Textarea className="ml-2 resize-none w-sm max-w-sm border-none shadow-none focus:ring-green-500 items-center text-gray-100" placeholder="What is happening?"></Textarea>
+                  <Textarea className="ml-2 resize-none w-sm max-w-sm border-none shadow-none focus:ring-green-500 items-center text-gray-100 md:text-xl" placeholder="What is happening?"></Textarea>
                 </div>
               </div>
               <DialogFooter className="flex">

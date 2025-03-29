@@ -6,18 +6,8 @@ import { Label } from '@/components/ui/label';
 import { Textarea, TweetArea } from './ui/textarea';
 
 function EditProfile() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'; // Disable scrolling
-    } else {
-      document.body.style.overflow = '';
-    }
-  }, [isOpen]);
-
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog>
       <DialogTrigger asChild>
         <Button variant="garis" className="ms-auto rounded-full">
           Edit Profile

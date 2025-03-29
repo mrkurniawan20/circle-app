@@ -11,7 +11,7 @@ import { users } from '@/stores/users';
 function ContentSearch() {
   return (
     <div
-      className="main-content border-l-1 border-r-1 border-gray-500 border-collapse"
+      className="main-content  border-collapse"
       // style={{
       //   height: '10000px',
       // }}
@@ -24,9 +24,7 @@ function ContentSearch() {
             <h2 className="text-gray-100 text-2xl font-semibold">No results found.</h2> <p className="w-xs mx-auto text-slate-500 pt-3">Try searching for something else or check the spelling of what you typed</p>
           </CommandEmpty>
           <CommandGroup>
-            {users.map((user, index) => (
-              <SearchResult key={index} page={user.page} image={user.image} fallback={user.fallback} name={user.name} username={user.username} bio={user.bio} buttonType={user.buttonType} />
-            ))}
+            <SearchResult searches={users} />
           </CommandGroup>
         </CommandList>
       </Command>

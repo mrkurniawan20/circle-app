@@ -12,14 +12,12 @@ import { users } from '@/stores/users';
 function ProfileBar({ showProfileContainer = true }: { showProfileContainer?: boolean }) {
   return (
     <div className="w-full relative">
-      <div className="fixed flex flex-col pl-10 pt-10 pr-10 w-base">
+      <div className="fixed flex flex-col  pt-10 pl-8 pr-10 w-xl">
         {/* biar bisa dipanggil atau engga */}
         {showProfileContainer && <ContainerMyProfile />}
         <div className="second-profile-container bg-gray-800 mt-5 rounded-xl">
           <h3 className="text-xl font-semibold text-gray-50 pt-5 pb-5  pl-5 pr-5 ">Suggested for you </h3>
-          {users.map((user, index) => (
-            <SuggestedAccount key={index} page={user.page} image={user.image} fallback={user.fallback} name={user.name} username={user.username} buttonType={user.buttonType} />
-          ))}
+          <SuggestedAccount avatars={users} />
         </div>
         <ContainerCredentials />
       </div>

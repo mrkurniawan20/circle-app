@@ -10,7 +10,7 @@ function Layout({ children, showProfileContainer = true }: LayoutProps & { showP
   return (
     <div className="grid grid-cols-[0.4fr_1fr_0.6fr]">
       <SideBar />
-      <div>{children}</div>
+      <div className="border-l-1 border-r-1 border-gray-500 min-h-screen">{children}</div>
       <ProfileBar showProfileContainer={showProfileContainer} />
     </div>
   );

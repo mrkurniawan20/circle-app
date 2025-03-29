@@ -4,17 +4,21 @@ import ContentPage from '@/components/ContentPage';
 import ProfileBar from '@/layouts/components/ProfileBar';
 import SideBar from '@/layouts/components/SideBar';
 import ContentSearch from '@/components/ContentSearch';
+import Layout from '@/layouts/Layout';
 
 function Search() {
   return (
-    <div>
-      <div className="grid grid-cols-[0.4fr_1fr_0.6fr] h-screen">
-        <SideBar />
-        <ContentSearch />
-        {/* <ContentPage /> */}
-        <ProfileBar />
-      </div>
-    </div>
+    // <div>
+    //   <div className="grid grid-cols-[0.4fr_1fr_0.6fr] h-screen">
+    //     <SideBar />
+    //     <ContentSearch />
+    //     {/* <ContentPage /> */}
+    //     <ProfileBar />
+    //   </div>
+    // </div>
+    <Layout>
+      <ContentSearch />
+    </Layout>
   );
 }
 
