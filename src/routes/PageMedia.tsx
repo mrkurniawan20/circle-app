@@ -3,19 +3,23 @@ import ContentPage from '@/components/ContentPage';
 import { CircleX, PanelRight } from 'lucide-react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-function PageMedia() {
+interface PageMedias {
+  image: string;
+}
+
+function PageMedia({ image }: PageMedias) {
   const [imageOnly, setImageOnly] = useState(true);
+  const navigate = useNavigate();
+  image = 'cars9';
   return (
     <div className="flex h-screen w-full">
-      <div className={`bg-gray-800 flex justify-center items-center relative transition-all duration-200 ${imageOnly ? 'flex-[1]' : 'flex-[1_1_100%]'}`}>
-        <NavLink to={'/'}>
-          <CircleX className="absolute text-gray-50 left-10 top-10 hover:bg-gray-600 size-10 p-2 rounded-full" />
-        </NavLink>
+      <div className={`bg-gray-800 flex justify-center items-center relative transition-all duration-200 ${imageOnly ? 'flex-[1] duration-300' : 'flex-[1_1_100%] duration-1000'}`}>
+        <CircleX className="absolute text-gray-50 left-10 top-10 hover:bg-gray-600 hover:cursor-pointer size-10 p-2 rounded-full" onClick={() => navigate(-1)} />
         <PanelRight onClick={() => setImageOnly((prev) => !prev)} className="absolute text-gray-50 right-10 top-10 hover:bg-gray-600 size-10 p-2 rounded-full hover:cursor-pointer" />
-        <img src="./src/assets/img/cars7.jpg" className="my-auto max-h-screen max-w-screen fixed" alt="" />
+        <img src={`./src/assets/img/${image}.jpg`} className="my-auto max-h-screen max-w-screen fixed" alt="" />
       </div>
       {imageOnly && (
-        <div className="min-w-0 flex-[0.4] transition-all overflow-y-scroll ">
+        <div className="min-w-0 flex-[0.4] transition-all overflow-y-scroll duration-1000">
           <ContentPage showNavLink={false} />
         </div>
       )}

@@ -8,6 +8,7 @@ import { NavLink } from 'react-router-dom';
 import { threads } from '@/stores/threads';
 import Layout from '@/layouts/Layout';
 import { images } from '@/stores/images';
+import { loggedInUser } from '@/stores/loggedInUser';
 
 function ProfileMedia() {
   return (
@@ -32,7 +33,7 @@ function ProfileMedia() {
           <div className="flex pt-3 pb-5">
             <EditProfile />
           </div>
-          <DataMyProfile />
+          <DataMyProfile name={loggedInUser.name} username={loggedInUser.username} bio={loggedInUser.bio} following={loggedInUser.following} followers={loggedInUser.followers} />
         </div>
         <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
           <NavLink to={'/profile'} className="text-center text-xl text-gray-50 ">
@@ -45,7 +46,9 @@ function ProfileMedia() {
         </div>
         <div className="grid grid-cols-3 gap-2 p-2">
           {images.map((img, index) => (
-            <img key={index} src={`./src/assets/img/${img.image}`} alt="" className="rounded-lg aspect-square object-cover" />
+            <NavLink to={'/media'}>
+              <img key={index} src={`./src/assets/img/${img.image}`} alt="" className="rounded-lg aspect-square object-cover hover:brightness-75 hover:cursor-pointer" />
+            </NavLink>
           ))}
         </div>
       </div>

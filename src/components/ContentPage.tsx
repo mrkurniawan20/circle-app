@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { replies } from '@/stores/replies';
 import ThreadList from './ThreadList';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
-import { MessageSquareText } from 'lucide-react';
+import { ImagePlus, MessageSquareText } from 'lucide-react';
 
 const likes = {
   likeCount: '20',
@@ -82,7 +82,10 @@ function ContentPage({ showNavLink = true }: { showNavLink?: boolean }) {
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
         <Textarea className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-xl font-semibold" placeholder="Type your reply"></Textarea>
-        <img className="justify-self-end size-10" src="./src/assets/img/add-image-green.png" alt="" />
+        <label htmlFor="add-image">
+          <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800 transform-all duration-200" />
+        </label>
+        <input type="file" name="add-image" id="add-image" className="hidden" />
         <Button variant="circle" className="justify-self-end ">
           Reply
         </Button>

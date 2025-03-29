@@ -43,16 +43,16 @@ function ThreadList({ avatarImage, name, username, relativeTime, threadImage, th
     setLike(!like);
   };
   return (
-    <div className="border-b-1 p-5 pl-10 pr-10 border-gray-500">
+    <div className="border-b-1 p-5 pl-10 pr-10 border-gray-500 hover:bg-gray-700 hover:cursor-pointer">
       <div className="flex pr-5 pt-5 ">
         <Avatar className="my-auto size-12">
           <AvatarImage src={`./src/assets/img/${avatarImage}.png`} alt="@shadcn" />
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
         <div className="inline-flex pl-3 ">
-          <h2 className="text-gray-50 font-semibold">{name}</h2>
+          <h2 className="text-gray-50 font-semibold hover:underline underline-offset-4">{name}</h2>
           <p className="text-slate-400 pl-3">
-            @{username} • {relativeTime}
+            @{username} • <span className="hover:underline underline-offset-4">{relativeTime}</span>
           </p>
         </div>
         <div className="ml-auto">

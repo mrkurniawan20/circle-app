@@ -82,10 +82,9 @@ function SideBar() {
           </DialogContent>
         </Dialog>
         <div className="flex-grow"></div>
-        {/* <Button onClick={clearUser}>logout</Button> */}
-        <NavLink to={'/logout'} onClick={clearUser} className="flex flex-row items-center mb-15 max-w-fit space-x-5 p-2 px-4 hover:bg-slate-700 rounded-full duration-200">
+        <NavLink to={'/login'} onClick={clearUser} className="flex flex-row items-center mb-15 max-w-fit space-x-5 p-2 px-4 hover:bg-slate-700 rounded-full duration-200">
           <DoorOpen className="size-8 text-gray-50" />
-          <p className="text-lg font-semibold invert">logout</p>
+          <p className="text-xl font-semibold text-gray-100">logout</p>
         </NavLink>
       </div>
     </div>
