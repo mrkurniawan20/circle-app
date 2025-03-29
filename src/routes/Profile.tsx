@@ -22,7 +22,7 @@ function Profile() {
           <NavLink to={'/home'} className="inline-flex items-center pt-10">
             <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700">
               <img src="./src/assets/img/back.png" className="invert w-6 h-6" alt="" />
-              <h2 className="text-2xl text-gray-100 font-semibold">Dio Brando 👊🏼</h2>
+              <h2 className="text-2xl text-gray-100 font-semibold">{loggedInUser.name}</h2>
             </div>
           </NavLink>
         </div>

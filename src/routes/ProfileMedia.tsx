@@ -4,13 +4,15 @@ import ProfileBar from '@/layouts/components/ProfileBar';
 import SideBar from '@/layouts/components/SideBar';
 import ThreadList from '@/components/ThreadList';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { threads } from '@/stores/threads';
 import Layout from '@/layouts/Layout';
 import { images } from '@/stores/images';
 import { loggedInUser } from '@/stores/loggedInUser';
 
 function ProfileMedia() {
+  const navigate = useNavigate();
+
   return (
     <Layout showProfileContainer={false}>
       <div
@@ -46,9 +48,11 @@ function ProfileMedia() {
         </div>
         <div className="grid grid-cols-3 gap-2 p-2">
           {images.map((img, index) => (
-            <NavLink to={'/media'}>
+            <div onClick={() => navigate('/media', { state: { image: img.image } })}>
               <img key={index} src={`./src/assets/img/${img.image}`} alt="" className="rounded-lg aspect-square object-cover hover:brightness-75 hover:cursor-pointer" />
-            </NavLink>
+            </div>
+            // <NavLink to={'/media'}>
+            // </NavLink>
           ))}
         </div>
       </div>

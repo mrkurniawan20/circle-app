@@ -16,7 +16,7 @@ interface FollowersList {
 function FollowersList({ page, image, fallback, name, username, bio, buttonType }: FollowersList) {
   return (
     <div>
-      <NavLink to={`/${page}`} className="flex w-full pb-1 pt-1 pl-5 pr-5 hover:bg-slate-700 rounded-2xl">
+      <NavLink to={`/${page}`} className="flex w-full pb-1 pt-1 pl-5 pr-5 hover:bg-slate-700 rounded-2xl duration-200">
         <Avatar className="my-auto">
           <AvatarImage src={`./src/assets/img/${image}.png`} alt="@shadcn" />
           <AvatarFallback>{fallback}</AvatarFallback>
