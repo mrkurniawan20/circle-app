@@ -7,12 +7,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { threads } from '@/stores/threads';
 import Layout from '@/layouts/Layout';
+import { loggedInUser } from '@/stores/loggedInUser';
 
 function Profile() {
   return (
     <Layout showProfileContainer={false}>
       <div
-        className="main-content border-l-1 border-r-1 border-gray-500 border-collapse"
+        className="main-content border-l-1 border-r-1 border-gray-500 "
         // style={{
         //   height: '10000px',
         // }}
@@ -31,7 +32,7 @@ function Profile() {
           <div className="flex pt-3 pb-5">
             <EditProfile />
           </div>
-          <DataMyProfile />
+          <DataMyProfile name={loggedInUser.name} username={loggedInUser.username} bio={loggedInUser.bio} following={loggedInUser.following} followers={loggedInUser.followers} />{' '}
         </div>
         <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
           <NavLink to={'/profile'} className="text-center text-xl text-gray-50 ">

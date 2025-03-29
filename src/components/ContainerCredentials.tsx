@@ -1,5 +1,7 @@
 import React from 'react';
 
+const socials = [{ icon: 'github' }, { icon: 'linkedin' }, { icon: 'twitter' }, { icon: 'facebook' }];
+
 function ContainerCredentials() {
   return (
     <div className="third-profile-container bg-gray-800 mt-5 pl-3 pr-3 rounded-xl w-full">
@@ -7,18 +9,11 @@ function ContainerCredentials() {
         <div className="flex">
           <h4 className="my-auto text-gray-50 font-semibold">Developed by Rafli Kurniawan&ensp;•&ensp;</h4>
           <div className="flex gap-3">
-            <a className="p-0 m-0 size-7" href="">
-              <img className="grayscale hover:grayscale-0" src="./src/assets/img/github.png" alt="" />
-            </a>
-            <a className="p-0 m-0 size-7" href="">
-              <img className="grayscale hover:grayscale-0" src="./src/assets/img/linkedin.png" alt="" />
-            </a>
-            <a className="p-0 m-0 size-7" href="">
-              <img className="grayscale hover:grayscale-0" src="./src/assets/img/twitter.png" alt="" />
-            </a>
-            <a className="p-0 m-0 size-7" href="">
-              <img className="grayscale hover:grayscale-0" src="./src/assets/img/facebook.png" alt="" />
-            </a>
+            {socials.map((social) => (
+              <a className="p-0 m-0 size-7" href="">
+                <img className="grayscale hover:grayscale-0 duration-100" src={`./src/assets/img/${social.icon}.png`} alt="" />
+              </a>
+            ))}
           </div>
         </div>
         <div>

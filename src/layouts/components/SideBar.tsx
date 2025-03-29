@@ -10,27 +10,30 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import SideBarPage from '../../components/SideBarPage';
 import EditProfile from '../../components/EditProfile';
 import { useUserStore } from '@/stores/auth';
-import { ImagePlus } from 'lucide-react';
+import { ImagePlus, DoorOpen, CircleUserRound } from 'lucide-react';
+import { FaHome, FaSearch, FaRegHeart } from 'react-icons/fa';
+import { IoPersonCircleOutline, IoPersonCircleSharp } from 'react-icons/io5';
+import { GiExitDoor } from 'react-icons/gi';
 
 const pages = [
   {
     page: 'home',
-    image: 'home',
+    image: <FaHome />,
     namePage: 'Home',
   },
   {
     page: 'search',
-    image: 'search',
+    image: <FaSearch />,
     namePage: 'Search',
   },
   {
     page: 'follow',
-    image: 'follow',
+    image: <FaRegHeart />,
     namePage: 'Follow',
   },
   {
     page: 'profile',
-    image: 'profile',
+    image: <IoPersonCircleSharp />,
     namePage: 'Profile',
   },
 ];
@@ -80,9 +83,9 @@ function SideBar() {
         </Dialog>
         <div className="flex-grow"></div>
         {/* <Button onClick={clearUser}>logout</Button> */}
-        <NavLink to={'/logout'} onClick={clearUser} className="flex flex-row items-center mb-15">
-          <img className="invert" src="./src/assets/img/logout.png" alt="" width="10%" />
-          &emsp;<p className="text-lg font-semibold invert">logout</p>
+        <NavLink to={'/logout'} onClick={clearUser} className="flex flex-row items-center mb-15 max-w-fit space-x-5 p-2 px-4 hover:bg-slate-700 rounded-full duration-200">
+          <DoorOpen className="size-8 text-gray-50" />
+          <p className="text-lg font-semibold invert">logout</p>
         </NavLink>
       </div>
     </div>

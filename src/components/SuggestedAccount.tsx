@@ -14,7 +14,7 @@ interface AvatarSuggest {
 
 function SuggestedAccount({ page, image, fallback, name, username, buttonType }: AvatarSuggest) {
   return (
-    <NavLink to={`/${page}`} className="profile flex pb-3 pl-5 pr-5  hover:bg-slate-700">
+    <NavLink to={`/${page}`} className="profile flex pb-3 pl-5 pr-5  hover:bg-slate-700 duration-175">
       <Avatar className="my-auto">
         <AvatarImage src={`./src/assets/img/${image}.png`} alt="@shadcn" />
         <AvatarFallback>{fallback}</AvatarFallback>

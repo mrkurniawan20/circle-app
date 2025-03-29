@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import ContentPage from '@/components/ContentPage';
-import PageContent from '@/components/ContentPage';
 import { CircleX, PanelRight } from 'lucide-react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
@@ -13,11 +12,11 @@ function PageMedia() {
           <CircleX className="absolute text-gray-50 left-10 top-10 hover:bg-gray-600 size-10 p-2 rounded-full" />
         </NavLink>
         <PanelRight onClick={() => setImageOnly((prev) => !prev)} className="absolute text-gray-50 right-10 top-10 hover:bg-gray-600 size-10 p-2 rounded-full hover:cursor-pointer" />
-        <img src="./src/assets/img/cars7.jpg" className="my-auto max-h-screen max-w-screen" alt="" />
+        <img src="./src/assets/img/cars7.jpg" className="my-auto max-h-screen max-w-screen fixed" alt="" />
       </div>
       {imageOnly && (
-        <div className="min-w-0 flex-[0.4] transition-all">
-          <PageContent showNavLink={false} />
+        <div className="min-w-0 flex-[0.4] transition-all overflow-y-scroll ">
+          <ContentPage showNavLink={false} />
         </div>
       )}
     </div>

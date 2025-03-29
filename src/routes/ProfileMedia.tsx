@@ -8,7 +8,6 @@ import { NavLink } from 'react-router-dom';
 import { threads } from '@/stores/threads';
 import Layout from '@/layouts/Layout';
 import { images } from '@/stores/images';
-import ThreadLikes from '@/components/ThreadLikes';
 
 function ProfileMedia() {
   return (
@@ -44,7 +43,6 @@ function ProfileMedia() {
             <div className="border-2 border-green-500 h-1 rounded-full"></div>
           </NavLink>
         </div>
-        <ThreadLikes />
         <div className="grid grid-cols-3 gap-2 p-2">
           {images.map((img, index) => (
             <img key={index} src={`./src/assets/img/${img.image}`} alt="" className="rounded-lg aspect-square object-cover" />

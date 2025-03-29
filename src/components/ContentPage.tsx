@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { NavLink } from 'react-router-dom';
+import { replies } from '@/stores/replies';
+import ThreadList from './ThreadList';
+import { GoHeart, GoHeartFill } from 'react-icons/go';
+import { MessageSquareText } from 'lucide-react';
 
-function PageContent({ showNavLink = true }: { showNavLink?: boolean }) {
+const likes = {
+  likeCount: '20',
+  likedCount: '21',
+};
+
+function ContentPage({ showNavLink = true }: { showNavLink?: boolean }) {
+  const [like, setLike] = useState<boolean>(false);
+
+  const toggleLike = () => {
+    setLike(!like);
+  };
   return (
     <div
-      className="border-l-1 border-r-1 border-gray-500 h-full"
+      className="border-l-1 border-r-1 border-gray-500 h-base"
       // style={{
       //   height: '10000px',
       // }}
@@ -15,7 +29,7 @@ function PageContent({ showNavLink = true }: { showNavLink?: boolean }) {
       {showNavLink && (
         <div className="inline-flex">
           <NavLink to={'/home'} className="inline-flex items-center pt-10">
-            <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700">
+            <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700 duration-200">
               <img src="./src/assets/img/back.png" className="invert w-6 h-6" alt="" />
               <h2 className="text-2xl text-gray-100 font-semibold">Home</h2>
             </div>
@@ -42,11 +56,24 @@ function PageContent({ showNavLink = true }: { showNavLink?: boolean }) {
       <div className="flex pl-5 pb-2">
         <p className="text-slate-400">11:32 PM • March 24, 2025</p>
       </div>
-      <div className="flex items-center gap-2 pl-5 pb-5">
-        <img src="./src/assets/img/liked.png" alt="" width="2.5%" />
-        <p className="text-slate-400">35</p>
-        <img src="./src/assets/img/text-bubble.png" className="invert" alt="" width="2.5%" />
-        <p className="text-slate-400">200 Replies</p>
+      <div className="flex items-center gap-4 pl-5 pb-5">
+        <button onClick={toggleLike} className="text-lg flex items-center gap-2 text-slate-400 hover:text-gray-50 hover:cursor-pointer transition-all duration-200">
+          {like ? (
+            <>
+              <GoHeartFill className="text-red-700 size-6" />
+              <span className="text-gray-50">{likes.likedCount}</span>
+            </>
+          ) : (
+            <>
+              <GoHeart className=" size-6" />
+              <span>{likes.likeCount}</span>
+            </>
+          )}
+        </button>
+        <div className="flex gap-2">
+          <MessageSquareText className="text-slate-400 size-6" />
+          <p className="text-slate-400">{replies.length} Replies</p>
+        </div>
       </div>
 
       <form action="" className="flex gap-5 border-t-1 border-b-1 border-gray-500 p-5">
@@ -60,8 +87,21 @@ function PageContent({ showNavLink = true }: { showNavLink?: boolean }) {
           Reply
         </Button>
       </form>
+      {replies.map((reply) => (
+        <ThreadList
+          avatarImage={reply.avatarImage}
+          name={reply.name}
+          username={reply.username}
+          relativeTime={reply.relativeTime}
+          threadImage={reply.threadImage}
+          thread={reply.thread}
+          likedCount={reply.likedCount}
+          likeCount={reply.likeCount}
+          replyCount={reply.replyCount}
+        />
+      ))}
     </div>
   );
 }
 
-export default PageContent;
+export default ContentPage;
