@@ -21,6 +21,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
+import ThreadLike from './ThreadLike';
 
 interface Threads {
   //Threads
@@ -40,11 +41,6 @@ interface ThreadProps {
 }
 
 function ThreadList({ threadList = [] }: ThreadProps) {
-  const [like, setLike] = useState<boolean>(false);
-
-  const toggleLike = () => {
-    setLike(!like);
-  };
   return (
     <>
       {threadList.map((threads) => (
@@ -101,25 +97,7 @@ function ThreadList({ threadList = [] }: ThreadProps) {
             <p className="text-gray-300 pb-2">{threads.thread}</p>
             <img src={`./src/assets/img/${threads.threadImage}`} className="w-fit rounded-4xl pb-2" alt="" />
           </div>
-          <div className="flex items-center gap-4 ml-15 pb-5">
-            <button onClick={toggleLike} className="text-lg flex items-center gap-2 text-slate-400 hover:text-gray-50 hover:cursor-pointer transition-all duration-200">
-              {like ? (
-                <>
-                  <GoHeartFill className="text-red-700 size-6" />
-                  <span className="text-gray-50">{threads.likedCount}</span>
-                </>
-              ) : (
-                <>
-                  <GoHeart className=" size-6" />
-                  <span>{threads.likeCount}</span>
-                </>
-              )}
-            </button>
-            <div className="flex gap-2">
-              <MessageSquareText className="text-slate-400 size-6" />
-              <p className="text-slate-400">{threads.replyCount} Replies</p>
-            </div>
-          </div>
+          <ThreadLike likeCount={threads.likeCount} likedCount={threads.likedCount} replyCount={threads.replyCount} />
         </div>
       ))}
     </>

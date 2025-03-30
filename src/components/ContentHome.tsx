@@ -8,12 +8,7 @@ import { ImagePlus } from 'lucide-react';
 
 function ContentHome() {
   return (
-    <div
-      className="main-content  border-collapse"
-      // style={{
-      //   height: '10000px',
-      // }}
-    >
+    <div>
       <h2 className="text-2xl p-10 pb-0 text-gray-100 font-semibold">Home</h2>
       <form action="" className="flex gap-5 p-10 border-b-1 border-gray-500">
         <Avatar className="size-12">
