@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
+import FollowButton from './FollowButton';
 
 interface AvatarSuggest {
   page: string;
@@ -17,22 +18,36 @@ interface SuggestedProps {
 }
 
 function SuggestedAccount({ avatars = [] }: SuggestedProps) {
+  const [follow, setFollow] = useState<boolean>(false);
+
+  const toggleFollow = () => {
+    setFollow(!follow);
+  };
   return (
     <>
       {avatars.map((avatar) => (
-        <NavLink to={`/${avatar.page}`} className="profile flex pb-3 pl-5 pr-5  hover:bg-slate-700 duration-100">
-          <Avatar className="my-auto">
-            <AvatarImage src={`./src/assets/img/${avatar.image}.png`} alt="@shadcn" />
-            <AvatarFallback>{avatar.fallback}</AvatarFallback>
-          </Avatar>
-          <div className="pl-5">
-            <h5 className="text-lg font-semibold text-gray-50">{avatar.name}</h5>
-            <p className="text-slate-400 text-sm pb-1">@{avatar.username}</p>
-          </div>
-          <Button variant={avatar.buttonType === 'follow' ? 'follow' : 'followed'} className="rounded-full ms-auto my-auto">
-            {avatar.buttonType === 'follow' ? 'Follow' : 'Following'}
-          </Button>
-        </NavLink>
+        <div className="flex">
+          <NavLink to={`/${avatar.page}`} className="profile flex py-2 px-5  w-full  hover:bg-slate-700 duration-100">
+            <Avatar className="my-auto">
+              <AvatarImage src={`./src/assets/img/${avatar.image}.png`} alt="@shadcn" />
+              <AvatarFallback>{avatar.fallback}</AvatarFallback>
+            </Avatar>
+            <div className="pl-5">
+              <h5 className="text-lg font-semibold text-gray-50">{avatar.name}</h5>
+              <p className="text-slate-400 text-sm pb-1">@{avatar.username}</p>
+            </div>
+            <FollowButton />
+          </NavLink>
+          {/* <button onClick={toggleFollow}>
+            {follow ? (
+              <>
+                <Button variant={'followed'}>Followed</Button>
+              </>
+            ) : (
+              <Button variant={'follow'}>Follow</Button>
+            )}
+          </button> */}
+        </div>
       ))}
     </>
   );

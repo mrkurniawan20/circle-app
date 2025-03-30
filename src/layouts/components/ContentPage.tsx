@@ -52,25 +52,6 @@ function ContentPage({ showNavLink = true }: { showNavLink?: boolean }) {
       <div className="flex pl-5 pb-2">
         <p className="text-slate-400">11:32 PM • March 24, 2025</p>
       </div>
-      {/* <div className="flex items-center gap-4 pl-5 pb-5">
-        <button onClick={toggleLike} className="text-lg flex items-center gap-2 text-slate-400 hover:text-gray-50 hover:cursor-pointer transition-all duration-200">
-          {like ? (
-            <>
-              <GoHeartFill className="text-red-700 size-6" />
-              <span className="text-gray-50">{likes.likedCount}</span>
-            </>
-          ) : (
-            <>
-              <GoHeart className=" size-6" />
-              <span>{likes.likeCount}</span>
-            </>
-          )}
-        </button>
-        <div className="flex gap-2">
-          <MessageSquareText className="text-slate-400 size-6" />
-          <p className="text-slate-400">{replies.length} Replies</p>
-        </div>
-      </div> */}
       <div className="-ml-10">
         <ThreadLike likeCount={likes.likeCount} likedCount={likes.likedCount} replyCount={replies.length} />
       </div>
