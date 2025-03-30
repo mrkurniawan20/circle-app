@@ -8,23 +8,27 @@ import ThreadList from '../../components/ThreadList';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { ImagePlus, MessageSquareText } from 'lucide-react';
 import ThreadLike from '@/components/ThreadLike';
+import { threads } from '@/stores/threads';
 
 const likes = {
   likeCount: '20',
   likedCount: '21',
 };
+interface PageIndex {
+  index: number;
+}
 
-function ContentPageMedia() {
+function ContentPageMedia({ index }: PageIndex) {
   return (
     <div>
       <div className="flex p-5">
         <Avatar className="my-auto">
-          <AvatarImage src="./src/assets/img/rainbow.png" alt="@shadcn" />
+          <AvatarImage src={`./src/assets/img/${threads[index].avatarImage}.png`} alt="@shadcn" />
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
         <div className="inline-block pl-5">
-          <h2 className="text-gray-50">Blackmore</h2>
-          <p className="text-slate-400">@CatchTheRainbow</p>
+          <h2 className="text-gray-50">{threads[index].name}</h2>
+          <p className="text-slate-400">{threads[index].username}</p>
         </div>
       </div>
       <div className="pl-5 pb-2 ">

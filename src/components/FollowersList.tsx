@@ -29,7 +29,7 @@ function FollowersList({ followers = [] }: FollowersProps) {
           </Avatar>
           <div className="pl-5">
             <h5 className="text-base font-semibold text-gray-50">{follower.name}</h5>
-            <p className="text-slate-400 text-xs pb-1">@{follower.username}</p>
+            <p className="text-slate-400 text-xs pb-1">{follower.username}</p>
             <p className="text-gray-200 text-xs pb-1">{follower.bio}</p>
           </div>
           <FollowButton />

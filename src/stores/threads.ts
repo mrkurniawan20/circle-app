@@ -2,7 +2,7 @@ export const threads = [
   {
     avatarImage: 'rainbow',
     name: 'Blackmore',
-    username: 'CatchTheRainbow',
+    username: '@CatchTheRainbow',
     relativeTime: '4h',
     datePosted: '12:45 • 20 Feb 2025',
     threadImage: '',
@@ -15,7 +15,7 @@ export const threads = [
   {
     avatarImage: 'golden requim',
     name: 'Giorno',
-    username: 'GoldenRequim',
+    username: '@GoldenRequim',
     relativeTime: '1d',
     datePosted: '12:45 • 20 Feb 2025',
     threadImage: 'header-resized.png',
@@ -28,7 +28,7 @@ export const threads = [
   {
     avatarImage: 'diver down',
     name: 'Anasui',
-    username: 'DiverDown',
+    username: '@DiverDown',
     relativeTime: '12d',
     datePosted: '12:45 • 20 Feb 2025',
     threadImage: 'dio.jpg',
@@ -41,7 +41,7 @@ export const threads = [
   {
     avatarImage: 'diver down',
     name: 'Anasui',
-    username: 'DiverDown',
+    username: '@DiverDown',
     relativeTime: '12d',
     datePosted: '12:45 • 20 Feb 2025',
     threadImage: '',
@@ -54,7 +54,7 @@ export const threads = [
   {
     avatarImage: 'black sabbath',
     name: 'Polpo',
-    username: 'BlackSabbath',
+    username: '@BlackSabbath',
     relativeTime: '12m',
     datePosted: '12:45 • 20 Feb 2025',
     threadImage: 'abbachio.jpeg',

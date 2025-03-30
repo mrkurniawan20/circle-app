@@ -56,7 +56,7 @@ function ThreadList({ threadList = [] }: ThreadProps) {
             <div className="inline-flex pl-3 ">
               <h2 className="text-gray-50 font-semibold hover:underline underline-offset-4">{threads.name}</h2>
               <p className="text-slate-400 pl-3">
-                @{threads.username} • <span className="hover:underline underline-offset-4">{threads.relativeTime}</span>
+                {threads.username} • <span className="hover:underline underline-offset-4">{threads.relativeTime}</span>
               </p>
             </div>
             <div className="ml-auto">

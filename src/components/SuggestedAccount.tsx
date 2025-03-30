@@ -34,7 +34,7 @@ function SuggestedAccount({ avatars = [] }: SuggestedProps) {
             </Avatar>
             <div className="pl-5">
               <h5 className="text-lg font-semibold text-gray-50">{avatar.name}</h5>
-              <p className="text-slate-400 text-sm pb-1">@{avatar.username}</p>
+              <p className="text-slate-400 text-sm pb-1">{avatar.username}</p>
             </div>
             <FollowButton />
           </NavLink>
