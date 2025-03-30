@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { users } from '@/stores/users';
-import FollowersList from './FollowersList';
+import FollowersList from '../../components/FollowersList';
 
 function ContentFollow() {
   return (

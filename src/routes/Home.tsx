@@ -1,5 +1,5 @@
 import CircleText from '@/components/CircleText';
-import ContentHome from '@/components/ContentHome';
+import ContentHome from '@/layouts/components/ContentHome';
 import ProfileBar from '@/layouts/components/ProfileBar';
 import SideBar from '@/layouts/components/SideBar';
 import Layout from '@/layouts/Layout';
@@ -9,8 +9,6 @@ function Home() {
   return (
     <Layout>
       <ContentHome />
-      {/* <SideBar /> */}
-      {/* <ProfileBar /> */}
     </Layout>
   );
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from './ui/button';
-import { Textarea } from './ui/textarea';
-import ThreadList from './ThreadList';
+import { Button } from '../../components/ui/button';
+import { Textarea } from '../../components/ui/textarea';
+import ThreadList from '../../components/ThreadList';
 import { threads } from '@/stores/threads';
 import { ImagePlus } from 'lucide-react';
 

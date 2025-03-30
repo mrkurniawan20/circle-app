@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ContentPage from '@/components/ContentPage';
+import ContentPage from '@/layouts/components/ContentPage';
 import { CircleX, PanelRight } from 'lucide-react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 

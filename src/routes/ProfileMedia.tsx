@@ -15,12 +15,7 @@ function ProfileMedia() {
 
   return (
     <Layout showProfileContainer={false}>
-      <div
-        className="main-content  border-collapse"
-        // style={{
-        //   height: '10000px',
-        // }}
-      >
+      <div>
         <div className="inline-flex">
           <NavLink to={'/home'} className="inline-flex items-center pt-10">
             <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700">
@@ -51,8 +46,6 @@ function ProfileMedia() {
             <div onClick={() => navigate('/media', { state: { image: img.image } })}>
               <img key={index} src={`./src/assets/img/${img.image}`} alt="" className="rounded-lg aspect-square object-cover hover:brightness-75 hover:cursor-pointer" />
             </div>
-            // <NavLink to={'/media'}>
-            // </NavLink>
           ))}
         </div>
       </div>

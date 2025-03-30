@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from './ui/button';
-import { Textarea } from './ui/textarea';
+import { Button } from '../../components/ui/button';
+import { Textarea } from '../../components/ui/textarea';
 import { NavLink } from 'react-router-dom';
 import { replies } from '@/stores/replies';
-import ThreadList from './ThreadList';
+import ThreadList from '../../components/ThreadList';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { ImagePlus, MessageSquareText } from 'lucide-react';
 
