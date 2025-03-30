@@ -53,9 +53,7 @@ function Profile() {
             <p className="pt-3 pb-3  hover:bg-slate-700 duration-150 rounded-lg">Media</p>
           </NavLink>
         </div>
-        {threads.map(() => (
-          <ThreadList threadList={threads} />
-        ))}
+        <ThreadList threadList={threads} />
       </div>
     </Layout>
   );

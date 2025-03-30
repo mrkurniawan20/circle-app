@@ -57,9 +57,7 @@ function ContentPageMedia({ index }: PageIndex) {
           Reply
         </Button>
       </form>
-      {replies.map(() => (
-        <ThreadList threadList={replies} />
-      ))}
+      <ThreadList threadList={replies} />
     </div>
   );
 }

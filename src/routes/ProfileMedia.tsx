@@ -42,11 +42,14 @@ function ProfileMedia() {
           </NavLink>
         </div>
         <div className="grid grid-cols-3 gap-2 p-2">
-          {images.map((img, index) => (
-            <div key={index} onClick={() => navigate('/media', { state: { image: img.image } })}>
-              <img src={`./src/assets/img/${img.image}`} alt="" className="rounded-lg aspect-square object-cover hover:brightness-75 hover:cursor-pointer" />
-            </div>
-          ))}
+          {threads.map(
+            (img, index) =>
+              img.threadImage && (
+                <div key={index} onClick={() => navigate('/media', { state: { index: index } })}>
+                  <img src={`./src/assets/img/${img.threadImage}`} alt="" className="rounded-lg aspect-square object-cover hover:brightness-75 hover:cursor-pointer" />
+                </div>
+              )
+          )}
         </div>
       </div>
     </Layout>
