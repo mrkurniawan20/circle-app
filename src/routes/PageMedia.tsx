@@ -17,6 +17,7 @@ function PageMedia({ index }: PageIndex) {
   const navigate = useNavigate();
   const location = useLocation();
   index = location.state?.index;
+  console.log(location);
   // image = location.state?.image || 'splash.jpg';
   const [imageOnly, setImageOnly] = useState(true);
 

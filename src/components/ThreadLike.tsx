@@ -11,7 +11,9 @@ interface ThreadsLike {
 function ThreadLike({ likedCount, likeCount, replyCount }: ThreadsLike) {
   const [like, setLike] = useState<boolean>(false);
 
-  const toggleLike = () => {
+  const toggleLike = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // e.preventDefault();
     setLike(!like);
   };
   return (
