@@ -7,6 +7,7 @@ import { replies } from '@/stores/replies';
 import ThreadList from '../../components/ThreadList';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { ImagePlus, MessageSquareText } from 'lucide-react';
+import ThreadLike from '@/components/ThreadLike';
 
 const likes = {
   likeCount: '20',
@@ -20,12 +21,7 @@ function ContentPage({ showNavLink = true }: { showNavLink?: boolean }) {
     setLike(!like);
   };
   return (
-    <div
-      className=" h-base"
-      // style={{
-      //   height: '10000px',
-      // }}
-    >
+    <div>
       {showNavLink && (
         <div className="inline-flex">
           <NavLink to={'/home'} className="inline-flex items-center pt-10">
@@ -56,7 +52,7 @@ function ContentPage({ showNavLink = true }: { showNavLink?: boolean }) {
       <div className="flex pl-5 pb-2">
         <p className="text-slate-400">11:32 PM • March 24, 2025</p>
       </div>
-      <div className="flex items-center gap-4 pl-5 pb-5">
+      {/* <div className="flex items-center gap-4 pl-5 pb-5">
         <button onClick={toggleLike} className="text-lg flex items-center gap-2 text-slate-400 hover:text-gray-50 hover:cursor-pointer transition-all duration-200">
           {like ? (
             <>
@@ -74,6 +70,9 @@ function ContentPage({ showNavLink = true }: { showNavLink?: boolean }) {
           <MessageSquareText className="text-slate-400 size-6" />
           <p className="text-slate-400">{replies.length} Replies</p>
         </div>
+      </div> */}
+      <div className="-ml-10">
+        <ThreadLike likeCount={likes.likeCount} likedCount={likes.likedCount} replyCount={replies.length} />
       </div>
 
       <form action="" className="flex gap-5 border-t-1 border-b-1 border-gray-500 p-5">

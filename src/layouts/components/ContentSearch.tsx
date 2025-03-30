@@ -1,12 +1,13 @@
 import React from 'react';
 import { Calculator, Calendar, CreditCard, Settings, Smile, User } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Button } from './ui/button';
+// import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+// import { Button } from './ui/button';
 
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from '@/components/ui/command';
-import SearchResult from './SearchResult';
+// import SearchResult from './SearchResult';
 import { users } from '@/stores/users';
+import SearchResult from '@/components/SearchResult';
 
 function ContentSearch() {
   return (

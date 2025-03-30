@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 
 interface ThreadsLike {
-  likeCount: string;
-  likedCount: string;
-  replyCount: string;
+  likeCount: string | number;
+  likedCount: string | number;
+  replyCount: string | number;
 }
 
 function ThreadLike({ likedCount, likeCount, replyCount }: ThreadsLike) {
