@@ -47,7 +47,11 @@ function ThreadList({ threadList = [] }: ThreadProps) {
   return (
     <>
       {threadList.map((threads, index) => (
-        <div onClick={() => navigate('/page', { state: { index: index } })} key={index} className="border-b-1 p-5 pl-10 pr-10 border-gray-500 hover:bg-gray-700 hover:cursor-pointer">
+        <div
+          onClick={() => (threads.threadImage ? navigate('/media', { state: { index: index } }) : navigate('/page', { state: { index: index } }))}
+          key={index}
+          className="border-b-1 p-5 pl-10 pr-10 border-gray-500 hover:bg-gray-700 hover:cursor-pointer"
+        >
           <div className="flex pr-5 pt-5 ">
             <Avatar className="my-auto size-12">
               <AvatarImage src={`./src/assets/img/${threads.avatarImage}.png`} alt="@shadcn" />

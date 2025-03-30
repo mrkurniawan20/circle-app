@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '../../components/ui/button';
 import { Textarea } from '../../components/ui/textarea';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { replies } from '@/stores/replies';
 import ThreadList from '../../components/ThreadList';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
@@ -19,8 +19,10 @@ interface PageIndex {
 }
 
 function ContentPageMedia({ index }: PageIndex) {
+  const location = useLocation();
+  index = location.state?.index;
   return (
-    <div>
+    <div key={index}>
       <div className="flex p-5">
         <Avatar className="my-auto">
           <AvatarImage src={`./src/assets/img/${threads[index].avatarImage}.png`} alt="@shadcn" />
@@ -32,16 +34,13 @@ function ContentPageMedia({ index }: PageIndex) {
         </div>
       </div>
       <div className="pl-5 pb-2 ">
-        <p className="text-gray-100">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam voluptates totam saepe accusantium officiis reprehenderit dignissimos debitis tenetur, deleniti error magni culpa incidunt molestiae? Nam repudiandae deserunt
-          corrupti nesciunt cum!
-        </p>
+        <p className="text-gray-100">{threads[index].thread}</p>
       </div>
       <div className="flex pl-5 pb-2">
-        <p className="text-slate-400">11:32 PM • March 24, 2025</p>
+        <p className="text-slate-400">{threads[index].datePosted}</p>
       </div>
       <div className="-ml-10">
-        <ThreadLike likeCount={likes.likeCount} likedCount={likes.likedCount} replyCount={replies.length} />
+        <ThreadLike likeCount={threads[index].likeCount} likedCount={threads[index].likedCount} replyCount={replies.length} />
       </div>
 
       <form action="" className="flex gap-5 border-t-1 border-b-1 border-gray-500 p-5">
