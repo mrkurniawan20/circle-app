@@ -9,8 +9,8 @@ function ContainerCredentials() {
         <div className="flex">
           <h4 className="my-auto text-gray-50 font-semibold">Developed by Rafli Kurniawan&ensp;•&ensp;</h4>
           <div className="flex gap-3">
-            {socials.map((social) => (
-              <a className="p-0 m-0 size-7" href="">
+            {socials.map((social, index) => (
+              <a key={index} className="p-0 m-0 size-7" href="">
                 <img className="grayscale hover:grayscale-0 duration-100" src={`./src/assets/img/${social.icon}.png`} alt="" />
               </a>
             ))}

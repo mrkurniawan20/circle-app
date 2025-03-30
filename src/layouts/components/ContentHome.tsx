@@ -20,7 +20,7 @@ function ContentHome() {
           placeholder="What is happening?"
         ></Textarea>
         <label htmlFor="add-image">
-          <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800 transform-all duration-200" />
+          <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
         </label>
         <input type="file" name="add-image" id="add-image" className="hidden" />
         <Button variant="circle" className="justify-self-end ">

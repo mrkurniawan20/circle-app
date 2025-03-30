@@ -35,7 +35,7 @@ function EditProfile() {
           <div className="flex flex-col items-center gap-4 relative">
             <label
               htmlFor="name"
-              className="absolute duration-300 transform -translate-y-2 scale-75 top-2 left-3 origin-[0] text-slate-400 px-1 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-4 peer-focus:scale-75"
+              className="absolute duration-300  -translate-y-2 scale-75 top-2 left-3 origin-[0] text-slate-400 px-1 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-4 peer-focus:scale-75"
             >
               Name
             </label>
@@ -44,7 +44,7 @@ function EditProfile() {
           <div className="grid grid-cols-4 items-center gap-4 relative">
             <label
               htmlFor="username"
-              className="absolute duration-300 transform -translate-y-2 scale-75 top-2 left-3 origin-[0] text-slate-400 px-1 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-4 peer-focus:scale-75"
+              className="absolute duration-300  -translate-y-2 scale-75 top-2 left-3 origin-[0] text-slate-400 px-1 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-4 peer-focus:scale-75"
             >
               Username
             </label>
@@ -53,7 +53,7 @@ function EditProfile() {
           <div className="grid grid-cols-4 items-center gap-4 relative">
             <label
               htmlFor="bio"
-              className="absolute duration-300 transform -translate-y-2 scale-75 top-2 left-3 origin-[0] text-slate-400 px-1 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-4 peer-focus:scale-75"
+              className="absolute duration-300  -translate-y-2 scale-75 top-2 left-3 origin-[0] text-slate-400 px-1 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-4 peer-focus:scale-75"
             >
               Bio
             </label>

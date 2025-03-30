@@ -22,29 +22,30 @@ import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import ThreadLike from './ThreadLike';
+import { ThreadProps } from '@/types/threadList';
 
-interface Threads {
-  //Threads
-  avatarImage: string;
-  name: string;
-  username: string;
-  relativeTime: string;
-  threadImage?: string;
-  thread: string; //Thread
-  // liked: 'liked' | 'unlike';
-  likeCount: string;
-  likedCount: string;
-  replyCount: string;
-}
-interface ThreadProps {
-  threadList: Threads[];
-}
+// interface Threads {
+//   //Threads
+//   avatarImage: string;
+//   name: string;
+//   username: string;
+//   relativeTime: string;
+//   threadImage?: string;
+//   thread: string; //Thread
+//   // liked: 'liked' | 'unlike';
+//   likeCount: string;
+//   likedCount: string;
+//   replyCount: string;
+// }
+// interface ThreadProps {
+//   threadList: Threads[];
+// }
 
 function ThreadList({ threadList = [] }: ThreadProps) {
   return (
     <>
-      {threadList.map((threads) => (
-        <div className="border-b-1 p-5 pl-10 pr-10 border-gray-500 hover:bg-gray-700 hover:cursor-pointer">
+      {threadList.map((threads, index) => (
+        <div onClick={() => console.log(index)} key={index} className="border-b-1 p-5 pl-10 pr-10 border-gray-500 hover:bg-gray-700 hover:cursor-pointer">
           <div className="flex pr-5 pt-5 ">
             <Avatar className="my-auto size-12">
               <AvatarImage src={`./src/assets/img/${threads.avatarImage}.png`} alt="@shadcn" />

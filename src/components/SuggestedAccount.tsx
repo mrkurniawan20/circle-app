@@ -25,8 +25,8 @@ function SuggestedAccount({ avatars = [] }: SuggestedProps) {
   };
   return (
     <>
-      {avatars.map((avatar) => (
-        <div className="flex">
+      {avatars.map((avatar, index) => (
+        <div className="flex" key={index}>
           <NavLink to={`/${avatar.page}`} className="profile flex py-2 px-5  w-full  hover:bg-slate-700 duration-100">
             <Avatar className="my-auto">
               <AvatarImage src={`./src/assets/img/${avatar.image}.png`} alt="@shadcn" />

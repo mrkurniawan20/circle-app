@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ContentPage from '@/layouts/components/ContentPage';
 import { CircleX, PanelRight } from 'lucide-react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import ContentPageMedia from '@/layouts/components/ContentPageMedia';
 
 interface PageMedias {
   image: string;
@@ -22,7 +23,7 @@ function PageMedia({ image }: PageMedias) {
       </div>
       {imageOnly && (
         <div className="min-w-0 flex-[0.4] transition-all overflow-y-scroll duration-1000">
-          <ContentPage showNavLink={false} />
+          <ContentPageMedia />
         </div>
       )}
     </div>

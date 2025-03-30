@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '../../components/ui/button';
+import { Textarea } from '../../components/ui/textarea';
+import { NavLink } from 'react-router-dom';
+import { replies } from '@/stores/replies';
+import ThreadList from '../../components/ThreadList';
+import { GoHeart, GoHeartFill } from 'react-icons/go';
+import { ImagePlus, MessageSquareText } from 'lucide-react';
+import ThreadLike from '@/components/ThreadLike';
+
+const likes = {
+  likeCount: '20',
+  likedCount: '21',
+};
+
+function ContentPageMedia() {
+  return (
+    <div>
+      <div className="flex p-5">
+        <Avatar className="my-auto">
+          <AvatarImage src="./src/assets/img/rainbow.png" alt="@shadcn" />
+          <AvatarFallback>ZW</AvatarFallback>
+        </Avatar>
+        <div className="inline-block pl-5">
+          <h2 className="text-gray-50">Blackmore</h2>
+          <p className="text-slate-400">@CatchTheRainbow</p>
+        </div>
+      </div>
+      <div className="pl-5 pb-2 ">
+        <p className="text-gray-100">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam voluptates totam saepe accusantium officiis reprehenderit dignissimos debitis tenetur, deleniti error magni culpa incidunt molestiae? Nam repudiandae deserunt
+          corrupti nesciunt cum!
+        </p>
+      </div>
+      <div className="flex pl-5 pb-2">
+        <p className="text-slate-400">11:32 PM • March 24, 2025</p>
+      </div>
+      <div className="-ml-10">
+        <ThreadLike likeCount={likes.likeCount} likedCount={likes.likedCount} replyCount={replies.length} />
+      </div>
+
+      <form action="" className="flex gap-5 border-t-1 border-b-1 border-gray-500 p-5">
+        <Avatar className="">
+          <AvatarImage src="./src/assets/img/star platinum.png" alt="@shadcn" />
+          <AvatarFallback>ZW</AvatarFallback>
+        </Avatar>
+        <Textarea className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-xl font-semibold" placeholder="Type your reply"></Textarea>
+        <label htmlFor="add-image">
+          <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
+        </label>
+        <input type="file" name="add-image" id="add-image" className="hidden" />
+        <Button variant="circle" className="justify-self-end ">
+          Reply
+        </Button>
+      </form>
+      {replies.map(() => (
+        <ThreadList threadList={replies} />
+      ))}
+    </div>
+  );
+}
+
+export default ContentPageMedia;

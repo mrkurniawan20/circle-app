@@ -24,8 +24,8 @@ interface FormProps {
 function Form({ title, inputs, submit, change, buttonText, forgotPassword, actions }: FormProps) {
   return (
     <form action={`${actions}`} onSubmit={submit} onChange={change} className="flex flex-col">
-      {inputs.map((input) => (
-        <div key={input.name} className="pb-2">
+      {inputs.map((input, index) => (
+        <div key={index} className="pb-2">
           <input
             className="w-sm px-1.5 py-2.5 border-2 border-gray-600 rounded-sm  text-sm text-gray-100 focus:border-green-500 focus:outline-none transition-all"
             type={input.type}

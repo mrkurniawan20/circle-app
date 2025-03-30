@@ -4,6 +4,7 @@ export const threads = [
     name: 'Blackmore',
     username: 'CatchTheRainbow',
     relativeTime: '4h',
+    datePosted: '12:45 • 20 Feb 2025',
     threadImage: '',
     thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
     liked: 'liked' as 'liked' | 'unlike',
@@ -16,6 +17,7 @@ export const threads = [
     name: 'Giorno',
     username: 'GoldenRequim',
     relativeTime: '1d',
+    datePosted: '12:45 • 20 Feb 2025',
     threadImage: 'header-resized.png',
     thread: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam hic expedita deleniti ipsam exercitationem iure enim molestiae repudiandae odio maxime?', //Thread
     liked: 'unlike' as 'unlike' | 'liked',
@@ -28,6 +30,7 @@ export const threads = [
     name: 'Anasui',
     username: 'DiverDown',
     relativeTime: '12d',
+    datePosted: '12:45 • 20 Feb 2025',
     threadImage: 'dio.jpg',
     thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
     liked: 'liked' as 'liked' | 'unlike',
@@ -40,6 +43,7 @@ export const threads = [
     name: 'Anasui',
     username: 'DiverDown',
     relativeTime: '12d',
+    datePosted: '12:45 • 20 Feb 2025',
     threadImage: '',
     thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
     liked: 'liked' as 'liked' | 'unlike',
@@ -52,6 +56,7 @@ export const threads = [
     name: 'Polpo',
     username: 'BlackSabbath',
     relativeTime: '12m',
+    datePosted: '12:45 • 20 Feb 2025',
     threadImage: 'abbachio.jpeg',
     thread: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque quos facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam natus!', //Thread
     liked: 'liked' as 'liked' | 'unlike',

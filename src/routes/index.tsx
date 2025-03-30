@@ -9,12 +9,12 @@ import Page from './Page';
 import Profile from './Profile';
 import ProfileMedia from './ProfileMedia';
 import Search from './Search';
-import Follow from './Follow';
 import Following from './Following';
 import ProtectedRouteLayout from './ProtectedRoute';
 import LoginForm from '@/components/auth/MyForm';
 import PageMedia from './PageMedia';
 import PageTitle from '@/layouts/components/PageTitle';
+import Followers from './Followers';
 
 let router = createBrowserRouter([
   {
@@ -29,11 +29,11 @@ let router = createBrowserRouter([
         Component: PageTitle(Profile, 'Profile | Circle'),
       },
       {
-        path: '/follow',
-        Component: PageTitle(Follow, 'Followers | Circle'),
+        path: '/followers',
+        Component: PageTitle(Followers, 'Followers | Circle'),
       },
       {
-        path: '/following',
+        path: '/follow',
         Component: PageTitle(Following, 'Following | Circle'),
       },
       {

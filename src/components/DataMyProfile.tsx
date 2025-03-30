@@ -17,8 +17,8 @@ interface LoggedInUserProps {
 function DataMyProfile({ loggedIn = [] }: LoggedInUserProps) {
   return (
     <>
-      {loggedIn.map((login) => (
-        <div>
+      {loggedIn.map((login, index) => (
+        <div key={index}>
           <h2 className="text-gray-50 pb-1 text-2xl font-semibold">{login.name}</h2>
           <p className="text-slate-400 text-sm pb-1">@{login.username}</p>
           <p className="text-gray-100 pb-1">{login.bio}</p>
@@ -26,13 +26,13 @@ function DataMyProfile({ loggedIn = [] }: LoggedInUserProps) {
             <div className="flex gap-2">
               <span className="text-gray-100">{login.following}</span>
               <p className="text-slate-400 hover:underline underline-offset-6">
-                <NavLink to={'/following'}>Following</NavLink>
+                <NavLink to={'/follow'}>Following</NavLink>
               </p>
             </div>
             <div className="flex gap-2">
               <span className="text-gray-100">{login.followers}</span>
               <p className="text-slate-400 hover:underline underline-offset-6">
-                <NavLink to={'/follow'}>Followers</NavLink>
+                <NavLink to={'/followers'}>Followers</NavLink>
               </p>
             </div>
           </div>

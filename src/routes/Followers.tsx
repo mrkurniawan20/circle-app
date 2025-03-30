@@ -6,7 +6,7 @@ import SideBar from '@/layouts/components/SideBar';
 import Layout from '@/layouts/Layout';
 import React from 'react';
 
-function Follow() {
+function Followers() {
   return (
     <Layout>
       <ContentFollow />
@@ -14,4 +14,4 @@ function Follow() {
   );
 }
 
-export default Follow;
+export default Followers;

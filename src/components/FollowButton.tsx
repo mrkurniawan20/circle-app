@@ -9,7 +9,7 @@ function FollowButton() {
     setFollow(!follow);
   };
   return (
-    <button onClick={toggleFollow} className="ms-auto my-auto">
+    <div onClick={toggleFollow} className="ms-auto my-auto">
       {follow ? (
         <>
           <Button variant={'followed'}>Followed</Button>
@@ -17,7 +17,7 @@ function FollowButton() {
       ) : (
         <Button variant={'follow'}>Follow</Button>
       )}
-    </button>
+    </div>
   );
 }
 
