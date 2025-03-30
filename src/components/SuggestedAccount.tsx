@@ -38,15 +38,6 @@ function SuggestedAccount({ avatars = [] }: SuggestedProps) {
             </div>
             <FollowButton />
           </NavLink>
-          {/* <button onClick={toggleFollow}>
-            {follow ? (
-              <>
-                <Button variant={'followed'}>Followed</Button>
-              </>
-            ) : (
-              <Button variant={'follow'}>Follow</Button>
-            )}
-          </button> */}
         </div>
       ))}
     </>

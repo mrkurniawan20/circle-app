@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from '@/components/ui/command';
+import FollowButton from './FollowButton';
 
 interface SearchResult {
   page: string;
@@ -35,9 +36,7 @@ function SearchResult({ searches = [] }: SearchProps) {
               <p className="text-slate-400 text-xs pb-1">@{search.username}</p>
               <p className="text-gray-200 text-xs pb-1">{search.bio}</p>
             </div>
-            <Button variant={search.buttonType === 'follow' ? 'follow' : 'followed'} className="rounded-full ml-auto my-auto">
-              {search.buttonType === 'follow' ? 'Follow' : 'Following'}
-            </Button>
+            <FollowButton />
           </NavLink>
         </CommandItem>
       ))}

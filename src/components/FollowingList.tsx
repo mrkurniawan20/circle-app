@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 import FollowButton from './FollowButton';
+import FollowedButton from './FollowedButton';
 
 interface FollowersList {
   page: string;
@@ -18,7 +19,7 @@ interface FollowersProps {
   followers: FollowersList[];
 }
 
-function FollowersList({ followers = [] }: FollowersProps) {
+function FollowingList({ followers = [] }: FollowersProps) {
   return (
     <div className="p-5">
       {followers.map((follower) => (
@@ -32,11 +33,11 @@ function FollowersList({ followers = [] }: FollowersProps) {
             <p className="text-slate-400 text-xs pb-1">@{follower.username}</p>
             <p className="text-gray-200 text-xs pb-1">{follower.bio}</p>
           </div>
-          <FollowButton />
+          <FollowedButton />
         </NavLink>
       ))}
     </div>
   );
 }
 
-export default FollowersList;
+export default FollowingList;
