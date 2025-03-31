@@ -23,7 +23,7 @@ import { Textarea } from './ui/textarea';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import ThreadLike from './ThreadLike';
 import { ThreadProps } from '@/types/threadList';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 // interface Threads {
 //   //Threads
@@ -58,12 +58,24 @@ function ThreadList({ threadList = [] }: ThreadProps) {
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
             <div className="inline-flex pl-3 ">
-              <h2 className="text-gray-50 font-semibold hover:underline underline-offset-4">{threads.name}</h2>
+              <NavLink
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+                to={`/${threads.username.toLowerCase()}`}
+              >
+                <h2 className="text-gray-50 font-semibold hover:underline underline-offset-4">{threads.name}</h2>
+              </NavLink>
               <p className="text-slate-400 pl-3">
-                {threads.username} • <span className="hover:underline underline-offset-4">{threads.relativeTime}</span>
+                @{threads.username} • <span className="hover:underline underline-offset-4">{threads.relativeTime}</span>
               </p>
             </div>
-            <div className="ml-auto">
+            <div
+              className="ml-auto"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Ellipsis className="text-slate-400  hover:bg-gray-600 rounded-full hover:cursor-pointer size-7 p-1 mb-2" />

@@ -5,7 +5,6 @@ import { Button } from './ui/button';
 import FollowButton from './FollowButton';
 
 interface AvatarSuggest {
-  page: string;
   image: string;
   fallback: string;
   name: string;
@@ -27,14 +26,14 @@ function SuggestedAccount({ avatars = [] }: SuggestedProps) {
     <>
       {avatars.map((avatar, index) => (
         <div className="flex" key={index}>
-          <NavLink to={`/${avatar.page}`} className="profile flex py-2 px-5  w-full  hover:bg-slate-700 duration-100">
+          <NavLink to={`/${avatar.username.toLocaleLowerCase()}`} className="profile flex py-2 px-5  w-full  hover:bg-slate-700 duration-100">
             <Avatar className="my-auto">
               <AvatarImage src={`./src/assets/img/${avatar.image}.png`} alt="@shadcn" />
               <AvatarFallback>{avatar.fallback}</AvatarFallback>
             </Avatar>
             <div className="pl-5">
               <h5 className="text-lg font-semibold text-gray-50">{avatar.name}</h5>
-              <p className="text-slate-400 text-sm pb-1">{avatar.username}</p>
+              <p className="text-slate-400 text-sm pb-1">@{avatar.username}</p>
             </div>
             <FollowButton />
           </NavLink>

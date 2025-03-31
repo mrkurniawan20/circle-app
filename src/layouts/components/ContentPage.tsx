@@ -42,7 +42,7 @@ function ContentPage({ index }: PageIndex) {
           </Avatar>
           <div className="inline-block pl-5">
             <h2 className="text-gray-50">{threads[index].name}</h2>
-            <p className="text-slate-400">{threads[index].username}</p>
+            <p className="text-slate-400">@{threads[index].username}</p>
           </div>
         </div>
         <div className="pl-5 pb-2 ">
