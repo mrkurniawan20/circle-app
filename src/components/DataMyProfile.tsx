@@ -1,13 +1,12 @@
 import React from 'react';
 import { loggedInUser } from '@/stores/loggedInUser';
 import { NavLink } from 'react-router-dom';
-
+import { usersFollowed } from '@/stores/users-followed';
+import { users } from '@/stores/users';
 interface LoggedInUser {
   name: string;
   username: string;
   bio: string;
-  following: string;
-  followers: string;
 }
 
 interface LoggedInUserProps {
@@ -24,16 +23,18 @@ function DataMyProfile({ loggedIn = [] }: LoggedInUserProps) {
           <p className="text-gray-100 pb-1">{login.bio}</p>
           <div className="flex gap-5 pb-5">
             <div className="flex gap-2">
-              <span className="text-gray-100">{login.following}</span>
-              <p className="text-slate-400 hover:underline underline-offset-6">
-                <NavLink to={'/follow'}>Following</NavLink>
-              </p>
+              <NavLink to={'/follow'}>
+                <p className="text-slate-400 hover:underline underline-offset-6">
+                  <span className="text-gray-100">{usersFollowed.length}</span> Following
+                </p>
+              </NavLink>
             </div>
-            <div className="flex gap-2">
-              <span className="text-gray-100">{login.followers}</span>
-              <p className="text-slate-400 hover:underline underline-offset-6">
-                <NavLink to={'/followers'}>Followers</NavLink>
-              </p>
+            <div className="flex gap-2 hover:underline underline-offset-6">
+              <NavLink to={'/followers'}>
+                <p className="text-slate-400 hover:underline underline-offset-6">
+                  <span className="text-gray-100">{users.length}</span> Followers
+                </p>
+              </NavLink>
             </div>
           </div>
         </div>
