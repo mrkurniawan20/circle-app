@@ -4,6 +4,8 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea, TweetArea } from './ui/textarea';
+import { ImagePlus } from 'lucide-react';
+import { loggedInUser } from '@/stores/loggedInUser';
 
 function EditProfile() {
   return (
@@ -17,21 +19,21 @@ function EditProfile() {
         <DialogHeader>
           <DialogTitle className="text-gray-100 ">Edit profile</DialogTitle>
           <form action="">
-            <label htmlFor="header">
-              <img src="./src/assets/img/header-resized.png" className="aspect-6/2 object-cover rounded-xl hover:cursor-pointer hover:brightness-50 transition-all duration-200" alt="" />
+            <label htmlFor="header" className="relative hover:brightness-50 duration-200 hover:cursor-pointer">
+              <img src="./src/assets/img/header-resized.png" className="aspect-6/2 object-cover rounded-xl " alt="" />
+              <ImagePlus className="text-gray-50 absolute inset-0 m-auto bg-black size-12 p-3 rounded-full opacity-70 hover:cursor-pointer" />
             </label>
             <input type="file" name="header" id="header" className="hidden" />
-            <label htmlFor="avatar">
-              <img
-                src="./src/assets/img/star platinum.png"
-                className="absolute aspect-square object-cover rounded-full size-20 ml-7 -mt-10 border-4 border-gray-800 hover:cursor-pointer hover:brightness-50 transition-all duration-200"
-                alt=""
-              />
-            </label>
-            <input type="file" name="avatar" id="avatar" className="hidden" />
+            <div className="sm:max-w-fit ml-7 -mt-10">
+              <label htmlFor="avatar" className="relative hover:brightness-50 duration-200 hover:cursor-pointer md:max-w-10 ">
+                <img src="./src/assets/img/star platinum.png" className="aspect-square object-cover rounded-full size-20  border-4 border-gray-800 " alt="" />
+                <ImagePlus className="text-gray-50 absolute inset-0 m-auto bg-black size-8 p-1 rounded-full opacity-70 hover:cursor-pointer" />
+              </label>
+              <input type="file" name="avatar" id="avatar" className="hidden" />
+            </div>
           </form>
         </DialogHeader>
-        <form className="mt-5 grid gap-4 py-4">
+        <form className=" grid gap-4 ">
           <div className="flex flex-col items-center gap-4 relative">
             <label
               htmlFor="name"
@@ -39,7 +41,7 @@ function EditProfile() {
             >
               Name
             </label>
-            <Input id="name" name="name" defaultValue="Dio Brando 👊🏼" className="border-2 focus:border-green-500 focus:outline-none transition-all col-span-4 p-4 pt-7 text-gray-50" />
+            <Input id="name" name="name" defaultValue={`${loggedInUser[0].name}`} className="border-2 focus:border-green-500 focus:outline-none transition-all col-span-4 p-4 pt-7 text-gray-50" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4 relative">
             <label
@@ -48,7 +50,7 @@ function EditProfile() {
             >
               Username
             </label>
-            <Input id="username" name="username" defaultValue="@konodioda" className="border-2 focus:border-green-500 focus:outline-none transition-all col-span-4 p-4 pt-7 text-gray-50" />
+            <Input id="username" name="username" defaultValue={`${loggedInUser[0].username}`} className="border-2 focus:border-green-500 focus:outline-none transition-all col-span-4 p-4 pt-7 text-gray-50" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4 relative">
             <label
@@ -57,7 +59,7 @@ function EditProfile() {
             >
               Bio
             </label>
-            <Textarea id="bio" name="bio" defaultValue="IT IS ME! DIO" className="border-2 focus:border-green-500 focus:outline-none transition-all resize-none col-span-4 min-h-20 p-4 pt-7 text-gray-50" />
+            <Textarea id="bio" name="bio" defaultValue={`${loggedInUser[0].bio}`} className="border-2 focus:border-green-500 focus:outline-none transition-all resize-none col-span-4 min-h-20 p-4 pt-7 text-gray-50" />
           </div>
           <div className="ms-auto">
             <Button className="ms-auto" type="submit" variant={'circle'}>

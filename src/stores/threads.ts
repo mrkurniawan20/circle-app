@@ -64,4 +64,17 @@ export const threads = [
     likedCount: '910',
     replyCount: '100',
   },
+  {
+    avatarImage: 'king crimson',
+    name: 'Diavollo',
+    username: 'KingCrimson',
+    relativeTime: '12s',
+    datePosted: '12:45 • 20 Feb 2025',
+    threadImage: 'cars2.jpg',
+    thread: 'Lorem,  facere, rem ut cupiditate fugiat nihil velit! Quam nesciunt, quae facilis voluptatum sed culpa itaque ut totam reiciendis laboriosam!', //Thread
+    liked: 'liked' as 'liked' | 'unlike',
+    likeCount: '909',
+    likedCount: '910',
+    replyCount: '100',
+  },
 ];
