@@ -8,13 +8,9 @@ import PageMedia from './PageMedia';
 import { threads } from '@/stores/threads';
 import { useLocation } from 'react-router-dom';
 
-interface PageIndex {
-  index: number;
-}
-
-function Page({ index }: PageIndex) {
+function Page() {
   const location = useLocation();
-  index = location.state?.index;
+  const index = location.state?.index ?? 0;
 
   return (
     <Layout>

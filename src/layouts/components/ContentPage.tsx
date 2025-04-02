@@ -22,7 +22,7 @@ interface PageIndex {
 
 function ContentPage({ index }: PageIndex) {
   const location = useLocation();
-  index = location.state?.index;
+  index = location.state?.index ?? 0;
   return (
     <div>
       <div className="inline-flex">

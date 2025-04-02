@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 
-function PageTitle<AddProps extends {}>(Component: React.ComponentType<AddProps>, title: string) {
-  return function WrappedComponent(props: AddProps) {
+function PageTitle(Component: React.ComponentType, title: string) {
+  return function WrappedComponent() {
     useEffect(() => {
       document.title = title;
     }, []);
-    return <Component {...props} />;
+    return <Component />;
   };
 }
 

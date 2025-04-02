@@ -15,6 +15,7 @@ import LoginForm from '@/components/auth/MyForm';
 import PageMedia from './PageMedia';
 import PageTitle from '@/layouts/components/PageTitle';
 import Followers from './Followers';
+import ContentPageMedia from '@/layouts/components/ContentPageMedia';
 
 let router = createBrowserRouter([
   {
@@ -72,10 +73,7 @@ let router = createBrowserRouter([
   },
   {
     path: '/media',
-    element: (() => {
-      const MediaWithTitle = PageTitle(PageMedia, 'Media | Cirlce');
-      return <MediaWithTitle image="splash.jpg" />;
-    })(),
+    Component: PageTitle(PageMedia, 'Media | Circle'),
   },
   // {
   //   path: '/',

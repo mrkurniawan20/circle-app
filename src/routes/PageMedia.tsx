@@ -5,18 +5,10 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import ContentPageMedia from '@/layouts/components/ContentPageMedia';
 import { threads } from '@/stores/threads';
 
-interface PageMedias {
-  image: string;
-}
-
-interface PageIndex {
-  index: number;
-}
-
-function PageMedia({ index }: PageIndex) {
+function PageMedia() {
   const navigate = useNavigate();
   const location = useLocation();
-  index = location.state?.index;
+  const index = location.state?.index ?? 1;
   console.log(location);
   // image = location.state?.image || 'splash.jpg';
   const [imageOnly, setImageOnly] = useState(true);
@@ -30,7 +22,7 @@ function PageMedia({ index }: PageIndex) {
       </div>
       {imageOnly && (
         <div className="min-w-0 flex-[0.4] transition-all overflow-y-scroll duration-1000">
-          <ContentPageMedia index={index} />
+          <ContentPageMedia />
         </div>
       )}
     </div>

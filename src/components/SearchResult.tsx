@@ -8,7 +8,6 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import FollowButton from './FollowButton';
 
 interface SearchResult {
-  page: string;
   image: string;
   fallback: string;
   name: string;
@@ -26,7 +25,7 @@ function SearchResult({ searches = [] }: SearchProps) {
     <>
       {searches.map((search, index) => (
         <CommandItem key={index} value={`${search.name} ${search.username} `} className="w-full data-[selected=true]:border-gray-600 data-[selected=true]:bg-accent-0 data-[selected=true]:text-accent-foreground">
-          <NavLink to={`/${search.page}`} className="flex w-full pb-1 pt-1 pl-5 pr-5 hover:bg-slate-700 rounded-2xl">
+          <NavLink to={`/${search.username}`} className="flex w-full pb-1 pt-1 pl-5 pr-5 hover:bg-slate-700 rounded-2xl">
             <Avatar className="my-auto">
               <AvatarImage src={`./src/assets/img/${search.image}.png`} alt="@shadcn" />
               <AvatarFallback>{search.fallback}</AvatarFallback>

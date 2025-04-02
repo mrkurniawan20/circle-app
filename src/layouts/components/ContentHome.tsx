@@ -15,10 +15,13 @@ function ContentHome() {
           <AvatarImage src="./src/assets/img/star platinum.png" alt="@shadcn" />
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
-        <Textarea
-          className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-base placeholder:text-lg placeholder:font-semibold"
-          placeholder="What is happening?"
-        ></Textarea>
+        <div className="flex-col">
+          <Textarea
+            className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-base placeholder:text-lg placeholder:font-semibold"
+            placeholder="What is happening?"
+          ></Textarea>
+          {/* <img src="./src/assets/img/header-resized.png" alt="" className="max-w-sm rounded-xl" /> */}
+        </div>
         <label htmlFor="add-image">
           <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
         </label>

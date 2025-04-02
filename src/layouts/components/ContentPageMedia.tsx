@@ -18,9 +18,9 @@ interface PageIndex {
   index: number;
 }
 
-function ContentPageMedia({ index }: PageIndex) {
+function ContentPageMedia() {
   const location = useLocation();
-  index = location.state?.index;
+  const index = location.state?.index ?? 0;
   return (
     <div key={index}>
       <div className="flex p-5">
