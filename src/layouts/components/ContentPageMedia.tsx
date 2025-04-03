@@ -9,14 +9,7 @@ import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { ImagePlus, MessageSquareText } from 'lucide-react';
 import ThreadLike from '@/components/ThreadLike';
 import { threads } from '@/stores/threads';
-
-const likes = {
-  likeCount: '20',
-  likedCount: '21',
-};
-interface PageIndex {
-  index: number;
-}
+import { loggedInUser } from '@/stores/loggedInUser';
 
 function ContentPageMedia() {
   const location = useLocation();
@@ -25,7 +18,7 @@ function ContentPageMedia() {
     <div key={index}>
       <div className="flex p-5">
         <Avatar className="my-auto">
-          <AvatarImage src={`./src/assets/img/${threads[index].avatarImage}.png`} alt="@shadcn" />
+          <AvatarImage src={`./src/assets/img/${threads[index].avatarImage}`} alt="@shadcn" />
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
         <div className="inline-block pl-5">
@@ -45,7 +38,7 @@ function ContentPageMedia() {
 
       <form action="" className="flex gap-5 border-t-1 border-b-1 border-gray-500 p-5">
         <Avatar className="">
-          <AvatarImage src="./src/assets/img/star platinum.png" alt="@shadcn" />
+          <AvatarImage src={`./src/assets/img/${loggedInUser[0].avatar}`} alt="@shadcn" />
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
         <Textarea className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-xl font-semibold" placeholder="Type your reply"></Textarea>

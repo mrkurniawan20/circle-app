@@ -17,18 +17,13 @@ interface SuggestedProps {
 }
 
 function SuggestedAccount({ avatars = [] }: SuggestedProps) {
-  const [follow, setFollow] = useState<boolean>(false);
-
-  const toggleFollow = () => {
-    setFollow(!follow);
-  };
   return (
     <>
       {avatars.map((avatar, index) => (
         <div className="flex" key={index}>
           <NavLink to={`/${avatar.username.toLocaleLowerCase()}`} className="profile flex py-2 px-5  w-full  hover:bg-slate-700 duration-100">
             <Avatar className="my-auto">
-              <AvatarImage src={`./src/assets/img/${avatar.image}.png`} alt="@shadcn" />
+              <AvatarImage src={`./src/assets/img/${avatar.image}`} alt="@shadcn" />
               <AvatarFallback>{avatar.fallback}</AvatarFallback>
             </Avatar>
             <div className="pl-5">

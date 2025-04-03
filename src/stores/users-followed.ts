@@ -1,7 +1,7 @@
 export const usersFollowed = [
   {
     page: 'bucciaratti',
-    image: 'sticky finger',
+    image: 'sticky finger.png',
     fallback: 'B',
     name: 'Bucciaratti',
     username: 'StickyFinger',
@@ -10,7 +10,7 @@ export const usersFollowed = [
   },
   {
     page: 'giorno',
-    image: 'golden requim',
+    image: 'golden requim.png',
     fallback: 'GG',
     name: 'Giorno',
     username: 'GoldenRequim',
@@ -19,7 +19,7 @@ export const usersFollowed = [
   },
   {
     page: 'anasui',
-    image: 'diver down',
+    image: 'diver down.png',
     fallback: 'A',
     name: 'Anasui',
     username: 'DiverDown',
@@ -28,7 +28,7 @@ export const usersFollowed = [
   },
   {
     page: 'polpo',
-    image: 'black sabbath',
+    image: 'black sabbath.png',
     fallback: 'P',
     name: 'Polpo',
     username: 'BlackSabbath',
@@ -37,7 +37,7 @@ export const usersFollowed = [
   },
   {
     page: 'Blackmore',
-    image: 'rainbow',
+    image: 'rainbow.png',
     fallback: 'B',
     name: 'Blackmore',
     username: 'CatchTheRainbow',
@@ -46,7 +46,7 @@ export const usersFollowed = [
   },
   {
     page: 'Vanilla Ice',
-    image: 'cream',
+    image: 'cream.png',
     fallback: 'VI',
     name: 'Vanilla Ice',
     username: 'Cream',
@@ -55,7 +55,7 @@ export const usersFollowed = [
   },
   {
     page: 'Polnarref',
-    image: 'silver chariot',
+    image: 'silver chariot.png',
     fallback: 'JPP',
     name: 'Jean-Pierre Polnarref',
     username: 'SilverChariot',
@@ -64,7 +64,7 @@ export const usersFollowed = [
   },
   {
     page: 'Koichii',
-    image: 'echo 3',
+    image: 'echo 3.png',
     fallback: 'K',
     name: 'Koichii',
     username: 'EchoAct3',
@@ -73,7 +73,7 @@ export const usersFollowed = [
   },
   {
     page: 'Diavollo',
-    image: 'king crimson',
+    image: 'king crimson.png',
     fallback: 'D',
     name: 'Diavollo',
     username: 'KingCrimson',

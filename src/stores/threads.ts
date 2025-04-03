@@ -1,6 +1,6 @@
 export const threads = [
   {
-    avatarImage: 'rainbow',
+    avatarImage: 'rainbow.png',
     name: 'Blackmore',
     username: 'CatchTheRainbow',
     relativeTime: '4h',
@@ -13,7 +13,7 @@ export const threads = [
     replyCount: '100',
   },
   {
-    avatarImage: 'golden requim',
+    avatarImage: 'golden requim.png',
     name: 'Giorno',
     username: 'GoldenRequim',
     relativeTime: '1d',
@@ -26,7 +26,7 @@ export const threads = [
     replyCount: '100',
   },
   {
-    avatarImage: 'diver down',
+    avatarImage: 'diver down.png',
     name: 'Anasui',
     username: 'DiverDown',
     relativeTime: '12d',
@@ -39,7 +39,7 @@ export const threads = [
     replyCount: '100',
   },
   {
-    avatarImage: 'diver down',
+    avatarImage: 'diver down.png',
     name: 'Anasui',
     username: 'DiverDown',
     relativeTime: '12d',
@@ -52,7 +52,7 @@ export const threads = [
     replyCount: '100',
   },
   {
-    avatarImage: 'black sabbath',
+    avatarImage: 'black sabbath.png',
     name: 'Polpo',
     username: 'BlackSabbath',
     relativeTime: '12m',
@@ -65,7 +65,7 @@ export const threads = [
     replyCount: '100',
   },
   {
-    avatarImage: 'king crimson',
+    avatarImage: 'king crimson.png',
     name: 'Diavollo',
     username: 'KingCrimson',
     relativeTime: '12s',

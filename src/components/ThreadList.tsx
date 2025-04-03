@@ -25,23 +25,6 @@ import ThreadLike from './ThreadLike';
 import { ThreadProps } from '@/types/threadList';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-// interface Threads {
-//   //Threads
-//   avatarImage: string;
-//   name: string;
-//   username: string;
-//   relativeTime: string;
-//   threadImage?: string;
-//   thread: string; //Thread
-//   // liked: 'liked' | 'unlike';
-//   likeCount: string;
-//   likedCount: string;
-//   replyCount: string;
-// }
-// interface ThreadProps {
-//   threadList: Threads[];
-// }
-
 function ThreadList({ threadList = [] }: ThreadProps) {
   const navigate = useNavigate();
   return (
@@ -54,7 +37,7 @@ function ThreadList({ threadList = [] }: ThreadProps) {
         >
           <div className="flex pr-5 pt-5 ">
             <Avatar className="my-auto size-12">
-              <AvatarImage src={`./src/assets/img/${threads.avatarImage}.png`} alt="@shadcn" />
+              <AvatarImage src={`./src/assets/img/${threads.avatarImage}`} alt="@shadcn" />
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
             <div className="inline-flex pl-3 ">

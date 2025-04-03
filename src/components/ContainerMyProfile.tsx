@@ -12,8 +12,8 @@ function ContainerMyProfile() {
           <h3 className="pt-3 pb-3 text-gray-100 text-xl font-semibold hover:underline underline-offset-6 sm:max-w-fit">My Profile</h3>
         </NavLink>
       </div>
-      <img src="./src/assets/img/header-resized.png" alt="" className="aspect-5/1 overflow-hidden object-cover rounded-xl" />
-      <img src="./src/assets/img/star platinum.png" alt="" className="size-20 aspect-square object-cover rounded-full border-5 border-gray-800 -mt-10 ml-4 absolute" />
+      <img src={`./src/assets/img/${loggedInUser[0].header}`} alt="" className="aspect-5/1 overflow-hidden object-cover rounded-xl" />
+      <img src={`./src/assets/img/${loggedInUser[0].avatar}`} alt="" className="size-20 aspect-square object-cover rounded-full border-5 border-gray-800 -mt-10 ml-4 absolute" />
       <div className="flex pt-3">
         <EditProfile />
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const socials = [{ icon: 'github' }, { icon: 'linkedin' }, { icon: 'twitter' }, { icon: 'facebook' }];
+const socials = [{ icon: 'github.png' }, { icon: 'linkedin.png' }, { icon: 'twitter.png' }, { icon: 'facebook.png' }];
 
 function ContainerCredentials() {
   return (
@@ -11,7 +11,7 @@ function ContainerCredentials() {
           <div className="flex gap-3">
             {socials.map((social, index) => (
               <a key={index} className="p-0 m-0 size-7" href="">
-                <img className="grayscale hover:grayscale-0 duration-100" src={`./src/assets/img/${social.icon}.png`} alt="" />
+                <img className="grayscale hover:grayscale-0 duration-100" src={`./src/assets/img/${social.icon}`} alt="" />
               </a>
             ))}
           </div>

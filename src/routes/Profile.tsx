@@ -9,6 +9,7 @@ import { threads } from '@/stores/threads';
 import Layout from '@/layouts/Layout';
 import { loggedInUser } from '@/stores/loggedInUser';
 import { Dialog, DialogContent, DialogOverlay, DialogTrigger } from '@/components/ui/dialog';
+import { ArrowLeft } from 'lucide-react';
 
 function Profile() {
   return (
@@ -17,7 +18,8 @@ function Profile() {
         <div className="inline-flex">
           <NavLink to={'/home'} className="inline-flex items-center pt-10">
             <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700">
-              <img src="./src/assets/img/back.png" className="invert w-6 h-6" alt="" />
+              <ArrowLeft className="size-8 text-gray-50" />
+
               <h2 className="text-2xl text-gray-100 font-semibold">{loggedInUser[0].name}</h2>
             </div>
           </NavLink>
@@ -25,21 +27,21 @@ function Profile() {
         <div className="p-10 pb-0 pt-2">
           <Dialog>
             <DialogTrigger asChild>
-              <img src="./src/assets/img/header-resized.png" alt="" className="aspect-5/1 object-cover rounded-2xl hover:cursor-pointer" />
+              <img src={`./src/assets/img/${loggedInUser[0].header}`} alt="" className="aspect-5/1 object-cover rounded-2xl hover:cursor-pointer" />
             </DialogTrigger>
             <DialogOverlay className="bg-black/80">
               <DialogContent className="border-none md:min-w-full p-1 rounded-none ">
-                <img src="./src/assets/img/header-resized.png" alt="" className="aspect-5/1 object-cover" />
+                <img src={`./src/assets/img/${loggedInUser[0].header}`} alt="" className="aspect-5/1 object-cover" />
               </DialogContent>
             </DialogOverlay>
           </Dialog>
           <Dialog>
             <DialogTrigger asChild>
-              <img src="./src/assets/img/star platinum.png" alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute hover:brightness-90 hover:cursor-pointer" />
+              <img src={`./src/assets/img/${loggedInUser[0].avatar}`} alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute hover:brightness-90 hover:cursor-pointer" />
             </DialogTrigger>
             <DialogOverlay className="bg-black/80">
               <DialogContent className="border-none md:w-fit p-1 rounded-full ">
-                <img src="./src/assets/img/star platinum.png" alt="" className="aspect-square object-cover size-full rounded-full" />
+                <img src={`./src/assets/img/${loggedInUser[0].avatar}`} alt="" className="aspect-square object-cover size-full rounded-full" />
               </DialogContent>
             </DialogOverlay>
           </Dialog>

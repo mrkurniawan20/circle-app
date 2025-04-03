@@ -15,6 +15,7 @@ import { FaHome, FaSearch, FaRegHeart } from 'react-icons/fa';
 import { IoPersonCircleOutline, IoPersonCircleSharp } from 'react-icons/io5';
 import { GiExitDoor } from 'react-icons/gi';
 import { Separator } from '@/components/ui/separator';
+import { loggedInUser } from '@/stores/loggedInUser';
 
 const pages = [
   {
@@ -59,7 +60,7 @@ function SideBar() {
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-[1fr_10fr] items-center">
                   <Avatar className="my-auto">
-                    <AvatarImage src="./src/assets/img/star platinum.png" alt="@shadcn" />
+                    <AvatarImage src={`./src/assets/img/${loggedInUser[0].avatar}`} alt="@shadcn" />
                     <AvatarFallback>ZW</AvatarFallback>
                   </Avatar>
                   <Textarea className="ml-2 resize-none w-sm max-w-sm border-none shadow-none focus:ring-green-500 items-center text-gray-100 md:text-xl" placeholder="What is happening?"></Textarea>

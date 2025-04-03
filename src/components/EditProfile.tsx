@@ -20,13 +20,13 @@ function EditProfile() {
           <DialogTitle className="text-gray-100 ">Edit profile</DialogTitle>
           <form action="">
             <label htmlFor="header" className="relative hover:brightness-50 duration-200 hover:cursor-pointer">
-              <img src="./src/assets/img/header-resized.png" className="aspect-6/2 object-cover rounded-xl " alt="" />
+              <img src={`./src/assets/img/${loggedInUser[0].header}`} className="aspect-6/2 object-cover rounded-xl " alt="" />
               <ImagePlus className="text-gray-50 absolute inset-0 m-auto bg-black size-12 p-3 rounded-full opacity-70 hover:cursor-pointer" />
             </label>
             <input type="file" name="header" id="header" className="hidden" />
             <div className="sm:max-w-fit ml-7 -mt-10">
               <label htmlFor="avatar" className="relative hover:brightness-50 duration-200 hover:cursor-pointer md:max-w-10 ">
-                <img src="./src/assets/img/star platinum.png" className="aspect-square object-cover rounded-full size-20  border-4 border-gray-800 " alt="" />
+                <img src={`./src/assets/img/${loggedInUser[0].avatar}`} className="aspect-square object-cover rounded-full size-20  border-4 border-gray-800 " alt="" />
                 <ImagePlus className="text-gray-50 absolute inset-0 m-auto bg-black size-8 p-1 rounded-full opacity-70 hover:cursor-pointer" />
               </label>
               <input type="file" name="avatar" id="avatar" className="hidden" />

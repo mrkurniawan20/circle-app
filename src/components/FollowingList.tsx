@@ -6,7 +6,6 @@ import FollowButton from './FollowButton';
 import FollowedButton from './FollowedButton';
 
 interface FollowersList {
-  page: string;
   image: string;
   fallback: string;
   name: string;
@@ -23,9 +22,9 @@ function FollowingList({ followers = [] }: FollowersProps) {
   return (
     <div className="p-5">
       {followers.map((follower, index) => (
-        <NavLink key={index} to={`/${follower.page}`} className="flex w-full pb-1 pt-1 px-5 hover:bg-slate-700 rounded-2xl duration-200">
+        <NavLink key={index} to={`/${follower.username}`} className="flex w-full pb-1 pt-1 px-5 hover:bg-slate-700 rounded-2xl duration-200">
           <Avatar className="my-auto">
-            <AvatarImage src={`./src/assets/img/${follower.image}.png`} alt="@shadcn" />
+            <AvatarImage src={`./src/assets/img/${follower.image}`} alt="@shadcn" />
             <AvatarFallback>{follower.fallback}</AvatarFallback>
           </Avatar>
           <div className="pl-5">

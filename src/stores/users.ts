@@ -1,6 +1,6 @@
 export const users = [
   {
-    image: 'sticky finger',
+    image: 'sticky finger.png',
     fallback: 'B',
     name: 'Bucciaratti',
     username: 'StickyFinger',
@@ -8,7 +8,7 @@ export const users = [
     buttonType: 'followed' as 'followed' | 'follow',
   },
   {
-    image: 'golden requim',
+    image: 'golden requim.png',
     fallback: 'GG',
     name: 'Giorno',
     username: 'GoldenRequim',
@@ -16,7 +16,7 @@ export const users = [
     buttonType: 'follow' as 'follow' | 'followed',
   },
   {
-    image: 'diver down',
+    image: 'diver down.png',
     fallback: 'A',
     name: 'Anasui',
     username: 'DiverDown',
@@ -24,7 +24,7 @@ export const users = [
     buttonType: 'follow' as 'follow' | 'followed',
   },
   {
-    image: 'black sabbath',
+    image: 'black sabbath.png',
     fallback: 'P',
     name: 'Polpo',
     username: 'BlackSabbath',
@@ -32,7 +32,7 @@ export const users = [
     buttonType: 'follow' as 'follow' | 'followed',
   },
   {
-    image: 'rainbow',
+    image: 'rainbow.png',
     fallback: 'B',
     name: 'Blackmore',
     username: 'CatchTheRainbow',

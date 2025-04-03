@@ -9,6 +9,7 @@ import { threads } from '@/stores/threads';
 import Layout from '@/layouts/Layout';
 import { images } from '@/stores/images';
 import { loggedInUser } from '@/stores/loggedInUser';
+import { ArrowLeft } from 'lucide-react';
 
 function ProfileMedia() {
   const navigate = useNavigate();
@@ -19,14 +20,15 @@ function ProfileMedia() {
         <div className="inline-flex">
           <NavLink to={'/home'} className="inline-flex items-center pt-10">
             <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700">
-              <img src="./src/assets/img/back.png" className="invert w-6 h-6" alt="" />
+              <ArrowLeft className="size-8 text-gray-50" />
+
               <h2 className="text-2xl text-gray-100 font-semibold">{loggedInUser[0].name}</h2>
             </div>
           </NavLink>
         </div>
         <div className="p-10 pb-0 pt-2">
-          <img src="./src/assets/img/header-resized.png" alt="" className="aspect-5/1  object-cover  rounded-2xl" />
-          <img src="./src/assets/img/star platinum.png" alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute" />
+          <img src={`./src/assets/img/${loggedInUser[0].header}`} alt="" className="aspect-5/1  object-cover  rounded-2xl" />
+          <img src={`./src/assets/img/${loggedInUser[0].avatar}`} alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute" />
           <div className="flex pt-3 pb-5">
             <EditProfile />
           </div>

@@ -6,29 +6,20 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { replies } from '@/stores/replies';
 import ThreadList from '../../components/ThreadList';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
-import { ImagePlus, MessageSquareText } from 'lucide-react';
+import { ImagePlus, ArrowLeft, MessageSquareText } from 'lucide-react';
 import ThreadLike from '@/components/ThreadLike';
 import { ThreadProps } from '@/types/threadList';
 import { threads } from '@/stores/threads';
+import { loggedInUser } from '@/stores/loggedInUser';
 
-const likes = {
-  likeCount: '20',
-  likedCount: '21',
-};
-
-interface PageIndex {
-  index: number;
-}
-
-function ContentPage({ index }: PageIndex) {
+function ContentPage() {
   const location = useLocation();
-  index = location.state?.index ?? 0;
+  const index = location.state?.index ?? 0;
   return (
     <div>
       <div className="inline-flex">
         <NavLink to={'/home'} className="inline-flex items-center pt-10">
           <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700 duration-200">
-            <img src="./src/assets/img/back.png" className="invert w-6 h-6" alt="" />
             <h2 className="text-2xl text-gray-100 font-semibold">Home</h2>
           </div>
         </NavLink>
@@ -37,7 +28,7 @@ function ContentPage({ index }: PageIndex) {
       <div>
         <div className="flex p-5">
           <Avatar className="my-auto">
-            <AvatarImage src={`./src/assets/img/${threads[index].avatarImage}.png`} alt="@shadcn" />
+            <AvatarImage src={`./src/assets/img/${threads[index].avatarImage}`} alt="@shadcn" />
             <AvatarFallback>ZW</AvatarFallback>
           </Avatar>
           <div className="inline-block pl-5">
@@ -58,7 +49,7 @@ function ContentPage({ index }: PageIndex) {
 
       <form action="" className="flex gap-5 border-t-1 border-b-1 border-gray-500 p-5">
         <Avatar className="">
-          <AvatarImage src="./src/assets/img/star platinum.png" alt="@shadcn" />
+          <AvatarImage src={`./src/assets/img/${loggedInUser[0].avatar}`} alt="@shadcn" />
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
         <Textarea className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-xl font-semibold" placeholder="Type your reply"></Textarea>
