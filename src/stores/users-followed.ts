@@ -9,6 +9,15 @@ export const usersFollowed = [
     buttonType: 'followed' as 'followed' | 'follow',
   },
   {
+    page: 'bucciaratti',
+    image: 'sticky finger.png',
+    fallback: 'B',
+    name: 'Bucciaratti',
+    username: 'StickyFinger',
+    bio: 'Syamalama lama lama dingdong',
+    buttonType: 'followed' as 'followed' | 'follow',
+  },
+  {
     page: 'giorno',
     image: 'golden requim.png',
     fallback: 'GG',

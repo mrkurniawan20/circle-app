@@ -13,8 +13,7 @@ function ContentSearch() {
   return (
     <div>
       <h2 className="text-2xl p-10 pb-5 text-gray-100 font-semibold">Search</h2>
-
-      <Command className=" md:min-w-[450px] bg-[#213547] p-5 rounded-none h-full">
+      <Command className=" md:min-w-[450px] bg-[#213547] p-5 rounded-none ">
         <CommandInput defaultValue="" placeholder="Type a command or search..." className="bg-gray-600 text-gray-300 p-5 border-none rounded-full placeholder:text-gray-300 " />
         <CommandList className="max-h-full">
           <CommandEmpty className=" p-5 mt-20  mx-auto text-center">

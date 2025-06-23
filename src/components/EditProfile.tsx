@@ -6,8 +6,9 @@ import { Label } from '@/components/ui/label';
 import { Textarea, TweetArea } from './ui/textarea';
 import { ImagePlus } from 'lucide-react';
 import { loggedInUser } from '@/stores/loggedInUser';
+import { UserProps, useUser } from '@/utils/setUser';
 
-function EditProfile() {
+function EditProfile({ user }: UserProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -20,13 +21,13 @@ function EditProfile() {
           <DialogTitle className="text-gray-100 ">Edit profile</DialogTitle>
           <form action="">
             <label htmlFor="header" className="relative hover:brightness-50 duration-200 hover:cursor-pointer">
-              <img src={`./src/assets/img/${loggedInUser[0].header}`} className="aspect-6/2 object-cover rounded-xl " alt="" />
+              <img src={`${user!.header}`} className="aspect-6/2 object-cover rounded-xl " alt="" />
               <ImagePlus className="text-gray-50 absolute inset-0 m-auto bg-black size-12 p-3 rounded-full opacity-70 hover:cursor-pointer" />
             </label>
             <input type="file" name="header" id="header" className="hidden" />
             <div className="sm:max-w-fit ml-7 -mt-10">
               <label htmlFor="avatar" className="relative hover:brightness-50 duration-200 hover:cursor-pointer md:max-w-10 ">
-                <img src={`./src/assets/img/${loggedInUser[0].avatar}`} className="aspect-square object-cover rounded-full size-20  border-4 border-gray-800 " alt="" />
+                <img src={`${user!.avatar}`} className="aspect-square object-cover rounded-full size-20  border-4 border-gray-800 " alt="" />
                 <ImagePlus className="text-gray-50 absolute inset-0 m-auto bg-black size-8 p-1 rounded-full opacity-70 hover:cursor-pointer" />
               </label>
               <input type="file" name="avatar" id="avatar" className="hidden" />
@@ -41,7 +42,7 @@ function EditProfile() {
             >
               Name
             </label>
-            <Input id="name" name="name" defaultValue={`${loggedInUser[0].name}`} className="border-2 focus:border-green-500 focus:outline-none transition-all col-span-4 p-4 pt-7 text-gray-50" />
+            <Input id="name" name="name" defaultValue={`${user!.name}`} className="border-2 focus:border-green-500 focus:outline-none transition-all col-span-4 p-4 pt-7 text-gray-50" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4 relative">
             <label
@@ -50,7 +51,7 @@ function EditProfile() {
             >
               Username
             </label>
-            <Input id="username" name="username" defaultValue={`${loggedInUser[0].username}`} className="border-2 focus:border-green-500 focus:outline-none transition-all col-span-4 p-4 pt-7 text-gray-50" />
+            <Input id="username" name="username" defaultValue={`${user!.username}`} className="border-2 focus:border-green-500 focus:outline-none transition-all col-span-4 p-4 pt-7 text-gray-50" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4 relative">
             <label
@@ -59,7 +60,7 @@ function EditProfile() {
             >
               Bio
             </label>
-            <Textarea id="bio" name="bio" defaultValue={`${loggedInUser[0].bio}`} className="border-2 focus:border-green-500 focus:outline-none transition-all resize-none col-span-4 min-h-20 p-4 pt-7 text-gray-50" />
+            <Textarea id="bio" name="bio" defaultValue={`${user!.bio}`} className="border-2 focus:border-green-500 focus:outline-none transition-all resize-none col-span-4 min-h-20 p-4 pt-7 text-gray-50" />
           </div>
           <div className="ms-auto">
             <Button className="ms-auto" type="submit" variant={'circle'}>

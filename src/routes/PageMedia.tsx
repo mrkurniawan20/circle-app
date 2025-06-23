@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import ContentPage from '@/layouts/components/ContentPage';
 import { CircleX, PanelRight } from 'lucide-react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import ContentPageMedia from '@/layouts/components/ContentPageMedia';
 import { threads } from '@/stores/threads';
+import { User, useUser } from '@/utils/setUser';
+import LoadingPage from '@/layouts/components/LoadingPage';
 
 function PageMedia() {
   const navigate = useNavigate();
@@ -12,6 +14,13 @@ function PageMedia() {
   console.log(location);
   // image = location.state?.image || 'splash.jpg';
   const [imageOnly, setImageOnly] = useState(true);
+  const { user, loading } = useUser();
+  if (loading) {
+    return <LoadingPage />;
+  } else if (!user) {
+    // return <ContentPageMedia user={null}/>; HARUS DIPERBAIKI UNTUK LIAT PAGE TANPA LOGIN
+    return null;
+  }
 
   return (
     <div className="flex h-screen w-full relative">
@@ -22,7 +31,7 @@ function PageMedia() {
       </div>
       {imageOnly && (
         <div className="min-w-0 flex-[0.4] transition-all overflow-y-scroll duration-1000">
-          <ContentPageMedia />
+          <ContentPageMedia user={user} />
         </div>
       )}
     </div>

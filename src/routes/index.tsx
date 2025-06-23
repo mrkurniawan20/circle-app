@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Register from './auth/Register';
-import Login from './auth/Login';
+import { LoginForm } from './auth/Login';
 import ForgotPassword from './auth/ForgotPassword';
 import ResetPassword from './auth/ResetPassword';
 // import Login from './auth/DeprecatedLogin';
@@ -11,20 +11,21 @@ import ProfileMedia from './ProfileMedia';
 import Search from './Search';
 import Following from './Following';
 import ProtectedRouteLayout from './ProtectedRoute';
-import LoginForm from '@/components/auth/MyForm';
+// import LoginForm from '@/components/auth/MyForm';
 import PageMedia from './PageMedia';
 import PageTitle from '@/layouts/components/PageTitle';
 import Followers from './Followers';
 import ContentPageMedia from '@/layouts/components/ContentPageMedia';
+import LoadingPage from '@/layouts/components/LoadingPage';
 
 let router = createBrowserRouter([
   {
     Component: ProtectedRouteLayout,
     children: [
-      {
-        path: '/',
-        Component: PageTitle(Home, 'Home | Circle'),
-      },
+      // {
+      //   path: '',
+      //   Component: PageTitle(Home, 'Home | Circle'),
+      // },
       {
         path: '/profile',
         Component: PageTitle(Profile, 'Profile | Circle'),
@@ -57,7 +58,11 @@ let router = createBrowserRouter([
   },
   {
     path: '/login',
-    Component: PageTitle(Login, 'Login | Circle'),
+    Component: PageTitle(LoginForm, 'Login | Circle'),
+  },
+  {
+    path: '/',
+    Component: PageTitle(LoginForm, 'Login | Circle'),
   },
   {
     path: '/forgot',
@@ -68,7 +73,7 @@ let router = createBrowserRouter([
     Component: PageTitle(ResetPassword, 'Reset Password | Circle'),
   },
   {
-    path: '/page',
+    path: '/page/:id',
     Component: PageTitle(Page, 'Page | Circle'),
   },
   {
@@ -96,8 +101,8 @@ let router = createBrowserRouter([
   //   Component: Following,
   // },
   {
-    path: '/myform',
-    Component: LoginForm,
+    path: '/loading',
+    Component: LoadingPage,
   },
 ]);
 

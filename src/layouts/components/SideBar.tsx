@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../../components/ui/button';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import CircleText from '../../components/CircleText';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -16,6 +16,8 @@ import { IoPersonCircleOutline, IoPersonCircleSharp } from 'react-icons/io5';
 import { GiExitDoor } from 'react-icons/gi';
 import { Separator } from '@/components/ui/separator';
 import { loggedInUser } from '@/stores/loggedInUser';
+import axios from 'axios';
+import { User, UserProps } from '@/utils/setUser';
 
 const pages = [
   {
@@ -40,18 +42,27 @@ const pages = [
   },
 ];
 
-function SideBar() {
-  const { clearUser } = useUserStore();
+function SideBar({ user }: UserProps) {
+  const navigate = useNavigate();
+  // const { clearUser } = useUserStore();
+  async function logOut() {
+    // const token = localStorage.getItem('token')
+    // const header = `Authorization: Bearer ${token}`;
+    const token = localStorage.getItem('token');
+    await axios.post('http://127.0.0.1:3320/user/logoutUser', token, { headers: { Authorization: `Bearer ${token}` } });
+    localStorage.removeItem('token');
+    navigate('/');
+  }
   return (
-    <div className="p-10">
-      <div className="flex flex-col gap-5 h-screen fixed w-xs">
+    <div className="p-10 pt-0 2xl:max-w-[250px] ms-auto">
+      <div className="flex flex-col gap-5 max-w-xs sticky top-10 left-0">
         <NavLink to={'/'} className="hover:scale-105 transition-transform duration-200">
-          <CircleText textSize="text-5xl" />
+          <CircleText textSize="text-5xl px-3" />
         </NavLink>
         <SideBarPage profiles={pages} />
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant={'circle'} className="p-5">
+            <Button variant={'circle'} className="p-5 px-10 max-w-fit">
               Create Post
             </Button>
           </DialogTrigger>
@@ -60,7 +71,7 @@ function SideBar() {
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-[1fr_10fr] items-center">
                   <Avatar className="my-auto">
-                    <AvatarImage src={`./src/assets/img/${loggedInUser[0].avatar}`} alt="@shadcn" />
+                    <AvatarImage src={`.${user.avatar}`} alt="@shadcn" />
                     <AvatarFallback>ZW</AvatarFallback>
                   </Avatar>
                   <Textarea className="ml-2 resize-none w-sm max-w-sm border-none shadow-none focus:ring-green-500 items-center text-gray-100 md:text-xl" placeholder="What is happening?"></Textarea>
@@ -82,10 +93,14 @@ function SideBar() {
           </DialogContent>
         </Dialog>
         <div className="flex-grow"></div>
-        <NavLink to={'/login'} onClick={clearUser} className="flex flex-row items-center mb-15 max-w-fit space-x-5 p-2 px-4 hover:bg-slate-700 rounded-full duration-200">
+        <button onClick={logOut} className="flex flex-row items-center  max-w-fit space-x-5 py-2 px-3 hover:bg-slate-700 rounded-full duration-200">
           <DoorOpen className="size-8 text-gray-50" />
           <p className="text-xl font-semibold text-gray-100">logout</p>
-        </NavLink>
+        </button>
+        {/* <NavLink to={'/login'} onClick={logOut} className="flex flex-row items-center  max-w-fit space-x-5 py-2 px-3 hover:bg-slate-700 rounded-full duration-200">
+          <DoorOpen className="size-8 text-gray-50" />
+          <p className="text-xl font-semibold text-gray-100">logout</p>
+        </NavLink> */}
       </div>
     </div>
   );

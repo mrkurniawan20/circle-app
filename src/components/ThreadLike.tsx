@@ -8,7 +8,7 @@ interface ThreadsLike {
   replyCount: string | number;
 }
 
-function ThreadLike({ likedCount, likeCount, replyCount }: ThreadsLike) {
+export function ThreadLike({ likedCount, likeCount, replyCount }: ThreadsLike) {
   const [like, setLike] = useState<boolean>(false);
 
   const toggleLike = (e: React.MouseEvent) => {
@@ -38,5 +38,3 @@ function ThreadLike({ likedCount, likeCount, replyCount }: ThreadsLike) {
     </div>
   );
 }
-
-export default ThreadLike;

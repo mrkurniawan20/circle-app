@@ -1,4 +1,13 @@
 export const loggedInUser = [
+  // {
+  //   name: 'Dio Brando',
+  //   username: 'ZaWarudo',
+  //   bio: `IT'S ME! DIO!`,
+  //   following: '40',
+  //   followers: '30M',
+  //   avatar: 'za warudo.png',
+  //   header: 'dio.jpg',
+  // },
   {
     name: 'Jotaro Kujo',
     username: 'StarPlatinum',

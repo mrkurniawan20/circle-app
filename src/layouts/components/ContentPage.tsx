@@ -1,20 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '../../components/ui/button';
 import { Textarea } from '../../components/ui/textarea';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { replies } from '@/stores/replies';
-import ThreadList from '../../components/ThreadList';
+import { ThreadList } from '../../components/ThreadList';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { ImagePlus, ArrowLeft, MessageSquareText } from 'lucide-react';
-import ThreadLike from '@/components/ThreadLike';
+import { ThreadLike } from '@/components/ThreadLike';
 import { ThreadProps } from '@/types/threadList';
 import { threads } from '@/stores/threads';
 import { loggedInUser } from '@/stores/loggedInUser';
+import ThreadReplyList from '@/components/ThreadReplyList';
+import { IndexProps } from '@/routes/Page';
+import { User, UserProps, useUser } from '@/utils/setUser';
+import axios from 'axios';
+import { Tweet } from '@/utils/setTweets';
 
-function ContentPage() {
+function ContentPage({ index, user }: { index: number; user: User | null }) {
+  const { id } = useParams();
+  const [tweet, setTweet] = useState<Tweet>();
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get(`http://localhost:3320/post/gettweetbyid/${id}`);
+        setTweet(res.data);
+      } catch (error) {}
+    }
+    fetchData();
+  }, []);
   const location = useLocation();
-  const index = location.state?.index ?? 0;
+  index = location.state?.index ?? 0;
   return (
     <div>
       <div className="inline-flex">
@@ -28,18 +44,18 @@ function ContentPage() {
       <div>
         <div className="flex p-5">
           <Avatar className="my-auto">
-            <AvatarImage src={`./src/assets/img/${threads[index].avatarImage}`} alt="@shadcn" />
+            <AvatarImage src={`./src/assets/img/${tweet}`} alt="@shadcn" />
             <AvatarFallback>ZW</AvatarFallback>
           </Avatar>
-          <div className="inline-block pl-5">
+          <div className="inline-block px-5">
             <h2 className="text-gray-50">{threads[index].name}</h2>
             <p className="text-slate-400">@{threads[index].username}</p>
           </div>
         </div>
-        <div className="pl-5 pb-2 ">
+        <div className="px-5 pb-2 ">
           <p className="text-gray-100">{threads[index].thread}</p>
         </div>
-        <div className="flex pl-5 pb-2">
+        <div className="flex px-5 pb-2">
           <p className="text-slate-400">{threads[index].datePosted}</p>
         </div>
         <div className="-ml-10">
@@ -47,9 +63,9 @@ function ContentPage() {
         </div>
       </div>
 
-      <form action="" className="flex gap-5 border-t-1 border-b-1 border-gray-500 p-5">
-        <Avatar className="">
-          <AvatarImage src={`./src/assets/img/${loggedInUser[0].avatar}`} alt="@shadcn" />
+      <form action="" className="flex gap-5 border-t-1 border-b-1 border-gray-500 p-5 bg-gray-800">
+        <Avatar className="size-10">
+          <AvatarImage src={`.${user!.avatar}`} alt="@shadcn" className="size-10 p-0" />
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
         <Textarea className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-xl font-semibold" placeholder="Type your reply"></Textarea>
@@ -61,7 +77,7 @@ function ContentPage() {
           Reply
         </Button>
       </form>
-      <ThreadList threadList={replies} />
+      <ThreadReplyList threadList={replies} />
     </div>
   );
 }

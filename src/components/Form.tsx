@@ -1,12 +1,15 @@
 import { Button } from '@/components/ui/button';
 import { buttonVariants } from '@/components/ui/button';
 import { NavLink } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 interface InputConfig {
   type: string;
   name: string;
+  value: string;
   label: string;
   id: string;
+  change(e: any): void;
   placeholder?: string;
 }
 
@@ -14,28 +17,46 @@ interface FormProps {
   title: string;
   inputs: InputConfig[];
   // onSubmit: (data: Record<string, string>) => void;
-  submit?: any;
+  submit: any;
   change?: any;
   buttonText: string;
   forgotPassword?: string;
   actions?: string;
+  showDate: boolean;
 }
 
-function Form({ title, inputs, submit, change, buttonText, forgotPassword, actions }: FormProps) {
+function Form({ title, inputs, submit, buttonText, forgotPassword, actions, showDate }: FormProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  function onSubmit(data: {}) {
+    console.log(data);
+  }
   return (
-    <form action={`${actions}`} onSubmit={submit} onChange={change} className="flex flex-col">
+    <form action={`${actions}`} onSubmit={handleSubmit(submit)} className="flex flex-col" method="POST" encType="multipart/form-data">
       {inputs.map((input, index) => (
         <div key={index} className="pb-2">
           <input
             className="w-sm px-1.5 py-2.5 border-2 border-gray-600 rounded-sm  text-sm text-gray-100 focus:border-green-500 focus:outline-none transition-all"
+            {...register(`${input.name}`)}
             type={input.type}
-            name={input.name}
+            // name={input.name}
             id={input.id}
             placeholder={input.placeholder}
+            value={input.value}
+            onChange={input.change}
             required
           />
         </div>
       ))}
+      {/* {showDate && <DateOfBirth />} */}
+      {showDate && (
+        <div>
+          <input name="dateOfBirth" id="dateOfBirth" type="date" className="w-sm px-1.5 py-2.5 border-2 border-gray-600 rounded-sm  text-sm text-gray-100 focus:border-green-500 focus:outline-none transition-all" />
+        </div>
+      )}
       <NavLink to={'/forgot'} className="py-2 text-gray-100 ml-auto hover:text-green-800 transition-all">
         {forgotPassword}
       </NavLink>

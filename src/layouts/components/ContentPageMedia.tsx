@@ -4,18 +4,20 @@ import { Button } from '../../components/ui/button';
 import { Textarea } from '../../components/ui/textarea';
 import { NavLink, useLocation } from 'react-router-dom';
 import { replies } from '@/stores/replies';
-import ThreadList from '../../components/ThreadList';
+import { ThreadList } from '../../components/ThreadList';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { ImagePlus, MessageSquareText } from 'lucide-react';
-import ThreadLike from '@/components/ThreadLike';
+import { ThreadLike } from '@/components/ThreadLike';
 import { threads } from '@/stores/threads';
 import { loggedInUser } from '@/stores/loggedInUser';
+import ThreadReplyList from '@/components/ThreadReplyList';
+import { UserProps, useUser } from '@/utils/setUser';
 
-function ContentPageMedia() {
+function ContentPageMedia({ user }: UserProps) {
   const location = useLocation();
   const index = location.state?.index ?? 0;
   return (
-    <div key={index}>
+    <div>
       <div className="flex p-5">
         <Avatar className="my-auto">
           <AvatarImage src={`./src/assets/img/${threads[index].avatarImage}`} alt="@shadcn" />
@@ -36,9 +38,9 @@ function ContentPageMedia() {
         <ThreadLike likeCount={threads[index].likeCount} likedCount={threads[index].likedCount} replyCount={replies.length} />
       </div>
 
-      <form action="" className="flex gap-5 border-t-1 border-b-1 border-gray-500 p-5">
+      <form action="" className="flex gap-5 border-t-1 border-b-1 border-gray-500 p-5 bg-gray-800">
         <Avatar className="">
-          <AvatarImage src={`./src/assets/img/${loggedInUser[0].avatar}`} alt="@shadcn" />
+          <AvatarImage src={`.${user!.avatar}`} alt="@shadcn" />
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
         <Textarea className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-xl font-semibold" placeholder="Type your reply"></Textarea>
@@ -50,7 +52,7 @@ function ContentPageMedia() {
           Reply
         </Button>
       </form>
-      <ThreadList threadList={replies} />
+      <ThreadReplyList threadList={replies} />
     </div>
   );
 }
