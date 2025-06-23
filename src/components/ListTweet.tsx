@@ -20,7 +20,7 @@ export function TweetList({ tweet }: TweetProps) {
         <div onClick={() => (t.image ? navigate('/media', { state: { index } }) : navigate(`/page/${t.id}`, { state: { index } }))} key={index} className="border-b-1 p-5 pl-10 pr-10 border-gray-500 hover:bg-gray-700 hover:cursor-pointer">
           <div className="flex pt-5">
             <Avatar className="my-auto size-12">
-              <AvatarImage src={`.${t.user.avatar}`} alt="@shadcn" />
+              <AvatarImage src={`${t.user.avatar}`} alt="@shadcn" />
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
             <div className="inline-flex pl-3">
@@ -71,7 +71,7 @@ export function TweetList({ tweet }: TweetProps) {
 
           <div className="pb-2 ml-15 -mt-5">
             <p className="text-gray-300 pb-2">{t.post}</p>
-            {t.image && <img src={`./src/assets/img/${t.image}`} className="2xl:max-w-fit xl:rounded-4xl pb-2 max-h-150 aspect-4/3 object-cover" alt="" />}
+            {t.image && <img src={`/src/uploads/${t.image}`} className="2xl:max-w-fit xl:rounded-4xl pb-2 max-h-150 aspect-4/3 object-cover" alt="" />}
           </div>
 
           <ThreadLike likeCount={t.likeCount} likedCount={t.likeCount + 1} replyCount={t.replyCount} />

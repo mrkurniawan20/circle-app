@@ -11,14 +11,11 @@ function PageMedia() {
   const navigate = useNavigate();
   const location = useLocation();
   const index = location.state?.index ?? 1;
-  console.log(location);
-  // image = location.state?.image || 'splash.jpg';
   const [imageOnly, setImageOnly] = useState(true);
   const { user, loading } = useUser();
   if (loading) {
     return <LoadingPage />;
   } else if (!user) {
-    // return <ContentPageMedia user={null}/>; HARUS DIPERBAIKI UNTUK LIAT PAGE TANPA LOGIN
     return null;
   }
 
