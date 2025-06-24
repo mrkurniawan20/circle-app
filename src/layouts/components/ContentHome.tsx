@@ -99,10 +99,10 @@ function ContentHome({ user }: UserProps) {
               ></Textarea>
             </div>
             <div className="flex ms-auto gap-4">
-              <label htmlFor="add-image">
+              <label htmlFor="image">
                 <ImagePlus className="size-10  text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
               </label>
-              <input type="file" name="add-image" id="add-image" className="hidden" onChange={handleFile} />
+              <input type="file" name="image" id="image" className="hidden" onChange={handleFile} />
               <Button variant="circle">Post</Button>
             </div>
           </form>

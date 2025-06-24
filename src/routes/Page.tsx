@@ -107,7 +107,7 @@ function Page() {
           <CircleX className="absolute text-gray-50 left-10 top-10 hover:bg-gray-600 hover:cursor-pointer size-10 p-2 rounded-full" onClick={() => navigate(-1)} />
           <PanelRight onClick={() => setImageOnly((show) => !show)} className="absolute text-gray-50 right-10 top-10 hover:bg-gray-600 size-10 p-2 rounded-full hover:cursor-pointer" />
           <img
-            src={`${tweet.image}`} // assumes your image is in public/img/
+            src={`/src/uploads/${tweet.image}`} // assumes your image is in public/img/
             className="my-auto max-h-full max-w-full absolute"
             alt=""
           />

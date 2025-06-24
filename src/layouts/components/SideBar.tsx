@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '../../components/ui/button';
 import { NavLink, useNavigate } from 'react-router-dom';
 import CircleText from '../../components/CircleText';
@@ -18,6 +18,7 @@ import { Separator } from '@/components/ui/separator';
 import { loggedInUser } from '@/stores/loggedInUser';
 import axios from 'axios';
 import { User, UserProps } from '@/utils/setUser';
+import LoadingPage from './LoadingPage';
 
 const pages = [
   {
@@ -43,13 +44,46 @@ const pages = [
 ];
 
 function SideBar({ user }: UserProps) {
+  const token = localStorage.getItem('token');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  // const { clearUser } = useUserStore();
+  const [formData, setFormData] = useState<{ post: string; image?: File }>({
+    post: '',
+  });
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    console.log(formData);
+  }
+  function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = e.target.files;
+    console.log('File selected:', files?.[0]); // ✅ always logs if input triggered
+    if (files![0].size > 5 * 1024 * 1024) {
+      alert('File is too large');
+      return;
+    }
+    if (files) {
+      console.log(formData);
+      setFormData((prev) => ({ ...prev, image: files[0] }));
+    }
+  }
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    const data = new FormData();
+    if (formData.post) data.append('post', formData.post);
+    if (formData.image) data.append('image', formData.image);
+    try {
+      await axios.post('http://localhost:3320/post/posttweet', data, { headers: { Authorization: `Bearer ${token}` } });
+      setFormData({ post: '' });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
   async function logOut() {
-    // const token = localStorage.getItem('token')
-    // const header = `Authorization: Bearer ${token}`;
     const token = localStorage.getItem('token');
-    await axios.post('http://127.0.0.1:3320/user/logoutUser', token, { headers: { Authorization: `Bearer ${token}` } });
+    await axios.post('http://localhost:3320/user/logoutUser', token, { headers: { Authorization: `Bearer ${token}` } });
     localStorage.removeItem('token');
     navigate('/');
   }
@@ -66,31 +100,43 @@ function SideBar({ user }: UserProps) {
               Create Post
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[525px] md:min-w-[700px] bg-gray-800 border-none top-[25%]">
-            <form action="">
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-[1fr_10fr] items-center">
-                  <Avatar className="my-auto">
-                    <AvatarImage src={`.${user.avatar}`} alt="@shadcn" />
-                    <AvatarFallback>ZW</AvatarFallback>
-                  </Avatar>
-                  <Textarea className="ml-2 resize-none w-sm max-w-sm border-none shadow-none focus:ring-green-500 items-center text-gray-100 md:text-xl" placeholder="What is happening?"></Textarea>
+          {loading ? (
+            <DialogContent>
+              <LoadingPage />
+            </DialogContent>
+          ) : (
+            <DialogContent className="sm:max-w-[525px] md:min-w-[700px] bg-gray-800 border-none top-[25%]">
+              <form action="" onSubmit={handleSubmit}>
+                <div className="grid gap-4 py-4">
+                  <div className="grid grid-cols-[1fr_10fr] items-center">
+                    <Avatar className="my-auto">
+                      <AvatarImage src={`/src/uploads/${user.avatar}`} alt="@shadcn" />
+                      <AvatarFallback>ZW</AvatarFallback>
+                    </Avatar>
+                    <Input
+                      name="post"
+                      value={formData.post}
+                      onChange={handleChange}
+                      className="ml-2 resize-none w-sm max-w-sm border-none shadow-none focus:ring-green-500 items-center text-gray-100 md:text-xl"
+                      placeholder="What is happening?"
+                    ></Input>
+                  </div>
                 </div>
-              </div>
-              <Separator className="mb-5 " />
-              <DialogFooter className="flex">
-                <div className="mr-auto">
-                  <label htmlFor="add-image">
-                    <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800  duration-200" />
-                  </label>
-                  <input type="file" name="add-image" id="add-image" className="hidden" />
-                </div>
-                <Button variant={'circle'} type="submit">
-                  Post
-                </Button>
-              </DialogFooter>
-            </form>
-          </DialogContent>
+                <Separator className="mb-5 " />
+                <DialogFooter className="flex">
+                  <div className="mr-auto">
+                    <label htmlFor="image">
+                      <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800  duration-200" />
+                    </label>
+                    <Input type="file" name="image" id="image" className="hidden" onChange={handleFile} />
+                  </div>
+                  <Button variant={'circle'} type="submit">
+                    Post
+                  </Button>
+                </DialogFooter>
+              </form>
+            </DialogContent>
+          )}
         </Dialog>
         <div className="flex-grow"></div>
         <button onClick={logOut} className="flex flex-row items-center  max-w-fit space-x-5 py-2 px-3 hover:bg-slate-700 rounded-full duration-200">
