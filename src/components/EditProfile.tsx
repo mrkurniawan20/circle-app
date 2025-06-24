@@ -7,8 +7,54 @@ import { Textarea, TweetArea } from './ui/textarea';
 import { ImagePlus } from 'lucide-react';
 import { loggedInUser } from '@/stores/loggedInUser';
 import { UserProps, useUser } from '@/utils/setUser';
+import axios from 'axios';
 
 function EditProfile({ user }: UserProps) {
+  const token = localStorage.getItem('token');
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState<{
+    name: string;
+    username: string;
+    bio: string;
+    avatar?: File;
+    header?: File;
+  }>({
+    name: '',
+    username: '',
+    bio: '',
+  });
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(formData);
+  }
+  function handleFileChange(field: `avatar` | `header`) {
+    return (e: React.ChangeEvent<HTMLInputElement>) => {
+      const files = e.target.files;
+      if (files![0].size > 5 * 1024 * 1024) {
+        alert('File is too large');
+      }
+      if (files) {
+        setFormData((prev) => ({ ...prev, [field]: files }));
+      }
+    };
+  }
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const data = new FormData();
+      if (formData.name) data.append('name', formData.name);
+      if (formData.username) data.append('username', formData.username);
+      if (formData.bio) data.append('bio', formData.bio);
+      if (formData.avatar) data.append('avatar', formData.avatar);
+      if (formData.header) data.append('header', formData.header);
+      await axios.patch(`http://localhost:3320/user/editprofile/${user.id}`, data, { headers: { Authorization: `Bearer ${token}` } });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -19,22 +65,22 @@ function EditProfile({ user }: UserProps) {
       <DialogContent className="sm:max-w-[425px] bg-gray-800 border-none top-[35%]">
         <DialogHeader>
           <DialogTitle className="text-gray-100 ">Edit profile</DialogTitle>
-          <form action="">
+          <form action="" onSubmit={handleSubmit}>
             <label htmlFor="header" className="relative hover:brightness-50 duration-200 hover:cursor-pointer">
               <img src={`${user!.header}`} className="aspect-6/2 object-cover rounded-xl " alt="" />
               <ImagePlus className="text-gray-50 absolute inset-0 m-auto bg-black size-12 p-3 rounded-full opacity-70 hover:cursor-pointer" />
             </label>
-            <input type="file" name="header" id="header" className="hidden" />
+            <input onChange={handleFileChange('header')} type="file" name="header" id="header" className="hidden" />
             <div className="sm:max-w-fit ml-7 -mt-10">
               <label htmlFor="avatar" className="relative hover:brightness-50 duration-200 hover:cursor-pointer md:max-w-10 ">
                 <img src={`${user!.avatar}`} className="aspect-square object-cover rounded-full size-20  border-4 border-gray-800 " alt="" />
                 <ImagePlus className="text-gray-50 absolute inset-0 m-auto bg-black size-8 p-1 rounded-full opacity-70 hover:cursor-pointer" />
               </label>
-              <input type="file" name="avatar" id="avatar" className="hidden" />
+              <input onChange={handleFileChange('avatar')} type="file" name="avatar" id="avatar" className="hidden" />
             </div>
           </form>
         </DialogHeader>
-        <form className=" grid gap-4 ">
+        <form className=" grid gap-4 " onSubmit={handleSubmit}>
           <div className="flex flex-col items-center gap-4 relative">
             <label
               htmlFor="name"
@@ -42,7 +88,7 @@ function EditProfile({ user }: UserProps) {
             >
               Name
             </label>
-            <Input id="name" name="name" defaultValue={`${user!.name}`} className="border-2 focus:border-green-500 focus:outline-none transition-all col-span-4 p-4 pt-7 text-gray-50" />
+            <Input value={formData.name} onChange={handleChange} id="name" name="name" defaultValue={`${user!.name}`} className="border-2 focus:border-green-500 focus:outline-none transition-all col-span-4 p-4 pt-7 text-gray-50" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4 relative">
             <label
@@ -51,7 +97,14 @@ function EditProfile({ user }: UserProps) {
             >
               Username
             </label>
-            <Input id="username" name="username" defaultValue={`${user!.username}`} className="border-2 focus:border-green-500 focus:outline-none transition-all col-span-4 p-4 pt-7 text-gray-50" />
+            <Input
+              value={formData.username}
+              onChange={handleChange}
+              id="username"
+              name="username"
+              defaultValue={`${user!.username}`}
+              className="border-2 focus:border-green-500 focus:outline-none transition-all col-span-4 p-4 pt-7 text-gray-50"
+            />
           </div>
           <div className="grid grid-cols-4 items-center gap-4 relative">
             <label
@@ -60,7 +113,14 @@ function EditProfile({ user }: UserProps) {
             >
               Bio
             </label>
-            <Textarea id="bio" name="bio" defaultValue={`${user!.bio}`} className="border-2 focus:border-green-500 focus:outline-none transition-all resize-none col-span-4 min-h-20 p-4 pt-7 text-gray-50" />
+            <Input
+              value={formData.bio}
+              onChange={handleChange}
+              id="bio"
+              name="bio"
+              defaultValue={`${user!.bio}`}
+              className="border-2 focus:border-green-500 focus:outline-none transition-all resize-none col-span-4 min-h-20 p-4 pt-7 text-gray-50"
+            />
           </div>
           <div className="ms-auto">
             <Button className="ms-auto" type="submit" variant={'circle'}>

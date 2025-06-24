@@ -14,7 +14,7 @@ function ContainerMyProfile({ user }: UserProps) {
         </NavLink>
       </div>
       <img src={`${user!.header}`} alt="" className="aspect-5/1 overflow-hidden object-cover rounded-xl" />
-      <img src={`${user!.avatar}`} alt="" className="size-20 aspect-square object-cover rounded-full border-5 border-gray-800 -mt-10 ml-4 absolute" />
+      <img src={`/src/uploads/${user!.avatar}`} alt="" className="size-20 aspect-square object-cover rounded-full border-5 border-gray-800 -mt-10 ml-4 absolute" />
       <div className="flex pt-3">
         <EditProfile user={user} />
       </div>
