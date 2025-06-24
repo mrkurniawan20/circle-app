@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import { Tweet } from '@/utils/setTweets';
 import axios from 'axios';
 import ListReply from '@/components/ListReply';
+import { Input } from '@/components/ui/input';
 
 export interface IndexProps {
   index: number;
@@ -24,6 +25,7 @@ export interface IndexProps {
 
 function Page() {
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
   const [fetchLoading, setFetchLoading] = useState(true);
   const { user, loading } = useUser();
   const { id } = useParams();
@@ -69,6 +71,33 @@ function Page() {
     fetchData();
   }, []);
 
+  const [formData, setFormData] = useState<{
+    reply: string;
+  }>({
+    reply: '',
+  });
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    console.log(formData);
+  }
+  async function submitReply(e: React.FormEvent) {
+    e.preventDefault();
+    try {
+      const data = new FormData();
+      if (formData.reply) data.append('reply', formData.reply);
+      // if (formData.image) data.append('image', formData.image);
+      setFetchLoading(true);
+      await axios.post(`http://localhost:3320/post/replytweet/${id}`, formData, { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`);
+      setTweet(res.data);
+      setFormData({ reply: '' });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setFetchLoading(false);
+    }
+  }
+
   if (loading || fetchLoading) return <LoadingPage />;
 
   if (tweet.image) {
@@ -107,12 +136,18 @@ function Page() {
                 <ThreadLike likeCount={tweet.likeCount} likedCount={tweet.likeCount + 1} replyCount={tweet.replyCount} />
               </div>
 
-              <form className="flex gap-5 border-t border-b border-gray-500 p-5 bg-gray-800 mt-5">
+              <form onSubmit={submitReply} className="flex gap-5 border-t border-b border-gray-500 p-5 bg-gray-800 mt-5">
                 <Avatar className="size-10">
-                  <AvatarImage src={user.avatar} alt="@shadcn" />
+                  <AvatarImage src={`/src/uploads/${user.avatar}`} alt="@shadcn" />
                   <AvatarFallback>ZW</AvatarFallback>
                 </Avatar>
-                <Textarea className="ml-2 resize-none w-xl max-w-xl border-none shadow-none focus:ring-green-500 text-gray-100 text-xl font-semibold" placeholder="Type your reply" />
+                <Input
+                  onChange={handleChange}
+                  value={formData.reply}
+                  name="reply"
+                  className="ml-2 resize-none w-xl max-w-xl border-none shadow-none focus:ring-green-500 text-gray-100 text-xl font-semibold"
+                  placeholder="Type your reply ges"
+                />
                 <label htmlFor="add-image">
                   <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
                 </label>
@@ -137,7 +172,7 @@ function Page() {
         <div className="p-5">
           <div className="flex">
             <Avatar className="my-auto">
-              <AvatarImage src={tweet.user.avatar} />
+              <AvatarImage src={`/src/uploads/${tweet.user.avatar}`} />
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
             <div className="inline-block px-5">
@@ -170,7 +205,7 @@ function Page() {
 
         <div className="flex py-5">
           <Avatar className="my-auto">
-            <AvatarImage src={tweet.user.avatar} />
+            <AvatarImage src={`/src/uploads/${tweet.user.avatar}`} />
             <AvatarFallback>ZW</AvatarFallback>
           </Avatar>
           <div className="inline-block px-5">
@@ -186,12 +221,12 @@ function Page() {
           <ThreadLike likeCount={tweet.likeCount} likedCount={tweet.likeCount + 1} replyCount={tweet.replyCount} />
         </div>
 
-        <form className="flex gap-5 border-t border-b border-gray-500 p-5 bg-gray-800 mt-5">
+        <form onSubmit={submitReply} className="flex gap-5 border-t border-b border-gray-500 p-5 bg-gray-800 mt-5">
           <Avatar className="size-10">
-            <AvatarImage src={user.avatar} alt="@shadcn" className="size-10 p-0" />
+            <AvatarImage src={`/src/uploads/${user.avatar}`} alt="@shadcn" className="size-10 p-0 object-cover" />
             <AvatarFallback>ZW</AvatarFallback>
           </Avatar>
-          <Textarea className="ml-2 resize-none w-xl max-w-xl border-none shadow-none focus:ring-green-500 text-gray-100 text-xl font-semibold" placeholder="Type your reply" />
+          <Input name="reply" value={formData.reply} onChange={handleChange} className="ml-2 resize-none w-xl max-w-xl border-none shadow-none focus:ring-green-500 text-gray-100 text-xl font-semibold" placeholder="Type your reply" />
           <label htmlFor="add-image">
             <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
           </label>
