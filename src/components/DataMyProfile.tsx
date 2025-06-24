@@ -26,14 +26,14 @@ function DataMyProfile({ loggedIn }: LoggedInUserProps) {
           <div className="flex gap-2">
             <NavLink to={'/follow'}>
               <p className="text-slate-400 hover:underline underline-offset-6">
-                <span className="text-gray-100">{loggedIn.following}</span> Following
+                <span className="text-gray-100">{loggedIn.followingCount}</span> Following
               </p>
             </NavLink>
           </div>
           <div className="flex gap-2 hover:underline underline-offset-6">
             <NavLink to={'/followers'}>
               <p className="text-slate-400 hover:underline underline-offset-6">
-                <span className="text-gray-100">{loggedIn.followers}</span> Followers
+                <span className="text-gray-100">{loggedIn.followersCount}</span> Followers
               </p>
             </NavLink>
           </div>

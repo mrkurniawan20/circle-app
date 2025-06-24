@@ -17,9 +17,12 @@ export interface User {
   header: string;
   verified: boolean;
   tweetCount: number;
-  followers: number;
-  following: number;
+  followersCount: number;
+  followingCount: number;
   tweet: Tweet[];
+}
+export interface Users {
+  user: User[];
 }
 export interface UserProps {
   user: User;
@@ -37,8 +40,8 @@ export function useUser() {
     header: '',
     verified: false,
     tweetCount: 0,
-    followers: 0,
-    following: 0,
+    followersCount: 0,
+    followingCount: 0,
     tweet: [],
   });
   const [loading, setLoading] = useState(true);

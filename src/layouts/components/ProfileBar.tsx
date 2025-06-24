@@ -23,7 +23,7 @@ function ProfileBar({ showProfileContainer = true }: { showProfileContainer?: bo
         {showProfileContainer && <ContainerMyProfile user={user!} />}
         <div className="second-profile-container bg-gray-800 mt-5 rounded-xl max-w-[430px]">
           <h3 className="text-xl font-semibold text-gray-50 pt-5 pb-5  pl-5 pr-5 ">Suggested for you </h3>
-          <SuggestedAccount avatars={users} />
+          <SuggestedAccount />
         </div>
         <ContainerCredentials />
       </div>
