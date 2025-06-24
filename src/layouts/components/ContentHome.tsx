@@ -50,10 +50,14 @@ function ContentHome({ user }: UserProps) {
   }
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const files = e.target.files;
+
+    console.log('cek', files);
     if (files![0].size > 5 * 1024 * 1024) {
       alert('File is too large');
     }
     if (files) {
+      console.log('cek 2');
+
       setFormData((prev) => ({ ...prev, image: files[0] }));
     }
   }
@@ -99,10 +103,10 @@ function ContentHome({ user }: UserProps) {
               ></Textarea>
             </div>
             <div className="flex ms-auto gap-4">
-              <label htmlFor="image">
+              <label htmlFor="postImage">
                 <ImagePlus className="size-10  text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
               </label>
-              <input type="file" name="image" id="image" className="hidden" onChange={handleFile} />
+              <input type="file" name="postImage" id="postImage" className="hidden" onChange={handleFile} />
               <Button variant="circle">Post</Button>
             </div>
           </form>

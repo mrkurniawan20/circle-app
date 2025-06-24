@@ -7,7 +7,6 @@ import EditProfile from '../../components/EditProfile';
 // import ContainerMyProfile from './ProfileBarContainerMyProfile';
 import ContainerCredentials from '../../components/ContainerCredentials';
 import ContainerMyProfile from '../../components/ContainerMyProfile';
-import { users } from '@/stores/users';
 import { useUser } from '@/utils/setUser';
 import LoadingPage from './LoadingPage';
 

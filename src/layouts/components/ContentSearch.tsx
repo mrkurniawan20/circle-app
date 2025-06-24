@@ -8,29 +8,30 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 // import SearchResult from './SearchResult';
 import { users } from '@/stores/users';
 import SearchResult from '@/components/SearchResult';
-import { User, Users } from '@/utils/setUser';
+import { User } from '@/utils/setUser';
 import axios from 'axios';
 import LoadingPage from './LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FollowedButton from '@/components/FollowedButton';
 
 function ContentSearch() {
+  const token = localStorage.getItem('token');
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     async function fetchData() {
-      setLoading(true);
       try {
-        const res = await axios.get('http://localhost:3320/user/getUsers');
+        setLoading(true);
+        const res = await axios.get('http://localhost:3320/user/getUsers', { headers: { Authorization: `Bearer ${token}` } });
         setUsers(res.data);
       } catch (error) {
+        console.error(error);
       } finally {
         setLoading(false);
       }
     }
     fetchData();
   }, []);
-  console.log(users);
   if (loading) return <LoadingPage />;
   return (
     <div>

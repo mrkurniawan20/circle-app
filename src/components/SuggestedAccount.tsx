@@ -7,18 +7,6 @@ import axios from 'axios';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import { User } from '@/utils/setUser';
 
-interface AvatarSuggest {
-  image: string;
-  fallback: string;
-  name: string;
-  username: string;
-  buttonType: 'follow' | 'followed';
-}
-
-interface SuggestedProps {
-  avatars: AvatarSuggest[];
-}
-
 function SuggestedAccount() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);

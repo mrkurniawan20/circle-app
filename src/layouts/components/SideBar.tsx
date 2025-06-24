@@ -56,10 +56,11 @@ function SideBar({ user }: UserProps) {
   }
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const files = e.target.files;
+    console.log('cek', files);
+
     console.log('File selected:', files?.[0]); // ✅ always logs if input triggered
     if (files![0].size > 5 * 1024 * 1024) {
       alert('File is too large');
-      return;
     }
     if (files) {
       console.log(formData);
@@ -125,10 +126,10 @@ function SideBar({ user }: UserProps) {
                 <Separator className="mb-5 " />
                 <DialogFooter className="flex">
                   <div className="mr-auto">
-                    <label htmlFor="image">
+                    <label htmlFor="imageDialog">
                       <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800  duration-200" />
                     </label>
-                    <Input type="file" name="image" id="image" className="hidden" onChange={handleFile} />
+                    <Input type="file" name="imageDialog" id="imageDialog" className="hidden" onChange={handleFile} />
                   </div>
                   <Button variant={'circle'} type="submit">
                     Post
