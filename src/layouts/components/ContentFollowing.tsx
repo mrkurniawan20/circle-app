@@ -4,17 +4,18 @@ import { NavLink } from 'react-router-dom';
 import { usersFollowed } from '@/stores/users-followed';
 // import FollowersList from './FollowersList';
 import { users } from '@/stores/users';
-import FollowersList from '@/components/FollowersList';
 import FollowingList from '@/components/FollowingList';
 import { User } from '@/utils/setUser';
 import axios from 'axios';
 import LoadingPage from './LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FollowedButton from '@/components/FollowedButton';
+import FollowButton from '@/components/FollowButton';
 
 function ContentFollowing() {
   const token = localStorage.getItem('token');
   const [users, setUsers] = useState<User[]>([]);
+  const [followingIds, setFollowingIds] = useState<number[]>([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     async function fetchData() {
@@ -22,6 +23,7 @@ function ContentFollowing() {
         setLoading(true);
         const res = await axios.get('http://localhost:3320/user/getfollowing', { headers: { Authorization: `Bearer ${token}` } });
         setUsers(res.data);
+        setFollowingIds(res.data.map((m: User) => m.id));
       } catch (error) {
         console.error(error);
       } finally {
@@ -55,7 +57,7 @@ function ContentFollowing() {
               <p className="text-slate-400 text-xs pb-1">@{follower.username}</p>
               <p className="text-gray-200 text-xs pb-1">{follower.bio}</p>
             </div>
-            <FollowedButton />
+            <FollowButton id={follower.id} isFollowing={followingIds.includes(follower.id)} />
           </NavLink>
         ))}
       </div>

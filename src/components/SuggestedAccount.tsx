@@ -10,14 +10,16 @@ import { User } from '@/utils/setUser';
 function SuggestedAccount() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
+  const token = localStorage.getItem('token');
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
       try {
-        const res = await axios.get('http://localhost:3320/user/getUsers', {
+        const res = await axios.get('http://localhost:3320/user/getunfolloweduser', {
           params: {
             limit: 5,
           },
+          headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(res.data);
       } catch (error) {
@@ -42,7 +44,7 @@ function SuggestedAccount() {
               <h5 className="text-lg font-semibold text-gray-50">{u.name}</h5>
               <p className="text-slate-400 text-sm pb-1">@{u.username}</p>
             </div>
-            <FollowButton />
+            <FollowButton id={u.id} isFollowing={false} />
           </NavLink>
         </div>
       ))}

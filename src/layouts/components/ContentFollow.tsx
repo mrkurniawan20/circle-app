@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { users } from '@/stores/users';
-import FollowersList from '../../components/FollowersList';
 import { User } from '@/utils/setUser';
 import axios from 'axios';
 import LoadingPage from './LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FollowedButton from '@/components/FollowedButton';
+import FollowButton from '@/components/FollowButton';
 
 function ContentFollow() {
   const token = localStorage.getItem('token');
+  const [followingIds, setFollowingIds] = useState<number[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -18,6 +19,7 @@ function ContentFollow() {
         setLoading(true);
         const res = await axios.get('http://localhost:3320/user/getfollowers', { headers: { Authorization: `Bearer ${token}` } });
         setUsers(res.data);
+        setFollowingIds(res.data.map((m: User) => m.id));
       } catch (error) {
         console.error(error);
       } finally {
@@ -33,10 +35,10 @@ function ContentFollow() {
       <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
         <NavLink to={'/follow'} className="text-center text-xl text-gray-50">
           <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg duration-200">Following</p>
-          <div className="bg-green-500 border-2 border-green-500 h-1 rounded-full"></div>
         </NavLink>
         <NavLink to={'/followers'} className="text-center text-xl text-gray-50 ">
           <p className="pt-3 pb-3   hover:bg-slate-700 rounded-lg duration-200">Followers</p>
+          <div className="bg-green-500 border-2 border-green-500 h-1 rounded-full"></div>
         </NavLink>
       </div>
       <div className="p-5">
@@ -51,7 +53,7 @@ function ContentFollow() {
               <p className="text-slate-400 text-xs pb-1">@{follower.username}</p>
               <p className="text-gray-200 text-xs pb-1">{follower.bio}</p>
             </div>
-            <FollowedButton />
+            <FollowButton id={follower.id} isFollowing={followingIds.includes(follower.id)} />
           </NavLink>
         ))}
       </div>
