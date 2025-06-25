@@ -37,7 +37,7 @@ export function useUser() {
     email: '',
     dateOfBirth: new Date(),
     bio: '',
-    avatar: '/src/uploads/blue.png',
+    avatar: 'blue.png',
     header: '',
     verified: false,
     tweetCount: 0,

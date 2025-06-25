@@ -65,7 +65,7 @@ function ContentPageMedia() {
     <div>
       <div className="flex p-5">
         <Avatar className="my-auto">
-          <AvatarImage src={`./src/uploads/${tweet.user.avatar}`} alt="@shadcn" />
+          <AvatarImage src={`.${tweet.user.avatar}`} alt="@shadcn" />
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
         <div className="inline-block pl-5">
@@ -85,7 +85,7 @@ function ContentPageMedia() {
 
       <form action="" className="flex gap-5 border-t-1 border-b-1 border-gray-500 p-5 bg-gray-800">
         <Avatar className="">
-          <AvatarImage src={`/src/uploads/${user!.avatar}`} alt="@shadcn" />
+          <AvatarImage src={`${user!.avatar}`} alt="@shadcn" />
           <AvatarFallback>ZW</AvatarFallback>
         </Avatar>
         <Input className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-xl font-semibold" placeholder="Type your reply"></Input>

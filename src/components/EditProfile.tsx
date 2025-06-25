@@ -34,7 +34,7 @@ function EditProfile({ user }: UserProps) {
         alert('File is too large');
       }
       if (files) {
-        setFormData((prev) => ({ ...prev, [field]: files }));
+        setFormData((prev) => ({ ...prev, [field]: files![0] }));
       }
     };
   }
@@ -48,6 +48,7 @@ function EditProfile({ user }: UserProps) {
       if (formData.bio) data.append('bio', formData.bio);
       if (formData.avatar) data.append('avatar', formData.avatar);
       if (formData.header) data.append('header', formData.header);
+      console.log(data);
       await axios.patch(`http://localhost:3320/user/editprofile/${user.id}`, data, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
       console.error(error);

@@ -107,7 +107,7 @@ function Page() {
           <CircleX className="absolute text-gray-50 left-10 top-10 hover:bg-gray-600 hover:cursor-pointer size-10 p-2 rounded-full" onClick={() => navigate(-1)} />
           <PanelRight onClick={() => setImageOnly((show) => !show)} className="absolute text-gray-50 right-10 top-10 hover:bg-gray-600 size-10 p-2 rounded-full hover:cursor-pointer" />
           <img
-            src={`/src/uploads/${tweet.image}`} // assumes your image is in public/img/
+            src={`${tweet.image}`} // assumes your image is in public/img/
             className="my-auto max-h-full max-w-full absolute"
             alt=""
           />
@@ -138,7 +138,7 @@ function Page() {
 
               <form onSubmit={submitReply} className="flex gap-5 border-t border-b border-gray-500 p-5 bg-gray-800 mt-5">
                 <Avatar className="size-10">
-                  <AvatarImage src={`/src/uploads/${user.avatar}`} alt="@shadcn" />
+                  <AvatarImage src={`${user.avatar}`} alt="@shadcn" />
                   <AvatarFallback>ZW</AvatarFallback>
                 </Avatar>
                 <Input
@@ -172,7 +172,7 @@ function Page() {
         <div className="p-5">
           <div className="flex">
             <Avatar className="my-auto">
-              <AvatarImage src={`/src/uploads/${tweet.user.avatar}`} />
+              <AvatarImage src={`${tweet.user.avatar}`} />
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
             <div className="inline-block px-5">
@@ -205,7 +205,7 @@ function Page() {
 
         <div className="flex py-5">
           <Avatar className="my-auto">
-            <AvatarImage src={`/src/uploads/${tweet.user.avatar}`} />
+            <AvatarImage src={`${tweet.user.avatar}`} />
             <AvatarFallback>ZW</AvatarFallback>
           </Avatar>
           <div className="inline-block px-5">
@@ -223,7 +223,7 @@ function Page() {
 
         <form onSubmit={submitReply} className="flex gap-5 border-t border-b border-gray-500 p-5 bg-gray-800 mt-5">
           <Avatar className="size-10">
-            <AvatarImage src={`/src/uploads/${user.avatar}`} alt="@shadcn" className="size-10 p-0 object-cover" />
+            <AvatarImage src={`${user.avatar}`} alt="@shadcn" className="size-10 p-0 object-cover" />
             <AvatarFallback>ZW</AvatarFallback>
           </Avatar>
           <Input name="reply" value={formData.reply} onChange={handleChange} className="ml-2 resize-none w-xl max-w-xl border-none shadow-none focus:ring-green-500 text-gray-100 text-xl font-semibold" placeholder="Type your reply" />

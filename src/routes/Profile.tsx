@@ -57,21 +57,21 @@ function Profile() {
             <div className="p-10 pb-0 pt-2">
               <Dialog>
                 <DialogTrigger asChild>
-                  <img src={`/src/uploads/${user.header}`} alt="" className="aspect-5/1 object-cover rounded-2xl hover:cursor-pointer" />
+                  <img src={`${user.header}`} alt="" className="aspect-5/1 object-cover rounded-2xl hover:cursor-pointer" />
                 </DialogTrigger>
                 <DialogOverlay className="bg-black/80">
                   <DialogContent className="border-none md:min-w-full p-1 rounded-none ">
-                    <img src={`/src/uploads/${user.header}`} alt="" className="aspect-5/1 object-cover" />
+                    <img src={`${user.header}`} alt="" className="aspect-5/1 object-cover" />
                   </DialogContent>
                 </DialogOverlay>
               </Dialog>
               <Dialog>
                 <DialogTrigger asChild>
-                  <img src={`/src/uploads/${user.avatar}`} alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute hover:brightness-90 hover:cursor-pointer" />
+                  <img src={`${user.avatar}`} alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute hover:brightness-90 hover:cursor-pointer" />
                 </DialogTrigger>
                 <DialogOverlay className="bg-black/80">
                   <DialogContent className="border-none md:w-fit p-1 rounded-full ">
-                    <img src={`/src/uploads/${user.avatar}`} alt="" className="aspect-square object-cover size-full rounded-full" />
+                    <img src={`${user.avatar}`} alt="" className="aspect-square object-cover size-full rounded-full" />
                   </DialogContent>
                 </DialogOverlay>
               </Dialog>

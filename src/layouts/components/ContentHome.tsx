@@ -90,7 +90,7 @@ function ContentHome({ user }: UserProps) {
           <h2 className="text-2xl p-10 pb-0 text-gray-100 font-semibold">Home</h2>
           <form onSubmit={handleSubmit} action="" className="flex gap-5 p-10 border-b-1 border-gray-500 xl:max-w-[600px] 2xl:max-w-screen">
             <Avatar className="size-12">
-              <AvatarImage src={`/src/uploads/${user.avatar}`} alt="@shadcn" className="object-cover" />
+              <AvatarImage src={`${user.avatar}`} alt="@shadcn" className="object-cover" />
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
             <div className="flex-col max-w-full">

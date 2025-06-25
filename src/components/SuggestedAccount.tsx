@@ -37,7 +37,7 @@ function SuggestedAccount() {
         <div className="flex" key={index}>
           <NavLink to={`/${u.username.toLocaleLowerCase()}`} className="profile flex py-2 px-5  w-full  hover:bg-slate-700 duration-100">
             <Avatar className="my-auto">
-              <AvatarImage src={`/src/uploads/${u.avatar}`} alt="@shadcn" />
+              <AvatarImage src={`${u.avatar}`} alt="@shadcn" />
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
             <div className="pl-5">

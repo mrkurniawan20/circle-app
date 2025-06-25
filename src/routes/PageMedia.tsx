@@ -72,14 +72,14 @@ function PageMedia() {
       <div className={`bg-gray-800 border-r-1 border-gray-500 flex justify-center items-center relative transition-all duration-200 ${imageOnly ? 'flex-[1] duration-300' : 'flex-[1_1_100%] duration-1000'}`}>
         <CircleX className="absolute text-gray-50 left-10 top-10 hover:bg-gray-600 hover:cursor-pointer size-10 p-2 rounded-full" onClick={() => navigate(-1)} />
         <PanelRight onClick={() => setImageOnly((show) => !show)} className="absolute text-gray-50 right-10 top-10 hover:bg-gray-600 size-10 p-2 rounded-full hover:cursor-pointer" />
-        <img src={`/src/uploads/${tweet.image}`} className="my-auto max-h-full max-w-full absolute" alt="" />
+        <img src={`${tweet.image}`} className="my-auto max-h-full max-w-full absolute" alt="" />
       </div>
       {imageOnly && (
         <div className="min-w-0 flex-[0.4] transition-all overflow-y-scroll duration-1000">
           <div>
             <div className="flex p-5">
               <Avatar className="my-auto">
-                <AvatarImage src={`./src/uploads/${tweet.user.avatar}`} alt="@shadcn" />
+                <AvatarImage src={`.${tweet.user.avatar}`} alt="@shadcn" />
                 <AvatarFallback>ZW</AvatarFallback>
               </Avatar>
               <div className="inline-block pl-5">
@@ -99,7 +99,7 @@ function PageMedia() {
 
             <form action="" className="flex gap-5 border-t-1 border-b-1 border-gray-500 p-5 bg-gray-800">
               <Avatar className="">
-                <AvatarImage src={`/src/uploads/${user!.avatar}`} alt="@shadcn" />
+                <AvatarImage src={`${user!.avatar}`} alt="@shadcn" />
                 <AvatarFallback>ZW</AvatarFallback>
               </Avatar>
               <Input className="ml-2 resize-none w-xl max-w-xl  border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-xl font-semibold" placeholder="Type your reply"></Input>

@@ -111,7 +111,7 @@ function SideBar({ user }: UserProps) {
                 <div className="grid gap-4 py-4">
                   <div className="grid grid-cols-[1fr_10fr] items-center">
                     <Avatar className="my-auto">
-                      <AvatarImage src={`/src/uploads/${user.avatar}`} alt="@shadcn" />
+                      <AvatarImage src={`${user.avatar}`} alt="@shadcn" />
                       <AvatarFallback>ZW</AvatarFallback>
                     </Avatar>
                     <Input
