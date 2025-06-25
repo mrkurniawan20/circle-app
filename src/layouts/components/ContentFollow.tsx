@@ -19,6 +19,7 @@ function ContentFollow() {
         setLoading(true);
         const res = await axios.get('http://localhost:3320/user/getfollowers', { headers: { Authorization: `Bearer ${token}` } });
         setUsers(res.data);
+        console.log(res.data);
         setFollowingIds(res.data.map((m: User) => m.id));
       } catch (error) {
         console.error(error);
@@ -53,7 +54,8 @@ function ContentFollow() {
               <p className="text-slate-400 text-xs pb-1">@{follower.username}</p>
               <p className="text-gray-200 text-xs pb-1">{follower.bio}</p>
             </div>
-            <FollowButton id={follower.id} isFollowing={followingIds.includes(follower.id)} />
+            {/* <FollowButton id={follower.id} isFollowing={followingIds.includes(follower.id)} /> */}
+            <FollowButton id={follower.id} isFollowing={follower.isFollowingBack} />
           </NavLink>
         ))}
       </div>

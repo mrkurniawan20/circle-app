@@ -20,6 +20,7 @@ export interface User {
   followersCount: number;
   followingCount: number;
   tweet: Tweet[];
+  isFollowingBack: boolean;
 }
 export interface Users {
   user: User[];
@@ -43,6 +44,7 @@ export function useUser() {
     followersCount: 0,
     followingCount: 0,
     tweet: [],
+    isFollowingBack: false,
   });
   const [loading, setLoading] = useState(true);
   useEffect(() => {

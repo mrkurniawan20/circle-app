@@ -13,6 +13,7 @@ import axios from 'axios';
 import LoadingPage from './LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FollowedButton from '@/components/FollowedButton';
+import FollowButton from '@/components/FollowButton';
 
 function ContentSearch() {
   const token = localStorage.getItem('token');
@@ -56,7 +57,7 @@ function ContentSearch() {
                     <p className="text-slate-400 text-xs pb-1">@{u.username}</p>
                     <p className="text-gray-200 text-xs pb-1">{u.bio}</p>
                   </div>
-                  <FollowedButton />
+                  <FollowButton id={u.id} isFollowing />
                 </NavLink>
               </CommandItem>
             ))}
