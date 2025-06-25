@@ -52,6 +52,7 @@ function Page() {
       followersCount: 0,
       followingCount: 0,
       tweet: [],
+      isFollowingBack: false,
     },
     reply: [],
   });
@@ -100,7 +101,76 @@ function Page() {
 
   if (loading || fetchLoading) return <LoadingPage />;
 
-  if (tweet.image) {
+  // === DEFAULT LAYOUT (no image)
+  if (user.id === 0) {
+    if (tweet.image) {
+      return (
+        <div className="flex h-screen w-full relative">
+          <div className={`bg-gray-800 border-r-1 border-gray-500 flex justify-center items-center relative transition-all duration-200 ${imageOnly ? 'flex-[1] duration-300' : 'flex-[1_1_100%] duration-1000'}`}>
+            <CircleX className="absolute text-gray-50 left-10 top-10 hover:bg-gray-600 hover:cursor-pointer size-10 p-2 rounded-full" onClick={() => navigate(-1)} />
+            <PanelRight onClick={() => setImageOnly((show) => !show)} className="absolute text-gray-50 right-10 top-10 hover:bg-gray-600 size-10 p-2 rounded-full hover:cursor-pointer" />
+            <img
+              src={`${tweet.image}`} // assumes your image is in public/img/
+              className="my-auto max-h-full max-w-full absolute"
+              alt=""
+            />
+          </div>
+
+          {imageOnly && (
+            <div className="min-w-0 flex-[0.4] overflow-y-scroll bg-[#213547] border-l border-gray-700">
+              <div className="p-5">
+                <div className="flex">
+                  <Avatar className="my-auto">
+                    <AvatarImage src={tweet.user.avatar} />
+                    <AvatarFallback>ZW</AvatarFallback>
+                  </Avatar>
+                  <div className="inline-block px-5">
+                    <h2 className="text-gray-50">{tweet.user.name}</h2>
+                    <p className="text-slate-400">@{tweet.user.username}</p>
+                  </div>
+                </div>
+
+                <div className="py-3">
+                  <p className="text-gray-100">{tweet.post}</p>
+                </div>
+
+                <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
+                <div className="-ml-10 mt-3">
+                  <ThreadLike likeCount={tweet.likeCount} likedCount={tweet.likeCount + 1} replyCount={tweet.replyCount} />
+                </div>
+
+                <ListReply replies={tweet.reply} />
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+    return (
+      <Layout minimal>
+        <div className="p-5">
+          <div className="flex">
+            <Avatar className="my-auto">
+              <AvatarImage src={`${tweet.user.avatar}`} />
+              <AvatarFallback>ZW</AvatarFallback>
+            </Avatar>
+            <div className="inline-block px-5">
+              <h2 className="text-gray-50">{tweet.user.name}</h2>
+              <p className="text-slate-400">@{tweet.user.username}</p>
+            </div>
+          </div>
+          <div className="py-3">
+            <p className="text-gray-100">{tweet.post}</p>
+          </div>
+          <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
+          <div className="-ml-10 mt-3">
+            <ThreadLike likeCount={tweet.likeCount} likedCount={tweet.likeCount + 1} replyCount={tweet.replyCount} />
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+  if (user.id !== 0 && tweet.image) {
     return (
       <div className="flex h-screen w-full relative">
         <div className={`bg-gray-800 border-r-1 border-gray-500 flex justify-center items-center relative transition-all duration-200 ${imageOnly ? 'flex-[1] duration-300' : 'flex-[1_1_100%] duration-1000'}`}>
@@ -162,33 +232,6 @@ function Page() {
           </div>
         )}
       </div>
-    );
-  }
-
-  // === DEFAULT LAYOUT (no image)
-  if (user.id === 0) {
-    return (
-      <Layout minimal>
-        <div className="p-5">
-          <div className="flex">
-            <Avatar className="my-auto">
-              <AvatarImage src={`${tweet.user.avatar}`} />
-              <AvatarFallback>ZW</AvatarFallback>
-            </Avatar>
-            <div className="inline-block px-5">
-              <h2 className="text-gray-50">{tweet.user.name}</h2>
-              <p className="text-slate-400">@{tweet.user.username}</p>
-            </div>
-          </div>
-          <div className="py-3">
-            <p className="text-gray-100">{tweet.post}</p>
-          </div>
-          <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
-          <div className="-ml-10 mt-3">
-            <ThreadLike likeCount={tweet.likeCount} likedCount={tweet.likeCount + 1} replyCount={tweet.replyCount} />
-          </div>
-        </div>
-      </Layout>
     );
   }
 

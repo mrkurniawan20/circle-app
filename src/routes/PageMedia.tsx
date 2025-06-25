@@ -44,6 +44,7 @@ function PageMedia() {
       followersCount: 0,
       followingCount: 0,
       tweet: [],
+      isFollowingBack: false,
     },
     reply: [],
   });
