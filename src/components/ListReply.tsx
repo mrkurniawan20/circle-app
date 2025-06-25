@@ -82,7 +82,7 @@ function ListReply({ replies }: ReplyListProps) {
 
           <div className="pb-2 ml-15 -mt-5">
             <p className="text-gray-300 pb-2">{reply.post}</p>
-            {reply.image && <img src={`./src/assets/img/${reply.image}`} className="w-fit rounded-4xl pb-2 max-h-150 aspect-4/3 object-cover" alt="Reply Image" />}
+            {reply.image && <img src={`${reply.image}`} className="w-fit rounded-4xl pb-2 max-h-150 aspect-4/3 object-cover" alt="Reply Image" />}
           </div>
 
           {/* <ThreadLike likeCount={reply.likeCount} likedCount={reply.likeCount +1} /> */}

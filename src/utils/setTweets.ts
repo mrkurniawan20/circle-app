@@ -11,6 +11,7 @@ export interface Tweet {
   user: User;
   reply: Reply[];
   createdAt: Date;
+  isLiked: boolean;
 }
 
 export interface TweetProps {

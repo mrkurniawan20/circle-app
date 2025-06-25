@@ -4,18 +4,12 @@ import { NavLink } from 'react-router-dom';
 import { usersFollowed } from '@/stores/users-followed';
 import { users } from '@/stores/users';
 import { User } from '@/utils/setUser';
-// interface LoggedInUser {
-//   name: string;
-//   username: string;
-//   bio: string;
-// }
 
 interface LoggedInUserProps {
   loggedIn: User;
 }
 
 function DataMyProfile({ loggedIn }: LoggedInUserProps) {
-  // const users = Array.isArray(loggedIn) ? loggedIn : [loggedIn];
   return (
     <>
       <div>

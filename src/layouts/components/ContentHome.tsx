@@ -34,8 +34,9 @@ function ContentHome({ user }: UserProps) {
     setLoading(true);
     async function fetchTweet() {
       try {
-        const tweets = await axios.get('http://127.0.0.1:3320/post/getTweets/');
+        const tweets = await axios.get('http://127.0.0.1:3320/post/getTweets/', { headers: { Authorization: `Bearer ${token}` } });
         setTweet(tweets.data);
+        console.log(tweets.data);
       } catch (error) {
         console.error(error);
       } finally {
@@ -46,18 +47,14 @@ function ContentHome({ user }: UserProps) {
   }, []);
   function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
   }
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const files = e.target.files;
 
-    console.log('cek', files);
     if (files![0].size > 5 * 1024 * 1024) {
       alert('File is too large');
     }
     if (files) {
-      console.log('cek 2');
-
       setFormData((prev) => ({ ...prev, image: files[0] }));
     }
   }
@@ -71,7 +68,8 @@ function ContentHome({ user }: UserProps) {
     }
     try {
       await axios.post('http://127.0.0.1:3320/post/posttweet/', data, { headers: { Authorization: `Bearer ${token}` } });
-      const tweets = await axios.get('http://127.0.0.1:3320/post/getTweets/');
+      const tweets = await axios.get('http://127.0.0.1:3320/post/getTweets/', { headers: { Authorization: `Bearer ${token}` } });
+      console.log(tweets.data);
       setTweet(tweets.data);
       setFormData({ post: '' });
     } catch (error) {

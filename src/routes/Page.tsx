@@ -74,6 +74,7 @@ function Page() {
 
   const [formData, setFormData] = useState<{
     reply: string;
+    image?: File;
   }>({
     reply: '',
   });
@@ -81,14 +82,25 @@ function Page() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     console.log(formData);
   }
+  function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = e.target.files;
+    if (files![0].size > 5 * 1024 * 1024) {
+      alert(`File is too large`);
+      return;
+    }
+    if (files) {
+      setFormData((prev) => ({ ...prev, image: files[0] }));
+      console.log(formData);
+    }
+  }
   async function submitReply(e: React.FormEvent) {
     e.preventDefault();
     try {
       const data = new FormData();
       if (formData.reply) data.append('reply', formData.reply);
-      // if (formData.image) data.append('image', formData.image);
+      if (formData.image) data.append('image', formData.image);
       setFetchLoading(true);
-      await axios.post(`http://localhost:3320/post/replytweet/${id}`, formData, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.post(`http://localhost:3320/post/replytweet/${id}`, data, { headers: { Authorization: `Bearer ${token}` } });
       const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`);
       setTweet(res.data);
       setFormData({ reply: '' });
@@ -218,10 +230,10 @@ function Page() {
                   className="ml-2 resize-none w-xl max-w-xl border-none shadow-none focus:ring-green-500 text-gray-100 text-xl font-semibold"
                   placeholder="Type your reply ges"
                 />
-                <label htmlFor="add-image">
+                <label htmlFor="replyImage">
                   <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
                 </label>
-                <input type="file" name="add-image" id="add-image" className="hidden" />
+                <input onChange={handleFile} type="file" name="replyImage" id="replyImage" className="hidden" />
                 <Button variant="circle" className="justify-self-end">
                   Reply
                 </Button>
@@ -270,10 +282,10 @@ function Page() {
             <AvatarFallback>ZW</AvatarFallback>
           </Avatar>
           <Input name="reply" value={formData.reply} onChange={handleChange} className="ml-2 resize-none w-xl max-w-xl border-none shadow-none focus:ring-green-500 text-gray-100 text-xl font-semibold" placeholder="Type your reply" />
-          <label htmlFor="add-image">
+          <label htmlFor="replyImage">
             <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
           </label>
-          <input type="file" name="add-image" id="add-image" className="hidden" />
+          <input onChange={handleFile} type="file" name="replyImage" id="replyImage" className="hidden" />
           <Button variant="circle" className="justify-self-end">
             Reply
           </Button>

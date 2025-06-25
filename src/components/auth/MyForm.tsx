@@ -21,7 +21,6 @@ function LoginForm() {
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.name, event.target.value);
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
 

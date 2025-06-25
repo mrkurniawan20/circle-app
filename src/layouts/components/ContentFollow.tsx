@@ -10,7 +10,6 @@ import FollowButton from '@/components/FollowButton';
 
 function ContentFollow() {
   const token = localStorage.getItem('token');
-  const [followingIds, setFollowingIds] = useState<number[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -19,8 +18,6 @@ function ContentFollow() {
         setLoading(true);
         const res = await axios.get('http://localhost:3320/user/getfollowers', { headers: { Authorization: `Bearer ${token}` } });
         setUsers(res.data);
-        console.log(res.data);
-        setFollowingIds(res.data.map((m: User) => m.id));
       } catch (error) {
         console.error(error);
       } finally {

@@ -17,33 +17,33 @@ import { GiExitDoor } from 'react-icons/gi';
 import { Separator } from '@/components/ui/separator';
 import { loggedInUser } from '@/stores/loggedInUser';
 import axios from 'axios';
-import { User, UserProps } from '@/utils/setUser';
+import { UserProps } from '@/utils/setUser';
 import LoadingPage from './LoadingPage';
 
-const pages = [
-  {
-    page: 'home',
-    image: <FaHome />,
-    namePage: 'Home',
-  },
-  {
-    page: 'search',
-    image: <FaSearch />,
-    namePage: 'Search',
-  },
-  {
-    page: 'follow',
-    image: <FaRegHeart />,
-    namePage: 'Follow',
-  },
-  {
-    page: 'profile',
-    image: <IoPersonCircleSharp />,
-    namePage: 'Profile',
-  },
-];
-
 function SideBar({ user }: UserProps) {
+  const pages = [
+    {
+      page: 'home',
+      image: <FaHome />,
+      namePage: 'Home',
+    },
+    {
+      page: 'search',
+      image: <FaSearch />,
+      namePage: 'Search',
+    },
+    {
+      page: 'follow',
+      image: <FaRegHeart />,
+      namePage: 'Follow',
+    },
+    {
+      page: `profile/${user.username}`,
+      image: <IoPersonCircleSharp />,
+      namePage: 'Profile',
+    },
+  ];
+
   const token = localStorage.getItem('token');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -52,18 +52,14 @@ function SideBar({ user }: UserProps) {
   });
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log(formData);
   }
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const files = e.target.files;
-    console.log('cek', files);
 
-    console.log('File selected:', files?.[0]); // ✅ always logs if input triggered
     if (files![0].size > 5 * 1024 * 1024) {
       alert('File is too large');
     }
     if (files) {
-      console.log(formData);
       setFormData((prev) => ({ ...prev, image: files[0] }));
     }
   }
@@ -129,7 +125,7 @@ function SideBar({ user }: UserProps) {
                     <label htmlFor="imageDialog">
                       <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800  duration-200" />
                     </label>
-                    <Input type="file" name="image" id="imageDialog" className="hidden" onChange={handleFile} />
+                    <Input type="file" name="imageDialog" id="imageDialog" className="hidden" onChange={handleFile} />
                   </div>
                   <Button variant={'circle'} type="submit">
                     Post
@@ -144,10 +140,6 @@ function SideBar({ user }: UserProps) {
           <DoorOpen className="size-8 text-gray-50" />
           <p className="text-xl font-semibold text-gray-100">logout</p>
         </button>
-        {/* <NavLink to={'/login'} onClick={logOut} className="flex flex-row items-center  max-w-fit space-x-5 py-2 px-3 hover:bg-slate-700 rounded-full duration-200">
-          <DoorOpen className="size-8 text-gray-50" />
-          <p className="text-xl font-semibold text-gray-100">logout</p>
-        </NavLink> */}
       </div>
     </div>
   );
