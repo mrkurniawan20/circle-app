@@ -121,7 +121,7 @@ function Page() {
               <div className="p-5">
                 <div className="flex">
                   <Avatar className="my-auto">
-                    <AvatarImage src={tweet.user.avatar} />
+                    <AvatarImage src={tweet.user.avatar} className="object-cover" />
                     <AvatarFallback>ZW</AvatarFallback>
                   </Avatar>
                   <div className="inline-block px-5">
@@ -151,7 +151,7 @@ function Page() {
         <div className="p-5">
           <div className="flex">
             <Avatar className="my-auto">
-              <AvatarImage src={`${tweet.user.avatar}`} />
+              <AvatarImage src={`${tweet.user.avatar}`} className="object-cover" />
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
             <div className="inline-block px-5">
@@ -188,7 +188,7 @@ function Page() {
             <div className="p-5">
               <div className="flex">
                 <Avatar className="my-auto">
-                  <AvatarImage src={tweet.user.avatar} />
+                  <AvatarImage src={tweet.user.avatar} className="object-cover" />
                   <AvatarFallback>ZW</AvatarFallback>
                 </Avatar>
                 <div className="inline-block px-5">
@@ -208,7 +208,7 @@ function Page() {
 
               <form onSubmit={submitReply} className="flex gap-5 border-t border-b border-gray-500 p-5 bg-gray-800 mt-5">
                 <Avatar className="size-10">
-                  <AvatarImage src={`${user.avatar}`} alt="@shadcn" />
+                  <AvatarImage src={`${user.avatar}`} alt="@shadcn" className="object-cover" />
                   <AvatarFallback>ZW</AvatarFallback>
                 </Avatar>
                 <Input
@@ -248,7 +248,7 @@ function Page() {
 
         <div className="flex py-5">
           <Avatar className="my-auto">
-            <AvatarImage src={`${tweet.user.avatar}`} />
+            <AvatarImage src={`${tweet.user.avatar}`} className="object-cover" />
             <AvatarFallback>ZW</AvatarFallback>
           </Avatar>
           <div className="inline-block px-5">

@@ -44,9 +44,9 @@ function ContentFollow() {
       </div>
       <div className="p-5">
         {users.map((follower, index) => (
-          <NavLink key={index} to={`/${follower.username}`} className="flex w-full pb-1 pt-1 px-5 hover:bg-slate-700 rounded-2xl duration-200">
+          <NavLink key={index} to={`/profile/${follower.username}`} className="flex w-full pb-1 pt-1 px-5 hover:bg-slate-700 rounded-2xl duration-200">
             <Avatar className="my-auto">
-              <AvatarImage src={`${follower.avatar}`} alt="@shadcn" />
+              <AvatarImage src={`${follower.avatar}`} alt="@shadcn" className="object-cover" />
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
             <div className="pl-5">

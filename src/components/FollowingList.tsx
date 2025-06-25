@@ -24,7 +24,7 @@ function FollowingList({ followers = [] }: FollowersProps) {
       {followers.map((follower, index) => (
         <NavLink key={index} to={`/${follower.username}`} className="flex w-full pb-1 pt-1 px-5 hover:bg-slate-700 rounded-2xl duration-200">
           <Avatar className="my-auto">
-            <AvatarImage src={`./src/assets/img/${follower.image}`} alt="@shadcn" />
+            <AvatarImage src={`./src/assets/img/${follower.image}`} alt="@shadcn" className="object-cover" />
             <AvatarFallback>{follower.fallback}</AvatarFallback>
           </Avatar>
           <div className="pl-5">

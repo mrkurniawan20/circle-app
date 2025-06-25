@@ -25,7 +25,6 @@ function EditProfile({ user }: UserProps) {
   });
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
   }
   function handleFileChange(field: `avatar` | `header`) {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +47,6 @@ function EditProfile({ user }: UserProps) {
       if (formData.bio) data.append('bio', formData.bio);
       if (formData.avatar) data.append('avatar', formData.avatar);
       if (formData.header) data.append('header', formData.header);
-      console.log(data);
       await axios.patch(`http://localhost:3320/user/editprofile/${user.id}`, data, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
       console.error(error);

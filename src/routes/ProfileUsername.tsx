@@ -4,29 +4,58 @@ import ProfileBar from '@/layouts/components/ProfileBar';
 import SideBar from '@/layouts/components/SideBar';
 import { ThreadList } from '@/components/ThreadList';
 import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate, useOutletContext } from 'react-router-dom';
+import { NavLink, useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import { threads } from '@/stores/threads';
 import Layout from '@/layouts/Layout';
 import { loggedInUser } from '@/stores/loggedInUser';
 import { Dialog, DialogContent, DialogOverlay, DialogTrigger } from '@/components/ui/dialog';
 import { ArrowLeft } from 'lucide-react';
-import { User, useUser } from '@/utils/setUser';
+import { Decoded, User, useUser } from '@/utils/setUser';
 import { TweetList } from '@/components/ListTweet';
 import { Tweet } from '@/utils/setTweets';
 import axios from 'axios';
 import LoadingPage from '@/layouts/components/LoadingPage';
+import FollowButton from '@/components/FollowButton';
+import { jwtDecode } from 'jwt-decode';
 
-function Profile() {
+function ProfileUsername() {
+  const token = localStorage.getItem('token');
+  const { username } = useParams();
   const navigate = useNavigate();
-  const { user } = useOutletContext<{ user: User }>();
+  const { user } = useUser();
+  const [profileUser, setProfileUser] = useState<User>({
+    id: 0,
+    name: '',
+    username: '',
+    email: '',
+    dateOfBirth: new Date(),
+    bio: '',
+    avatar: 'blue.png',
+    header: '',
+    verified: false,
+    tweetCount: 0,
+    followersCount: 0,
+    followingCount: 0,
+    tweet: [],
+    isFollowingBack: false,
+  });
   const [tweet, setTweet] = useState<Tweet[]>([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:3320/post/gettweetbyid/${user.id}`);
-        setTweet(res.data);
+        if (token) {
+          const user = await axios.get(`http://localhost:3320/user/getuser/${username}`, { headers: { Authorization: `Bearer ${token}` } });
+          setProfileUser(user.data);
+          const tweet = await axios.get(`http://localhost:3320/post/gettweetbyid/${user.data.id}`);
+          setTweet(tweet.data);
+        } else {
+          const user = await axios.get(`http://localhost:3320/user/getuser/${username}`);
+          setProfileUser(user.data);
+          const tweet = await axios.get(`http://localhost:3320/post/gettweetbyid/${user.data.id}`);
+          setTweet(tweet.data);
+        }
       } catch (error) {
         console.error(error);
       } finally {
@@ -48,8 +77,8 @@ function Profile() {
                 <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700">
                   <ArrowLeft className="size-8 text-gray-50" />
                   <div>
-                    <h2 className="text-2xl text-gray-100 font-semibold">{user.name}</h2>
-                    <p className="text-sm text-slate-400">{user.tweetCount} tweets</p>
+                    <h2 className="text-2xl text-gray-100 font-semibold">{profileUser.name}</h2>
+                    <p className="text-sm text-slate-400">{profileUser.tweetCount} tweets</p>
                   </div>
                 </div>
               </NavLink>
@@ -57,26 +86,26 @@ function Profile() {
             <div className="p-10 pb-0 pt-2">
               <Dialog>
                 <DialogTrigger asChild>
-                  <img src={`${user.header}`} alt="" className="aspect-5/1 object-cover rounded-2xl hover:cursor-pointer" />
+                  <img src={`${profileUser.header}`} alt="" className="aspect-5/1 object-cover rounded-2xl hover:cursor-pointer" />
                 </DialogTrigger>
                 <DialogOverlay className="bg-black/80">
                   <DialogContent className="border-none md:min-w-full p-1 rounded-none ">
-                    <img src={`${user.header}`} alt="" className="aspect-5/1 object-cover" />
+                    <img src={`${profileUser.header}`} alt="" className="aspect-5/1 object-cover" />
                   </DialogContent>
                 </DialogOverlay>
               </Dialog>
               <Dialog>
                 <DialogTrigger asChild>
-                  <img src={`${user.avatar}`} alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute hover:brightness-90 hover:cursor-pointer" />
+                  <img src={`${profileUser.avatar}`} alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute hover:brightness-90 hover:cursor-pointer" />
                 </DialogTrigger>
                 <DialogOverlay className="bg-black/80">
                   <DialogContent className="border-none md:w-fit p-1 rounded-full ">
-                    <img src={`${user.avatar}`} alt="" className="aspect-square object-cover size-full rounded-full" />
+                    <img src={`${profileUser.avatar}`} alt="" className="aspect-square object-cover size-full rounded-full" />
                   </DialogContent>
                 </DialogOverlay>
               </Dialog>
-              <div className="flex pt-3 pb-5">{user && <EditProfile user={user} />}</div>
-              <DataMyProfile loggedIn={user} />{' '}
+              <div className="flex pt-3 pb-5">{user.username == profileUser.username ? <EditProfile user={user} /> : <FollowButton id={profileUser.id} isFollowing={profileUser.isFollowingBack} />}</div>
+              <DataMyProfile loggedIn={profileUser} />{' '}
             </div>
             <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
               <NavLink to={'/profile'} className="text-center text-xl text-gray-50 ">
@@ -95,4 +124,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ProfileUsername;

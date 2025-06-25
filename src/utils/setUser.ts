@@ -3,8 +3,9 @@ import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import { Tweet } from './setTweets';
 
-interface Decoded {
+export interface Decoded {
   id: number;
+  username: string;
 }
 export interface User {
   id: number;
@@ -55,12 +56,11 @@ export function useUser() {
     }
     try {
       const decoded = jwtDecode<Decoded>(token);
-      const userId = decoded.id;
+      const username = decoded.username;
       axios
-        .get(`http://127.0.0.1:3320/user/getUser/${userId}`, { headers: { Authorization: `Bearer ${token}` } })
+        .get(`http://127.0.0.1:3320/user/getUser/${username}`, { headers: { Authorization: `Bearer ${token}` } })
         .then((res) => {
           setUser(res.data);
-          console.log(user);
         })
         .catch((err) => {
           console.log(`Failed to fetch user ${err}`);

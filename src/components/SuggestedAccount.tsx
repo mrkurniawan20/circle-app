@@ -29,15 +29,14 @@ function SuggestedAccount() {
     }
     fetchData();
   }, []);
-  console.log(users);
   if (loading) return <LoadingPage />;
   return (
     <>
       {users.map((u, index) => (
         <div className="flex" key={index}>
-          <NavLink to={`/${u.username.toLocaleLowerCase()}`} className="profile flex py-2 px-5  w-full  hover:bg-slate-700 duration-100">
+          <NavLink to={`/profile/${u.username.toLocaleLowerCase()}`} className="profile flex py-2 px-5  w-full  hover:bg-slate-700 duration-100">
             <Avatar className="my-auto">
-              <AvatarImage src={`${u.avatar}`} alt="@shadcn" />
+              <AvatarImage src={`${u.avatar}`} alt="@shadcn" className="object-cover" />
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
             <div className="pl-5">

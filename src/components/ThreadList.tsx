@@ -40,7 +40,7 @@ export function ThreadList({ threadList = [] }: ThreadProps) {
         >
           <div className="flex pt-5 ">
             <Avatar className="my-auto size-12">
-              <AvatarImage src={`./src/assets/img/${threads.avatarImage}`} alt="@shadcn" />
+              <AvatarImage src={`./src/assets/img/${threads.avatarImage}`} alt="@shadcn" className="object-cover" />
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
             <div className="inline-flex pl-3 ">

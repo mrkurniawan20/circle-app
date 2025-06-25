@@ -15,7 +15,6 @@ function FollowButton({ id, isFollowing }: Follow) {
     e.preventDefault();
     try {
       await axios.get(`http://localhost:3320/user/followuser/${id}`, { headers: { Authorization: `Bearer ${token}` } });
-      console.log(token);
       setFollow(true);
     } catch (error) {
       console.error(error);
@@ -26,7 +25,6 @@ function FollowButton({ id, isFollowing }: Follow) {
     setFollow(false);
     try {
       await axios.get(`http://localhost:3320/user/unfollowuser/${id}`, { headers: { Authorization: `Bearer ${token}` } });
-      console.log(token);
     } catch (error) {
       console.error(error);
     }

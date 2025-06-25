@@ -17,6 +17,7 @@ import PageTitle from '@/layouts/components/PageTitle';
 import Followers from './Followers';
 import ContentPageMedia from '@/layouts/components/ContentPageMedia';
 import LoadingPage from '@/layouts/components/LoadingPage';
+import ProfileUsername from './ProfileUsername';
 
 let router = createBrowserRouter([
   {
@@ -88,10 +89,10 @@ let router = createBrowserRouter([
   //   path: '/home',
   //   Component: Home,
   // },
-  // {
-  //   path: '/profile',
-  //   Component: Profile,
-  // },
+  {
+    path: '/profile/:username',
+    Component: ProfileUsername,
+  },
   // {
   //   path: '/follow',
   //   Component: Follow,

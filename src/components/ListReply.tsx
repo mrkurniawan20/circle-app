@@ -33,7 +33,7 @@ function ListReply({ replies }: ReplyListProps) {
         <div key={reply.id} onClick={() => (reply.image ? navigate('/media', { state: { index } }) : navigate('/page', { state: { index } }))} className="border-b-1 p-5 px-5 border-gray-500 hover:bg-gray-700 hover:cursor-pointer">
           <div className="flex pr-5 pt-5">
             <Avatar className="my-auto size-12">
-              <AvatarImage src={`${reply.user.avatar}`} alt={reply.user.username} />
+              <AvatarImage src={`${reply.user.avatar}`} alt={reply.user.username} className="object-cover" />
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
             <div className="inline-flex pl-3">

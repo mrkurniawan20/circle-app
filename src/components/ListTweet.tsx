@@ -20,11 +20,11 @@ export function TweetList({ tweet }: TweetProps) {
         <div onClick={() => navigate(`/page/${t.id}`, { state: { index } })} key={index} className="border-b-1 p-5 pl-10 pr-10 border-gray-500 hover:bg-gray-700 hover:cursor-pointer">
           <div className="flex pt-5">
             <Avatar className="my-auto size-12">
-              <AvatarImage src={`${t.user.avatar}`} alt="@shadcn" />
+              <AvatarImage src={`${t.user.avatar}`} alt="@shadcn" className="object-cover" />
               <AvatarFallback>ZW</AvatarFallback>
             </Avatar>
             <div className="inline-flex pl-3">
-              <NavLink onClick={(e) => e.stopPropagation()} to={`/${t.user.username.toLowerCase()}`}>
+              <NavLink onClick={(e) => e.stopPropagation()} to={`/profile/${t.user.username.toLowerCase()}`}>
                 <h2 className="text-gray-50 font-semibold hover:underline underline-offset-4">{t.user.name}</h2>
               </NavLink>
               <p className="text-slate-400 pl-3">

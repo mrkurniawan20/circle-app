@@ -14,7 +14,7 @@ const ReplyForm: React.FC<ReplyFormProps> = ({ loggedInUser }) => {
   return (
     <form action="" className="flex gap-5 border-t-1 border-b-1 border-gray-500 p-5 bg-gray-800">
       <Avatar className="size-10">
-        <AvatarImage src={`${loggedInUser.avatar}`} alt={loggedInUser.username} className="size-10 p-0" />
+        <AvatarImage src={`${loggedInUser.avatar}`} alt={loggedInUser.username} className="size-10 p-0 object-cover" />
         <AvatarFallback>ME</AvatarFallback>
       </Avatar>
 

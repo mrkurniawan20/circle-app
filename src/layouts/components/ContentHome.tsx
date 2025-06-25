@@ -106,7 +106,7 @@ function ContentHome({ user }: UserProps) {
               <label htmlFor="postImage">
                 <ImagePlus className="size-10  text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
               </label>
-              <input type="file" name="postImage" id="postImage" className="hidden" onChange={handleFile} />
+              <input type="file" name="image" id="postImage" className="hidden" onChange={handleFile} />
               <Button variant="circle">Post</Button>
             </div>
           </form>

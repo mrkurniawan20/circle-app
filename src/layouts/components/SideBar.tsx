@@ -111,7 +111,7 @@ function SideBar({ user }: UserProps) {
                 <div className="grid gap-4 py-4">
                   <div className="grid grid-cols-[1fr_10fr] items-center">
                     <Avatar className="my-auto">
-                      <AvatarImage src={`${user.avatar}`} alt="@shadcn" />
+                      <AvatarImage src={`${user.avatar}`} alt="@shadcn" className="object-cover" />
                       <AvatarFallback>ZW</AvatarFallback>
                     </Avatar>
                     <Input
@@ -129,7 +129,7 @@ function SideBar({ user }: UserProps) {
                     <label htmlFor="imageDialog">
                       <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800  duration-200" />
                     </label>
-                    <Input type="file" name="imageDialog" id="imageDialog" className="hidden" onChange={handleFile} />
+                    <Input type="file" name="image" id="imageDialog" className="hidden" onChange={handleFile} />
                   </div>
                   <Button variant={'circle'} type="submit">
                     Post
