@@ -1,5 +1,5 @@
 import { Reply } from '@/components/ListReply';
-import { User } from './setUser';
+import { User } from './useUser';
 
 export interface Tweet {
   id: number;

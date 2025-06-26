@@ -1,13 +1,11 @@
 import CircleText from '@/components/CircleText';
-import ContentPage from '@/layouts/components/ContentPage';
 import ProfileBar from '@/layouts/components/ProfileBar';
 import SideBar from '@/layouts/components/SideBar';
 import Layout from '@/layouts/Layout';
 import React, { useEffect, useState } from 'react';
-import PageMedia from './PageMedia';
 import { threads } from '@/stores/threads';
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useUser } from '@/utils/setUser';
+import { useUser } from '@/utils/useUser';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ThreadLike } from '@/components/ThreadLike';

@@ -7,7 +7,7 @@ import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { ThreadLike } from './ThreadLike';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { User } from '@/utils/setUser';
+import { User } from '@/utils/useUser';
 
 export interface Reply {
   id: number;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { users } from '@/stores/users';
-import { User } from '@/utils/setUser';
+import { User } from '@/utils/useUser';
 import axios from 'axios';
 import LoadingPage from './LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';

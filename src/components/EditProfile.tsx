@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea, TweetArea } from './ui/textarea';
 import { ImagePlus } from 'lucide-react';
 import { loggedInUser } from '@/stores/loggedInUser';
-import { UserProps, useUser } from '@/utils/setUser';
+import { UserProps, useUser } from '@/utils/useUser';
 import axios from 'axios';
 
 function EditProfile({ user }: UserProps) {

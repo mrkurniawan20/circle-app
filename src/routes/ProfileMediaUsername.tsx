@@ -9,7 +9,7 @@ import Layout from '@/layouts/Layout';
 import { loggedInUser } from '@/stores/loggedInUser';
 import { ArrowLeft } from 'lucide-react';
 import { Dialog, DialogContent, DialogOverlay, DialogTrigger } from '@/components/ui/dialog';
-import { User, useUser } from '@/utils/setUser';
+import { User, useUser } from '@/utils/useUser';
 import { Tweet } from '@/utils/setTweets';
 import axios from 'axios';
 import LoadingPage from '@/layouts/components/LoadingPage';

@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores/auth';
 import React, { useEffect } from 'react';
 import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import { useUser } from '@/utils/setUser';
+import { useUser } from '@/utils/useUser';
 import LoadingPage from '@/layouts/components/LoadingPage';
 
 interface DecodedProps {

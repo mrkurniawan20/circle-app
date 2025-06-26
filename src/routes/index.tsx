@@ -12,10 +12,8 @@ import Search from './Search';
 import Following from './Following';
 import ProtectedRouteLayout from './ProtectedRoute';
 // import LoginForm from '@/components/auth/MyForm';
-import PageMedia from './PageMedia';
 import PageTitle from '@/layouts/components/PageTitle';
 import Followers from './Followers';
-import ContentPageMedia from '@/layouts/components/ContentPageMedia';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import ProfileUsername from './ProfileUsername';
 import ProfileMediaUsername from './ProfileMediaUsername';
@@ -78,10 +76,10 @@ let router = createBrowserRouter([
     path: '/page/:id',
     Component: PageTitle(Page, 'Page | Circle'),
   },
-  {
-    path: '/media',
-    Component: PageTitle(PageMedia, 'Media | Circle'),
-  },
+  // {
+  //   path: '/media',
+  //   Component: PageTitle(PageMedia, 'Media | Circle'),
+  // },
   // {
   //   path: '/',
   //   Component: Home,

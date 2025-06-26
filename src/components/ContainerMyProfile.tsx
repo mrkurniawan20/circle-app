@@ -3,7 +3,7 @@ import EditProfile from './EditProfile';
 import DataMyProfile from './DataMyProfile';
 import { loggedInUser } from '@/stores/loggedInUser';
 import { NavLink } from 'react-router-dom';
-import { UserProps, useUser } from '@/utils/setUser';
+import { UserProps, useUser } from '@/utils/useUser';
 
 function ContainerMyProfile({ user }: UserProps) {
   return (

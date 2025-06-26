@@ -1,6 +1,6 @@
 import ProfileBar from '@/layouts/components/ProfileBar';
 import SideBar from '@/layouts/components/SideBar';
-import { useUser } from '@/utils/setUser';
+import { useUser } from '@/utils/useUser';
 import React from 'react';
 import LoadingPage from './components/LoadingPage';
 

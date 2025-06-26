@@ -5,7 +5,7 @@ import { Button } from './ui/button';
 import FollowButton from './FollowButton';
 import axios from 'axios';
 import LoadingPage from '@/layouts/components/LoadingPage';
-import { User } from '@/utils/setUser';
+import { User } from '@/utils/useUser';
 
 function SuggestedAccount() {
   const [users, setUsers] = useState<User[]>([]);

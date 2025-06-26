@@ -3,7 +3,7 @@ import { loggedInUser } from '@/stores/loggedInUser';
 import { NavLink } from 'react-router-dom';
 import { usersFollowed } from '@/stores/users-followed';
 import { users } from '@/stores/users';
-import { User } from '@/utils/setUser';
+import { User } from '@/utils/useUser';
 
 interface LoggedInUserProps {
   loggedIn: User;

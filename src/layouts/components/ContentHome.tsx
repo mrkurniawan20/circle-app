@@ -6,7 +6,7 @@ import { Textarea } from '../../components/ui/textarea';
 import { threads } from '@/stores/threads';
 import { Ellipsis, ImagePlus, Pencil, Trash2 } from 'lucide-react';
 import { loggedInUser } from '@/stores/loggedInUser';
-import { User, UserProps } from '@/utils/setUser';
+import { User, UserProps } from '@/utils/useUser';
 import axios from 'axios';
 import { Tweet, TweetProps } from '@/utils/setTweets';
 import { ThreadList } from '@/components/ThreadList';

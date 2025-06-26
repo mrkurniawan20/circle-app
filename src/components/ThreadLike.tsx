@@ -1,4 +1,4 @@
-import { useUser } from '@/utils/setUser';
+import { useUser } from '@/utils/useUser';
 import axios from 'axios';
 import { MessageSquareText } from 'lucide-react';
 import React, { useState } from 'react';

@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { ImagePlus } from 'lucide-react';
-import type { User } from '@/utils/setUser';
+import type { User } from '@/utils/useUser';
 
 interface ReplyFormProps {
   loggedInUser: User;

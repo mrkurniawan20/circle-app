@@ -7,7 +7,7 @@ import EditProfile from '../../components/EditProfile';
 // import ContainerMyProfile from './ProfileBarContainerMyProfile';
 import ContainerCredentials from '../../components/ContainerCredentials';
 import ContainerMyProfile from '../../components/ContainerMyProfile';
-import { useUser } from '@/utils/setUser';
+import { useUser } from '@/utils/useUser';
 import LoadingPage from './LoadingPage';
 
 function ProfileBar({ showProfileContainer = true }: { showProfileContainer?: boolean }) {

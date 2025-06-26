@@ -6,7 +6,7 @@ import { Button } from './ui/button';
 
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from '@/components/ui/command';
 import FollowButton from './FollowButton';
-import { User, Users } from '@/utils/setUser';
+import { User, Users } from '@/utils/useUser';
 
 // interface SearchResult {
 //   image: string;

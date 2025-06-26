@@ -17,7 +17,7 @@ import { GiExitDoor } from 'react-icons/gi';
 import { Separator } from '@/components/ui/separator';
 import { loggedInUser } from '@/stores/loggedInUser';
 import axios from 'axios';
-import { UserProps } from '@/utils/setUser';
+import { UserProps } from '@/utils/useUser';
 import LoadingPage from './LoadingPage';
 
 function SideBar({ user }: UserProps) {

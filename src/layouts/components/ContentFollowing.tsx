@@ -5,7 +5,7 @@ import { usersFollowed } from '@/stores/users-followed';
 // import FollowersList from './FollowersList';
 import { users } from '@/stores/users';
 import FollowingList from '@/components/FollowingList';
-import { User } from '@/utils/setUser';
+import { User } from '@/utils/useUser';
 import axios from 'axios';
 import LoadingPage from './LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
