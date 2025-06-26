@@ -12,9 +12,11 @@ import { TweetProps } from '@/utils/setTweets'; // <- your interface
 import { formatDistanceToNow } from 'date-fns';
 import { Input } from './ui/input';
 import axios from 'axios';
+import { useUser } from '@/utils/useUser';
 
 export function TweetList({ tweet }: TweetProps) {
   const navigate = useNavigate();
+  const { user } = useUser();
   const [post, setPost] = useState('');
   const [editTweet, setEditTweet] = useState(0);
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -51,48 +53,50 @@ export function TweetList({ tweet }: TweetProps) {
                 @{t.user.username} • <span className="hover:underline underline-offset-4">{formatDistanceToNow(new Date(t.createdAt), { addSuffix: true })}</span>
               </p>
             </div>
-            <div className="ml-auto" onClick={(e) => e.stopPropagation()}>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Ellipsis className="text-slate-400 hover:bg-gray-600 rounded-full hover:cursor-pointer size-7 p-1 mb-2" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="mr-40 w-40 bg-gray-800 border-none shadow-xl">
-                  <DropdownMenuGroup>
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <DropdownMenuItem
-                          className="hover:bg-gray-600 hover:cursor-pointer focus:bg-gray-600"
-                          onSelect={(e) => {
-                            e.preventDefault();
-                            setEditTweet(t.id);
-                          }}
-                        >
-                          <Pencil className="text-gray-50" />
-                          <span className="text-gray-50">Edit</span>
-                        </DropdownMenuItem>
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-[425px] bg-gray-800 border-none">
-                        <DialogHeader>
-                          <DialogTitle className="text-gray-50">Edit thread</DialogTitle>
-                        </DialogHeader>
-                        <div className="grid gap-4 py-4">
-                          <form onSubmit={submitEdit} className="flex flex-col items-center gap-4">
-                            <Input onChange={handleChange} id="bio" name="bio" defaultValue={t.post} className="border-2 focus:border-green-500 focus:outline-none transition-all resize-none col-span-4 min-h-20 p-4 pt-7 text-gray-50" />
-                            <Button className="ml-auto" variant={'circle'} type="submit">
-                              Save changes
-                            </Button>
-                          </form>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
-                    <DropdownMenuItem className="hover:bg-gray-600 hover:cursor-pointer focus:bg-gray-600">
-                      <Trash2 className="text-gray-50" />
-                      <span className="text-gray-50">Delete</span>
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+            {user.username == t.username && (
+              <div className="ml-auto" onClick={(e) => e.stopPropagation()}>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Ellipsis className="text-slate-400 hover:bg-gray-600 rounded-full hover:cursor-pointer size-7 p-1 mb-2" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="mr-40 w-40 bg-gray-800 border-none shadow-xl">
+                    <DropdownMenuGroup>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <DropdownMenuItem
+                            className="hover:bg-gray-600 hover:cursor-pointer focus:bg-gray-600"
+                            onSelect={(e) => {
+                              e.preventDefault();
+                              setEditTweet(t.id);
+                            }}
+                          >
+                            <Pencil className="text-gray-50" />
+                            <span className="text-gray-50">Edit</span>
+                          </DropdownMenuItem>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px] bg-gray-800 border-none">
+                          <DialogHeader>
+                            <DialogTitle className="text-gray-50">Edit thread</DialogTitle>
+                          </DialogHeader>
+                          <div className="grid gap-4 py-4">
+                            <form onSubmit={submitEdit} className="flex flex-col items-center gap-4">
+                              <Input onChange={handleChange} id="bio" name="bio" defaultValue={t.post} className="border-2 focus:border-green-500 focus:outline-none transition-all resize-none col-span-4 min-h-20 p-4 pt-7 text-gray-50" />
+                              <Button className="ml-auto" variant={'circle'} type="submit">
+                                Save changes
+                              </Button>
+                            </form>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                      <DropdownMenuItem className="hover:bg-gray-600 hover:cursor-pointer focus:bg-gray-600">
+                        <Trash2 className="text-gray-50" />
+                        <span className="text-gray-50">Delete</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            )}
           </div>
 
           <div className="pb-2 ml-15 -mt-5">

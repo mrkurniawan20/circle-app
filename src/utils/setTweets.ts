@@ -5,7 +5,7 @@ export interface Tweet {
   id: number;
   post: string;
   image?: string;
-  userId: number;
+  username: string;
   likeCount: number;
   replyCount: number;
   user: User;

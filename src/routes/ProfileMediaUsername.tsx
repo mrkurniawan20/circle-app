@@ -73,7 +73,7 @@ function ProfileMediaUsername() {
               <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700">
                 <ArrowLeft className="size-8 text-gray-50" />
 
-                <h2 className="text-2xl text-gray-100 font-semibold">{user.name}</h2>
+                <h2 className="text-2xl text-gray-100 font-semibold">{profileUser.name}</h2>
               </div>
             </NavLink>
           </div>
@@ -82,21 +82,21 @@ function ProfileMediaUsername() {
           <img src={`./src/assets/img/${user.avatar}`} alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute" /> */}
             <Dialog>
               <DialogTrigger asChild>
-                <img src={`${user.header}`} alt="" className="aspect-5/1 object-cover rounded-2xl hover:cursor-pointer" />
+                <img src={`${profileUser.header}`} alt="" className="aspect-5/1 object-cover rounded-2xl hover:cursor-pointer" />
               </DialogTrigger>
               <DialogOverlay className="bg-black/80">
                 <DialogContent className="border-none md:min-w-full p-1 rounded-none ">
-                  <img src={`${user.header}`} alt="" className="aspect-5/1 object-cover" />
+                  <img src={`${profileUser.header}`} alt="" className="aspect-5/1 object-cover" />
                 </DialogContent>
               </DialogOverlay>
             </Dialog>
             <Dialog>
               <DialogTrigger asChild>
-                <img src={`${user.avatar}`} alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute hover:brightness-90 hover:cursor-pointer" />
+                <img src={`${profileUser.avatar}`} alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute hover:brightness-90 hover:cursor-pointer" />
               </DialogTrigger>
               <DialogOverlay className="bg-black/80">
                 <DialogContent className="border-none md:w-fit p-1 rounded-full ">
-                  <img src={`${user.avatar}`} alt="" className="aspect-square object-cover size-full rounded-full" />
+                  <img src={`${profileUser.avatar}`} alt="" className="aspect-square object-cover size-full rounded-full" />
                 </DialogContent>
               </DialogOverlay>
             </Dialog>
