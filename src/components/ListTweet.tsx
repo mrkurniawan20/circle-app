@@ -1,5 +1,5 @@
 // TweetList.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Ellipsis, Pencil, Trash2 } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -10,9 +10,29 @@ import { ThreadLike } from './ThreadLike';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { TweetProps } from '@/utils/setTweets'; // <- your interface
 import { formatDistanceToNow } from 'date-fns';
+import { Input } from './ui/input';
+import axios from 'axios';
 
 export function TweetList({ tweet }: TweetProps) {
   const navigate = useNavigate();
+  const [post, setPost] = useState('');
+  const [editTweet, setEditTweet] = useState(0);
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setPost(e.target.value);
+  }
+  async function submitEdit(e: React.FormEvent) {
+    e.preventDefault();
+    try {
+      const data = new FormData();
+      if (post) {
+        data.append('post', post);
+        console.log(data);
+      }
+      await axios.patch(`http://localhost:3320/post/edittweet/${editTweet}`, data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className="2xl:w-full xl:w-[600px]">
@@ -40,7 +60,13 @@ export function TweetList({ tweet }: TweetProps) {
                   <DropdownMenuGroup>
                     <Dialog>
                       <DialogTrigger asChild>
-                        <DropdownMenuItem className="hover:bg-gray-600 hover:cursor-pointer focus:bg-gray-600" onSelect={(e) => e.preventDefault()}>
+                        <DropdownMenuItem
+                          className="hover:bg-gray-600 hover:cursor-pointer focus:bg-gray-600"
+                          onSelect={(e) => {
+                            e.preventDefault();
+                            setEditTweet(t.id);
+                          }}
+                        >
                           <Pencil className="text-gray-50" />
                           <span className="text-gray-50">Edit</span>
                         </DropdownMenuItem>
@@ -50,8 +76,8 @@ export function TweetList({ tweet }: TweetProps) {
                           <DialogTitle className="text-gray-50">Edit thread</DialogTitle>
                         </DialogHeader>
                         <div className="grid gap-4 py-4">
-                          <form className="flex flex-col items-center gap-4">
-                            <Textarea id="bio" name="bio" defaultValue={t.post} className="border-2 focus:border-green-500 focus:outline-none transition-all resize-none col-span-4 min-h-20 p-4 pt-7 text-gray-50" />
+                          <form onSubmit={submitEdit} className="flex flex-col items-center gap-4">
+                            <Input onChange={handleChange} id="bio" name="bio" defaultValue={t.post} className="border-2 focus:border-green-500 focus:outline-none transition-all resize-none col-span-4 min-h-20 p-4 pt-7 text-gray-50" />
                             <Button className="ml-auto" variant={'circle'} type="submit">
                               Save changes
                             </Button>
