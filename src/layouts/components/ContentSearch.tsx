@@ -24,6 +24,7 @@ function ContentSearch() {
       try {
         setLoading(true);
         const res = await axios.get('http://localhost:3320/user/getUsers', { headers: { Authorization: `Bearer ${token}` } });
+        console.log(res.data);
         setUsers(res.data);
       } catch (error) {
         console.error(error);
@@ -47,9 +48,9 @@ function ContentSearch() {
           <CommandGroup>
             {users.map((u) => (
               <CommandItem value={`${u.name} ${u.username} `} className="w-full data-[selected=true]:border-gray-600 data-[selected=true]:bg-accent-0 data-[selected=true]:text-accent-foreground">
-                <NavLink to={`/${u.id}`} className="flex w-full pb-1 pt-1 pl-5 pr-5 hover:bg-slate-700 rounded-2xl">
+                <NavLink to={`/profile/${u.username}`} className="flex w-full pb-1 pt-1 pl-5 pr-5 hover:bg-slate-700 rounded-2xl">
                   <Avatar className="my-auto">
-                    <AvatarImage src={`.${u.avatar}`} alt="@shadcn" className="object-cover" />
+                    <AvatarImage src={`${u.avatar}`} alt="@shadcn" className="object-cover" />
                     <AvatarFallback>ZW</AvatarFallback>
                   </Avatar>
                   <div className="pl-5">
@@ -57,7 +58,7 @@ function ContentSearch() {
                     <p className="text-slate-400 text-xs pb-1">@{u.username}</p>
                     <p className="text-gray-200 text-xs pb-1">{u.bio}</p>
                   </div>
-                  <FollowButton id={u.id} isFollowing />
+                  <FollowButton id={u.id} isFollowing={u.isFollowingBack} />
                 </NavLink>
               </CommandItem>
             ))}
