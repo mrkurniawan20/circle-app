@@ -74,7 +74,7 @@ export function TweetList({ tweet }: TweetProps) {
             {t.image && <img src={`${t.image}`} className="2xl:max-w-fit xl:rounded-4xl pb-2 max-h-150 aspect-4/3 object-cover" alt="" />}
           </div>
 
-          <ThreadLike id={t.id} isLiked={t.isLiked} likeCount={t.likeCount} likedCount={t.likeCount} replyCount={t.replyCount} />
+          <ThreadLike id={t.id} isLiked={t.isLiked} likeCount={t.likeCount} replyCount={t.replyCount} />
         </div>
       ))}
     </div>

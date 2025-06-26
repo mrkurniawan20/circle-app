@@ -38,6 +38,7 @@ function Page() {
     likeCount: 0,
     replyCount: 0,
     createdAt: new Date(),
+    isLiked: false,
     user: {
       id: 0,
       name: '',
@@ -61,8 +62,14 @@ function Page() {
     async function fetchData() {
       try {
         setFetchLoading(true);
-        const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`);
-        setTweet(res.data);
+        if (token) {
+          const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+          console.log(res.data);
+          setTweet(res.data);
+        } else {
+          const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`);
+          setTweet(res.data);
+        }
       } catch (error) {
         console.error(error);
       } finally {
@@ -101,7 +108,9 @@ function Page() {
       if (formData.image) data.append('image', formData.image);
       setFetchLoading(true);
       await axios.post(`http://localhost:3320/post/replytweet/${id}`, data, { headers: { Authorization: `Bearer ${token}` } });
-      const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`);
+
+      const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      console.log(res.data);
       setTweet(res.data);
       setFormData({ reply: '' });
     } catch (error) {
@@ -148,7 +157,7 @@ function Page() {
 
                 <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
                 <div className="-ml-10 mt-3">
-                  <ThreadLike likeCount={tweet.likeCount} likedCount={tweet.likeCount + 1} replyCount={tweet.replyCount} />
+                  <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
                 </div>
 
                 <ListReply replies={tweet.reply} />
@@ -176,7 +185,7 @@ function Page() {
           </div>
           <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
           <div className="-ml-10 mt-3">
-            <ThreadLike likeCount={tweet.likeCount} likedCount={tweet.likeCount + 1} replyCount={tweet.replyCount} />
+            <ThreadLike id={tweet.id} likeCount={tweet.likeCount} isLiked={tweet.isLiked} replyCount={tweet.replyCount} />
           </div>
         </div>
       </Layout>
@@ -215,7 +224,7 @@ function Page() {
 
               <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
               <div className="-ml-10 mt-3">
-                <ThreadLike likeCount={tweet.likeCount} likedCount={tweet.likeCount + 1} replyCount={tweet.replyCount} />
+                <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
               </div>
 
               <form onSubmit={submitReply} className="flex gap-5 border-t border-b border-gray-500 p-5 bg-gray-800 mt-5">
@@ -273,7 +282,7 @@ function Page() {
         <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
 
         <div className="-ml-10 mt-3">
-          <ThreadLike likeCount={tweet.likeCount} likedCount={tweet.likeCount + 1} replyCount={tweet.replyCount} />
+          <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
         </div>
 
         <form onSubmit={submitReply} className="flex gap-5 border-t border-b border-gray-500 p-5 bg-gray-800 mt-5">

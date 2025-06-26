@@ -6,13 +6,12 @@ import { GoHeart, GoHeartFill } from 'react-icons/go';
 
 interface ThreadsLike {
   likeCount: string | number;
-  likedCount: string | number;
   replyCount: string | number;
   isLiked: boolean;
   id: number;
 }
 
-export function ThreadLike({ likedCount, likeCount, replyCount, isLiked, id }: ThreadsLike) {
+export function ThreadLike({ likeCount, replyCount, isLiked, id }: ThreadsLike) {
   // const { user } = useUser();
   const [like, setLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(Number(likeCount));

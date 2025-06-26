@@ -18,6 +18,7 @@ import Followers from './Followers';
 import ContentPageMedia from '@/layouts/components/ContentPageMedia';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import ProfileUsername from './ProfileUsername';
+import ProfileMediaUsername from './ProfileMediaUsername';
 
 let router = createBrowserRouter([
   {
@@ -93,10 +94,10 @@ let router = createBrowserRouter([
     path: '/profile/:username',
     Component: ProfileUsername,
   },
-  // {
-  //   path: '/follow',
-  //   Component: Follow,
-  // },
+  {
+    path: '/media/:username',
+    Component: PageTitle(ProfileMediaUsername, 'Profile | Circle'),
+  },
   // {
   //   path: '/following',
   //   Component: Following,

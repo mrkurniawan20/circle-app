@@ -48,12 +48,13 @@ function ProfileUsername() {
         if (token) {
           const user = await axios.get(`http://localhost:3320/user/getuser/${username}`, { headers: { Authorization: `Bearer ${token}` } });
           setProfileUser(user.data);
-          const tweet = await axios.get(`http://localhost:3320/post/gettweetbyid/${user.data.id}`);
+          const tweet = await axios.get(`http://localhost:3320/post/gettweetbyusername/${user.data.username}`, { headers: { Authorization: `Bearer ${token}` } });
           setTweet(tweet.data);
+          console.log(tweet.data);
         } else {
           const user = await axios.get(`http://localhost:3320/user/getuser/${username}`);
           setProfileUser(user.data);
-          const tweet = await axios.get(`http://localhost:3320/post/gettweetbyid/${user.data.id}`);
+          const tweet = await axios.get(`http://localhost:3320/post/gettweetbyusername/${user.data.username}`);
           setTweet(tweet.data);
         }
       } catch (error) {
@@ -108,11 +109,11 @@ function ProfileUsername() {
               <DataMyProfile loggedIn={profileUser} />{' '}
             </div>
             <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
-              <NavLink to={'/profile'} className="text-center text-xl text-gray-50 ">
+              <NavLink to={`/profile/${profileUser.username}`} className="text-center text-xl text-gray-50 ">
                 <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg duration-150">All Post</p>
                 <div className="bg-green-500 border-2 border-green-500 h-1 rounded-full"></div>
               </NavLink>
-              <NavLink to={'/profilemedia'} className="text-center text-xl text-gray-50">
+              <NavLink to={`/media/${profileUser.username}`} className="text-center text-xl text-gray-50">
                 <p className="pt-3 pb-3  hover:bg-slate-700 duration-150 rounded-lg">Media</p>
               </NavLink>
             </div>
