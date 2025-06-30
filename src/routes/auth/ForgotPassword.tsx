@@ -16,7 +16,7 @@ function ForgotPassword() {
     <div className="flex flex-col mx-auto w-fit pt-20">
       <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Forgot password" />
-      <Form title="login" inputs={formInputs} submit={handleSubmit} buttonText="Send Instruction" showDate={true} />
+      <Form title="login" inputs={formInputs} submit={handleSubmit} buttonText="Send Instruction" showDate={false} />
       <p className="text-gray-100 pt-2">
         Already have an account?{' '}
         <NavLink to={'/register'} className={({ isActive }) => `rounded ${isActive ? 'text-blue-500 font-bold' : 'text-green-500'} hover:text-green-800 transition-all`}>

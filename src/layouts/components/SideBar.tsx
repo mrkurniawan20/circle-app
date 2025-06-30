@@ -48,7 +48,7 @@ function SideBar({ user }: UserProps) {
     if (formData.image) data.append('image', formData.image);
 
     try {
-      await axios.post('https://circle-backend-ecru.vercel.app/post/posttweet', data, {
+      await axios.post('http://localhost:3320/post/posttweet', data, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setFormData({ post: '' });
@@ -60,7 +60,7 @@ function SideBar({ user }: UserProps) {
   }
 
   async function logOut() {
-    await axios.post('https://circle-backend-ecru.vercel.app/user/logoutUser', token, {
+    await axios.post('http://localhost:3320/user/logoutUser', token, {
       headers: { Authorization: `Bearer ${token}` },
     });
     localStorage.removeItem('token');

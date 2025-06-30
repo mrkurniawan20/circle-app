@@ -41,7 +41,7 @@ function ListReply({ replies }: ReplyListProps) {
       if (post) {
         data.append('post', post);
       }
-      await axios.patch(`https://circle-backend-ecru.vercel.app/post/editReply/${selectedTweet}`, data, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.patch(`http://localhost:3320/post/editReply/${selectedTweet}`, data, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
       console.error(error);
     }
@@ -49,7 +49,7 @@ function ListReply({ replies }: ReplyListProps) {
   async function deleteReply(id: number) {
     try {
       console.log(id);
-      await axios.delete(`https://circle-backend-ecru.vercel.app/post/deleteReply/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`http://localhost:3320/post/deleteReply/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
       console.error(error);
     }

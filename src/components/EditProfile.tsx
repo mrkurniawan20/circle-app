@@ -54,7 +54,7 @@ function EditProfile({ user }: UserProps) {
       if (formData.bio) data.append('bio', formData.bio);
       if (formData.avatar) data.append('avatar', formData.avatar);
       if (formData.header) data.append('header', formData.header);
-      await axios.patch(`https://circle-backend-ecru.vercel.app/user/editprofile/${user.id}`, data, {
+      await axios.patch(`http://localhost:3320/user/editprofile/${user.id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
     } catch (error) {

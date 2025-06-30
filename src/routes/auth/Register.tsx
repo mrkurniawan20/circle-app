@@ -5,9 +5,12 @@ import SubTitle from '@/components/SubTitle';
 import Form from '@/components/Form';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Loader2 } from 'lucide-react';
 
 function Register() {
   const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -32,19 +35,28 @@ function Register() {
 
   async function handleSubmit() {
     try {
-      console.log(formData.dateOfBirth);
-      const response = await axios.post('https://circle-backend-ecru.vercel.app/user/registerUser', formData);
+      setLoading(true);
+      const response = await axios.post('http://localhost:3320/user/registerUser', formData);
+      console.log(response.data);
       navigate('/login');
       console.log(response);
     } catch (error: any) {
       console.log(error.message);
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data.message;
+        setError(errorMessage);
+      }
+    } finally {
+      setLoading(false);
     }
   }
   return (
     <div className="flex flex-col mx-auto w-fit pt-20">
       <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Create account Circle" />
-      <Form title="login" inputs={formInputs} submit={handleSubmit} buttonText="Register" showDate={true} />
+      {error !== '' && <p className="text-center bg-red-500 text-white text-sm p-2 my-5 rounded-md">{error}</p>}
+      <Form title="login" inputs={formInputs} submit={handleSubmit} buttonText={loading ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : 'Register'} showDate={true} />
+
       <p className="text-gray-100 pt-3">
         Already have an account?{' '}
         <NavLink to={'/login'} className={({ isActive }) => `rounded ${isActive ? 'text-blue-500 font-bold' : 'text-green-500'} hover:text-green-800 transition-all`}>

@@ -55,7 +55,7 @@ function Page() {
     async function fetchData() {
       try {
         setFetchLoading(true);
-        const res = await axios.get(`https://circle-backend-ecru.vercel.app/post/gettweet/${id}`, {
+        const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         });
         setTweet(res.data);
@@ -89,11 +89,11 @@ function Page() {
       if (formData.reply) data.append('reply', formData.reply);
       if (formData.image) data.append('image', formData.image);
       setFetchLoading(true);
-      await axios.post(`https://circle-backend-ecru.vercel.app/post/replytweet/${id}`, data, {
+      await axios.post(`http://localhost:3320/post/replytweet/${id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      const res = await axios.get(`https://circle-backend-ecru.vercel.app/post/gettweet/${id}`, {
+      const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTweet(res.data);

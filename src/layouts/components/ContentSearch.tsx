@@ -19,7 +19,7 @@ function ContentSearch() {
     async function fetchData() {
       try {
         setLoading(true);
-        const res = await axios.get('https://circle-backend-ecru.vercel.app/user/getUsers', {
+        const res = await axios.get('http://localhost:3320/user/getUsers', {
           headers: { Authorization: `Bearer ${token}` },
           params: {
             name: debounceValue,

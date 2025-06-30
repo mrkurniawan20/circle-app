@@ -24,7 +24,7 @@ export function LoginForm() {
 
   async function handleSubmit() {
     try {
-      const res = await axios.post('https://circle-backend-ecru.vercel.app/user/loginUser', formData);
+      const res = await axios.post('http://localhost:3320/user/loginUser', formData);
       const token = res.data.loggedInUser.token;
       localStorage.setItem('token', token);
     } catch (error) {
@@ -40,11 +40,7 @@ export function LoginForm() {
     <div className="flex flex-col mx-auto w-fit pt-20">
       <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Login to Circle" />
-      {/* <form action="" className="my-form" onSubmit={handleSubmit}>
-        <input className="border-2 p-2 rounded-md border-gray-600" onChange={handleChange} type="email" name="email" id="email" placeholder="email" />
-        <input className="border-2 p-2 rounded-md border-gray-600" onChange={handleChange} type="password" name="password" id="password" placeholder="password" />
-        <button type="submit">Submit</button>
-      </form> */}
+
       <Form title="login" inputs={formInputs} change={handleChange} submit={handleSubmit} buttonText="Login" forgotPassword="Forgot password?" showDate={false} />
       <p className="text-gray-100 pt-3">
         Don't have an account yet?{' '}

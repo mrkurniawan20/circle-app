@@ -61,7 +61,7 @@ export function useUser() {
       const decoded = jwtDecode<Decoded>(token);
       const username = decoded.username;
       axios
-        .get(`https://circle-backend-ecru.vercel.app/user/getUser/${username}`, { headers: { Authorization: `Bearer ${token}` } })
+        .get(`http://localhost:3320/user/getUser/${username}`, { headers: { Authorization: `Bearer ${token}` } })
         .then((res) => {
           setUser(res.data);
         })

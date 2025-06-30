@@ -16,7 +16,7 @@ function ContentFollowing() {
     async function fetchData() {
       try {
         setLoading(true);
-        const res = await axios.get(`https://circle-backend-ecru.vercel.app/user/getfollowing/${username}`, { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get(`http://localhost:3320/user/getfollowing/${username}`, { headers: { Authorization: `Bearer ${token}` } });
         setUsers(res.data);
       } catch (error) {
         console.error(error);

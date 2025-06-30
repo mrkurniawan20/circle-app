@@ -15,7 +15,7 @@ function SuggestedAccount() {
     async function fetchData() {
       setLoading(true);
       try {
-        const res = await axios.get('https://circle-backend-ecru.vercel.app/user/getunfolloweduser', {
+        const res = await axios.get('http://localhost:3320/user/getunfolloweduser', {
           params: { limit: 5 },
           headers: { Authorization: `Bearer ${token}` },
         });

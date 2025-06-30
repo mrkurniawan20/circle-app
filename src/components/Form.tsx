@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { NavLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { ReactNode } from 'react';
 
 interface InputConfig {
   type: string;
@@ -17,7 +18,7 @@ interface FormProps {
   inputs: InputConfig[];
   submit?: any;
   change?: any;
-  buttonText: string;
+  buttonText: string | ReactNode;
   forgotPassword?: string;
   actions?: string;
   showDate: boolean;

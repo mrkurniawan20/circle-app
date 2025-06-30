@@ -23,7 +23,7 @@ function ContentHome({ user }: UserProps) {
     setLoading(true);
     async function fetchTweet() {
       try {
-        const tweets = await axios.get('https://circle-backend-ecru.vercel.app/post/getTweets/', { headers: { Authorization: `Bearer ${token}` } });
+        const tweets = await axios.get('http://localhost:3320/post/getTweets/', { headers: { Authorization: `Bearer ${token}` } });
         setTweet(tweets.data);
         console.log(tweets.data);
       } catch (error) {
@@ -56,8 +56,8 @@ function ContentHome({ user }: UserProps) {
       data.append(`image`, formData.image);
     }
     try {
-      await axios.post('https://circle-backend-ecru.vercel.app/post/posttweet/', data, { headers: { Authorization: `Bearer ${token}` } });
-      const tweets = await axios.get('https://circle-backend-ecru.vercel.app/post/getTweets/', { headers: { Authorization: `Bearer ${token}` } });
+      await axios.post('http://localhost:3320/post/posttweet/', data, { headers: { Authorization: `Bearer ${token}` } });
+      const tweets = await axios.get('http://localhost:3320/post/getTweets/', { headers: { Authorization: `Bearer ${token}` } });
       console.log(tweets.data);
       setTweet(tweets.data);
       setFormData({ post: '' });

@@ -13,7 +13,7 @@ function FollowButton({ id, isFollowing }: Follow) {
   async function followUser(e: React.MouseEvent) {
     e.preventDefault();
     try {
-      await axios.get(`https://circle-backend-ecru.vercel.app/user/followuser/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.get(`http://localhost:3320/user/followuser/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       setFollow(true);
     } catch (error) {
       console.error(error);
@@ -23,7 +23,7 @@ function FollowButton({ id, isFollowing }: Follow) {
     e.preventDefault();
     setFollow(false);
     try {
-      await axios.get(`https://circle-backend-ecru.vercel.app/user/unfollowuser/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.get(`http://localhost:3320/user/unfollowuser/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
       console.error(error);
     }
