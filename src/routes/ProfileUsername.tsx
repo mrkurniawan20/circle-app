@@ -98,12 +98,9 @@ function ProfileUsername() {
           </Dialog>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex justify-end pt-16 pb-4">{user.username === profileUser.username ? <EditProfile user={user} /> : <FollowButton id={profileUser.id} isFollowing={profileUser.isFollowingBack} />}</div>
-
-        {/* Bio & Info */}
-        <div className="pb-4">
+        <div className="flex pt-10 pb-4 items-center">
           <DataMyProfile loggedIn={profileUser} />
+          <div className="flex ml-auto ">{user.username === profileUser.username ? <EditProfile user={user} /> : <FollowButton id={profileUser.id} isFollowing={profileUser.isFollowingBack} />}</div>
         </div>
 
         {/* Tabs */}
