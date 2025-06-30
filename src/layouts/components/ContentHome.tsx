@@ -101,7 +101,7 @@ function ContentHome({ user }: UserProps) {
                 </div>
               )}
             </div>
-            <div className="flex justify-between ">
+            <div className="flex ml-auto items-center gap-x-5">
               <label htmlFor="postImage">
                 <ImagePlus className="size-6 text-green-500 hover:text-green-700 cursor-pointer transition duration-200" />
               </label>

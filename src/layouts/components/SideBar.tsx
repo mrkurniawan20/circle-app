@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogFooter, DialogTrigger } from '@/components
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import SideBarPage from '../../components/SideBarPage';
-import { ImagePlus, DoorOpen } from 'lucide-react';
+import { ImagePlus, DoorOpen, CircleX } from 'lucide-react';
 import { FaHome, FaSearch, FaRegHeart } from 'react-icons/fa';
 import { IoPersonCircleSharp } from 'react-icons/io5';
 import { Separator } from '@/components/ui/separator';
@@ -91,15 +91,21 @@ function SideBar({ user }: UserProps) {
               <LoadingPage />
             </DialogContent>
           ) : (
-            <DialogContent className="sm:max-w-[525px] md:min-w-[700px] bg-gray-800 border-none top-[25%] max-h-[90vh] overflow-y-auto">
+            <DialogContent className="sm:max-w-[525px] md:min-w-[700px] bg-gray-800 border-none top-[50%] max-h-[90vh] overflow-y-auto">
               <form onSubmit={handleSubmit}>
                 <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-[1fr_10fr] items-center">
+                  <div className=" items-center">
                     <Avatar className="my-auto">
                       <AvatarImage src={user.avatar} alt="@user" className="object-cover" />
                       <AvatarFallback>U</AvatarFallback>
                     </Avatar>
-                    <Input name="post" value={formData.post} onChange={handleChange} className="ml-2 resize-none w-full border-none shadow-none focus:ring-green-500 text-gray-100 md:text-xl" placeholder="What is happening?" />
+                    <Input name="post" value={formData.post} onChange={handleChange} className="py-10 px-0 resize-none w-full border-none shadow-none focus:ring-green-500 text-gray-100 md:text-xl" placeholder="What is happening?" />
+                    {formData.image && (
+                      <div className="mt-3 relative w-fit">
+                        <CircleX className="absolute -top-2 -right-2 text-gray-50 bg-black hover:bg-gray-600 hover:cursor-pointer size-5 p-1 rounded-full" onClick={() => setFormData((prev) => ({ ...prev, image: undefined }))} />
+                        <img src={URL.createObjectURL(formData.image)} alt="Preview" className="max-w-[200px] rounded-lg" />
+                      </div>
+                    )}
                   </div>
                 </div>
                 <Separator className="mb-5" />
