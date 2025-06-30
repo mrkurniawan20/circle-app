@@ -13,6 +13,11 @@ import { useUser } from '@/utils/useUser';
 import { api } from '@/services/api';
 
 export function TweetList({ tweet }: TweetProps) {
+  function formatCompactTime(date: Date | string) {
+    const [num, unit] = formatDistanceToNowStrict(new Date(date)).split(' ');
+
+    return num + (unit[0] === 'm' ? 'm' : unit[0]); // special case for "minutes"
+  }
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
   const { user } = useUser();
@@ -57,7 +62,7 @@ export function TweetList({ tweet }: TweetProps) {
                 <h2 className="text-gray-50 font-semibold hover:underline underline-offset-4">{t.user.name}</h2>
               </NavLink>
               <p className="text-slate-400 pl-3">
-                @{t.user.username} • <span className="hover:underline underline-offset-4">{formatDistanceToNowStrict(new Date(t.createdAt), { addSuffix: true })}</span>
+                @{t.user.username} • <span className="hover:underline underline-offset-4">{formatCompactTime(new Date(t.createdAt))}</span>
               </p>
             </div>
             {user.username == t.username && (

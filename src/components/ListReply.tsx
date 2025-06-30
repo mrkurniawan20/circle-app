@@ -26,6 +26,11 @@ interface ReplyListProps {
 }
 
 function ListReply({ replies }: ReplyListProps) {
+  function formatCompactTime(date: Date | string) {
+    const [num, unit] = formatDistanceToNowStrict(new Date(date)).split(' ');
+
+    return num + (unit[0] === 'm' ? 'm' : unit[0]); // special case for "minutes"
+  }
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const { user } = useUser();
@@ -69,7 +74,7 @@ function ListReply({ replies }: ReplyListProps) {
                 <h2 className="text-gray-50 font-semibold hover:underline underline-offset-4">{reply.user.name}</h2>
               </NavLink>
               <p className="text-slate-400 pl-3">
-                @{reply.user.username} • <span className="hover:underline underline-offset-4">{formatDistanceToNowStrict(new Date(reply.createdAt), { addSuffix: true })}</span>
+                @{reply.user.username} • <span className="hover:underline underline-offset-4">{formatCompactTime(new Date(reply.createdAt))}</span>
               </p>
             </div>
             {user.id == reply.userId && (
