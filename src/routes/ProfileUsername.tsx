@@ -30,91 +30,99 @@ function ProfileUsername() {
     followersCount: 0,
     followingCount: 0,
     tweet: [],
+    reply: [],
     isFollowingBack: false,
   });
+
   const [tweet, setTweet] = useState<Tweet[]>([]);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       try {
-        setLoading(true);
-        if (token) {
-          const user = await axios.get(`http://localhost:3320/user/getuser/${username}`, { headers: { Authorization: `Bearer ${token}` } });
-          setProfileUser(user.data);
-          const tweet = await axios.get(`http://localhost:3320/post/gettweetbyusername/${user.data.username}`, { headers: { Authorization: `Bearer ${token}` } });
-          setTweet(tweet.data);
-          console.log(tweet.data);
-        } else {
-          const user = await axios.get(`http://localhost:3320/user/getuser/${username}`);
-          setProfileUser(user.data);
-          const tweet = await axios.get(`http://localhost:3320/post/gettweetbyusername/${user.data.username}`);
-          setTweet(tweet.data);
-        }
+        const resUser = await axios.get(`http://localhost:3320/user/getuser/${username}`, {
+          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+        });
+        const resTweet = await axios.get(`http://localhost:3320/post/gettweetbyusername/${resUser.data.username}`, {
+          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+        });
+
+        setProfileUser(resUser.data);
+        setTweet(resTweet.data);
       } catch (error) {
         console.error(error);
       } finally {
         setLoading(false);
       }
     }
+
     fetchData();
   }, []);
 
+  if (loading) return <LoadingPage />;
+
   return (
-    <>
-      {loading ? (
-        <LoadingPage />
-      ) : (
-        <Layout showProfileContainer={false}>
+    <Layout showProfileContainer={false}>
+      <div className="w-full max-w-2xl mx-auto px-4 sm:px-6">
+        {/* Top Bar */}
+        <NavLink to="/home" className="flex items-center gap-3 pt-6 pb-2 hover:bg-slate-700 rounded-full px-4 w-fit">
+          <ArrowLeft className="size-6 text-gray-50" />
           <div>
-            <div className="inline-flex">
-              <NavLink to={'/home'} className="inline-flex items-center pt-10">
-                <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700">
-                  <ArrowLeft className="size-8 text-gray-50" />
-                  <div>
-                    <h2 className="text-2xl text-gray-100 font-semibold">{profileUser.name}</h2>
-                    <p className="text-sm text-slate-400">{profileUser.tweetCount} tweets</p>
-                  </div>
-                </div>
-              </NavLink>
-            </div>
-            <div className="p-10 pb-0 pt-2">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <img src={`${profileUser.header}`} alt="" className="aspect-5/1 object-cover rounded-2xl hover:cursor-pointer" />
-                </DialogTrigger>
-                <DialogOverlay className="bg-black/80">
-                  <DialogContent className="border-none md:min-w-full p-1 rounded-none ">
-                    <img src={`${profileUser.header}`} alt="" className="aspect-5/1 object-cover" />
-                  </DialogContent>
-                </DialogOverlay>
-              </Dialog>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <img src={`${profileUser.avatar}`} alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute hover:brightness-90 hover:cursor-pointer" />
-                </DialogTrigger>
-                <DialogOverlay className="bg-black/80">
-                  <DialogContent className="border-none md:w-fit p-1 rounded-full ">
-                    <img src={`${profileUser.avatar}`} alt="" className="aspect-square object-cover size-full rounded-full" />
-                  </DialogContent>
-                </DialogOverlay>
-              </Dialog>
-              <div className="flex pt-3 pb-5">{user.username == profileUser.username ? <EditProfile user={user} /> : <FollowButton id={profileUser.id} isFollowing={profileUser.isFollowingBack} />}</div>
-              <DataMyProfile loggedIn={profileUser} />{' '}
-            </div>
-            <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
-              <NavLink to={`/profile/${profileUser.username}`} className="text-center text-xl text-gray-50 ">
-                <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg duration-150">All Post</p>
-                <div className="bg-green-500 border-2 border-green-500 h-1 rounded-full"></div>
-              </NavLink>
-              <NavLink to={`/media/${profileUser.username}`} className="text-center text-xl text-gray-50">
-                <p className="pt-3 pb-3  hover:bg-slate-700 duration-150 rounded-lg">Media</p>
-              </NavLink>
-            </div>
-            <TweetList tweet={tweet} />
+            <h2 className="text-xl font-semibold text-gray-100">{profileUser.name}</h2>
+            <p className="text-sm text-slate-400">{profileUser.tweetCount} tweets</p>
           </div>
-        </Layout>
-      )}
-    </>
+        </NavLink>
+
+        {/* Header Image */}
+        <div className="relative mt-2">
+          <Dialog>
+            <DialogTrigger asChild>
+              <img src={profileUser.header} alt="" className="aspect-[5/1] object-cover w-full rounded-2xl cursor-pointer" />
+            </DialogTrigger>
+            <DialogOverlay className="bg-black/80" />
+            <DialogContent className="border-none p-1 rounded-none">
+              <img src={profileUser.header} alt="" className="aspect-[5/1] object-cover w-full" />
+            </DialogContent>
+          </Dialog>
+
+          {/* Avatar */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <img src={profileUser.avatar} alt="" className="size-24 object-cover rounded-full border-4 border-[#213547] absolute -bottom-12 left-4 cursor-pointer hover:brightness-90 transition" />
+            </DialogTrigger>
+            <DialogOverlay className="bg-black/80" />
+            <DialogContent className="border-none w-fit p-1 rounded-full">
+              <img src={profileUser.avatar} alt="" className="size-full object-cover rounded-full" />
+            </DialogContent>
+          </Dialog>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex justify-end pt-16 pb-4">{user.username === profileUser.username ? <EditProfile user={user} /> : <FollowButton id={profileUser.id} isFollowing={profileUser.isFollowingBack} />}</div>
+
+        {/* Bio & Info */}
+        <div className="pb-4">
+          <DataMyProfile loggedIn={profileUser} />
+        </div>
+
+        {/* Tabs */}
+        <div className="grid grid-cols-2 border-b border-gray-600 text-center font-semibold text-gray-100">
+          <NavLink to={`/profile/${profileUser.username}`} className="py-3 hover:bg-slate-700 rounded-t-lg">
+            All Posts
+            <div className="bg-green-500 h-1 rounded-full mt-1" />
+          </NavLink>
+          <NavLink to={`/media/${profileUser.username}`} className="py-3 hover:bg-slate-700 rounded-t-lg">
+            Media
+          </NavLink>
+        </div>
+
+        {/* Tweets */}
+        <div className="pt-4">
+          <TweetList tweet={tweet} />
+        </div>
+      </div>
+    </Layout>
   );
 }
 
