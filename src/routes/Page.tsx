@@ -46,6 +46,7 @@ function Page() {
       followersCount: 0,
       followingCount: 0,
       tweet: [],
+      reply: [],
       isFollowingBack: false,
     },
     reply: [],
@@ -73,7 +74,7 @@ function Page() {
   }, []);
 
   const [formData, setFormData] = useState<{
-    reply: string;
+    reply?: string;
     image?: File;
   }>({
     reply: '',

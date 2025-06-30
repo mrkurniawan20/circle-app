@@ -7,7 +7,7 @@ function ContainerMyProfile({ user }: UserProps) {
   return (
     <div className="first-profile-container bg-gray-800 pl-5 pr-5 rounded-xl relative max-w-[430px]">
       <div className="p-0 m-0 sm:max-w-fit">
-        <NavLink to={'/profile'} className="">
+        <NavLink to={`/profile/${user.username}`} className="">
           <h3 className="pt-3 pb-3 text-gray-100 text-xl font-semibold hover:underline underline-offset-6 sm:max-w-fit">My Profile</h3>
         </NavLink>
       </div>
