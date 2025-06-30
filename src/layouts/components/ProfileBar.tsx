@@ -6,20 +6,19 @@ import LoadingPage from './LoadingPage';
 
 function ProfileBar({ showProfileContainer = true }: { showProfileContainer?: boolean }) {
   const { user, loading } = useUser();
-  if (loading) {
-    return <LoadingPage />;
-  }
+  if (loading) return <LoadingPage />;
+
   return (
-    <div className="min-w-full">
-      <div className="sticky top-0 right-5 flex flex-col pt-10 px-10">
+    <aside className="w-full max-w-full px-4 pt-6 sticky top-0">
+      <div className="flex flex-col gap-6">
         {showProfileContainer && <ContainerMyProfile user={user!} />}
-        <div className="second-profile-container bg-gray-800 mt-5 rounded-xl max-w-[430px]">
-          <h3 className="text-xl font-semibold text-gray-50 pt-5 pb-5  pl-5 pr-5 ">Suggested for you </h3>
+        <div className="bg-gray-800 rounded-xl w-full max-w-[430px] overflow-hidden">
+          <h3 className="text-xl font-semibold text-gray-50 px-5 py-4">Suggested for you</h3>
           <SuggestedAccount />
         </div>
         <ContainerCredentials />
       </div>
-    </div>
+    </aside>
   );
 }
 

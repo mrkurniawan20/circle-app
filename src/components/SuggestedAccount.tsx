@@ -10,43 +10,45 @@ function SuggestedAccount() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem('token');
+
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
       try {
         const res = await axios.get('http://localhost:3320/user/getunfolloweduser', {
-          params: {
-            limit: 5,
-          },
+          params: { limit: 5 },
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(res.data);
       } catch (error) {
+        console.error(error);
       } finally {
         setLoading(false);
       }
     }
     fetchData();
   }, []);
+
   if (loading) return <LoadingPage />;
+
   return (
-    <>
-      {users.map((u, index) => (
-        <div className="flex" key={index}>
-          <NavLink to={`/profile/${u.username.toLocaleLowerCase()}`} className="profile flex py-2 px-5  w-full  hover:bg-slate-700 duration-100">
-            <Avatar className="my-auto">
-              <AvatarImage src={`${u.avatar}`} alt="@shadcn" className="object-cover" />
-              <AvatarFallback>ZW</AvatarFallback>
+    <div className="flex flex-col gap-1 pb-4">
+      {users.map((u) => (
+        <div key={u.id} className="hover:bg-slate-700 duration-100">
+          <NavLink to={`/profile/${u.username.toLowerCase()}`} className="flex items-center px-5 py-2 gap-3">
+            <Avatar className="shrink-0">
+              <AvatarImage src={u.avatar} alt="@user" className="object-cover" />
+              <AvatarFallback>U</AvatarFallback>
             </Avatar>
-            <div className="pl-5">
-              <h5 className="text-lg font-semibold text-gray-50">{u.name}</h5>
-              <p className="text-slate-400 text-sm pb-1">@{u.username}</p>
+            <div className="flex-grow">
+              <h5 className="text-gray-50 font-semibold text-sm">{u.name}</h5>
+              <p className="text-slate-400 text-xs">@{u.username}</p>
             </div>
             <FollowButton id={u.id} isFollowing={false} />
           </NavLink>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 
