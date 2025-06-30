@@ -20,19 +20,19 @@ function ContentHome({ user }: UserProps) {
   }>({
     post: '',
   });
-  useEffect(() => {
+  async function fetchTweet() {
     setLoading(true);
-    async function fetchTweet() {
-      try {
-        const tweets = await api.get(`/post/getTweets/`, { headers: { Authorization: `Bearer ${token}` } });
-        setTweet(tweets.data);
-        console.log(tweets.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
+    try {
+      const tweets = await api.get(`/post/getTweets/`, { headers: { Authorization: `Bearer ${token}` } });
+      setTweet(tweets.data);
+      console.log(tweets.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
+  }
+  useEffect(() => {
     fetchTweet();
   }, []);
   function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -68,6 +68,7 @@ function ContentHome({ user }: UserProps) {
       console.log(tweets.data);
       setTweet(tweets.data);
       setFormData({ post: '' });
+      await fetchTweet();
     } catch (error) {
       console.error(error);
     } finally {

@@ -175,7 +175,7 @@ function Page() {
 
   return (
     <Layout>
-      <div className="p-5">
+      <div className="p-2">
         <div className="inline-flex">
           <NavLink to="/home" className="inline-flex items-center pt-10">
             <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700 duration-200">
