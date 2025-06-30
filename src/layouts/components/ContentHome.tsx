@@ -73,30 +73,37 @@ function ContentHome({ user }: UserProps) {
       {loading ? (
         <LoadingPage />
       ) : (
-        <div>
-          <h2 className="text-2xl p-10 pb-0 text-gray-100 font-semibold">Home</h2>
-          <form onSubmit={handleSubmit} action="" className="flex gap-5 p-10 border-b-1 border-gray-500 xl:max-w-[600px] 2xl:max-w-screen">
-            <Avatar className="size-12">
-              <AvatarImage src={`${user.avatar}`} alt="@shadcn" className="object-cover" />
-              <AvatarFallback>ZW</AvatarFallback>
-            </Avatar>
-            <div className="flex-col max-w-full">
+        <div className="px-4 md:px-10 py-6 max-w-2xl mx-auto">
+          <h2 className="text-2xl text-gray-100 font-semibold mb-4">Home</h2>
+
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 border-b border-gray-600 pb-6">
+            <div className="flex gap-4">
+              <Avatar className="size-12 shrink-0">
+                <AvatarImage src={user.avatar} alt="@avatar" className="object-cover" />
+                <AvatarFallback>ZW</AvatarFallback>
+              </Avatar>
+
               <Textarea
                 name="post"
-                className="ml-2 resize-none 2xl:w-xl border-none shadow-none focus:ring-green-500 items-center text-gray-100 text-xl md:text-base placeholder:text-lg placeholder:font-semibold"
+                className="resize-none w-full border-none shadow-none focus:ring-green-500 text-gray-100 text-lg placeholder:text-lg placeholder:font-semibold"
                 placeholder="What is happening?"
                 onChange={handleChange}
                 value={formData.post}
-              ></Textarea>
+              />
             </div>
-            <div className="flex ms-auto gap-4">
+
+            <div className="flex justify-between items-center pl-16">
               <label htmlFor="postImage">
-                <ImagePlus className="size-10  text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
+                <ImagePlus className="size-6 text-green-500 hover:text-green-700 cursor-pointer transition duration-200" />
               </label>
               <input type="file" name="image" id="postImage" className="hidden" onChange={handleFile} />
-              <Button variant="circle">Post</Button>
+
+              <Button variant="circle" type="submit" className="ml-auto">
+                Post
+              </Button>
             </div>
           </form>
+
           <TweetList tweet={tweets} />
         </div>
       )}
