@@ -5,7 +5,7 @@ import { useUser } from '@/utils/useUser';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ThreadLike } from '@/components/ThreadLike';
-import { CircleX, ImagePlus, PanelRight } from 'lucide-react';
+import { ArrowLeft, CircleX, ImagePlus, PanelRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tweet } from '@/utils/setTweets';
 import axios from 'axios';
@@ -107,20 +107,18 @@ function Page() {
 
   if (loading) return <LoadingPage />;
 
-  // === IMAGE VIEW MODE ===
-  if (tweet.image) {
+  const isMobile = window.innerWidth < 768;
+  if (tweet.image && !isMobile) {
     return (
       <div className="flex h-screen w-full relative">
-        {/* Left image panel */}
         <div className={`bg-gray-800 border-r border-gray-700 flex justify-center items-center relative transition-all duration-200 ${imageOnly ? 'flex-[1] duration-300' : 'flex-[1_1_100%] duration-1000'}`}>
           <CircleX className="absolute text-gray-50 left-6 top-6 hover:bg-gray-600 hover:cursor-pointer size-10 p-2 rounded-full" onClick={() => navigate(-1)} />
           <PanelRight onClick={() => setImageOnly((show) => !show)} className="absolute text-gray-50 right-6 top-6 hover:bg-gray-600 size-10 p-2 rounded-full hover:cursor-pointer" />
-          <img src={tweet.image} className="my-auto max-h-full max-w-full absolute" alt="" />
+          <img src={tweet.image} className="my-auto max-h-full max-w-full absolute" alt="tweet" />
         </div>
 
-        {/* Right content panel */}
         {imageOnly && (
-          <div className="min-w-0 w-full max-w-xl overflow-y-scroll bg-[#213547] border-l border-gray-700 flex flex-col">
+          <div className="min-w-0 w-full max-w-xl overflow-y-auto bg-[#213547] border-l border-gray-700 flex flex-col">
             <div className="p-5 flex-1 w-full">
               <div className="flex">
                 <Avatar className="my-auto">
@@ -135,35 +133,28 @@ function Page() {
 
               <div className="py-3">
                 <p className="text-gray-100 break-words">{tweet.post}</p>
+                <img src={tweet.image} alt="tweet-mobile" className="md:hidden mt-3 rounded-lg" />
               </div>
 
               <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
 
-              <div className="">
-                <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
-              </div>
+              <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
+
               <form onSubmit={submitReply} className="flex items-start border-t border-b border-gray-500 px-5 py-4 bg-gray-800 w-full gap-3">
-                {/* Avatar */}
                 <Avatar className="size-10 mt-1">
                   <AvatarImage src={user.avatar} className="object-cover" />
                   <AvatarFallback>ZW</AvatarFallback>
                 </Avatar>
 
-                {/* Right side content, full width */}
                 <div className="flex flex-col w-full">
                   <input onChange={handleFile} type="file" name="replyImage" id="replyImage" className="hidden" />
-
                   <Input onChange={handleChange} value={formData.reply} name="reply" className="w-full border-none shadow-none focus:ring-green-500 text-gray-100 text-sm sm:text-base" placeholder="Type your reply..." />
-
-                  {/* Preview image if exists */}
                   {formData.image && (
                     <div className="mt-3 relative w-fit">
                       <CircleX className="absolute -top-2 -right-2 text-gray-50 bg-black hover:bg-gray-600 hover:cursor-pointer size-5 p-1 rounded-full" onClick={() => setFormData((prev) => ({ ...prev, image: undefined }))} />
                       <img src={URL.createObjectURL(formData.image)} alt="Preview" className="max-w-[200px] rounded-lg" />
                     </div>
                   )}
-
-                  {/* Bottom control bar */}
                   <div className="mt-4 flex justify-between items-center w-full">
                     <label htmlFor="replyImage">
                       <ImagePlus className="size-6 sm:size-7 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
@@ -175,7 +166,6 @@ function Page() {
                 </div>
               </form>
             </div>
-
             {fetchLoading ? <LoadingPage /> : <ListReply replies={tweet.reply} />}
           </div>
         )}
@@ -183,13 +173,13 @@ function Page() {
     );
   }
 
-  // === TEXT-ONLY TWEET VIEW ===
   return (
     <Layout>
       <div className="p-5">
         <div className="inline-flex">
           <NavLink to="/home" className="inline-flex items-center pt-10">
             <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700 duration-200">
+              <ArrowLeft className="text-gray-100" />
               <h2 className="text-2xl text-gray-100 font-semibold">Home</h2>
             </div>
           </NavLink>
@@ -207,34 +197,26 @@ function Page() {
         </div>
 
         <p className="text-gray-100 pb-2">{tweet.post}</p>
+        {tweet.image && <img src={tweet.image} alt="Tweet visual" className="rounded-lg my-4" />}
         <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
 
-        <div className="">
-          <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
-        </div>
+        <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
 
         <form onSubmit={submitReply} className="flex items-start border-t border-b border-gray-500 px-5 py-4 bg-gray-800 w-full gap-3">
-          {/* Avatar */}
           <Avatar className="size-10 mt-1">
             <AvatarImage src={user.avatar} className="object-cover" />
             <AvatarFallback>ZW</AvatarFallback>
           </Avatar>
 
-          {/* Right side content, full width */}
           <div className="flex flex-col w-full">
             <input onChange={handleFile} type="file" name="replyImage" id="replyImage" className="hidden" />
-
             <Input onChange={handleChange} value={formData.reply} name="reply" className="w-full border-none shadow-none focus:ring-green-500 text-gray-100 text-sm sm:text-base" placeholder="Type your reply..." />
-
-            {/* Preview image if exists */}
             {formData.image && (
               <div className="mt-3 relative w-fit">
                 <CircleX className="absolute -top-2 -right-2 text-gray-50 bg-black hover:bg-gray-600 hover:cursor-pointer size-5 p-1 rounded-full" onClick={() => setFormData((prev) => ({ ...prev, image: undefined }))} />
                 <img src={URL.createObjectURL(formData.image)} alt="Preview" className="max-w-[200px] rounded-lg" />
               </div>
             )}
-
-            {/* Bottom control bar */}
             <div className="mt-4 flex justify-between items-center w-full">
               <label htmlFor="replyImage">
                 <ImagePlus className="size-6 sm:size-7 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />

@@ -7,7 +7,7 @@ function Home() {
   const { user } = useOutletContext<{ user: User }>();
   return (
     <Layout>
-      <ContentHome user={user} />;
+      <ContentHome user={user} />
     </Layout>
   );
 }

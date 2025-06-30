@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '@/App.css';
 import CircleText from '@/components/CircleText';
 import SubTitle from '@/components/SubTitle';
 import Form from '@/components/Form';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Eraser } from 'lucide-react';
 
 function Register() {
   const navigate = useNavigate();
-  // const handleSubmit = (data: Record<string, string>) => {
-  //   console.log(`Form Data: ${data}`);
-  // };
+
   const [formData, setFormData] = useState({
     name: '',
     username: '',
@@ -33,16 +30,16 @@ function Register() {
     { label: 'password', change: handleChange, value: formData.password, type: 'password', name: 'password', id: 'password', placeholder: 'Password' },
   ];
 
-  async function handleSubmit(e: any) {
-    e.preventDefault();
+  async function handleSubmit(e: React.FormEvent) {
+    // e.preventDefault();
     try {
       console.log(formData.dateOfBirth);
-      const response = await axios.post('http://127.0.0.1:3320/user/registerUser', formData);
+      const response = await axios.post('http://localhost:3320/user/registerUser', formData);
       navigate('/login');
+      console.log(response);
     } catch (error: any) {
       console.log(error.message);
     }
-    // alert('Submitted');
   }
   return (
     <div className="flex flex-col mx-auto w-fit pt-20">

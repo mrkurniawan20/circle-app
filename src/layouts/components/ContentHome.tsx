@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '../../components/ui/button';
 import { Textarea } from '../../components/ui/textarea';
-import { ImagePlus } from 'lucide-react';
+import { CircleX, ImagePlus } from 'lucide-react';
 import { UserProps } from '@/utils/useUser';
 import axios from 'axios';
 import { Tweet } from '@/utils/setTweets';
@@ -93,11 +93,18 @@ function ContentHome({ user }: UserProps) {
             </div>
 
             <div className="flex justify-between items-center pl-16">
+              <input type="file" name="image" id="postImage" className="hidden" onChange={handleFile} />
+              {formData.image && (
+                <div className="mt-3 relative w-fit">
+                  <CircleX className="absolute -top-2 -right-2 text-gray-50 bg-black hover:bg-gray-600 hover:cursor-pointer size-5 p-1 rounded-full" onClick={() => setFormData((prev) => ({ ...prev, image: undefined }))} />
+                  <img src={URL.createObjectURL(formData.image)} alt="Preview" className="max-w-[200px] rounded-lg" />
+                </div>
+              )}
+            </div>
+            <div className="flex justify-between ">
               <label htmlFor="postImage">
                 <ImagePlus className="size-6 text-green-500 hover:text-green-700 cursor-pointer transition duration-200" />
               </label>
-              <input type="file" name="image" id="postImage" className="hidden" onChange={handleFile} />
-
               <Button variant="circle" type="submit" className="ml-auto">
                 Post
               </Button>
