@@ -25,18 +25,24 @@ function SideBar({ user }: UserProps) {
   const token = localStorage.getItem('token');
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<{ post: string; image?: File }>({ post: '' });
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
   const navigate = useNavigate();
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const value = e.target.value;
+    setButtonDisabled(value.trim() === '' && !formData.image);
   }
 
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const files = e.target.files;
     if (files && files[0].size > 5 * 1024 * 1024) {
       alert('File is too large');
-    } else if (files) {
+    }
+    if (files) {
       setFormData((prev) => ({ ...prev, image: files[0] }));
+      setButtonDisabled(false);
     }
   }
 
@@ -102,7 +108,13 @@ function SideBar({ user }: UserProps) {
                     <Input name="post" value={formData.post} onChange={handleChange} className="py-10 px-0 resize-none w-full border-none shadow-none focus:ring-green-500 text-gray-100 md:text-xl" placeholder="What is happening?" />
                     {formData.image && (
                       <div className="mt-3 relative w-fit">
-                        <CircleX className="absolute -top-2 -right-2 text-gray-50 bg-black hover:bg-gray-600 hover:cursor-pointer size-5 p-1 rounded-full" onClick={() => setFormData((prev) => ({ ...prev, image: undefined }))} />
+                        <CircleX
+                          className="absolute -top-2 -right-2 text-gray-50 bg-black hover:bg-gray-600 hover:cursor-pointer size-5 p-1 rounded-full"
+                          onClick={() => {
+                            setButtonDisabled(true);
+                            setFormData((prev) => ({ ...prev, image: undefined }));
+                          }}
+                        />
                         <img src={URL.createObjectURL(formData.image)} alt="Preview" className="max-w-[200px] rounded-lg" />
                       </div>
                     )}
@@ -116,7 +128,7 @@ function SideBar({ user }: UserProps) {
                     </label>
                     <Input type="file" name="imageDialog" id="imageDialog" className="hidden" onChange={handleFile} />
                   </div>
-                  <Button variant="circle" type="submit">
+                  <Button variant="circle" type="submit" disabled={buttonDisabled}>
                     Post
                   </Button>
                 </DialogFooter>

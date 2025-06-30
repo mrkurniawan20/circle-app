@@ -13,6 +13,7 @@ function ContentHome({ user }: UserProps) {
   const token = localStorage.getItem('token');
   const [tweets, setTweet] = useState<Tweet[]>([]);
   const [loading, setLoading] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [formData, setFormData] = useState<{
     post: string;
     image?: File;
@@ -35,7 +36,9 @@ function ContentHome({ user }: UserProps) {
     fetchTweet();
   }, []);
   function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    const value = e.target.value;
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setButtonDisabled(value.trim() === '' && !formData.image);
   }
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const files = e.target.files;
@@ -45,6 +48,7 @@ function ContentHome({ user }: UserProps) {
     }
     if (files) {
       setFormData((prev) => ({ ...prev, image: files[0] }));
+      setButtonDisabled(false);
     }
   }
   async function handleSubmit(e: React.FormEvent) {
@@ -54,6 +58,9 @@ function ContentHome({ user }: UserProps) {
     data.append('post', formData.post);
     if (formData.image) {
       data.append(`image`, formData.image);
+    }
+    if (!formData.image && formData.post == '') {
+      setButtonDisabled(true);
     }
     try {
       await axios.post('http://localhost:3320/post/posttweet/', data, { headers: { Authorization: `Bearer ${token}` } });
@@ -96,7 +103,13 @@ function ContentHome({ user }: UserProps) {
               <input type="file" name="image" id="postImage" className="hidden" onChange={handleFile} />
               {formData.image && (
                 <div className="mt-3 relative w-fit">
-                  <CircleX className="absolute -top-2 -right-2 text-gray-50 bg-black hover:bg-gray-600 hover:cursor-pointer size-5 p-1 rounded-full" onClick={() => setFormData((prev) => ({ ...prev, image: undefined }))} />
+                  <CircleX
+                    className="absolute -top-2 -right-2 text-gray-50 bg-black hover:bg-gray-600 hover:cursor-pointer size-5 p-1 rounded-full"
+                    onClick={() => {
+                      setFormData((prev) => ({ ...prev, image: undefined }));
+                      setButtonDisabled(true);
+                    }}
+                  />
                   <img src={URL.createObjectURL(formData.image)} alt="Preview" className="max-w-[200px] rounded-lg" />
                 </div>
               )}
@@ -105,7 +118,7 @@ function ContentHome({ user }: UserProps) {
               <label htmlFor="postImage">
                 <ImagePlus className="size-6 text-green-500 hover:text-green-700 cursor-pointer transition duration-200" />
               </label>
-              <Button variant="circle" type="submit" className="ml-auto">
+              <Button variant="circle" type="submit" className="ml-auto" disabled={buttonDisabled}>
                 Post
               </Button>
             </div>
