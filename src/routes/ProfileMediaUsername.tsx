@@ -16,6 +16,7 @@ function ProfileMediaUsername() {
   const token = localStorage.getItem('token');
   const { user } = useUser();
   const { username } = useParams();
+
   const [tweet, setTweets] = useState<Tweet[]>([]);
   const [loading, setLoading] = useState(false);
   const [profileUser, setProfileUser] = useState<User>({
@@ -32,94 +33,93 @@ function ProfileMediaUsername() {
     followersCount: 0,
     followingCount: 0,
     tweet: [],
+    reply: [],
     isFollowingBack: false,
   });
+
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
       try {
-        if (token) {
-          const user = await axios.get(`http://localhost:3320/user/getuser/${username}`, { headers: { Authorization: `Bearer ${token}` } });
-          setProfileUser(user.data);
-          const res = await axios.get(`http://localhost:3320/post/getTweetWithImage/${user.data.username}`, { headers: { Authorization: `Bearer ${token}` } });
-          setTweets(res.data);
-        } else {
-          const user = await axios.get(`http://localhost:3320/user/getuser/${username}`);
-          setProfileUser(user.data);
-          const tweet = await axios.get(`http://localhost:3320/post/gettweetbyusername/${user.data.username}`);
-          setTweets(tweet.data);
-        }
+        const userRes = await axios.get(`http://localhost:3320/user/getuser/${username}`, {
+          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+        });
+        const tweetRes = await axios.get(token ? `http://localhost:3320/post/getTweetWithImage/${userRes.data.username}` : `http://localhost:3320/post/gettweetbyusername/${userRes.data.username}`);
+
+        setProfileUser(userRes.data);
+        setTweets(tweetRes.data.filter((t: Tweet) => t.image));
       } catch (error) {
         console.error(error);
       } finally {
         setLoading(false);
       }
     }
+
     fetchData();
   }, []);
 
+  if (loading) return <LoadingPage />;
+
   return (
     <Layout showProfileContainer={false}>
-      {loading ? (
-        <LoadingPage />
-      ) : (
-        <div>
-          <div className="inline-flex">
-            <NavLink to={'/home'} className="inline-flex items-center pt-10">
-              <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700">
-                <ArrowLeft className="size-8 text-gray-50" />
+      <div className="w-full max-w-2xl mx-auto px-4 sm:px-6">
+        {/* Header with Back */}
+        <NavLink to="/home" className="flex items-center gap-3 pt-6 pb-2 hover:bg-slate-700 rounded-full px-4 w-fit">
+          <ArrowLeft className="size-6 text-gray-50" />
+          <h2 className="text-xl font-semibold text-gray-100">{profileUser.name}</h2>
+        </NavLink>
 
-                <h2 className="text-2xl text-gray-100 font-semibold">{profileUser.name}</h2>
-              </div>
-            </NavLink>
-          </div>
-          <div className="p-10 pb-0 pt-2">
-            {/* <img src={`./src/assets/img/${user.header}`} alt="" className="aspect-5/1  object-cover  rounded-2xl" />
-          <img src={`./src/assets/img/${user.avatar}`} alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute" /> */}
-            <Dialog>
-              <DialogTrigger asChild>
-                <img src={`${profileUser.header}`} alt="" className="aspect-5/1 object-cover rounded-2xl hover:cursor-pointer" />
-              </DialogTrigger>
-              <DialogOverlay className="bg-black/80">
-                <DialogContent className="border-none md:min-w-full p-1 rounded-none ">
-                  <img src={`${profileUser.header}`} alt="" className="aspect-5/1 object-cover" />
-                </DialogContent>
-              </DialogOverlay>
-            </Dialog>
-            <Dialog>
-              <DialogTrigger asChild>
-                <img src={`${profileUser.avatar}`} alt="" className="aspect-square object-cover size-25 rounded-full border-5 border-[#213547] ml-10 -mt-12 absolute hover:brightness-90 hover:cursor-pointer" />
-              </DialogTrigger>
-              <DialogOverlay className="bg-black/80">
-                <DialogContent className="border-none md:w-fit p-1 rounded-full ">
-                  <img src={`${profileUser.avatar}`} alt="" className="aspect-square object-cover size-full rounded-full" />
-                </DialogContent>
-              </DialogOverlay>
-            </Dialog>
-            <div className="flex pt-3 pb-5">{user.username == profileUser.username ? <EditProfile user={user} /> : <FollowButton id={profileUser.id} isFollowing={profileUser.isFollowingBack} />}</div>
-            <DataMyProfile loggedIn={profileUser} />
-          </div>
-          <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
-            <NavLink to={`/profile/${profileUser.username}`} className="text-center text-xl text-gray-50 ">
-              <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg duration-150">All Post</p>
-            </NavLink>
-            <NavLink to={`/media/${profileUser.username}`} className="text-center text-xl text-gray-50">
-              <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg duration-150">Media</p>
-              <div className="bg-green-500 border-2 border-green-500 h-1 rounded-full"></div>
-            </NavLink>
-          </div>
-          <div className="grid grid-cols-3 gap-2 p-2">
-            {tweet.map(
-              (img, index) =>
-                img.image && (
-                  <div key={index} onClick={() => navigate(`/page/${img.id}`, { state: { index: index } })}>
-                    <img src={`${img.image}`} alt="" className="rounded-lg aspect-square object-cover hover:brightness-75 hover:cursor-pointer" />
-                  </div>
-                )
-            )}
-          </div>
+        {/* Header and Avatar */}
+        <div className="relative mt-2">
+          <Dialog>
+            <DialogTrigger asChild>
+              <img src={profileUser.header} alt="" className="aspect-[5/1] object-cover w-full rounded-2xl cursor-pointer" />
+            </DialogTrigger>
+            <DialogOverlay className="bg-black/80" />
+            <DialogContent className="border-none p-1 rounded-none">
+              <img src={profileUser.header} alt="" className="aspect-[5/1] object-cover w-full" />
+            </DialogContent>
+          </Dialog>
+
+          <Dialog>
+            <DialogTrigger asChild>
+              <img src={profileUser.avatar} alt="" className="size-24 object-cover rounded-full border-4 border-[#213547] absolute -bottom-12 left-4 cursor-pointer hover:brightness-90 transition" />
+            </DialogTrigger>
+            <DialogOverlay className="bg-black/80" />
+            <DialogContent className="border-none w-fit p-1 rounded-full">
+              <img src={profileUser.avatar} alt="" className="size-full object-cover rounded-full" />
+            </DialogContent>
+          </Dialog>
         </div>
-      )}
+
+        {/* Follow/Edit Button */}
+        <div className="flex justify-end pt-16 pb-4">{user.username === profileUser.username ? <EditProfile user={user} /> : <FollowButton id={profileUser.id} isFollowing={profileUser.isFollowingBack} />}</div>
+
+        {/* Bio & Info */}
+        <div className="pb-4">
+          <DataMyProfile loggedIn={profileUser} />
+        </div>
+
+        {/* Tabs */}
+        <div className="grid grid-cols-2 border-b border-gray-600 text-center font-semibold text-gray-100">
+          <NavLink to={`/profile/${profileUser.username}`} className="py-3 hover:bg-slate-700 rounded-t-lg">
+            All Posts
+          </NavLink>
+          <NavLink to={`/media/${profileUser.username}`} className="py-3 hover:bg-slate-700 rounded-t-lg">
+            Media
+            <div className="bg-green-500 h-1 rounded-full mt-1" />
+          </NavLink>
+        </div>
+
+        {/* Media Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 py-4">
+          {tweet.map((img, index) => (
+            <div key={index} onClick={() => navigate(`/page/${img.id}`, { state: { index } })} className="cursor-pointer">
+              <img src={img.image} alt="" className="aspect-square object-cover rounded-lg hover:brightness-75 transition duration-150" />
+            </div>
+          ))}
+        </div>
+      </div>
     </Layout>
   );
 }
