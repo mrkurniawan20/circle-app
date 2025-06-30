@@ -7,7 +7,7 @@ import { Button } from './ui/button';
 import { ThreadLike } from './ThreadLike';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { TweetProps } from '@/utils/setTweets'; // <- your interface
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNowStrict } from 'date-fns';
 import { Input } from './ui/input';
 import axios from 'axios';
 import { useUser } from '@/utils/useUser';
@@ -57,7 +57,7 @@ export function TweetList({ tweet }: TweetProps) {
                 <h2 className="text-gray-50 font-semibold hover:underline underline-offset-4">{t.user.name}</h2>
               </NavLink>
               <p className="text-slate-400 pl-3">
-                @{t.user.username} • <span className="hover:underline underline-offset-4">{formatDistanceToNow(new Date(t.createdAt), { addSuffix: true })}</span>
+                @{t.user.username} • <span className="hover:underline underline-offset-4">{formatDistanceToNowStrict(new Date(t.createdAt), { addSuffix: true })}</span>
               </p>
             </div>
             {user.username == t.username && (

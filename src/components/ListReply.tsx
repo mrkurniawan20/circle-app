@@ -8,6 +8,7 @@ import { User, useUser } from '@/utils/useUser';
 import { useState } from 'react';
 import axios from 'axios';
 import { Input } from './ui/input';
+import { formatDistanceToNowStrict } from 'date-fns';
 
 export interface Reply {
   id: number;
@@ -68,7 +69,7 @@ function ListReply({ replies }: ReplyListProps) {
                 <h2 className="text-gray-50 font-semibold hover:underline underline-offset-4">{reply.user.name}</h2>
               </NavLink>
               <p className="text-slate-400 pl-3">
-                @{reply.user.username} • <span className="hover:underline underline-offset-4">{new Date(reply.createdAt).toLocaleDateString()}</span>
+                @{reply.user.username} • <span className="hover:underline underline-offset-4">{formatDistanceToNowStrict(new Date(reply.createdAt), { addSuffix: true })}</span>
               </p>
             </div>
             {user.id == reply.userId && (
