@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { User, useUser } from '@/utils/useUser';
-import axios from 'axios';
 import LoadingPage from './LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FollowButton from '@/components/FollowButton';
+import { api } from '@/services/api';
 
 function ContentFollowing() {
   const token = localStorage.getItem('token');
@@ -16,7 +16,7 @@ function ContentFollowing() {
     async function fetchData() {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:3320/user/getfollowing/${username}`, { headers: { Authorization: `Bearer ${token}` } });
+        const res = await api.get(`/user/getfollowing/${username}`, { headers: { Authorization: `Bearer ${token}` } });
         setUsers(res.data);
       } catch (error) {
         console.error(error);

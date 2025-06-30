@@ -1,8 +1,8 @@
-import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import { Tweet } from './setTweets';
 import { Reply } from '@/components/ListReply';
+import { api } from '@/services/api';
 
 export interface Decoded {
   id: number;
@@ -60,8 +60,8 @@ export function useUser() {
     try {
       const decoded = jwtDecode<Decoded>(token);
       const username = decoded.username;
-      axios
-        .get(`http://localhost:3320/user/getUser/${username}`, { headers: { Authorization: `Bearer ${token}` } })
+      api
+        .get(`/user/getUser/${username}`, { headers: { Authorization: `Bearer ${token}` } })
         .then((res) => {
           setUser(res.data);
         })

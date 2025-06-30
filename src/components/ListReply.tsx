@@ -6,9 +6,9 @@ import { Button } from './ui/button';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { User, useUser } from '@/utils/useUser';
 import { useState } from 'react';
-import axios from 'axios';
 import { Input } from './ui/input';
 import { formatDistanceToNowStrict } from 'date-fns';
+import { api } from '@/services/api';
 
 export interface Reply {
   id: number;
@@ -41,7 +41,7 @@ function ListReply({ replies }: ReplyListProps) {
       if (post) {
         data.append('post', post);
       }
-      await axios.patch(`http://localhost:3320/post/editReply/${selectedTweet}`, data, { headers: { Authorization: `Bearer ${token}` } });
+      await api.patch(`/post/editReply/${selectedTweet}`, data, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
       console.error(error);
     }
@@ -49,7 +49,7 @@ function ListReply({ replies }: ReplyListProps) {
   async function deleteReply(id: number) {
     try {
       console.log(id);
-      await axios.delete(`http://localhost:3320/post/deleteReply/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await api.delete(`/post/deleteReply/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
       console.error(error);
     }

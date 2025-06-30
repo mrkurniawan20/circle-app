@@ -10,9 +10,9 @@ import { ImagePlus, DoorOpen, CircleX } from 'lucide-react';
 import { FaHome, FaSearch, FaRegHeart } from 'react-icons/fa';
 import { IoPersonCircleSharp } from 'react-icons/io5';
 import { Separator } from '@/components/ui/separator';
-import axios from 'axios';
 import { UserProps } from '@/utils/useUser';
 import LoadingPage from './LoadingPage';
+import { api } from '@/services/api';
 
 function SideBar({ user }: UserProps) {
   const pages = [
@@ -54,7 +54,7 @@ function SideBar({ user }: UserProps) {
     if (formData.image) data.append('image', formData.image);
 
     try {
-      await axios.post('http://localhost:3320/post/posttweet', data, {
+      await api.post(`/post/posttweet`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setFormData({ post: '' });
@@ -66,7 +66,7 @@ function SideBar({ user }: UserProps) {
   }
 
   async function logOut() {
-    await axios.post('http://localhost:3320/user/logoutUser', token, {
+    await api.post(`/user/logoutUser`, token, {
       headers: { Authorization: `Bearer ${token}` },
     });
     localStorage.removeItem('token');

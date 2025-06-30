@@ -7,9 +7,9 @@ import { ArrowLeft } from 'lucide-react';
 import { Dialog, DialogContent, DialogOverlay, DialogTrigger } from '@/components/ui/dialog';
 import { User, useUser } from '@/utils/useUser';
 import { Tweet } from '@/utils/setTweets';
-import axios from 'axios';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import FollowButton from '@/components/FollowButton';
+import { api } from '@/services/api';
 
 function ProfileMediaUsername() {
   const navigate = useNavigate();
@@ -41,10 +41,10 @@ function ProfileMediaUsername() {
     async function fetchData() {
       setLoading(true);
       try {
-        const userRes = await axios.get(`http://localhost:3320/user/getuser/${username}`, {
+        const userRes = await api.get(`/user/getuser/${username}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         });
-        const tweetRes = await axios.get(token ? `http://localhost:3320/post/getTweetWithImage/${userRes.data.username}` : `http://localhost:3320/post/gettweetbyusername/${userRes.data.username}`);
+        const tweetRes = await api.get(token ? `/post/getTweetWithImage/${userRes.data.username}` : `/post/gettweetbyusername/${userRes.data.username}`);
 
         setProfileUser(userRes.data);
         setTweets(tweetRes.data.filter((t: Tweet) => t.image));

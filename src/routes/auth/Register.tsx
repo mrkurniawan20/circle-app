@@ -6,6 +6,7 @@ import Form from '@/components/Form';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Loader2 } from 'lucide-react';
+import { api } from '@/services/api';
 
 function Register() {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ function Register() {
   async function handleSubmit() {
     try {
       setLoading(true);
-      const response = await axios.post('http://localhost:3320/user/registerUser', formData);
+      const response = await api.post(`/user/registerUser`, formData);
       console.log(response.data);
       navigate('/login');
       console.log(response);

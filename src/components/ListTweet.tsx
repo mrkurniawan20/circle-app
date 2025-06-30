@@ -9,8 +9,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { TweetProps } from '@/utils/setTweets'; // <- your interface
 import { formatDistanceToNowStrict } from 'date-fns';
 import { Input } from './ui/input';
-import axios from 'axios';
 import { useUser } from '@/utils/useUser';
+import { api } from '@/services/api';
 
 export function TweetList({ tweet }: TweetProps) {
   const token = localStorage.getItem('token');
@@ -29,7 +29,7 @@ export function TweetList({ tweet }: TweetProps) {
         data.append('post', post);
         console.log(data);
       }
-      await axios.patch(`http://localhost:3320/post/edittweet/${selectedTweet}`, data, { headers: { Authorization: `Bearer ${token}` } });
+      await api.patch(`/post/edittweet/${selectedTweet}`, data, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
       console.error(error);
     }
@@ -37,7 +37,7 @@ export function TweetList({ tweet }: TweetProps) {
   async function deleteTweet(id: number) {
     try {
       console.log(id);
-      await axios.delete(`http://localhost:3320/post/deleteTweet/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await api.delete(`/post/deleteTweet/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
       console.error(error);
     }

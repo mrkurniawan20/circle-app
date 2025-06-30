@@ -3,8 +3,9 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import CircleText from '@/components/CircleText';
 import SubTitle from '@/components/SubTitle';
 import Form from '@/components/Form';
-import axios from 'axios';
 import { Loader2 } from 'lucide-react';
+import { api } from '@/services/api';
+import axios from 'axios';
 
 export function LoginForm() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export function LoginForm() {
   async function handleSubmit() {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:3320/user/loginUser', formData);
+      const res = await api.post(`/user/loginUser`, formData);
       const token = res.data.loggedInUser.token;
       localStorage.setItem('token', token);
       navigate('/home');

@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import FollowButton from './FollowButton';
-import axios from 'axios';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import { User } from '@/utils/useUser';
+import { api } from '@/services/api';
 
 function SuggestedAccount() {
   const [users, setUsers] = useState<User[]>([]);
@@ -15,7 +15,7 @@ function SuggestedAccount() {
     async function fetchData() {
       setLoading(true);
       try {
-        const res = await axios.get('http://localhost:3320/user/getunfolloweduser', {
+        const res = await api.get(`/user/getunfolloweduser`, {
           params: { limit: 5 },
           headers: { Authorization: `Bearer ${token}` },
         });

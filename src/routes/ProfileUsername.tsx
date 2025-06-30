@@ -8,9 +8,9 @@ import { ArrowLeft } from 'lucide-react';
 import { User, useUser } from '@/utils/useUser';
 import { TweetList } from '@/components/ListTweet';
 import { Tweet } from '@/utils/setTweets';
-import axios from 'axios';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import FollowButton from '@/components/FollowButton';
+import { api } from '@/services/api';
 
 function ProfileUsername() {
   const token = localStorage.getItem('token');
@@ -41,10 +41,10 @@ function ProfileUsername() {
     async function fetchData() {
       setLoading(true);
       try {
-        const resUser = await axios.get(`http://localhost:3320/user/getuser/${username}`, {
+        const resUser = await api.get(`/user/getuser/${username}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         });
-        const resTweet = await axios.get(`http://localhost:3320/post/gettweetbyusername/${resUser.data.username}`, {
+        const resTweet = await api.get(`/post/gettweetbyusername/${resUser.data.username}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         });
 

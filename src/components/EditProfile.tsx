@@ -4,8 +4,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from '@/components/ui/input';
 import { ImagePlus } from 'lucide-react';
 import { UserProps } from '@/utils/useUser';
-import axios from 'axios';
 import LoadingPage from '@/layouts/components/LoadingPage';
+import { api } from '@/services/api';
 
 function EditProfile({ user }: UserProps) {
   const token = localStorage.getItem('token');
@@ -54,7 +54,7 @@ function EditProfile({ user }: UserProps) {
       if (formData.bio) data.append('bio', formData.bio);
       if (formData.avatar) data.append('avatar', formData.avatar);
       if (formData.header) data.append('header', formData.header);
-      await axios.patch(`http://localhost:3320/user/editprofile/${user.id}`, data, {
+      await api.patch(`/user/editprofile/${user.id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
     } catch (error) {

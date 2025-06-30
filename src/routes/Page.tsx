@@ -8,9 +8,9 @@ import { ThreadLike } from '@/components/ThreadLike';
 import { ArrowLeft, CircleX, ImagePlus, PanelRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tweet } from '@/utils/setTweets';
-import axios from 'axios';
 import ListReply from '@/components/ListReply';
 import { Input } from '@/components/ui/input';
+import { api } from '@/services/api';
 
 function Page() {
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ function Page() {
     async function fetchData() {
       try {
         setFetchLoading(true);
-        const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`, {
+        const res = await api.get(`/post/gettweet/${id}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         });
         setTweet(res.data);
@@ -89,11 +89,11 @@ function Page() {
       if (formData.reply) data.append('reply', formData.reply);
       if (formData.image) data.append('image', formData.image);
       setFetchLoading(true);
-      await axios.post(`http://localhost:3320/post/replytweet/${id}`, data, {
+      await api.post(`/post/replytweet/${id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`, {
+      const res = await api.get(`/post/gettweet/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTweet(res.data);

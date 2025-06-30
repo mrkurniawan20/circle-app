@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom';
 
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { User } from '@/utils/useUser';
-import axios from 'axios';
 import LoadingPage from './LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FollowButton from '@/components/FollowButton';
 import { useDebounce } from '@/utils/useDebounce';
+import { api } from '@/services/api';
 
 function ContentSearch() {
   const token = localStorage.getItem('token');
@@ -19,7 +19,7 @@ function ContentSearch() {
     async function fetchData() {
       try {
         setLoading(true);
-        const res = await axios.get('http://localhost:3320/user/getUsers', {
+        const res = await api.get(`/user/getUsers`, {
           headers: { Authorization: `Bearer ${token}` },
           params: {
             name: debounceValue,
