@@ -3,13 +3,11 @@ import Register from './auth/Register';
 import { LoginForm } from './auth/Login';
 import ForgotPassword from './auth/ForgotPassword';
 import ResetPassword from './auth/ResetPassword';
-// import Login from './auth/DeprecatedLogin';
 import Home from './Home';
 import Page from './Page';
 import Search from './Search';
 import Following from './Following';
 import ProtectedRouteLayout from './ProtectedRoute';
-// import LoginForm from '@/components/auth/MyForm';
 import PageTitle from '@/layouts/components/PageTitle';
 import Followers from './Followers';
 import LoadingPage from '@/layouts/components/LoadingPage';
@@ -20,14 +18,6 @@ let router = createBrowserRouter([
   {
     Component: ProtectedRouteLayout,
     children: [
-      // {
-      //   path: '',
-      //   Component: PageTitle(Home, 'Home | Circle'),
-      // },
-      // {
-      //   path: '/profile',
-      //   Component: PageTitle(Profile, 'Profile | Circle'),
-      // },
       {
         path: '/followers/:username',
         Component: PageTitle(Followers, 'Followers | Circle'),
@@ -40,10 +30,6 @@ let router = createBrowserRouter([
         path: '/home',
         Component: PageTitle(Home, 'Home | Circle'),
       },
-      // {
-      //   path: '/profilemedia',
-      //   Component: PageTitle(ProfileMedia, 'Profile | Circle'),
-      // },
       {
         path: '/search',
         Component: PageTitle(Search, 'Search | Circle'),

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 interface InputConfig {
   type: string;
   name: string;
-  value: string;
+  value?: string;
   label: string;
   id: string;
   change(e: any): void;
@@ -15,7 +15,7 @@ interface InputConfig {
 interface FormProps {
   title: string;
   inputs: InputConfig[];
-  submit: any;
+  submit?: any;
   change?: any;
   buttonText: string;
   forgotPassword?: string;
@@ -24,14 +24,8 @@ interface FormProps {
 }
 
 function Form({ inputs, submit, buttonText, forgotPassword, actions, showDate }: FormProps) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  function onSubmit(data: {}) {
-    console.log(data);
-  }
+  const { register, handleSubmit } = useForm();
+
   return (
     <form action={`${actions}`} onSubmit={handleSubmit(submit)} className="flex flex-col" method="POST" encType="multipart/form-data">
       {inputs.map((input, index) => (

@@ -1,18 +1,9 @@
-import { AuthContext } from '@/assets/contexts/auth';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import CircleText from '@/components/CircleText';
 import SubTitle from '@/components/SubTitle';
-import { useUserStore } from '@/stores/auth';
 import Form from '@/components/Form';
 import axios from 'axios';
-import { loggedInUser } from '@/stores/loggedInUser';
-import { useForm } from 'react-hook-form';
-
-interface LoginFormState {
-  email: string;
-  password: string;
-}
 
 export function LoginForm() {
   const navigate = useNavigate();
@@ -31,23 +22,15 @@ export function LoginForm() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  async function handleSubmit(event: React.FormEvent) {
+  async function handleSubmit() {
     try {
       const res = await axios.post('http://127.0.0.1:3320/user/loginUser', formData);
       const token = res.data.loggedInUser.token;
       localStorage.setItem('token', token);
-      // const user = res.data.loggedInUser.user;
-      //user yang di-return semua key
-      // localStorage.setItem('user', user);
-      // useUser();
-      // console.log(`user's name is ${user}`);
-
-      // console.log(token);
     } catch (error) {
     } finally {
       navigate('/home');
     }
-    // alert(`Hello, my name is ${formState.username}\nmy age is ${formState.age}`);
   }
   const formInputs = [
     { label: 'email', change: handleChange, value: formData.email, type: 'email', name: 'email', id: 'email', placeholder: 'Email/Username' },

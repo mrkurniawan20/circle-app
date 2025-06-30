@@ -1,23 +1,39 @@
-import React from 'react';
 import '@/App.css';
 import CircleText from '@/components/CircleText';
 import SubTitle from '@/components/SubTitle';
 import Form from '@/components/Form';
-import { NavLink } from 'react-router-dom';
 
 function ResetPassword() {
   const handleSubmit = (data: Record<string, string>) => {
     console.log(`Form Data: ${data}`);
   };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(`${e.target.name}: ${e.target.value}`);
+  };
+
   const formInputs = [
-    { label: 'password', type: 'password', name: 'password', id: 'id', placeholder: 'New Password' },
-    { label: 'confirmPassword', type: 'confirmPassword', name: 'confirmPassword', id: 'id', placeholder: 'Confirm New Password' },
+    {
+      label: 'password',
+      type: 'password',
+      name: 'password',
+      id: 'password',
+      placeholder: 'New Password',
+      change: handleChange,
+    },
+    {
+      label: 'confirmPassword',
+      type: 'password', // ← this should not be `confirmPassword`, just `password`
+      name: 'confirmPassword',
+      id: 'confirmPassword',
+      placeholder: 'Confirm New Password',
+      change: handleChange,
+    },
   ];
   return (
     <div className="flex flex-col mx-auto w-fit pt-20">
       <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Reset your password" />
-      <Form title="login" inputs={formInputs} submit={handleSubmit} buttonText="Create New Password" />
+      <Form showDate={false} title="login" inputs={formInputs} submit={handleSubmit} buttonText="Create New Password" />
     </div>
   );
 }

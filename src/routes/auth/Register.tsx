@@ -30,8 +30,7 @@ function Register() {
     { label: 'password', change: handleChange, value: formData.password, type: 'password', name: 'password', id: 'password', placeholder: 'Password' },
   ];
 
-  async function handleSubmit(e: React.FormEvent) {
-    // e.preventDefault();
+  async function handleSubmit() {
     try {
       console.log(formData.dateOfBirth);
       const response = await axios.post('http://localhost:3320/user/registerUser', formData);

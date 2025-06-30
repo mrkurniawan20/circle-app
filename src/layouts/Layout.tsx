@@ -45,8 +45,6 @@ function Layout({ children, showProfileContainer = true, minimal = false }: Layo
         </div>
       </div>
 
-      {/* Desktop Grid Layout */}
-      {/* <div className="min-h-screen flex flex-col xl:grid xl:grid-cols-[250px_600px_auto] 2xl:grid-cols-[0.4fr_1fr_0.4fr]"> */}
       <div className="2xl:grid 2xl:grid-cols-[250px_1fr_430px] xl:grid xl:grid-cols-[250px_1fr_430px]">
         <div className="hidden xl:block">
           <SideBar user={user!} />
