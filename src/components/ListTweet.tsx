@@ -49,9 +49,9 @@ export function TweetList({ tweet }: TweetProps) {
   }
 
   return (
-    <div className="2xl:w-full xl:w-[600px]">
+    <div className="2xl:w-full xl:w-full">
       {tweet.map((t, index) => (
-        <div onClick={() => navigate(`/page/${t.id}`, { state: { index } })} key={index} className="border-b-1 py-5  border-gray-500 hover:bg-gray-700 hover:cursor-pointer">
+        <div onClick={() => navigate(`/page/${t.id}`, { state: { index } })} key={index} className="border-b-1 px-2 py-5  border-gray-500 hover:bg-gray-700 hover:cursor-pointer">
           <div className="flex pt-5">
             <Avatar className="my-auto size-12">
               <AvatarImage src={`${t.user.avatar}`} alt="@shadcn" className="object-cover" />

@@ -81,8 +81,8 @@ function ContentHome({ user }: UserProps) {
       {loading ? (
         <LoadingPage />
       ) : (
-        <div className="px-4 md:px-10 py-6 max-w-2xl mx-auto">
-          <h2 className="text-2xl text-gray-100 font-semibold mb-4">Home</h2>
+        <div className="px-2 py-6 max-w-2xl mx-auto">
+          <h2 className="text-2xl text-gray-100 font-semibold mb-4 ">Home</h2>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4 border-b border-gray-600 pb-6">
             <div className="flex gap-4">
@@ -124,8 +124,9 @@ function ContentHome({ user }: UserProps) {
               </Button>
             </div>
           </form>
-
-          <TweetList tweet={tweets} />
+          <div className="w-full mx-auto">
+            <TweetList tweet={tweets} />
+          </div>
         </div>
       )}
     </>
