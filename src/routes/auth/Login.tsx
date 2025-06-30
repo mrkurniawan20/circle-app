@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import CircleText from '@/components/CircleText';
 import SubTitle from '@/components/SubTitle';
 import Form from '@/components/Form';
 import axios from 'axios';
+import { Loader2 } from 'lucide-react';
 
 export function LoginForm() {
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
-  if (token) {
-    localStorage.removeItem('token');
-  }
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) localStorage.removeItem('token');
+  }, []);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -18,18 +21,25 @@ export function LoginForm() {
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.name, event.target.value);
     setFormData({ ...formData, [event.target.name]: event.target.value });
+    setError('');
   };
 
   async function handleSubmit() {
+    setLoading(true);
     try {
       const res = await axios.post('http://localhost:3320/user/loginUser', formData);
       const token = res.data.loggedInUser.token;
       localStorage.setItem('token', token);
-    } catch (error) {
-    } finally {
       navigate('/home');
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data.message;
+        console.log(error);
+        setError(errorMessage);
+      }
+    } finally {
+      setLoading(false);
     }
   }
   const formInputs = [
@@ -40,8 +50,8 @@ export function LoginForm() {
     <div className="flex flex-col mx-auto w-fit pt-20">
       <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Login to Circle" />
-
-      <Form title="login" inputs={formInputs} change={handleChange} submit={handleSubmit} buttonText="Login" forgotPassword="Forgot password?" showDate={false} />
+      {error !== '' && <p className="text-center bg-red-500 text-white text-sm p-2 my-5 rounded-md">{error}</p>}
+      <Form title="login" inputs={formInputs} change={handleChange} submit={handleSubmit} buttonText={loading ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : 'Login'} forgotPassword="Forgot password?" showDate={false} />
       <p className="text-gray-100 pt-3">
         Don't have an account yet?{' '}
         <NavLink to={'/register'} className={({ isActive }) => `rounded ${isActive ? 'text-blue-500 font-bold' : 'text-green-500'} hover:text-green-800 transition-all`}>

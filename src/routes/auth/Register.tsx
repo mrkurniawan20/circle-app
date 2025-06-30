@@ -24,7 +24,7 @@ function Register() {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    console.log(e.target.name);
+    setError('');
   }
   const formInputs = [
     { label: 'name', change: handleChange, value: formData.name, type: 'text', name: 'name', id: 'name', placeholder: 'Full Name' },
