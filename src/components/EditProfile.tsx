@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { ImagePlus } from 'lucide-react';
+import { ImagePlus, Loader2 } from 'lucide-react';
 import { UserProps } from '@/utils/useUser';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import { api } from '@/services/api';
@@ -23,6 +23,7 @@ function EditProfile({ user }: UserProps) {
   });
   const [avatarPreview, setAvatarPreview] = useState(user.avatar);
   const [headerPreview, setHeaderPreview] = useState(user.header);
+  const [isEditing, setIsEditing] = useState(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,6 +49,7 @@ function EditProfile({ user }: UserProps) {
     e.preventDefault();
     try {
       setLoading(true);
+      setIsEditing(true);
       const data = new FormData();
       if (formData.name) data.append('name', formData.name);
       if (formData.username) data.append('username', formData.username);
@@ -61,6 +63,7 @@ function EditProfile({ user }: UserProps) {
       console.error(error);
     } finally {
       setLoading(false);
+      setIsEditing(false);
     }
   }
 
@@ -118,7 +121,7 @@ function EditProfile({ user }: UserProps) {
 
               <div className="ms-auto mt-2">
                 <Button type="submit" variant="circle" disabled={loading}>
-                  Save
+                  {isEditing ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : `Save`}
                 </Button>
               </div>
             </>
