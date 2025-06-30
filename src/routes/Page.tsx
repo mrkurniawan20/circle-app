@@ -12,17 +12,14 @@ import axios from 'axios';
 import ListReply from '@/components/ListReply';
 import { Input } from '@/components/ui/input';
 
-export interface IndexProps {
-  index: number;
-}
-
 function Page() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  const [fetchLoading, setFetchLoading] = useState(true);
   const { user, loading } = useUser();
   const { id } = useParams();
   const [imageOnly, setImageOnly] = useState(true);
+  const [fetchLoading, setFetchLoading] = useState(true);
+
   const [tweet, setTweet] = useState<Tweet>({
     id: 0,
     post: '',
@@ -52,18 +49,16 @@ function Page() {
     reply: [],
   });
 
+  const [formData, setFormData] = useState<{ reply?: string; image?: File }>({ reply: '' });
+
   useEffect(() => {
     async function fetchData() {
       try {
         setFetchLoading(true);
-        if (token) {
-          const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`, { headers: { Authorization: `Bearer ${token}` } });
-          console.log(res.data);
-          setTweet(res.data);
-        } else {
-          const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`);
-          setTweet(res.data);
-        }
+        const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`, {
+          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+        });
+        setTweet(res.data);
       } catch (error) {
         console.error(error);
       } finally {
@@ -71,29 +66,22 @@ function Page() {
       }
     }
     fetchData();
-  }, []);
+  }, [id, token]);
 
-  const [formData, setFormData] = useState<{
-    reply?: string;
-    image?: File;
-  }>({
-    reply: '',
-  });
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log(formData);
   }
+
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const files = e.target.files;
-    if (files![0].size > 5 * 1024 * 1024) {
+    if (!files) return;
+    if (files[0].size > 5 * 1024 * 1024) {
       alert(`File is too large`);
       return;
     }
-    if (files) {
-      setFormData((prev) => ({ ...prev, image: files[0] }));
-      console.log(formData);
-    }
+    setFormData((prev) => ({ ...prev, image: files[0] }));
   }
+
   async function submitReply(e: React.FormEvent) {
     e.preventDefault();
     try {
@@ -101,10 +89,13 @@ function Page() {
       if (formData.reply) data.append('reply', formData.reply);
       if (formData.image) data.append('image', formData.image);
       setFetchLoading(true);
-      await axios.post(`http://localhost:3320/post/replytweet/${id}`, data, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.post(`http://localhost:3320/post/replytweet/${id}`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-      const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`, { headers: { Authorization: `Bearer ${token}` } });
-      console.log(res.data);
+      const res = await axios.get(`http://localhost:3320/post/gettweet/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setTweet(res.data);
       setFormData({ reply: '' });
     } catch (error) {
@@ -116,91 +107,21 @@ function Page() {
 
   if (loading || fetchLoading) return <LoadingPage />;
 
-  // === DEFAULT LAYOUT (no image)
-  if (user.id === 0) {
-    if (tweet.image) {
-      return (
-        <div className="flex h-screen w-full relative">
-          <div className={`bg-gray-800 border-r-1 border-gray-500 flex justify-center items-center relative transition-all duration-200 ${imageOnly ? 'flex-[1] duration-300' : 'flex-[1_1_100%] duration-1000'}`}>
-            <CircleX className="absolute text-gray-50 left-10 top-10 hover:bg-gray-600 hover:cursor-pointer size-10 p-2 rounded-full" onClick={() => navigate(-1)} />
-            <PanelRight onClick={() => setImageOnly((show) => !show)} className="absolute text-gray-50 right-10 top-10 hover:bg-gray-600 size-10 p-2 rounded-full hover:cursor-pointer" />
-            <img
-              src={`${tweet.image}`} // assumes your image is in public/img/
-              className="my-auto max-h-full max-w-full absolute"
-              alt=""
-            />
-          </div>
-
-          {imageOnly && (
-            <div className="min-w-0 flex-[0.4] overflow-y-scroll bg-[#213547] border-l border-gray-700">
-              <div className="p-5">
-                <div className="flex">
-                  <Avatar className="my-auto">
-                    <AvatarImage src={tweet.user.avatar} className="object-cover" />
-                    <AvatarFallback>ZW</AvatarFallback>
-                  </Avatar>
-                  <div className="inline-block px-5">
-                    <h2 className="text-gray-50">{tweet.user.name}</h2>
-                    <p className="text-slate-400">@{tweet.user.username}</p>
-                  </div>
-                </div>
-
-                <div className="py-3">
-                  <p className="text-gray-100">{tweet.post}</p>
-                </div>
-
-                <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
-                <div className="-ml-10 mt-3">
-                  <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
-                </div>
-
-                <ListReply replies={tweet.reply} />
-              </div>
-            </div>
-          )}
-        </div>
-      );
-    }
-    return (
-      <Layout minimal>
-        <div className="p-5">
-          <div className="flex">
-            <Avatar className="my-auto">
-              <AvatarImage src={`${tweet.user.avatar}`} className="object-cover" />
-              <AvatarFallback>ZW</AvatarFallback>
-            </Avatar>
-            <div className="inline-block px-5">
-              <h2 className="text-gray-50">{tweet.user.name}</h2>
-              <p className="text-slate-400">@{tweet.user.username}</p>
-            </div>
-          </div>
-          <div className="py-3">
-            <p className="text-gray-100">{tweet.post}</p>
-          </div>
-          <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
-          <div className="-ml-10 mt-3">
-            <ThreadLike id={tweet.id} likeCount={tweet.likeCount} isLiked={tweet.isLiked} replyCount={tweet.replyCount} />
-          </div>
-        </div>
-      </Layout>
-    );
-  }
-  if (user.id !== 0 && tweet.image) {
+  // === IMAGE VIEW MODE ===
+  if (tweet.image) {
     return (
       <div className="flex h-screen w-full relative">
-        <div className={`bg-gray-800 border-r-1 border-gray-500 flex justify-center items-center relative transition-all duration-200 ${imageOnly ? 'flex-[1] duration-300' : 'flex-[1_1_100%] duration-1000'}`}>
-          <CircleX className="absolute text-gray-50 left-10 top-10 hover:bg-gray-600 hover:cursor-pointer size-10 p-2 rounded-full" onClick={() => navigate(-1)} />
-          <PanelRight onClick={() => setImageOnly((show) => !show)} className="absolute text-gray-50 right-10 top-10 hover:bg-gray-600 size-10 p-2 rounded-full hover:cursor-pointer" />
-          <img
-            src={`${tweet.image}`} // assumes your image is in public/img/
-            className="my-auto max-h-full max-w-full absolute"
-            alt=""
-          />
+        {/* Left image panel */}
+        <div className={`bg-gray-800 border-r border-gray-700 flex justify-center items-center relative transition-all duration-200 ${imageOnly ? 'flex-[1] duration-300' : 'flex-[1_1_100%] duration-1000'}`}>
+          <CircleX className="absolute text-gray-50 left-6 top-6 hover:bg-gray-600 hover:cursor-pointer size-10 p-2 rounded-full" onClick={() => navigate(-1)} />
+          <PanelRight onClick={() => setImageOnly((show) => !show)} className="absolute text-gray-50 right-6 top-6 hover:bg-gray-600 size-10 p-2 rounded-full hover:cursor-pointer" />
+          <img src={tweet.image} className="my-auto max-h-full max-w-full absolute" alt="" />
         </div>
 
+        {/* Right content panel */}
         {imageOnly && (
-          <div className="min-w-0 flex-[0.4] overflow-y-scroll bg-[#213547] border-l border-gray-700">
-            <div className="p-5">
+          <div className="min-w-0 w-full max-w-xl overflow-y-scroll bg-[#213547] border-l border-gray-700 flex flex-col">
+            <div className="p-5 flex-1">
               <div className="flex">
                 <Avatar className="my-auto">
                   <AvatarImage src={tweet.user.avatar} className="object-cover" />
@@ -213,43 +134,38 @@ function Page() {
               </div>
 
               <div className="py-3">
-                <p className="text-gray-100">{tweet.post}</p>
+                <p className="text-gray-100 break-words">{tweet.post}</p>
               </div>
 
               <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
+
               <div className="-ml-10 mt-3">
                 <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
               </div>
-
-              <form onSubmit={submitReply} className="flex gap-5 border-t border-b border-gray-500 p-5 bg-gray-800 mt-5">
+              <form onSubmit={submitReply} className="flex gap-3 items-center border-t border-b border-gray-500 px-5 py-4 bg-gray-800 w-full">
                 <Avatar className="size-10">
-                  <AvatarImage src={`${user.avatar}`} alt="@shadcn" className="object-cover" />
+                  <AvatarImage src={user.avatar} className="object-cover" />
                   <AvatarFallback>ZW</AvatarFallback>
                 </Avatar>
-                <Input
-                  onChange={handleChange}
-                  value={formData.reply}
-                  name="reply"
-                  className="ml-2 resize-none w-xl max-w-xl border-none shadow-none focus:ring-green-500 text-gray-100 text-xl font-semibold"
-                  placeholder="Type your reply ges"
-                />
+                <Input onChange={handleChange} value={formData.reply} name="reply" className="flex-1 border-none shadow-none focus:ring-green-500 text-gray-100 text-sm sm:text-base" placeholder="Type your reply..." />
                 <label htmlFor="replyImage">
-                  <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
+                  <ImagePlus className="size-6 sm:size-7 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
                 </label>
                 <input onChange={handleFile} type="file" name="replyImage" id="replyImage" className="hidden" />
-                <Button variant="circle" className="justify-self-end">
+                <Button type="submit" variant="circle" className="p-2">
                   Reply
                 </Button>
               </form>
-
-              <ListReply replies={tweet.reply} />
             </div>
+
+            <ListReply replies={tweet.reply} />
           </div>
         )}
       </div>
     );
   }
 
+  // === TEXT-ONLY TWEET VIEW ===
   return (
     <Layout>
       <div className="p-5">
@@ -263,7 +179,7 @@ function Page() {
 
         <div className="flex py-5">
           <Avatar className="my-auto">
-            <AvatarImage src={`${tweet.user.avatar}`} className="object-cover" />
+            <AvatarImage src={tweet.user.avatar} className="object-cover" />
             <AvatarFallback>ZW</AvatarFallback>
           </Avatar>
           <div className="inline-block px-5">
@@ -279,17 +195,17 @@ function Page() {
           <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
         </div>
 
-        <form onSubmit={submitReply} className="flex gap-5 border-t border-b border-gray-500 p-5 bg-gray-800 mt-5">
+        <form onSubmit={submitReply} className="flex gap-3 items-center border-t border-b border-gray-500 px-5 py-4 bg-gray-800 mt-5">
           <Avatar className="size-10">
-            <AvatarImage src={`${user.avatar}`} alt="@shadcn" className="size-10 p-0 object-cover" />
+            <AvatarImage src={user.avatar} className="object-cover" />
             <AvatarFallback>ZW</AvatarFallback>
           </Avatar>
-          <Input name="reply" value={formData.reply} onChange={handleChange} className="ml-2 resize-none w-xl max-w-xl border-none shadow-none focus:ring-green-500 text-gray-100 text-xl font-semibold" placeholder="Type your reply" />
+          <Input onChange={handleChange} value={formData.reply} name="reply" className="flex-1 border-none shadow-none focus:ring-green-500 text-gray-100 text-sm sm:text-base" placeholder="Type your reply..." />
           <label htmlFor="replyImage">
-            <ImagePlus className="size-10 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
+            <ImagePlus className="size-6 sm:size-7 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
           </label>
           <input onChange={handleFile} type="file" name="replyImage" id="replyImage" className="hidden" />
-          <Button variant="circle" className="justify-self-end">
+          <Button type="submit" variant="circle" className="p-2">
             Reply
           </Button>
         </form>
