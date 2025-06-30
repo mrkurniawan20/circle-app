@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { User } from '@/utils/useUser';
+import { NavLink, useParams } from 'react-router-dom';
+import { User, useUser } from '@/utils/useUser';
 import axios from 'axios';
 import LoadingPage from './LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FollowButton from '@/components/FollowButton';
 
-function ContentFollow() {
+function ContentFollowers() {
   const token = localStorage.getItem('token');
+  const { user } = useUser();
+  const { username } = useParams();
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
-        const res = await axios.get('http://localhost:3320/user/getfollowers', { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get(`http://localhost:3320/user/getfollowers/${username}`, { headers: { Authorization: `Bearer ${token}` } });
         setUsers(res.data);
       } catch (error) {
         console.error(error);
@@ -29,10 +31,10 @@ function ContentFollow() {
     <div>
       <h2 className="text-2xl p-10 pb-5 text-gray-100 font-semibold">Follows</h2>
       <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
-        <NavLink to={'/follow'} className="text-center text-xl text-gray-50">
+        <NavLink to={`/following/${username}`} className="text-center text-xl text-gray-50">
           <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg duration-200">Following</p>
         </NavLink>
-        <NavLink to={'/followers'} className="text-center text-xl text-gray-50 ">
+        <NavLink to={`/followers/${username}`} className="text-center text-xl text-gray-50 ">
           <p className="pt-3 pb-3   hover:bg-slate-700 rounded-lg duration-200">Followers</p>
           <div className="bg-green-500 border-2 border-green-500 h-1 rounded-full"></div>
         </NavLink>
@@ -49,8 +51,7 @@ function ContentFollow() {
               <p className="text-slate-400 text-xs pb-1">@{follower.username}</p>
               <p className="text-gray-200 text-xs pb-1">{follower.bio}</p>
             </div>
-            {/* <FollowButton id={follower.id} isFollowing={followingIds.includes(follower.id)} /> */}
-            <FollowButton id={follower.id} isFollowing={follower.isFollowingBack} />
+            {user.username !== follower.username && <FollowButton id={follower.id} isFollowing={follower.isFollowingBack} />}
           </NavLink>
         ))}
       </div>
@@ -58,4 +59,4 @@ function ContentFollow() {
   );
 }
 
-export default ContentFollow;
+export default ContentFollowers;

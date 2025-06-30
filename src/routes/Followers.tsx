@@ -1,10 +1,10 @@
-import ContentFollow from '@/layouts/components/ContentFollow';
+import ContentFollowers from '@/layouts/components/ContentFollowers';
 import Layout from '@/layouts/Layout';
 
 function Followers() {
   return (
     <Layout>
-      <ContentFollow />
+      <ContentFollowers />
     </Layout>
   );
 }

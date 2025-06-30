@@ -27,7 +27,7 @@ function SideBar({ user }: UserProps) {
       namePage: 'Search',
     },
     {
-      page: 'follow',
+      page: `followers/${user.username}`,
       image: <FaRegHeart />,
       namePage: 'Follow',
     },

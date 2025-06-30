@@ -29,11 +29,11 @@ let router = createBrowserRouter([
       //   Component: PageTitle(Profile, 'Profile | Circle'),
       // },
       {
-        path: '/followers',
+        path: '/followers/:username',
         Component: PageTitle(Followers, 'Followers | Circle'),
       },
       {
-        path: '/follow',
+        path: '/following/:username',
         Component: PageTitle(Following, 'Following | Circle'),
       },
       {
