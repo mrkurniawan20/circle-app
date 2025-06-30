@@ -105,7 +105,7 @@ function Page() {
     }
   }
 
-  if (loading || fetchLoading) return <LoadingPage />;
+  if (loading) return <LoadingPage />;
 
   // === IMAGE VIEW MODE ===
   if (tweet.image) {
@@ -121,7 +121,7 @@ function Page() {
         {/* Right content panel */}
         {imageOnly && (
           <div className="min-w-0 w-full max-w-xl overflow-y-scroll bg-[#213547] border-l border-gray-700 flex flex-col">
-            <div className="p-5 flex-1">
+            <div className="p-5 flex-1 w-full">
               <div className="flex">
                 <Avatar className="my-auto">
                   <AvatarImage src={tweet.user.avatar} className="object-cover" />
@@ -142,23 +142,41 @@ function Page() {
               <div className="-ml-10 mt-3">
                 <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
               </div>
-              <form onSubmit={submitReply} className="flex gap-3 items-center border-t border-b border-gray-500 px-5 py-4 bg-gray-800 w-full">
-                <Avatar className="size-10">
+              <form onSubmit={submitReply} className="flex items-start border-t border-b border-gray-500 px-5 py-4 bg-gray-800 w-full gap-3">
+                {/* Avatar */}
+                <Avatar className="size-10 mt-1">
                   <AvatarImage src={user.avatar} className="object-cover" />
                   <AvatarFallback>ZW</AvatarFallback>
                 </Avatar>
-                <Input onChange={handleChange} value={formData.reply} name="reply" className="flex-1 border-none shadow-none focus:ring-green-500 text-gray-100 text-sm sm:text-base" placeholder="Type your reply..." />
-                <label htmlFor="replyImage">
-                  <ImagePlus className="size-6 sm:size-7 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
-                </label>
-                <input onChange={handleFile} type="file" name="replyImage" id="replyImage" className="hidden" />
-                <Button type="submit" variant="circle" className="p-2">
-                  Reply
-                </Button>
+
+                {/* Right side content, full width */}
+                <div className="flex flex-col w-full">
+                  <input onChange={handleFile} type="file" name="replyImage" id="replyImage" className="hidden" />
+
+                  <Input onChange={handleChange} value={formData.reply} name="reply" className="w-full border-none shadow-none focus:ring-green-500 text-gray-100 text-sm sm:text-base" placeholder="Type your reply..." />
+
+                  {/* Preview image if exists */}
+                  {formData.image && (
+                    <div className="mt-3 relative w-fit">
+                      <CircleX className="absolute -top-2 -right-2 text-gray-50 bg-black hover:bg-gray-600 hover:cursor-pointer size-5 p-1 rounded-full" onClick={() => setFormData((prev) => ({ ...prev, image: undefined }))} />
+                      <img src={URL.createObjectURL(formData.image)} alt="Preview" className="max-w-[200px] rounded-lg" />
+                    </div>
+                  )}
+
+                  {/* Bottom control bar */}
+                  <div className="mt-4 flex justify-between items-center w-full">
+                    <label htmlFor="replyImage">
+                      <ImagePlus className="size-6 sm:size-7 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
+                    </label>
+                    <Button type="submit" variant="circle">
+                      Reply
+                    </Button>
+                  </div>
+                </div>
               </form>
             </div>
 
-            <ListReply replies={tweet.reply} />
+            {fetchLoading ? <LoadingPage /> : <ListReply replies={tweet.reply} />}
           </div>
         )}
       </div>
@@ -195,22 +213,39 @@ function Page() {
           <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
         </div>
 
-        <form onSubmit={submitReply} className="flex gap-3 items-center border-t border-b border-gray-500 px-5 py-4 bg-gray-800 mt-5">
-          <Avatar className="size-10">
+        <form onSubmit={submitReply} className="flex items-start border-t border-b border-gray-500 px-5 py-4 bg-gray-800 w-full gap-3">
+          {/* Avatar */}
+          <Avatar className="size-10 mt-1">
             <AvatarImage src={user.avatar} className="object-cover" />
             <AvatarFallback>ZW</AvatarFallback>
           </Avatar>
-          <Input onChange={handleChange} value={formData.reply} name="reply" className="flex-1 border-none shadow-none focus:ring-green-500 text-gray-100 text-sm sm:text-base" placeholder="Type your reply..." />
-          <label htmlFor="replyImage">
-            <ImagePlus className="size-6 sm:size-7 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
-          </label>
-          <input onChange={handleFile} type="file" name="replyImage" id="replyImage" className="hidden" />
-          <Button type="submit" variant="circle" className="p-2">
-            Reply
-          </Button>
-        </form>
 
-        <ListReply replies={tweet.reply} />
+          {/* Right side content, full width */}
+          <div className="flex flex-col w-full">
+            <input onChange={handleFile} type="file" name="replyImage" id="replyImage" className="hidden" />
+
+            <Input onChange={handleChange} value={formData.reply} name="reply" className="w-full border-none shadow-none focus:ring-green-500 text-gray-100 text-sm sm:text-base" placeholder="Type your reply..." />
+
+            {/* Preview image if exists */}
+            {formData.image && (
+              <div className="mt-3 relative w-fit">
+                <CircleX className="absolute -top-2 -right-2 text-gray-50 bg-black hover:bg-gray-600 hover:cursor-pointer size-5 p-1 rounded-full" onClick={() => setFormData((prev) => ({ ...prev, image: undefined }))} />
+                <img src={URL.createObjectURL(formData.image)} alt="Preview" className="max-w-[200px] rounded-lg" />
+              </div>
+            )}
+
+            {/* Bottom control bar */}
+            <div className="mt-4 flex justify-between items-center w-full">
+              <label htmlFor="replyImage">
+                <ImagePlus className="size-6 sm:size-7 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
+              </label>
+              <Button type="submit" variant="circle">
+                Reply
+              </Button>
+            </div>
+          </div>
+        </form>
+        {fetchLoading ? <LoadingPage /> : <ListReply replies={tweet.reply} />}
       </div>
     </Layout>
   );
