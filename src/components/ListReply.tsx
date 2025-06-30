@@ -3,9 +3,11 @@ import { Ellipsis, Pencil, Trash2 } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from './ui/button';
-import { Textarea } from './ui/textarea';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { User } from '@/utils/useUser';
+import { User, useUser } from '@/utils/useUser';
+import { useState } from 'react';
+import axios from 'axios';
+import { Input } from './ui/input';
 
 export interface Reply {
   id: number;
@@ -24,6 +26,33 @@ interface ReplyListProps {
 
 function ListReply({ replies }: ReplyListProps) {
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+  const { user } = useUser();
+  const [post, setPost] = useState('');
+  const [selectedTweet, setSelectedTweet] = useState(0);
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setPost(e.target.value);
+  }
+  async function submitEdit(e: React.FormEvent) {
+    e.preventDefault();
+    try {
+      const data = new FormData();
+      if (post) {
+        data.append('post', post);
+      }
+      await axios.patch(`http://localhost:3320/post/editReply/${selectedTweet}`, data, { headers: { Authorization: `Bearer ${token}` } });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async function deleteReply(id: number) {
+    try {
+      console.log(id);
+      await axios.delete(`http://localhost:3320/post/deleteReply/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <>
@@ -42,40 +71,69 @@ function ListReply({ replies }: ReplyListProps) {
                 @{reply.user.username} • <span className="hover:underline underline-offset-4">{new Date(reply.createdAt).toLocaleDateString()}</span>
               </p>
             </div>
-            <div className="ml-auto" onClick={(e) => e.stopPropagation()}>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Ellipsis className="text-slate-400 hover:bg-gray-600 rounded-full hover:cursor-pointer size-7 p-1 mb-2" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="mr-40 w-40 bg-gray-800 border-none shadow-xl">
-                  <DropdownMenuGroup>
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <DropdownMenuItem className="hover:bg-gray-600 hover:cursor-pointer focus:bg-gray-600" onSelect={(e) => e.preventDefault()}>
-                          <Pencil className="text-gray-50 mr-2" />
-                          <span className="text-gray-50">Edit</span>
-                        </DropdownMenuItem>
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-[425px] bg-gray-800 border-none">
-                        <DialogHeader>
-                          <DialogTitle className="text-gray-50">Edit reply</DialogTitle>
-                        </DialogHeader>
-                        <form className="flex flex-col gap-4 py-4">
-                          <Textarea defaultValue={reply.post} className="border-2 focus:border-green-500 focus:outline-none transition-all resize-none col-span-4 min-h-20 p-4 pt-7 text-gray-50" />
-                          <Button className="ml-auto" variant={'circle'} type="submit">
-                            Save changes
-                          </Button>
-                        </form>
-                      </DialogContent>
-                    </Dialog>
-                    <DropdownMenuItem className="hover:bg-gray-600 hover:cursor-pointer focus:bg-gray-600">
-                      <Trash2 className="text-gray-50 mr-2" />
-                      <span className="text-gray-50">Delete</span>
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+            {user.id == reply.userId && (
+              <div className="ml-auto" onClick={(e) => e.stopPropagation()}>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Ellipsis className="text-slate-400 hover:bg-gray-600 rounded-full hover:cursor-pointer size-7 p-1 mb-2" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="mr-40 w-40 bg-gray-800 border-none shadow-xl">
+                    <DropdownMenuGroup>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <DropdownMenuItem
+                            className="hover:bg-gray-600 hover:cursor-pointer focus:bg-gray-600"
+                            onSelect={(e) => {
+                              e.preventDefault();
+                              setSelectedTweet(reply.id);
+                            }}
+                          >
+                            <Pencil className="text-gray-50" />
+                            <span className="text-gray-50">Edit</span>
+                          </DropdownMenuItem>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px] bg-gray-800 border-none">
+                          <DialogHeader>
+                            <DialogTitle className="text-gray-50">Edit thread</DialogTitle>
+                          </DialogHeader>
+                          <div className="grid gap-4 py-4">
+                            <form onSubmit={submitEdit} className="flex flex-col items-center gap-4">
+                              <Input
+                                onChange={handleChange}
+                                id="bio"
+                                name="bio"
+                                defaultValue={reply.post}
+                                className="border-2 focus:border-green-500 focus:outline-none transition-all resize-none col-span-4 min-h-20 p-4 pt-7 text-gray-50"
+                              />
+                              <Button className="ml-auto" variant={'circle'} type="submit">
+                                Save changes
+                              </Button>
+                            </form>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                      <DropdownMenuItem
+                        className="hover:bg-gray-600 hover:cursor-pointer focus:bg-gray-600"
+                        onSelect={(e) => {
+                          e.preventDefault();
+                          setSelectedTweet(reply.id);
+                        }}
+                      >
+                        <Trash2 className="text-gray-50" />
+                        <button
+                          onClick={() => {
+                            deleteReply(reply.id);
+                          }}
+                          className="text-gray-50"
+                        >
+                          Delete
+                        </button>
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            )}
           </div>
 
           <div className="pb-2 ml-15 -mt-5">

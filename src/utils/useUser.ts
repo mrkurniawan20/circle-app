@@ -2,6 +2,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import { Tweet } from './setTweets';
+import { Reply } from '@/components/ListReply';
 
 export interface Decoded {
   id: number;
@@ -21,6 +22,7 @@ export interface User {
   followersCount: number;
   followingCount: number;
   tweet: Tweet[];
+  reply: Reply[];
   isFollowingBack: boolean;
 }
 export interface Users {
@@ -45,6 +47,7 @@ export function useUser() {
     followersCount: 0,
     followingCount: 0,
     tweet: [],
+    reply: [],
     isFollowingBack: false,
   });
   const [loading, setLoading] = useState(true);
