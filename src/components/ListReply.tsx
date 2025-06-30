@@ -1,11 +1,9 @@
-import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Ellipsis, Pencil, Trash2 } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
-import { ThreadLike } from './ThreadLike';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { User } from '@/utils/useUser';
 

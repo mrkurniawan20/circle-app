@@ -1,15 +1,10 @@
-import CircleText from '@/components/CircleText';
-import ProfileBar from '@/layouts/components/ProfileBar';
-import SideBar from '@/layouts/components/SideBar';
 import Layout from '@/layouts/Layout';
 import React, { useEffect, useState } from 'react';
-import { threads } from '@/stores/threads';
-import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useUser } from '@/utils/useUser';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ThreadLike } from '@/components/ThreadLike';
-import { Textarea } from '@/components/ui/textarea';
 import { CircleX, ImagePlus, PanelRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tweet } from '@/utils/setTweets';
@@ -31,8 +26,8 @@ function Page() {
   const [tweet, setTweet] = useState<Tweet>({
     id: 0,
     post: '',
+    username: '',
     image: '',
-    userId: 0,
     likeCount: 0,
     replyCount: 0,
     createdAt: new Date(),

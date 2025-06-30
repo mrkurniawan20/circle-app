@@ -1,9 +1,7 @@
-import React from 'react';
 import EditProfile from './EditProfile';
 import DataMyProfile from './DataMyProfile';
-import { loggedInUser } from '@/stores/loggedInUser';
 import { NavLink } from 'react-router-dom';
-import { UserProps, useUser } from '@/utils/useUser';
+import { UserProps } from '@/utils/useUser';
 
 function ContainerMyProfile({ user }: UserProps) {
   return (

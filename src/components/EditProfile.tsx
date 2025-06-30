@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea, TweetArea } from './ui/textarea';
 import { ImagePlus } from 'lucide-react';
-import { loggedInUser } from '@/stores/loggedInUser';
-import { UserProps, useUser } from '@/utils/useUser';
+import { UserProps } from '@/utils/useUser';
 import axios from 'axios';
 
 function EditProfile({ user }: UserProps) {

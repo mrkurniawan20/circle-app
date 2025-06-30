@@ -1,27 +1,20 @@
 import DataMyProfile from '@/components/DataMyProfile';
 import EditProfile from '@/components/EditProfile';
-import ProfileBar from '@/layouts/components/ProfileBar';
-import SideBar from '@/layouts/components/SideBar';
-import { ThreadList } from '@/components/ThreadList';
-import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate, useOutletContext, useParams } from 'react-router-dom';
-import { threads } from '@/stores/threads';
+import { useEffect, useState } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
 import Layout from '@/layouts/Layout';
-import { loggedInUser } from '@/stores/loggedInUser';
 import { Dialog, DialogContent, DialogOverlay, DialogTrigger } from '@/components/ui/dialog';
 import { ArrowLeft } from 'lucide-react';
-import { Decoded, User, useUser } from '@/utils/useUser';
+import { User, useUser } from '@/utils/useUser';
 import { TweetList } from '@/components/ListTweet';
 import { Tweet } from '@/utils/setTweets';
 import axios from 'axios';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import FollowButton from '@/components/FollowButton';
-import { jwtDecode } from 'jwt-decode';
 
 function ProfileUsername() {
   const token = localStorage.getItem('token');
   const { username } = useParams();
-  const navigate = useNavigate();
   const { user } = useUser();
   const [profileUser, setProfileUser] = useState<User>({
     id: 0,

@@ -6,8 +6,6 @@ import ResetPassword from './auth/ResetPassword';
 // import Login from './auth/DeprecatedLogin';
 import Home from './Home';
 import Page from './Page';
-import Profile from './Profile';
-import ProfileMedia from './ProfileMedia';
 import Search from './Search';
 import Following from './Following';
 import ProtectedRouteLayout from './ProtectedRoute';
@@ -26,10 +24,10 @@ let router = createBrowserRouter([
       //   path: '',
       //   Component: PageTitle(Home, 'Home | Circle'),
       // },
-      {
-        path: '/profile',
-        Component: PageTitle(Profile, 'Profile | Circle'),
-      },
+      // {
+      //   path: '/profile',
+      //   Component: PageTitle(Profile, 'Profile | Circle'),
+      // },
       {
         path: '/followers',
         Component: PageTitle(Followers, 'Followers | Circle'),
@@ -42,10 +40,10 @@ let router = createBrowserRouter([
         path: '/home',
         Component: PageTitle(Home, 'Home | Circle'),
       },
-      {
-        path: '/profilemedia',
-        Component: PageTitle(ProfileMedia, 'Profile | Circle'),
-      },
+      // {
+      //   path: '/profilemedia',
+      //   Component: PageTitle(ProfileMedia, 'Profile | Circle'),
+      // },
       {
         path: '/search',
         Component: PageTitle(Search, 'Search | Circle'),

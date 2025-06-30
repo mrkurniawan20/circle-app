@@ -1,6 +1,4 @@
-import Layout from '@/layouts/Layout';
-import { useUserStore } from '@/stores/auth';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { useUser } from '@/utils/useUser';
@@ -13,12 +11,8 @@ interface DecodedProps {
 }
 
 function ProtectedRouteLayout() {
-  // const { user } = useUserStore();
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-
-  // const decoded = jwtDecode<DecodedProps>(token!);
-  // const userId = decoded.id;
 
   const title = document.title;
   useEffect(() => {
@@ -31,7 +25,6 @@ function ProtectedRouteLayout() {
   function isTokenExpired(token: string): boolean {
     const decoded = jwtDecode<DecodedProps>(token);
     try {
-      // console.log(decoded.exp);
       console.log(decoded);
       return decoded.exp * 1000 < Date.now();
     } catch (error) {
@@ -43,10 +36,6 @@ function ProtectedRouteLayout() {
   if (loading) {
     return <LoadingPage />;
   }
-
-  //   const isLogin = true;
-  // const user = useUser();
-
   if (!token) {
     return <Navigate to={'/login'} />;
   } else {

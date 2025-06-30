@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button } from './ui/button';
-import { User } from '@/utils/useUser';
 import axios from 'axios';
 
 interface Follow {

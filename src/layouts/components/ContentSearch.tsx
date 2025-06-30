@@ -1,18 +1,11 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Calculator, Calendar, CreditCard, Settings, Smile } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-// import { Button } from './ui/button';
 
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from '@/components/ui/command';
-// import SearchResult from './SearchResult';
-import { users } from '@/stores/users';
-import SearchResult from '@/components/SearchResult';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { User } from '@/utils/useUser';
 import axios from 'axios';
 import LoadingPage from './LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import FollowedButton from '@/components/FollowedButton';
 import FollowButton from '@/components/FollowButton';
 import { useDebounce } from '@/utils/useDebounce';
 

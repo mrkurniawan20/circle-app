@@ -1,12 +1,8 @@
 import DataMyProfile from '@/components/DataMyProfile';
 import EditProfile from '@/components/EditProfile';
-import ProfileBar from '@/layouts/components/ProfileBar';
-import SideBar from '@/layouts/components/SideBar';
-import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate, useOutletContext, useParams } from 'react-router-dom';
-import { threads } from '@/stores/threads';
+import { useEffect, useState } from 'react';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import Layout from '@/layouts/Layout';
-import { loggedInUser } from '@/stores/loggedInUser';
 import { ArrowLeft } from 'lucide-react';
 import { Dialog, DialogContent, DialogOverlay, DialogTrigger } from '@/components/ui/dialog';
 import { User, useUser } from '@/utils/useUser';

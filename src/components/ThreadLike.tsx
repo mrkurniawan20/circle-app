@@ -1,4 +1,3 @@
-import { useUser } from '@/utils/useUser';
 import axios from 'axios';
 import { MessageSquareText } from 'lucide-react';
 import React, { useState } from 'react';
@@ -12,7 +11,6 @@ interface ThreadsLike {
 }
 
 export function ThreadLike({ likeCount, replyCount, isLiked, id }: ThreadsLike) {
-  // const { user } = useUser();
   const [like, setLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(Number(likeCount));
   const token = localStorage.getItem('token');

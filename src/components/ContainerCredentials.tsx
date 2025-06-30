@@ -1,5 +1,3 @@
-import React from 'react';
-
 const socials = [{ icon: 'github.png' }, { icon: 'linkedin.png' }, { icon: 'twitter.png' }, { icon: 'facebook.png' }];
 
 function ContainerCredentials() {

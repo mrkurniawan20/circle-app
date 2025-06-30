@@ -2,25 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '../../components/ui/button';
 import { Textarea } from '../../components/ui/textarea';
-// import ThreadList from '../../components/ThreadList';
-import { threads } from '@/stores/threads';
-import { Ellipsis, ImagePlus, Pencil, Trash2 } from 'lucide-react';
-import { loggedInUser } from '@/stores/loggedInUser';
-import { User, UserProps } from '@/utils/useUser';
+import { ImagePlus } from 'lucide-react';
+import { UserProps } from '@/utils/useUser';
 import axios from 'axios';
-import { Tweet, TweetProps } from '@/utils/setTweets';
-import { ThreadList } from '@/components/ThreadList';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { ThreadLike } from '@/components/ThreadLike';
+import { Tweet } from '@/utils/setTweets';
 import LoadingPage from './LoadingPage';
-import { formatDistanceToNow } from 'date-fns';
 import { TweetList } from '@/components/ListTweet';
-// import { TweetList } from '@/components/ThreadList';
 
 function ContentHome({ user }: UserProps) {
-  const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const [tweets, setTweet] = useState<Tweet[]>([]);
   const [loading, setLoading] = useState(false);

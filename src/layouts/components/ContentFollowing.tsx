@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import { users } from '@/stores/users';
-import { usersFollowed } from '@/stores/users-followed';
-// import FollowersList from './FollowersList';
-import { users } from '@/stores/users';
-import FollowingList from '@/components/FollowingList';
 import { User } from '@/utils/useUser';
 import axios from 'axios';
 import LoadingPage from './LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import FollowedButton from '@/components/FollowedButton';
 import FollowButton from '@/components/FollowButton';
 
 function ContentFollowing() {
