@@ -29,7 +29,6 @@ function ContentFollowing() {
   if (loading) return <LoadingPage />;
   return (
     <div>
-      <h2 className="text-2xl p-10 pb-5 text-gray-100 font-semibold">Follows</h2>
       <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
         <NavLink to={`/following/${username}`} className="text-center text-xl text-gray-50">
           <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg duration-200">Following</p>
