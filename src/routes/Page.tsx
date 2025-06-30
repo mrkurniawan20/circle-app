@@ -5,7 +5,7 @@ import { useUser } from '@/utils/useUser';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ThreadLike } from '@/components/ThreadLike';
-import { ArrowLeft, CircleX, ImagePlus, PanelRight } from 'lucide-react';
+import { ArrowLeft, CircleX, ImagePlus, Loader2, PanelRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tweet } from '@/utils/setTweets';
 import ListReply from '@/components/ListReply';
@@ -19,6 +19,7 @@ function Page() {
   const { id } = useParams();
   const [imageOnly, setImageOnly] = useState(true);
   const [fetchLoading, setFetchLoading] = useState(true);
+  const [isReplying, setIsReplying] = useState(false);
 
   const [tweet, setTweet] = useState<Tweet>({
     id: 0,
@@ -85,6 +86,7 @@ function Page() {
   async function submitReply(e: React.FormEvent) {
     e.preventDefault();
     try {
+      setIsReplying(true);
       const data = new FormData();
       if (formData.reply) data.append('reply', formData.reply);
       if (formData.image) data.append('image', formData.image);
@@ -97,11 +99,12 @@ function Page() {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTweet(res.data);
-      setFormData({ reply: '' });
+      setFormData({ reply: '', image: undefined });
     } catch (error) {
       console.error(error);
     } finally {
       setFetchLoading(false);
+      setIsReplying(false);
     }
   }
 
@@ -160,7 +163,7 @@ function Page() {
                       <ImagePlus className="size-6 sm:size-7 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
                     </label>
                     <Button type="submit" variant="circle">
-                      Reply
+                      {isReplying ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : `Reply`}
                     </Button>
                   </div>
                 </div>
@@ -185,7 +188,7 @@ function Page() {
           </NavLink>
         </div>
 
-        <div className="flex py-5">
+        <div className="flex py-5 px-3">
           <Avatar className="my-auto">
             <AvatarImage src={tweet.user.avatar} className="object-cover" />
             <AvatarFallback>ZW</AvatarFallback>
@@ -196,11 +199,12 @@ function Page() {
           </div>
         </div>
 
-        <p className="text-gray-100 pb-2">{tweet.post}</p>
+        <p className="text-gray-100 pb-2 px-3">{tweet.post}</p>
         {tweet.image && <img src={tweet.image} alt="Tweet visual" className="rounded-lg my-4" />}
-        <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
-
-        <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
+        <p className="text-slate-400 px-3">{new Date(tweet.createdAt).toLocaleDateString()}</p>
+        <div className="p-3">
+          <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
+        </div>
 
         <form onSubmit={submitReply} className="flex items-start border-t border-b border-gray-500 px-5 py-4 bg-gray-800 w-full gap-3">
           <Avatar className="size-10 mt-1">
@@ -222,7 +226,7 @@ function Page() {
                 <ImagePlus className="size-6 sm:size-7 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
               </label>
               <Button type="submit" variant="circle">
-                Reply
+                {isReplying ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : `Reply`}
               </Button>
             </div>
           </div>
