@@ -35,7 +35,7 @@ export function ThreadLike({ likeCount, replyCount, isLiked, id }: ThreadsLike) 
     }
   }
   return (
-    <div className="flex items-center gap-4 ml-15 pb-5">
+    <div className="flex items-center gap-4 pb-5">
       {like ? (
         <button onClick={unlikeTweet} className="text-lg flex items-center gap-2 text-slate-400 hover:text-gray-50 hover:cursor-pointer transition-all duration-200">
           <GoHeartFill className="text-red-400 size-6" />

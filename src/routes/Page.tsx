@@ -139,7 +139,7 @@ function Page() {
 
               <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
 
-              <div className="-ml-10 mt-3">
+              <div className="">
                 <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
               </div>
               <form onSubmit={submitReply} className="flex items-start border-t border-b border-gray-500 px-5 py-4 bg-gray-800 w-full gap-3">
@@ -209,7 +209,7 @@ function Page() {
         <p className="text-gray-100 pb-2">{tweet.post}</p>
         <p className="text-slate-400">{new Date(tweet.createdAt).toLocaleDateString()}</p>
 
-        <div className="-ml-10 mt-3">
+        <div className="">
           <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
         </div>
 
