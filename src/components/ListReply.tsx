@@ -63,7 +63,7 @@ function ListReply({ replies }: ReplyListProps) {
   return (
     <>
       {replies.map((reply, index) => (
-        <div key={reply.id} onClick={() => (reply.image ? navigate('/media', { state: { index } }) : navigate('/page', { state: { index } }))} className="border-b-1 py-5  border-gray-500 hover:bg-gray-700 hover:cursor-pointer">
+        <div key={reply.id} onClick={() => (reply.image ? navigate('/media', { state: { index } }) : navigate('/page', { state: { index } }))} className="border-b-1 py-1  border-gray-500 hover:bg-gray-700 hover:cursor-pointer">
           <div className="flex pr-5 pt-5">
             <Avatar className="my-auto size-12">
               <AvatarImage src={`${reply.user.avatar}`} alt={reply.user.username} className="object-cover" />
