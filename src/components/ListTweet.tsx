@@ -13,10 +13,11 @@ import axios from 'axios';
 import { useUser } from '@/utils/useUser';
 
 export function TweetList({ tweet }: TweetProps) {
+  const token = localStorage.getItem('token');
   const navigate = useNavigate();
   const { user } = useUser();
   const [post, setPost] = useState('');
-  const [editTweet, setEditTweet] = useState(0);
+  const [selectedTweet, setSelectedTweet] = useState(0);
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setPost(e.target.value);
   }
@@ -28,7 +29,15 @@ export function TweetList({ tweet }: TweetProps) {
         data.append('post', post);
         console.log(data);
       }
-      await axios.patch(`http://localhost:3320/post/edittweet/${editTweet}`, data);
+      await axios.patch(`http://localhost:3320/post/edittweet/${selectedTweet}`, data, { headers: { Authorization: `Bearer ${token}` } });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async function deleteTweet(id: number) {
+    try {
+      console.log(id);
+      await axios.delete(`http://localhost:3320/post/deleteTweet/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
       console.error(error);
     }
@@ -65,7 +74,7 @@ export function TweetList({ tweet }: TweetProps) {
                             className="hover:bg-gray-600 hover:cursor-pointer focus:bg-gray-600"
                             onSelect={(e) => {
                               e.preventDefault();
-                              setEditTweet(t.id);
+                              setSelectedTweet(t.id);
                             }}
                           >
                             <Pencil className="text-gray-50" />
@@ -86,9 +95,17 @@ export function TweetList({ tweet }: TweetProps) {
                           </div>
                         </DialogContent>
                       </Dialog>
-                      <DropdownMenuItem className="hover:bg-gray-600 hover:cursor-pointer focus:bg-gray-600">
+                      <DropdownMenuItem
+                        className="hover:bg-gray-600 hover:cursor-pointer focus:bg-gray-600"
+                        onSelect={(e) => {
+                          e.preventDefault();
+                          setSelectedTweet(t.id);
+                        }}
+                      >
                         <Trash2 className="text-gray-50" />
-                        <span className="text-gray-50">Delete</span>
+                        <button onClick={() => deleteTweet(t.id)} className="text-gray-50">
+                          Delete
+                        </button>
                       </DropdownMenuItem>
                     </DropdownMenuGroup>
                   </DropdownMenuContent>
