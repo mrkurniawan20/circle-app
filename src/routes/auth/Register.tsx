@@ -33,7 +33,7 @@ function Register() {
   async function handleSubmit() {
     try {
       console.log(formData.dateOfBirth);
-      const response = await axios.post('http://localhost:3320/user/registerUser', formData);
+      const response = await axios.post('https://circle-backend-ecru.vercel.app/user/registerUser', formData);
       navigate('/login');
       console.log(response);
     } catch (error: any) {

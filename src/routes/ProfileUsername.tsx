@@ -41,10 +41,10 @@ function ProfileUsername() {
     async function fetchData() {
       setLoading(true);
       try {
-        const resUser = await axios.get(`http://localhost:3320/user/getuser/${username}`, {
+        const resUser = await axios.get(`https://circle-backend-ecru.vercel.app/user/getuser/${username}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         });
-        const resTweet = await axios.get(`http://localhost:3320/post/gettweetbyusername/${resUser.data.username}`, {
+        const resTweet = await axios.get(`https://circle-backend-ecru.vercel.app/post/gettweetbyusername/${resUser.data.username}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         });
 

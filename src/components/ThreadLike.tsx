@@ -17,7 +17,7 @@ export function ThreadLike({ likeCount, replyCount, isLiked, id }: ThreadsLike) 
   function likeTweet(e: React.MouseEvent) {
     e.stopPropagation();
     try {
-      axios.get(`http://localhost:3320/post/liketweet/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      axios.get(`https://circle-backend-ecru.vercel.app/post/liketweet/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       setLike(true);
       setLikes((prev) => prev + 1);
     } catch (error) {
@@ -27,7 +27,7 @@ export function ThreadLike({ likeCount, replyCount, isLiked, id }: ThreadsLike) 
   function unlikeTweet(e: React.MouseEvent) {
     e.stopPropagation();
     try {
-      axios.get(`http://localhost:3320/post/unliketweet/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      axios.get(`https://circle-backend-ecru.vercel.app/post/unliketweet/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       setLike(false);
       setLikes((prev) => prev - 1);
     } catch (error) {

@@ -41,10 +41,10 @@ function ProfileMediaUsername() {
     async function fetchData() {
       setLoading(true);
       try {
-        const userRes = await axios.get(`http://localhost:3320/user/getuser/${username}`, {
+        const userRes = await axios.get(`https://circle-backend-ecru.vercel.app/user/getuser/${username}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         });
-        const tweetRes = await axios.get(token ? `http://localhost:3320/post/getTweetWithImage/${userRes.data.username}` : `http://localhost:3320/post/gettweetbyusername/${userRes.data.username}`);
+        const tweetRes = await axios.get(token ? `https://circle-backend-ecru.vercel.app/post/getTweetWithImage/${userRes.data.username}` : `https://circle-backend-ecru.vercel.app/post/gettweetbyusername/${userRes.data.username}`);
 
         setProfileUser(userRes.data);
         setTweets(tweetRes.data.filter((t: Tweet) => t.image));

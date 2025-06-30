@@ -24,7 +24,7 @@ export function LoginForm() {
 
   async function handleSubmit() {
     try {
-      const res = await axios.post('http://127.0.0.1:3320/user/loginUser', formData);
+      const res = await axios.post('https://circle-backend-ecru.vercel.app/user/loginUser', formData);
       const token = res.data.loggedInUser.token;
       localStorage.setItem('token', token);
     } catch (error) {
