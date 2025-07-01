@@ -52,7 +52,7 @@ function ProfileUsername() {
   console.log(isMobile);
 
   const InnerContent = (
-    <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 min-h-screen border-r-1 border-l-1 border-gray-500">
+    <div className={`w-full max-w-2xl mx-auto px-4 sm:px-6 min-h-screen ${!isLoggedIn && `border-x-1 border-gray-500`}`}>
       {isLoggedIn && (
         <div className="flex justify-between items-center">
           <NavLink to="/home" className="flex items-center gap-3 pt-6 pb-2 hover:bg-slate-700 rounded-full px-4 w-fit">
