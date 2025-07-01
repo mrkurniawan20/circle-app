@@ -53,7 +53,6 @@ function ContentHome({ user }: UserProps) {
   }
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setLoading(true);
     const data = new FormData();
     data.append('post', formData.post);
     if (formData.image) {
@@ -63,22 +62,20 @@ function ContentHome({ user }: UserProps) {
       setButtonDisabled(true);
     }
     try {
-      await api.post(`/post/posttweet/`, data, { headers: { Authorization: `Bearer ${token}` } });
-      const tweets = await api.get(`/post/getTweets/`, { headers: { Authorization: `Bearer ${token}` } });
-      console.log(tweets.data);
-      setTweet(tweets.data);
+      const res = await api.post(`/post/posttweet/`, data, { headers: { Authorization: `Bearer ${token}` } });
+      const newTweet = res.data;
+      console.log(res.data);
+      setTweet((prev) => [newTweet, ...prev]);
       setFormData({ post: '' });
-      await fetchTweet();
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false);
     }
   }
 
   return (
     <>
-      {loading ? (
+      {loading && tweets.length === 0 ? (
         <LoadingPage />
       ) : (
         <div className="px-2 py-6 max-w-2xl mx-auto">
