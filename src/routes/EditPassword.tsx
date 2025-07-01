@@ -61,7 +61,7 @@ const EditPassword = () => {
         </div>
 
         <button type="submit" className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-lg transition-all">
-          {isEditing ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : `Save Password`}
+          {isEditing ? <Loader2 className="h-8 w-8 animate-spin text-gray-500 mx-auto" /> : `Save Password`}
         </button>
       </form>
     </div>

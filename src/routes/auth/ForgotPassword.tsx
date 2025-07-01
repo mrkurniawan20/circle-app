@@ -39,8 +39,8 @@ function ForgotPassword() {
     <div className="flex flex-col mx-auto w-fit pt-20">
       <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Forgot password" />
-      {error !== '' && <p className="text-center bg-red-500 text-white text-sm p-2 my-5 rounded-md">{error}</p>}
-      {success !== '' && <div className="text-sm text-green-600 bg-green-100 border border-green-300 rounded-md p-3 my-5 w-full text-center">{success}</div>}
+      {error !== '' && <p className="text-center bg-red-500 text-white text-sm p-2 my-5 rounded-md max-w-sm">{error}</p>}
+      {success !== '' && <div className="text-sm text-green-600 bg-green-100 border border-green-300 rounded-md p-3 my-5 text-center max-w-sm">{success}</div>}
       <Form title="forgot" inputs={formInputs} submit={handleSubmit} buttonText={forgotLoading ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : 'Send Instruction'} showDate={false} />
       <p className="text-gray-100 pt-2">
         Already have an account?{' '}
