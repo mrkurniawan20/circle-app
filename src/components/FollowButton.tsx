@@ -5,9 +5,10 @@ import { api } from '@/services/api';
 interface Follow {
   id: number;
   isFollowing: boolean;
+  onFollow: () => void;
 }
 
-function FollowButton({ id, isFollowing }: Follow) {
+function FollowButton({ id, isFollowing, onFollow }: Follow) {
   const [follow, setFollow] = useState<boolean>(isFollowing);
   const [loading, setLoading] = useState<boolean>(false);
   const token = localStorage.getItem('token');
@@ -21,6 +22,7 @@ function FollowButton({ id, isFollowing }: Follow) {
       await api.get(`/user/followuser/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      onFollow?.();
     } catch (error) {
       console.error(error);
       setFollow(false);
@@ -38,6 +40,7 @@ function FollowButton({ id, isFollowing }: Follow) {
       await api.get(`/user/unfollowuser/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      onFollow?.();
     } catch (error) {
       console.error(error);
       setFollow(true);

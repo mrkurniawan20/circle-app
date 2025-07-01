@@ -12,18 +12,18 @@ function ContentFollowing() {
   const { username } = useParams();
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        const res = await api.get(`/user/getfollowing/${username}`, { headers: { Authorization: `Bearer ${token}` } });
-        setUsers(res.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
+  async function fetchData() {
+    try {
+      setLoading(true);
+      const res = await api.get(`/user/getfollowing/${username}`, { headers: { Authorization: `Bearer ${token}` } });
+      setUsers(res.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
+  }
+  useEffect(() => {
     fetchData();
   }, []);
   if (loading) return <LoadingPage />;
@@ -50,7 +50,7 @@ function ContentFollowing() {
               <p className="text-slate-400 text-xs pb-1">@{follower.username}</p>
               <p className="text-gray-200 text-xs pb-1">{follower.bio}</p>
             </div>
-            {user.username !== follower.username && <FollowButton id={follower.id} isFollowing={follower.isFollowingBack} />}
+            {user.username !== follower.username && <FollowButton id={follower.id} isFollowing={follower.isFollowingBack} onFollow={fetchData} />}
           </NavLink>
         ))}
       </div>

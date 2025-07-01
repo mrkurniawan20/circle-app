@@ -26,24 +26,22 @@ function ProfileUsername() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  async function fetchData() {
+    try {
+      const resUser = await api.get(`/user/getuser/${username}`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+      });
+      const resTweet = await api.get(`/post/gettweetbyusername/${resUser.data.username}`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+      });
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const resUser = await api.get(`/user/getuser/${username}`, {
-          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-        });
-        const resTweet = await api.get(`/post/gettweetbyusername/${resUser.data.username}`, {
-          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-        });
-
-        setProfileUser(resUser.data);
-        setTweet(resTweet.data);
-      } catch (error) {
-        console.error(error);
-      }
+      setProfileUser(resUser.data);
+      setTweet(resTweet.data);
+    } catch (error) {
+      console.error(error);
     }
-
+  }
+  useEffect(() => {
     fetchData();
   }, [username, token]);
 
@@ -94,7 +92,7 @@ function ProfileUsername() {
 
       <div className="flex pt-10 pb-4 items-center">
         <DataMyProfile loggedIn={profileUser} />
-        {isLoggedIn && <div className="flex ml-auto ">{user.username === profileUser.username ? <EditProfile user={user} /> : <FollowButton id={profileUser.id} isFollowing={profileUser.isFollowingBack} />}</div>}
+        {isLoggedIn && <div className="flex ml-auto ">{user.username === profileUser.username ? <EditProfile user={user} /> : <FollowButton id={profileUser.id} isFollowing={profileUser.isFollowingBack} onFollow={fetchData} />}</div>}
       </div>
 
       <div className="grid grid-cols-2 border-b border-gray-600 text-center font-semibold text-gray-100">

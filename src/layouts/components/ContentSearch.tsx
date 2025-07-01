@@ -15,24 +15,24 @@ function ContentSearch() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
   const debounceValue = useDebounce(name, 1000);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        const res = await api.get(`/user/getUsers`, {
-          headers: { Authorization: `Bearer ${token}` },
-          params: {
-            name: debounceValue,
-          },
-        });
-        console.log(res.data);
-        setUsers(res.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
+  async function fetchData() {
+    try {
+      setLoading(true);
+      const res = await api.get(`/user/getUsers`, {
+        headers: { Authorization: `Bearer ${token}` },
+        params: {
+          name: debounceValue,
+        },
+      });
+      console.log(res.data);
+      setUsers(res.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
+  }
+  useEffect(() => {
     fetchData();
   }, [debounceValue]);
 
@@ -67,7 +67,7 @@ function ContentSearch() {
                     <p className="text-slate-400 text-xs pb-1">@{u.username}</p>
                     <p className="text-gray-200 text-xs pb-1">{u.bio}</p>
                   </div>
-                  <FollowButton id={u.id} isFollowing={u.isFollowingBack} />
+                  <FollowButton id={u.id} isFollowing={u.isFollowingBack} onFollow={fetchData} />
                 </NavLink>
               </CommandItem>
             ))}

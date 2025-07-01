@@ -10,22 +10,21 @@ function SuggestedAccount() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem('token');
-
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const res = await api.get(`/user/getunfolloweduser`, {
-          params: { limit: 5 },
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUsers(res.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
+  async function fetchData() {
+    setLoading(true);
+    try {
+      const res = await api.get(`/user/getunfolloweduser`, {
+        params: { limit: 5 },
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setUsers(res.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
+  }
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -44,7 +43,7 @@ function SuggestedAccount() {
               <h5 className="text-gray-50 font-semibold text-sm">{u.name}</h5>
               <p className="text-slate-400 text-xs">@{u.username}</p>
             </div>
-            <FollowButton id={u.id} isFollowing={false} />
+            <FollowButton id={u.id} isFollowing={false} onFollow={fetchData} />
           </NavLink>
         </div>
       ))}

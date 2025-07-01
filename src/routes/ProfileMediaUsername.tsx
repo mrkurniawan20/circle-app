@@ -26,22 +26,20 @@ function ProfileMediaUsername() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  async function fetchData() {
+    try {
+      const userRes = await api.get(`/user/getuser/${username}`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+      });
+      const tweetRes = await api.get(token ? `/post/getTweetWithImage/${userRes.data.username}` : `/post/gettweetbyusername/${userRes.data.username}`);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const userRes = await api.get(`/user/getuser/${username}`, {
-          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-        });
-        const tweetRes = await api.get(token ? `/post/getTweetWithImage/${userRes.data.username}` : `/post/gettweetbyusername/${userRes.data.username}`);
-
-        setProfileUser(userRes.data);
-        setTweets(tweetRes.data.filter((t: Tweet) => t.image));
-      } catch (error) {
-        console.error(error);
-      }
+      setProfileUser(userRes.data);
+      setTweets(tweetRes.data.filter((t: Tweet) => t.image));
+    } catch (error) {
+      console.error(error);
     }
-
+  }
+  useEffect(() => {
     fetchData();
   }, [username, token]);
 
@@ -81,7 +79,7 @@ function ProfileMediaUsername() {
 
       <div className="flex pt-10 pb-4 items-center">
         <DataMyProfile loggedIn={profileUser} />
-        {isLoggedIn && <div className="flex ml-auto ">{user.username === profileUser.username ? <EditProfile user={user} /> : <FollowButton id={profileUser.id} isFollowing={profileUser.isFollowingBack} />}</div>}
+        {isLoggedIn && <div className="flex ml-auto ">{user.username === profileUser.username ? <EditProfile user={user} /> : <FollowButton id={profileUser.id} isFollowing={profileUser.isFollowingBack} onFollow={fetchData} />}</div>}
       </div>
 
       <div className="grid grid-cols-2 border-b border-gray-600 text-center font-semibold text-gray-100">
