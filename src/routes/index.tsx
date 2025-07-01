@@ -13,6 +13,7 @@ import Followers from './Followers';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import ProfileUsername from './ProfileUsername';
 import ProfileMediaUsername from './ProfileMediaUsername';
+import NotFound from './NotFound';
 
 let router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ let router = createBrowserRouter([
   {
     path: '/loading',
     Component: LoadingPage,
+  },
+  {
+    path: '*',
+    Component: NotFound,
   },
 ]);
 
