@@ -18,28 +18,27 @@ function ProfileMediaUsername() {
   const { username } = useParams();
 
   const [tweet, setTweets] = useState<Tweet[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [profileUser, setProfileUser] = useState<User>({
-    id: 0,
-    name: '',
-    username: '',
-    email: '',
-    dateOfBirth: new Date(),
-    bio: '',
-    avatar: 'blue.png',
-    header: '',
-    verified: false,
-    tweetCount: 0,
-    followersCount: 0,
-    followingCount: 0,
-    tweet: [],
-    reply: [],
-    isFollowingBack: false,
-  });
+  // const [profileUser, setProfileUser] = useState<User>({
+  //   id: 0,
+  //   name: '',
+  //   username: '',
+  //   email: '',
+  //   dateOfBirth: new Date(),
+  //   bio: '',
+  //   avatar: 'blue.png',
+  //   header: '',
+  //   verified: false,
+  //   tweetCount: 0,
+  //   followersCount: 0,
+  //   followingCount: 0,
+  //   tweet: [],
+  //   reply: [],
+  //   isFollowingBack: false,
+  // });
+  const [profileUser, setProfileUser] = useState<User | null>(null);
 
   useEffect(() => {
     async function fetchData() {
-      setLoading(true);
       try {
         const userRes = await api.get(`/user/getuser/${username}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
@@ -51,14 +50,13 @@ function ProfileMediaUsername() {
       } catch (error) {
         console.error(error);
       } finally {
-        setLoading(false);
       }
     }
 
     fetchData();
   }, []);
 
-  if (loading) return <LoadingPage />;
+  if (user == null || profileUser == null) return <LoadingPage />;
 
   return (
     <Layout showProfileContainer={false}>

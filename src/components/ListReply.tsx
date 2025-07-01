@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { Input } from './ui/input';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { api } from '@/services/api';
+import LoadingPage from '@/layouts/components/LoadingPage';
 
 export interface Reply {
   id: number;
@@ -59,7 +60,7 @@ function ListReply({ replies }: ReplyListProps) {
       console.error(error);
     }
   }
-
+  if (user == null) return <LoadingPage />;
   return (
     <>
       {replies.map((reply, index) => (

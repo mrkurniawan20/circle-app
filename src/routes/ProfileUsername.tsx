@@ -16,30 +16,29 @@ function ProfileUsername() {
   const token = localStorage.getItem('token');
   const { username } = useParams();
   const { user } = useUser();
-  const [profileUser, setProfileUser] = useState<User>({
-    id: 0,
-    name: '',
-    username: '',
-    email: '',
-    dateOfBirth: new Date(),
-    bio: '',
-    avatar: 'blue.png',
-    header: '',
-    verified: false,
-    tweetCount: 0,
-    followersCount: 0,
-    followingCount: 0,
-    tweet: [],
-    reply: [],
-    isFollowingBack: false,
-  });
+  // const [profileUser, setProfileUser] = useState<User>({
+  //   id: 0,
+  //   name: '',
+  //   username: '',
+  //   email: '',
+  //   dateOfBirth: new Date(),
+  //   bio: '',
+  //   avatar: 'blue.png',
+  //   header: '',
+  //   verified: false,
+  //   tweetCount: 0,
+  //   followersCount: 0,
+  //   followingCount: 0,
+  //   tweet: [],
+  //   reply: [],
+  //   isFollowingBack: false,
+  // });
+  const [profileUser, setProfileUser] = useState<User | null>(null);
 
   const [tweet, setTweet] = useState<Tweet[]>([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
-      setLoading(true);
       try {
         const resUser = await api.get(`/user/getuser/${username}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
@@ -53,14 +52,13 @@ function ProfileUsername() {
       } catch (error) {
         console.error(error);
       } finally {
-        setLoading(false);
       }
     }
 
     fetchData();
   }, []);
 
-  if (loading) return <LoadingPage />;
+  if (profileUser == null || user == null) return <LoadingPage />;
 
   return (
     <Layout showProfileContainer={false}>

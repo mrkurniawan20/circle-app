@@ -11,6 +11,7 @@ import { formatDistanceToNowStrict } from 'date-fns';
 import { Input } from './ui/input';
 import { useUser } from '@/utils/useUser';
 import { api } from '@/services/api';
+import LoadingPage from '@/layouts/components/LoadingPage';
 
 export function TweetList({ tweet }: TweetProps) {
   function formatCompactTime(date: Date | string) {
@@ -47,7 +48,7 @@ export function TweetList({ tweet }: TweetProps) {
       console.error(error);
     }
   }
-
+  if (user == null) return <LoadingPage />;
   return (
     <div className="2xl:w-full xl:w-full">
       {tweet.map((t, index) => (
