@@ -54,13 +54,18 @@ function ProfileUsername() {
   const InnerContent = (
     <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 min-h-screen border-r-1 border-l-1 border-gray-500">
       {isLoggedIn && (
-        <NavLink to="/home" className="flex items-center gap-3 pt-6 pb-2 hover:bg-slate-700 rounded-full px-4 w-fit">
-          <ArrowLeft className="size-6 text-gray-50" />
-          <div>
-            <h2 className="text-xl font-semibold text-gray-100">{profileUser.name}</h2>
-            <p className="text-sm text-slate-400">{profileUser.tweetCount} tweets</p>
-          </div>
-        </NavLink>
+        <div className="flex justify-between items-center">
+          <NavLink to="/home" className="flex items-center gap-3 pt-6 pb-2 hover:bg-slate-700 rounded-full px-4 w-fit">
+            <ArrowLeft className="size-6 text-gray-50" />
+            <div>
+              <h2 className="text-xl font-semibold text-gray-100">{profileUser.name}</h2>
+              <p className="text-sm text-slate-400">{profileUser.tweetCount} tweets</p>
+            </div>
+          </NavLink>
+          <NavLink to={'/edit'} className="flex items-center p-2 hover:bg-slate-700 rounded-full px-4 w-fit">
+            <h2 className="text-sm text-slate-400">Edit Password</h2>
+          </NavLink>
+        </div>
       )}
 
       <div className="relative pt-3">

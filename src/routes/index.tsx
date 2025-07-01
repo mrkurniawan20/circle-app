@@ -14,6 +14,7 @@ import LoadingPage from '@/layouts/components/LoadingPage';
 import ProfileUsername from './ProfileUsername';
 import ProfileMediaUsername from './ProfileMediaUsername';
 import NotFound from './NotFound';
+import EditPassword from './EditPassword';
 
 let router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ let router = createBrowserRouter([
       {
         path: '/search',
         Component: PageTitle(Search, 'Search | Circle'),
+      },
+      {
+        path: '/edit',
+        Component: PageTitle(EditPassword, 'Edit Password | Circle'),
       },
     ],
   },
