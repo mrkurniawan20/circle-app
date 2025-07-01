@@ -3,6 +3,7 @@ import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { useUser } from '@/utils/useUser';
 import LoadingPage from '@/layouts/components/LoadingPage';
+import Layout from '@/layouts/Layout';
 
 interface DecodedProps {
   id: number;
@@ -39,7 +40,11 @@ function ProtectedRouteLayout() {
   if (!token) {
     return <Navigate to={'/login'} />;
   } else {
-    return <Outlet context={{ user }} />;
+    return (
+      <Layout>
+        <Outlet context={{ user }} />
+      </Layout>
+    );
   }
 }
 
