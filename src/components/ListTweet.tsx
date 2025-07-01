@@ -122,7 +122,7 @@ export function TweetList({ tweet }: TweetProps) {
 
           <div className="pb-2 ml-15 -mt-5">
             <p className="text-gray-300 pb-2">{t.post}</p>
-            {t.image && <img src={`${t.image}`} className="2xl:max-w-fit xl:rounded-4xl pb-2 max-h-150 aspect-4/3 object-cover" alt="" />}
+            {t.image && <img src={`${t.image}`} className="rounded-4xl pb-2 max-h-150 aspect-4/3 object-cover" alt="" />}
           </div>
 
           <div className="ml-15">
