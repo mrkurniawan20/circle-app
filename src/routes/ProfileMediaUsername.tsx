@@ -14,28 +14,18 @@ import { api } from '@/services/api';
 function ProfileMediaUsername() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  const { user } = useUser();
+  const { user, loading } = useUser();
   const { username } = useParams();
 
   const [tweet, setTweets] = useState<Tweet[]>([]);
-  // const [profileUser, setProfileUser] = useState<User>({
-  //   id: 0,
-  //   name: '',
-  //   username: '',
-  //   email: '',
-  //   dateOfBirth: new Date(),
-  //   bio: '',
-  //   avatar: 'blue.png',
-  //   header: '',
-  //   verified: false,
-  //   tweetCount: 0,
-  //   followersCount: 0,
-  //   followingCount: 0,
-  //   tweet: [],
-  //   reply: [],
-  //   isFollowingBack: false,
-  // });
   const [profileUser, setProfileUser] = useState<User | null>(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  console.log(isMobile);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -49,74 +39,72 @@ function ProfileMediaUsername() {
         setTweets(tweetRes.data.filter((t: Tweet) => t.image));
       } catch (error) {
         console.error(error);
-      } finally {
       }
     }
 
     fetchData();
-  }, []);
+  }, [username, token]);
 
-  if (user == null || profileUser == null) return <LoadingPage />;
+  if (loading || profileUser == null) return <LoadingPage />;
+  const isLoggedIn = user.id !== 0;
 
-  return (
-    <Layout showProfileContainer={false}>
-      <div className="w-full max-w-2xl mx-auto px-4 sm:px-6">
-        {/* Header with Back */}
+  const InnerContent = (
+    <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 min-h-screen border-r-1 border-l-1 border-gray-500">
+      {isLoggedIn && (
         <NavLink to="/home" className="flex items-center gap-3 pt-6 pb-2 hover:bg-slate-700 rounded-full px-4 w-fit">
           <ArrowLeft className="size-6 text-gray-50" />
           <h2 className="text-xl font-semibold text-gray-100">{profileUser.name}</h2>
         </NavLink>
+      )}
 
-        {/* Header and Avatar */}
-        <div className="relative mt-2">
-          <Dialog>
-            <DialogTrigger asChild>
-              <img src={profileUser.header} alt="" className="aspect-[5/1] object-cover w-full rounded-2xl cursor-pointer" />
-            </DialogTrigger>
-            <DialogOverlay className="bg-black/80" />
-            <DialogContent className="border-none p-1 rounded-none">
-              <img src={profileUser.header} alt="" className="aspect-[5/1] object-cover w-full" />
-            </DialogContent>
-          </Dialog>
+      <div className="relative pt-3">
+        <Dialog>
+          <DialogTrigger asChild>
+            <img src={profileUser.header} alt="" className="aspect-[5/1] object-cover w-full rounded-2xl cursor-pointer" />
+          </DialogTrigger>
+          <DialogOverlay className="bg-black/80" />
+          <DialogContent className="border-none p-1 rounded-none">
+            <img src={profileUser.header} alt="" className="aspect-[5/1] object-cover w-full" />
+          </DialogContent>
+        </Dialog>
 
-          <Dialog>
-            <DialogTrigger asChild>
-              <img src={profileUser.avatar} alt="" className="size-24 object-cover rounded-full border-4 border-[#213547] absolute -bottom-12 left-4 cursor-pointer hover:brightness-90 transition" />
-            </DialogTrigger>
-            <DialogOverlay className="bg-black/80" />
-            <DialogContent className="border-none w-fit p-1 rounded-full">
-              <img src={profileUser.avatar} alt="" className="size-full object-cover rounded-full" />
-            </DialogContent>
-          </Dialog>
-        </div>
-
-        <div className="flex pt-10 pb-4 items-center">
-          <DataMyProfile loggedIn={profileUser} />
-          <div className="flex ml-auto ">{user.username === profileUser.username ? <EditProfile user={user} /> : <FollowButton id={profileUser.id} isFollowing={profileUser.isFollowingBack} />}</div>
-        </div>
-
-        {/* Tabs */}
-        <div className="grid grid-cols-2 border-b border-gray-600 text-center font-semibold text-gray-100">
-          <NavLink to={`/profile/${profileUser.username}`} className="py-3 hover:bg-slate-700 rounded-t-lg">
-            All Posts
-          </NavLink>
-          <NavLink to={`/media/${profileUser.username}`} className="py-3 hover:bg-slate-700 rounded-t-lg">
-            Media
-            <div className="bg-green-500 h-1 rounded-full mt-1" />
-          </NavLink>
-        </div>
-
-        {/* Media Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 py-4">
-          {tweet.map((img, index) => (
-            <div key={index} onClick={() => navigate(`/page/${img.id}`, { state: { index } })} className="cursor-pointer">
-              <img src={img.image} alt="" className="aspect-square object-cover rounded-lg hover:brightness-75 transition duration-150" />
-            </div>
-          ))}
-        </div>
+        <Dialog>
+          <DialogTrigger asChild>
+            <img src={profileUser.avatar} alt="" className="size-24 object-cover rounded-full border-4 border-[#213547] absolute -bottom-12 left-4 cursor-pointer hover:brightness-90 transition" />
+          </DialogTrigger>
+          <DialogOverlay className="bg-black/80" />
+          <DialogContent className="border-none w-fit p-1 rounded-full">
+            <img src={profileUser.avatar} alt="" className="size-full object-cover rounded-full" />
+          </DialogContent>
+        </Dialog>
       </div>
-    </Layout>
+
+      <div className="flex pt-10 pb-4 items-center">
+        <DataMyProfile loggedIn={profileUser} />
+        {isLoggedIn && <div className="flex ml-auto ">{user.username === profileUser.username ? <EditProfile user={user} /> : <FollowButton id={profileUser.id} isFollowing={profileUser.isFollowingBack} />}</div>}
+      </div>
+
+      <div className="grid grid-cols-2 border-b border-gray-600 text-center font-semibold text-gray-100">
+        <NavLink to={`/profile/${profileUser.username}`} className="py-3 hover:bg-slate-700 rounded-t-lg">
+          All Posts
+        </NavLink>
+        <NavLink to={`/media/${profileUser.username}`} className="py-3 hover:bg-slate-700 rounded-t-lg">
+          Media
+          <div className="bg-green-500 h-1 rounded-full mt-1" />
+        </NavLink>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 py-4">
+        {tweet.map((img, index) => (
+          <div key={index} onClick={() => navigate(`/page/${img.id}`, { state: { index } })} className="cursor-pointer">
+            <img src={img.image} alt="" className="aspect-square object-cover rounded-lg hover:brightness-75 transition duration-150" />
+          </div>
+        ))}
+      </div>
+    </div>
   );
+
+  return isLoggedIn ? <Layout showProfileContainer={false}>{InnerContent}</Layout> : <>{InnerContent}</>;
 }
 
 export default ProfileMediaUsername;

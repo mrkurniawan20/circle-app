@@ -82,9 +82,9 @@ function ContentHome({ user }: UserProps) {
         <LoadingPage />
       ) : (
         <div className="px-2 py-6 max-w-2xl mx-auto">
-          <h2 className="text-2xl text-gray-100 font-semibold mb-4 ">Home</h2>
+          <h2 className="text-2xl text-gray-100 font-semibold mb-4 ml-4">Home</h2>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4 border-b border-gray-600 pb-6">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 border-b border-gray-600 pb-6 ml-4">
             <div className="flex gap-4">
               <Avatar className="size-12 shrink-0">
                 <AvatarImage src={user.avatar} alt="@avatar" className="object-cover" />

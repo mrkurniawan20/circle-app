@@ -90,7 +90,6 @@ function Page() {
   const isLoggedIn = user.id !== 0;
   const hasImage = !!tweet.image;
 
-  // Helper UI blocks (replace with real content):
   const TweetHeader = () => (
     <div className="flex py-5 px-3">
       <Avatar className="my-auto">
@@ -109,7 +108,7 @@ function Page() {
       <p className="text-gray-100 pb-2 px-3">{tweet.post}</p>
       {hasImage && <img src={tweet.image} alt="Tweet visual" className="rounded-lg my-4" />}
       <p className="text-slate-400 px-3">{new Date(tweet.createdAt).toLocaleDateString()}</p>
-      <div className="p-3">
+      <div className="p-3 border-b-1 border-gray-500">
         <ThreadLike id={tweet.id} isLiked={tweet.isLiked} likeCount={tweet.likeCount} replyCount={tweet.replyCount} />
       </div>
     </>
@@ -149,7 +148,6 @@ function Page() {
     </form>
   );
 
-  // --- MAIN CONDITIONAL RENDER ---
   if (isMobile) {
     return (
       <div className="p-2">
@@ -197,7 +195,6 @@ function Page() {
     );
   }
 
-  // DESKTOP NO IMAGE
   if (isLoggedIn) {
     return (
       <Layout>
