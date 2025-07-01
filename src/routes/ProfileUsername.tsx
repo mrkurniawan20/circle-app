@@ -62,9 +62,11 @@ function ProfileUsername() {
               <p className="text-sm text-slate-400">{profileUser.tweetCount} tweets</p>
             </div>
           </NavLink>
-          <NavLink to={'/edit'} className="flex items-center p-2 hover:bg-slate-700 rounded-full px-4 w-fit">
-            <h2 className="text-sm text-slate-400">Edit Password</h2>
-          </NavLink>
+          {user.id === profileUser.id && (
+            <NavLink to={'/edit'} className="flex items-center p-2 hover:bg-slate-700 rounded-full px-4 w-fit">
+              <h2 className="text-sm text-slate-400">Edit Password</h2>
+            </NavLink>
+          )}
         </div>
       )}
 
