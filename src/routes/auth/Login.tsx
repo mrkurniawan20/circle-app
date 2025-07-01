@@ -17,7 +17,7 @@ export function LoginForm() {
   }, []);
 
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
@@ -36,7 +36,6 @@ export function LoginForm() {
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
         const errorMessage = error.response?.data.message;
-        console.log(error);
         setError(errorMessage);
       }
     } finally {
@@ -44,7 +43,7 @@ export function LoginForm() {
     }
   }
   const formInputs = [
-    { label: 'email', change: handleChange, value: formData.email, type: 'email', name: 'email', id: 'email', placeholder: 'Email/Username' },
+    { label: 'username', change: handleChange, value: formData.username, type: 'username', name: 'username', id: 'username', placeholder: 'Username' },
     { label: 'password', change: handleChange, value: formData.password, type: 'password', name: 'password', id: 'password', placeholder: 'Password' },
   ];
   return (
