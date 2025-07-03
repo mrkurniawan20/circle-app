@@ -67,6 +67,7 @@ function ContentHome({ user }: UserProps) {
   }
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setButtonDisabled(true);
     setIsSubmitting(true);
     const data = new FormData();
     data.append('post', formData.post);

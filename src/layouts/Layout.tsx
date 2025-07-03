@@ -36,8 +36,8 @@ function Layout({ children, showProfileContainer = true, minimal = false }: Layo
         <span className="text-lg font-semibold text-green-500 ">Circle</span>
         <div className="w-6" />
       </div>
-
-      <div className={`fixed inset-0 z-30 bg-black bg-opacity-50 transition-opacity ${sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} xl:hidden`} onClick={() => setSidebarOpen(false)}>
+      <div className={`fixed inset-0 z-30 xl:hidden ${!sidebarOpen ? 'pointer-events-none' : ''}`}>
+        <div className={`absolute inset-0 bg-black transition-opacity duration-300 ${sidebarOpen ? 'opacity-70 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} onClick={() => setSidebarOpen(false)} />
         <div className={`absolute left-0 top-0 h-full w-64 bg-[#213547] dark:bg-background transform transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`} onClick={(e) => e.stopPropagation()}>
           <SideBar user={user!} />
         </div>
