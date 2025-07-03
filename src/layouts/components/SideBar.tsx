@@ -75,7 +75,7 @@ function SideBar({ user }: UserProps) {
   return (
     <div className="p-6 pt-2 max-w-full h-full">
       <div className="flex flex-col gap-5 sticky top-5">
-        <NavLink to="/" className="hover:scale-105 transition-transform duration-200 w-fit">
+        <NavLink to="/home" className="hover:scale-105 transition-transform duration-200 w-fit">
           <CircleText textSize="text-5xl px-3" />
         </NavLink>
 
