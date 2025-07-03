@@ -65,13 +65,11 @@ export function useUser() {
         .then((res) => {
           setUser(res.data);
         })
-        .catch((err) => {
-          console.log(`Failed to fetch user ${err}`);
+        .catch(() => {
           localStorage.removeItem('token');
         })
         .finally(() => setLoading(false));
     } catch (error) {
-      console.log('Unable to fetch user');
       localStorage.removeItem('token');
     }
   }, []);

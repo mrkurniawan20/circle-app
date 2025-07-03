@@ -41,7 +41,6 @@ function Register() {
       navigate('/login');
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
-        console.log(error);
         const errorMessage = error.response?.data.message || error.response?.data.error;
         setError(errorMessage);
       }

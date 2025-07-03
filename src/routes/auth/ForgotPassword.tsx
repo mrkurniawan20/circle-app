@@ -20,7 +20,7 @@ function ForgotPassword() {
     setSuccess('');
   }
   async function handleSubmit(e: React.FormEvent) {
-    console.log(e);
+    e.isTrusted;
     try {
       setForgotLoading(true);
       const res = await api.post('/user/forgotpassword', formData);

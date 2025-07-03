@@ -54,7 +54,6 @@ function ListReply({ replies }: ReplyListProps) {
   }
   async function deleteReply(id: number) {
     try {
-      console.log(id);
       await api.delete(`/post/deleteReply/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
       console.error(error);

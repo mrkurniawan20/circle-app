@@ -47,13 +47,14 @@ function ProfileUsername() {
 
   if (loading || profileUser == null) return <LoadingPage />;
   const isLoggedIn = user.id !== 0;
-  console.log(isMobile);
 
   const InnerContent = (
     <div className={`w-full  mx-auto px-4 sm:px-6 min-h-screen ${!isLoggedIn && `border-x-1 border-gray-500`}`}>
       {isLoggedIn && (
         <div className="flex justify-between items-center">
-          <NavLink to="/home" className="flex items-center gap-3 pt-6 pb-2 hover:bg-slate-700 rounded-full px-4 w-fit">
+          <NavLink to="/home" className="flex items-center gap-3 mt-4 py-2 hover:bg-slate-700 rounded-full px-4 w-fit">
+            {isMobile && null}
+
             <ArrowLeft className="size-6 text-gray-50" />
             <div>
               <h2 className="text-xl font-semibold text-gray-100">{profileUser.name}</h2>

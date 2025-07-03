@@ -26,7 +26,6 @@ function ContentHome({ user }: UserProps) {
     try {
       const tweets = await api.get(`/post/getTweets/`, { headers: { Authorization: `Bearer ${token}` } });
       setTweet(tweets.data);
-      console.log(tweets.data);
     } catch (error) {
       console.error(error);
     } finally {

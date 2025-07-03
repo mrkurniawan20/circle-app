@@ -24,7 +24,6 @@ function ContentSearch() {
           name: debounceValue,
         },
       });
-      console.log(res.data);
       setUsers(res.data);
     } catch (error) {
       console.error(error);

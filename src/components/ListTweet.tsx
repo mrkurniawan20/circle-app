@@ -33,7 +33,6 @@ export function TweetList({ tweet }: TweetProps) {
       const data = new FormData();
       if (post) {
         data.append('post', post);
-        console.log(data);
       }
       await api.patch(`/post/edittweet/${selectedTweet}`, data, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
@@ -42,7 +41,6 @@ export function TweetList({ tweet }: TweetProps) {
   }
   async function deleteTweet(id: number) {
     try {
-      console.log(id);
       await api.delete(`/post/deleteTweet/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
       console.error(error);
