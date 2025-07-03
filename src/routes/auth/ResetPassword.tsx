@@ -33,7 +33,7 @@ function ResetPassword() {
     <div className="flex flex-col mx-auto w-fit pt-20">
       <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Reset your password" />
-      <Form showDate={false} title="login" inputs={formInputs} submit={handleSubmit} buttonText="Create New Password" />
+      <Form title="login" inputs={formInputs} submit={handleSubmit} buttonText="Create New Password" />
     </div>
   );
 }

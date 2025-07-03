@@ -21,10 +21,10 @@ interface FormProps {
   buttonText: string | ReactNode;
   forgotPassword?: string;
   actions?: string;
-  showDate: boolean;
+  // showDate: boolean;
 }
 
-function Form({ inputs, submit, buttonText, forgotPassword, actions, showDate }: FormProps) {
+function Form({ inputs, submit, buttonText, forgotPassword, actions }: FormProps) {
   const { register, handleSubmit } = useForm();
 
   return (
@@ -43,11 +43,11 @@ function Form({ inputs, submit, buttonText, forgotPassword, actions, showDate }:
           />
         </div>
       ))}
-      {showDate && (
+      {/* {showDate && (
         <div>
           <input name="dateOfBirth" id="dateOfBirth" type="date" className="w-sm px-1.5 py-2.5 border-2 border-gray-600 rounded-sm  text-sm text-gray-100 focus:border-green-500 focus:outline-none transition-all" />
         </div>
-      )}
+      )} */}
       <NavLink to={'/forgot'} className="py-2 text-gray-100 ml-auto hover:text-green-800 transition-all">
         {forgotPassword}
       </NavLink>

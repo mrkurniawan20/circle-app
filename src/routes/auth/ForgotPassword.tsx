@@ -41,7 +41,7 @@ function ForgotPassword() {
       <SubTitle subTitle="Forgot password" />
       {error !== '' && <p className="text-center bg-red-500 text-white text-sm p-2 my-5 rounded-md max-w-sm">{error}</p>}
       {success !== '' && <div className="text-sm text-green-600 bg-green-100 border border-green-300 rounded-md p-3 my-5 text-center max-w-sm">{success}</div>}
-      <Form title="forgot" inputs={formInputs} submit={handleSubmit} buttonText={forgotLoading ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : 'Send Instruction'} showDate={false} />
+      <Form title="forgot" inputs={formInputs} submit={handleSubmit} buttonText={forgotLoading ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : 'Send Instruction'} />
       <p className="text-gray-100 pt-2">
         Already have an account?{' '}
         <NavLink to={'/register'} className={({ isActive }) => `rounded ${isActive ? 'text-blue-500 font-bold' : 'text-green-500'} hover:text-green-800 transition-all`}>

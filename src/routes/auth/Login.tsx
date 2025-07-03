@@ -51,7 +51,7 @@ export function LoginForm() {
       <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Login to Circle" />
       {error !== '' && <p className="text-center bg-red-500 text-white text-sm p-2 my-5 rounded-md">{error}</p>}
-      <Form title="login" inputs={formInputs} change={handleChange} submit={handleSubmit} buttonText={loading ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : 'Login'} forgotPassword="Forgot password?" showDate={false} />
+      <Form title="login" inputs={formInputs} change={handleChange} submit={handleSubmit} buttonText={loading ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : 'Login'} forgotPassword="Forgot password?" />
       <p className="text-gray-100 pt-3">
         Don't have an account yet?{' '}
         <NavLink to={'/register'} className={({ isActive }) => `rounded ${isActive ? 'text-blue-500 font-bold' : 'text-green-500'} hover:text-green-800 transition-all`}>

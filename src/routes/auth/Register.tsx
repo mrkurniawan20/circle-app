@@ -18,7 +18,7 @@ function Register() {
     username: '',
     email: '',
     password: '',
-    dateOfBirth: '2000-02-20T15:00:00+07:00',
+    // dateOfBirth: '2000-02-20T15:00:00+07:00',
   });
   function handleChange(e: any) {
     setFormData({
@@ -37,14 +37,12 @@ function Register() {
   async function handleSubmit() {
     try {
       setLoading(true);
-      const response = await api.post(`/user/registerUser`, formData);
-      console.log(response.data);
+      await api.post(`/user/registerUser`, formData);
       navigate('/login');
-      console.log(response);
     } catch (error: any) {
-      console.log(error.message);
       if (axios.isAxiosError(error)) {
-        const errorMessage = error.response?.data.message;
+        console.log(error);
+        const errorMessage = error.response?.data.message || error.response?.data.error;
         setError(errorMessage);
       }
     } finally {
@@ -56,7 +54,7 @@ function Register() {
       <CircleText textSize="text-3xl" />
       <SubTitle subTitle="Create account Circle" />
       {error !== '' && <p className="text-center bg-red-500 text-white text-sm p-2 my-5 rounded-md">{error}</p>}
-      <Form title="login" inputs={formInputs} submit={handleSubmit} buttonText={loading ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : 'Register'} showDate={true} />
+      <Form title="login" inputs={formInputs} submit={handleSubmit} buttonText={loading ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : 'Register'} />
 
       <p className="text-gray-100 pt-3">
         Already have an account?{' '}
