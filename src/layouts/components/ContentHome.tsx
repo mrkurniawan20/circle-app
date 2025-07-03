@@ -12,7 +12,9 @@ import { api } from '@/services/api';
 function ContentHome({ user }: UserProps) {
   const token = localStorage.getItem('token');
   const [tweets, setTweet] = useState<Tweet[]>([]);
+  const [nextCursor, setNextCursor] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [formData, setFormData] = useState<{
@@ -21,15 +23,27 @@ function ContentHome({ user }: UserProps) {
   }>({
     post: '',
   });
-  async function fetchTweet() {
-    setLoading(true);
+  async function fetchTweet(cursor?: number) {
+    if (cursor) setIsFetchingMore(true);
+    else setLoading(true);
     try {
-      const tweets = await api.get(`/post/getTweets/`, { headers: { Authorization: `Bearer ${token}` } });
-      setTweet(tweets.data);
+      const res = await api.get(`/post/getTweets/`, {
+        headers: { Authorization: `Bearer ${token}` },
+        params: {
+          cursor,
+        },
+      });
+      if (cursor) {
+        setTweet((prev) => [...prev, ...res.data.tweets]);
+      } else {
+        setTweet(res.data.tweets);
+      }
+      setNextCursor(res.data.nextCursor);
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
+      setIsFetchingMore(false);
     }
   }
   useEffect(() => {
@@ -124,6 +138,13 @@ function ContentHome({ user }: UserProps) {
           </form>
           <div className="w-full mx-auto">
             <TweetList tweet={tweets} />
+            {nextCursor && (
+              <div className="mt-6 text-center">
+                <Button onClick={() => fetchTweet(nextCursor)} disabled={isFetchingMore} variant="ghost" className="text-white border-gray-500 hover:border-gray-300">
+                  {isFetchingMore ? 'Loading...' : 'Load More'}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       )}
