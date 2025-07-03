@@ -167,7 +167,6 @@ function Page() {
     );
   }
 
-  // DESKTOP
   if (hasImage) {
     return (
       <div className="flex h-screen w-full relative">
@@ -198,7 +197,7 @@ function Page() {
   if (isLoggedIn) {
     return (
       <Layout>
-        <div className="p-2">
+        <div className="p-2 min-h-screen">
           <div className="inline-flex">
             <NavLink to="/home" className="inline-flex items-center pt-10">
               <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700 duration-200">
@@ -217,7 +216,7 @@ function Page() {
   }
   return (
     <Layout minimal={true}>
-      <div className="p-2">
+      <div className="p-2 min-h-screen">
         <div className="inline-flex">
           <NavLink to="/home" className="inline-flex items-center pt-10">
             <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700 duration-200">

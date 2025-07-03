@@ -28,7 +28,7 @@ function ContentFollowers() {
   }, []);
   if (loading) return <LoadingPage />;
   return (
-    <div>
+    <div className="min-h-screen">
       <div className="grid grid-cols-[1fr_1fr]  pr-5 pl-5 border-b-1 border-gray-500">
         <NavLink to={`/following/${username}`} className="text-center text-xl text-gray-50">
           <p className="pt-3 pb-3  hover:bg-slate-700 rounded-lg duration-200">Following</p>

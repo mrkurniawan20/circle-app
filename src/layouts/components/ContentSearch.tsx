@@ -14,7 +14,7 @@ function ContentSearch() {
   const [name, setName] = useState('');
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
-  const debounceValue = useDebounce(name, 1000);
+  const debounceValue = useDebounce(name, 500);
   async function fetchData() {
     try {
       setLoading(true);
@@ -38,7 +38,7 @@ function ContentSearch() {
 
   if (loading) return <LoadingPage />;
   return (
-    <div>
+    <div className="min-h-screen">
       <h2 className="text-2xl p-10 pb-5 text-gray-100 font-semibold">Search</h2>
       <Command className=" md:min-w-[450px] bg-[#213547] p-5 rounded-none ">
         <CommandInput

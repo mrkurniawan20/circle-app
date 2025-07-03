@@ -29,7 +29,6 @@ function Layout({ children, showProfileContainer = true, minimal = false }: Layo
 
   return (
     <>
-      {/* Mobile Navbar */}
       <div className="xl:hidden flex items-center justify-between px-4 py-3 border-b border-gray-800 bg-[#213547] dark:bg-background sticky top-0 z-20">
         <button onClick={() => setSidebarOpen(true)}>
           <Menu className="h-6 w-6 text-green-500 " />
@@ -38,21 +37,20 @@ function Layout({ children, showProfileContainer = true, minimal = false }: Layo
         <div className="w-6" />
       </div>
 
-      {/* Mobile Sidebar Overlay */}
       <div className={`fixed inset-0 z-30 bg-black bg-opacity-50 transition-opacity ${sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} xl:hidden`} onClick={() => setSidebarOpen(false)}>
         <div className={`absolute left-0 top-0 h-full w-64 bg-[#213547] dark:bg-background transform transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`} onClick={(e) => e.stopPropagation()}>
           <SideBar user={user!} />
         </div>
       </div>
 
-      <div className="2xl:grid 2xl:grid-cols-[250px_1fr_430px] xl:grid xl:grid-cols-[250px_1fr_430px]">
-        <div className="hidden xl:block">
+      <div className="2xl:grid 2xl:grid-cols-[0.5fr_1fr_0.7fr] xl:grid xl:grid-cols-[250px_1fr_430px]">
+        <div className="hidden xl:block ml-auto">
           <SideBar user={user!} />
         </div>
 
         <div className="w-full max-w-full xl:border-x border-gray-500">{children}</div>
 
-        <div className="hidden xl:block">
+        <div className="hidden xl:block mr-auto">
           <ProfileBar showProfileContainer={showProfileContainer} />
         </div>
       </div>

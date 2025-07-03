@@ -47,7 +47,7 @@ function ProfileMediaUsername() {
   const isLoggedIn = user.id !== 0;
 
   const InnerContent = (
-    <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 min-h-screen">
+    <div className="w-full  mx-auto px-4 sm:px-6 min-h-screen">
       {isLoggedIn && (
         <NavLink to="/home" className="flex items-center gap-3 pt-6 pb-2 hover:bg-slate-700 rounded-full px-4 w-fit">
           <ArrowLeft className="size-6 text-gray-50" />

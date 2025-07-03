@@ -13,6 +13,7 @@ function ContentHome({ user }: UserProps) {
   const token = localStorage.getItem('token');
   const [tweets, setTweet] = useState<Tweet[]>([]);
   const [loading, setLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [formData, setFormData] = useState<{
     post: string;
@@ -53,6 +54,7 @@ function ContentHome({ user }: UserProps) {
   }
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setIsSubmitting(true);
     const data = new FormData();
     data.append('post', formData.post);
     if (formData.image) {
@@ -64,12 +66,12 @@ function ContentHome({ user }: UserProps) {
     try {
       const res = await api.post(`/post/posttweet/`, data, { headers: { Authorization: `Bearer ${token}` } });
       const newTweet = res.data;
-      console.log(res.data);
       setTweet((prev) => [newTweet, ...prev]);
       setFormData({ post: '' });
     } catch (error) {
       console.error(error);
     } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -78,7 +80,7 @@ function ContentHome({ user }: UserProps) {
       {loading && tweets.length === 0 ? (
         <LoadingPage />
       ) : (
-        <div className="px-2 py-6 max-w-2xl mx-auto">
+        <div className="px-2 py-6 w-full mx-auto ">
           <h2 className="text-2xl text-gray-100 font-semibold mb-4 ml-4">Home</h2>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4 border-b border-gray-600 pb-6 ">
@@ -116,8 +118,8 @@ function ContentHome({ user }: UserProps) {
               <label htmlFor="postImage">
                 <ImagePlus className="size-6 text-green-500 hover:text-green-700 cursor-pointer transition duration-200" />
               </label>
-              <Button variant="circle" type="submit" className="ml-auto" disabled={buttonDisabled}>
-                Post
+              <Button variant="circle" type="submit" className="ml-auto" disabled={buttonDisabled || isSubmitting}>
+                {isSubmitting ? `Posting...` : `Post`}
               </Button>
             </div>
           </form>
