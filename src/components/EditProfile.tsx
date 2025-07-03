@@ -17,9 +17,9 @@ function EditProfile({ user }: UserProps) {
     avatar?: File;
     header?: File;
   }>({
-    name: '',
-    username: '',
-    bio: '',
+    name: user.name,
+    username: user.username,
+    bio: user.bio,
   });
   const [avatarPreview, setAvatarPreview] = useState(user.avatar);
   const [headerPreview, setHeaderPreview] = useState(user.header);
@@ -102,21 +102,21 @@ function EditProfile({ user }: UserProps) {
                 <label htmlFor="name" className="absolute text-slate-400 text-sm ">
                   Name
                 </label>
-                <Input value={formData.name} onChange={handleChange} id="name" name="name" defaultValue={user.name} className="border-2 mt-6 p-4  text-gray-50 focus:border-green-500 focus:outline-none" />
+                <Input value={formData.name} onChange={handleChange} id="name" name="name" className="border-2 mt-6 p-4  text-gray-50 focus:border-green-500 focus:outline-none" />
               </div>
 
               <div className="relative">
                 <label htmlFor="username" className="absolute text-slate-400 text-sm ">
                   Username
                 </label>
-                <Input value={formData.username} onChange={handleChange} id="username" name="username" defaultValue={user.username} className="border-2 mt-6 p-4  text-gray-50 focus:border-green-500 focus:outline-none" />
+                <Input value={formData.username} onChange={handleChange} id="username" name="username" className="border-2 mt-6 p-4  text-gray-50 focus:border-green-500 focus:outline-none" />
               </div>
 
               <div className="relative">
                 <label htmlFor="bio" className="absolute text-slate-400 text-sm ">
                   Bio
                 </label>
-                <Input value={formData.bio} onChange={handleChange} id="bio" name="bio" defaultValue={user.bio} className="border-2 mt-6 p-4  min-h-[80px] text-gray-50 focus:border-green-500 focus:outline-none" />
+                <Input value={formData.bio} onChange={handleChange} id="bio" name="bio" className="border-2 mt-6 p-4  min-h-[80px] text-gray-50 focus:border-green-500 focus:outline-none" />
               </div>
 
               <div className="ms-auto mt-2">
