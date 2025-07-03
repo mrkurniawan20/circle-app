@@ -58,7 +58,7 @@ function ContentHome({ user }: UserProps) {
     const files = e.target.files;
 
     if (files![0].size > 5 * 1024 * 1024) {
-      alert('File is too large');
+      alert('File is too large, maximum file size allowed is 5MB');
     }
     if (files) {
       setFormData((prev) => ({ ...prev, image: files[0] }));

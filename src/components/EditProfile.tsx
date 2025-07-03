@@ -34,7 +34,7 @@ function EditProfile({ user }: UserProps) {
       const files = e.target.files;
       if (!files) return;
       if (files[0].size > 5 * 1024 * 1024) {
-        alert('File is too large');
+        alert('File is too large, maximum file size allowed is 5MB');
         return;
       }
       const file = files[0];

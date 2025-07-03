@@ -37,7 +37,7 @@ function SideBar({ user }: UserProps) {
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const files = e.target.files;
     if (files && files[0].size > 5 * 1024 * 1024) {
-      alert('File is too large');
+      alert('File is too large, maximum file size allowed is 5MB');
     }
     if (files) {
       setFormData((prev) => ({ ...prev, image: files[0] }));

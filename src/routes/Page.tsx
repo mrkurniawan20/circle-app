@@ -20,6 +20,7 @@ function Page() {
   const [imageOnly, setImageOnly] = useState(true);
   const [fetchLoading, setFetchLoading] = useState(true);
   const [isReplying, setIsReplying] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const [tweet, setTweet] = useState<Tweet | null>(null);
 
@@ -48,21 +49,26 @@ function Page() {
   }, []);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setButtonDisabled(value.trim() === '' && !formData.image);
+    console.log(formData);
   }
 
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const files = e.target.files;
     if (!files) return;
     if (files[0].size > 5 * 1024 * 1024) {
-      alert(`File is too large`);
+      alert(`File is too large, maximum file size allowed is 5MB`);
       return;
     }
     setFormData((prev) => ({ ...prev, image: files[0] }));
+    setButtonDisabled(false);
   }
 
   async function submitReply(e: React.FormEvent) {
     e.preventDefault();
+    setButtonDisabled(true);
     try {
       setIsReplying(true);
       const data = new FormData();
@@ -83,6 +89,7 @@ function Page() {
     } finally {
       setFetchLoading(false);
       setIsReplying(false);
+      setButtonDisabled(false);
     }
   }
 
@@ -129,6 +136,7 @@ function Page() {
               className="absolute -top-2 -right-2 text-gray-50 bg-black hover:bg-gray-600 hover:cursor-pointer size-5 p-1 rounded-full"
               onClick={() => {
                 setFormData((prev) => ({ ...prev, image: undefined }));
+                if (formData.reply == '') setButtonDisabled(true);
                 const fileInput = document.getElementById('replyImage') as HTMLInputElement;
                 if (fileInput) fileInput.value = '';
               }}
@@ -140,7 +148,7 @@ function Page() {
           <label htmlFor="replyImage">
             <ImagePlus className="size-6 sm:size-7 text-green-500 hover:cursor-pointer hover:text-green-800 duration-200" />
           </label>
-          <Button type="submit" variant="circle">
+          <Button type="submit" variant="circle" disabled={buttonDisabled || isReplying}>
             {isReplying ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : `Reply`}
           </Button>
         </div>
