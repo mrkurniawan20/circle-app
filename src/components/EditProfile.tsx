@@ -4,7 +4,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from '@/components/ui/input';
 import { ImagePlus, Loader2 } from 'lucide-react';
 import { UserProps } from '@/utils/useUser';
-import LoadingPage from '@/layouts/components/LoadingPage';
 import { api } from '@/services/api';
 
 function EditProfile({ user }: UserProps) {
@@ -80,52 +79,48 @@ function EditProfile({ user }: UserProps) {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          {loading ? (
-            <LoadingPage />
-          ) : (
-            <>
-              <label htmlFor="header" className="relative hover:brightness-50 duration-200 hover:cursor-pointer rounded-xl overflow-hidden">
-                <img src={headerPreview} className="aspect-[6/2] object-cover w-full rounded-xl" alt="" />
-                <ImagePlus className="absolute right-42 bottom-15 bg-black/60 rounded-full size-8 p-1 text-white hover:scale-110 transition" strokeWidth={2} />
+          <>
+            <label htmlFor="header" className="relative hover:brightness-50 duration-200 hover:cursor-pointer rounded-xl overflow-hidden">
+              <img src={headerPreview} className="aspect-[6/2] object-cover w-full rounded-xl" alt="" />
+              <ImagePlus className="absolute right-42 bottom-15 bg-black/60 rounded-full size-8 p-1 text-white hover:scale-110 transition" strokeWidth={2} />
+            </label>
+            <input onChange={handleFileChange('header')} type="file" name="header" id="header" className="hidden" />
+
+            <div className="relative w-fit mx-auto -mt-10">
+              <label htmlFor="avatar" className="hover:brightness-50 hover:cursor-pointer duration-200 relative">
+                <img src={avatarPreview} className="w-20 h-20 object-cover rounded-full border-4 border-gray-800" alt="" />
+                <ImagePlus className="absolute right-7 bottom-7 bg-black/60 rounded-full size-6 p-1 text-white hover:scale-110 transition" strokeWidth={2} />
               </label>
-              <input onChange={handleFileChange('header')} type="file" name="header" id="header" className="hidden" />
+              <input onChange={handleFileChange('avatar')} type="file" name="avatar" id="avatar" className="hidden" />
+            </div>
 
-              <div className="relative w-fit mx-auto -mt-10">
-                <label htmlFor="avatar" className="hover:brightness-50 hover:cursor-pointer duration-200 relative">
-                  <img src={avatarPreview} className="w-20 h-20 object-cover rounded-full border-4 border-gray-800" alt="" />
-                  <ImagePlus className="absolute right-7 bottom-7 bg-black/60 rounded-full size-6 p-1 text-white hover:scale-110 transition" strokeWidth={2} />
-                </label>
-                <input onChange={handleFileChange('avatar')} type="file" name="avatar" id="avatar" className="hidden" />
-              </div>
+            <div className="relative">
+              <label htmlFor="name" className="absolute text-slate-400 text-sm ">
+                Name
+              </label>
+              <Input value={formData.name} onChange={handleChange} id="name" name="name" className="border-2 mt-6 p-4  text-gray-50 focus:border-green-500 focus:outline-none" />
+            </div>
 
-              <div className="relative">
-                <label htmlFor="name" className="absolute text-slate-400 text-sm ">
-                  Name
-                </label>
-                <Input value={formData.name} onChange={handleChange} id="name" name="name" className="border-2 mt-6 p-4  text-gray-50 focus:border-green-500 focus:outline-none" />
-              </div>
+            <div className="relative">
+              <label htmlFor="username" className="absolute text-slate-400 text-sm ">
+                Username
+              </label>
+              <Input value={formData.username} onChange={handleChange} id="username" name="username" className="border-2 mt-6 p-4  text-gray-50 focus:border-green-500 focus:outline-none" />
+            </div>
 
-              <div className="relative">
-                <label htmlFor="username" className="absolute text-slate-400 text-sm ">
-                  Username
-                </label>
-                <Input value={formData.username} onChange={handleChange} id="username" name="username" className="border-2 mt-6 p-4  text-gray-50 focus:border-green-500 focus:outline-none" />
-              </div>
+            <div className="relative">
+              <label htmlFor="bio" className="absolute text-slate-400 text-sm ">
+                Bio
+              </label>
+              <Input value={formData.bio} onChange={handleChange} id="bio" name="bio" className="border-2 mt-6 p-4  min-h-[80px] text-gray-50 focus:border-green-500 focus:outline-none" />
+            </div>
 
-              <div className="relative">
-                <label htmlFor="bio" className="absolute text-slate-400 text-sm ">
-                  Bio
-                </label>
-                <Input value={formData.bio} onChange={handleChange} id="bio" name="bio" className="border-2 mt-6 p-4  min-h-[80px] text-gray-50 focus:border-green-500 focus:outline-none" />
-              </div>
-
-              <div className="ms-auto mt-2">
-                <Button type="submit" variant="circle" disabled={loading}>
-                  {isEditing ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : `Save`}
-                </Button>
-              </div>
-            </>
-          )}
+            <div className="ms-auto mt-2">
+              <Button type="submit" variant="circle" disabled={loading}>
+                {isEditing ? <Loader2 className="h-10 w-10 animate-spin text-gray-500" /> : `Save`}
+              </Button>
+            </div>
+          </>
         </form>
       </DialogContent>
     </Dialog>

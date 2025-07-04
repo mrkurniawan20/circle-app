@@ -84,7 +84,7 @@ function ContentHome({ user }: UserProps) {
       const res = await api.post(`/post/posttweet/`, data, { headers: { Authorization: `Bearer ${token}` } });
       const newTweet = res.data;
       setTweet((prev) => [newTweet, ...prev]);
-      setFormData({ post: '' });
+      setFormData({ post: '', image: undefined });
     } catch (error) {
       console.error(error);
     } finally {
