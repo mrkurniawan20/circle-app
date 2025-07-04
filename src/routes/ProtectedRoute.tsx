@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { useUser } from '@/utils/useUser';
 import LoadingPage from '@/layouts/components/LoadingPage';
 import Layout from '@/layouts/Layout';
+import GuestLayout from '@/layouts/GuestLayout';
 
 interface DecodedProps {
   id: number;
@@ -14,6 +15,7 @@ interface DecodedProps {
 function ProtectedRouteLayout() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const { user, loading } = useUser();
 
   const title = document.title;
   useEffect(() => {
@@ -32,13 +34,20 @@ function ProtectedRouteLayout() {
     }
   }
 
-  const { user, loading } = useUser();
   if (loading) {
     return <LoadingPage />;
   }
   if (!token) {
-    return <Navigate to={'/login'} />;
-  } else {
+    return (
+      <GuestLayout>
+        <Outlet />
+      </GuestLayout>
+    );
+  }
+  // else if (hasImage) {
+  //   return <Outlet />;
+  // }
+  else {
     return (
       <Layout>
         <Outlet context={{ user }} />

@@ -1,9 +1,8 @@
 import ContentHome from '@/layouts/components/ContentHome';
-import { User } from '@/utils/useUser';
-import { useOutletContext } from 'react-router-dom';
+import { useUser } from '@/utils/useUser';
 
 function Home() {
-  const { user } = useOutletContext<{ user: User }>();
+  const { user } = useUser();
   return (
     // <Layout>
     //   <ContentHome user={user} />

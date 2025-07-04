@@ -40,6 +40,18 @@ let router = createBrowserRouter([
         path: '/edit',
         Component: PageTitle(EditPassword, 'Edit Password | Circle'),
       },
+      {
+        path: '/page/:id',
+        Component: PageTitle(Page, 'Page | Circle'),
+      },
+      {
+        path: '/profile/:username',
+        Component: ProfileUsername,
+      },
+      {
+        path: '/media/:username',
+        Component: PageTitle(ProfileMediaUsername, 'Profile | Circle'),
+      },
     ],
   },
   {
@@ -62,33 +74,17 @@ let router = createBrowserRouter([
     path: '/reset',
     Component: PageTitle(ResetPassword, 'Reset Password | Circle'),
   },
-  {
-    path: '/page/:id',
-    Component: PageTitle(Page, 'Page | Circle'),
-  },
   // {
-  //   path: '/media',
-  //   Component: PageTitle(PageMedia, 'Media | Circle'),
+  //   path: '/page/:id',
+  //   Component: PageTitle(Page, 'Page | Circle'),
   // },
   // {
-  //   path: '/',
-  //   Component: Home,
+  //   path: '/profile/:username',
+  //   Component: ProfileUsername,
   // },
   // {
-  //   path: '/home',
-  //   Component: Home,
-  // },
-  {
-    path: '/profile/:username',
-    Component: ProfileUsername,
-  },
-  {
-    path: '/media/:username',
-    Component: PageTitle(ProfileMediaUsername, 'Profile | Circle'),
-  },
-  // {
-  //   path: '/following',
-  //   Component: Following,
+  //   path: '/media/:username',
+  //   Component: PageTitle(ProfileMediaUsername, 'Profile | Circle'),
   // },
   {
     path: '/loading',

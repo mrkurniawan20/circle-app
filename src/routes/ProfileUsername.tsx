@@ -112,7 +112,8 @@ function ProfileUsername() {
     </div>
   );
 
-  return isLoggedIn ? <Layout showProfileContainer={false}>{InnerContent}</Layout> : <>{InnerContent}</>;
+  // return isLoggedIn ? <Layout showProfileContainer={false}>{InnerContent}</Layout> : <>{InnerContent}</>;
+  return <>{InnerContent}</>;
 }
 
 export default ProfileUsername;
