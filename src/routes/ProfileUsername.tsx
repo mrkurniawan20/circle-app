@@ -2,7 +2,6 @@ import DataMyProfile from '@/components/DataMyProfile';
 import EditProfile from '@/components/EditProfile';
 import { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
-import Layout from '@/layouts/Layout';
 import { Dialog, DialogContent, DialogOverlay, DialogTrigger } from '@/components/ui/dialog';
 import { ArrowLeft } from 'lucide-react';
 import { User, useUser } from '@/utils/useUser';
