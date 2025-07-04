@@ -10,6 +10,7 @@ import { Tweet } from '@/utils/setTweets';
 import ListReply from '@/components/ListReply';
 import { Input } from '@/components/ui/input';
 import { api } from '@/services/api';
+import Layout from '@/layouts/Layout';
 
 function Page() {
   const navigate = useNavigate();
@@ -203,7 +204,26 @@ function Page() {
 
   if (isLoggedIn) {
     return (
-      // <Layout>
+      <Layout>
+        <div className="p-2 min-h-screen">
+          <div className="inline-flex">
+            <NavLink to="/home" className="inline-flex items-center pt-10">
+              <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700 duration-200">
+                <ArrowLeft className="text-gray-100" />
+                <h2 className="text-2xl text-gray-100 font-semibold">Home</h2>
+              </div>
+            </NavLink>
+          </div>
+          <TweetHeader />
+          <TweetBody />
+          {ReplyBox}
+          {fetchLoading ? <LoadingPage /> : <ListReply replies={tweet.reply} />}
+        </div>
+      </Layout>
+    );
+  }
+  return (
+    <Layout minimal={true}>
       <div className="p-2 min-h-screen">
         <div className="inline-flex">
           <NavLink to="/home" className="inline-flex items-center pt-10">
@@ -218,26 +238,7 @@ function Page() {
         {ReplyBox}
         {fetchLoading ? <LoadingPage /> : <ListReply replies={tweet.reply} />}
       </div>
-      // </Layout>
-    );
-  }
-  return (
-    // <Layout minimal={true}>
-    <div className="p-2 min-h-screen">
-      <div className="inline-flex">
-        <NavLink to="/home" className="inline-flex items-center pt-10">
-          <div className="flex items-center space-x-3 hover:rounded-full pr-5 pl-5 pt-1 pb-1 hover:bg-slate-700 duration-200">
-            <ArrowLeft className="text-gray-100" />
-            <h2 className="text-2xl text-gray-100 font-semibold">Home</h2>
-          </div>
-        </NavLink>
-      </div>
-      <TweetHeader />
-      <TweetBody />
-      {ReplyBox}
-      {fetchLoading ? <LoadingPage /> : <ListReply replies={tweet.reply} />}
-    </div>
-    // </Layout>
+    </Layout>
   );
 }
 

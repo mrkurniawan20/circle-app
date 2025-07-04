@@ -3,7 +3,6 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { useUser } from '@/utils/useUser';
 import LoadingPage from '@/layouts/components/LoadingPage';
-import Layout from '@/layouts/Layout';
 import GuestLayout from '@/layouts/GuestLayout';
 
 interface DecodedProps {
@@ -49,9 +48,9 @@ function ProtectedRouteLayout() {
   // }
   else {
     return (
-      <Layout>
-        <Outlet context={{ user }} />
-      </Layout>
+      <Outlet context={{ user }} />
+      // <Layout>
+      // </Layout>
     );
   }
 }
